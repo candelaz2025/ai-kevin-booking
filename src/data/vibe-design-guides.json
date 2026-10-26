@@ -1,0 +1,93 @@
+[
+  {
+    "slug": "guide",
+    "href": "/en/guide/",
+    "title": "Installation & Usage Guide",
+    "category": "Setup",
+    "desc": "Get started with Oil UI in Claude Code, Codex, DeepSeek, Cursor, and Windsurf in 30 seconds."
+  },
+  {
+    "slug": "claude-code-ui-design",
+    "href": "/en/guide/claude-code-ui-design/",
+    "title": "Claude Code UI Design Guide",
+    "category": "Agent Guide",
+    "desc": "How Claude Code navigates UI design tasks, explores side-by-side styles, and refines typography."
+  },
+  {
+    "slug": "codex-ui-design",
+    "href": "/en/guide/codex-ui-design/",
+    "title": "Codex UI Design Guide",
+    "category": "Agent Guide",
+    "desc": "Supercharging OpenAI Codex with structured UI design directions and character."
+  },
+  {
+    "slug": "deepseek-harness-ui-design",
+    "href": "/en/guide/deepseek-harness-ui-design/",
+    "title": "DeepSeek Harness UI Guide",
+    "category": "Agent Guide",
+    "desc": "Deploying DeepSeek 4.1 Flash with the Oil UI plugin for rapid interface generation."
+  },
+  {
+    "slug": "cursor-windsurf-ui-design",
+    "href": "/en/guide/cursor-windsurf-ui-design/",
+    "title": "Cursor & Windsurf UI Guide",
+    "category": "IDE Guide",
+    "desc": "Using Oil UI rules and templates in Cursor Composer and Windsurf Cascade."
+  },
+  {
+    "slug": "landing-page-design",
+    "href": "/en/guide/landing-page-design/",
+    "title": "Website & SaaS Landing Page Playbook",
+    "category": "Playbook",
+    "desc": "Hero layout, persuasive storytelling, scroll narratives, and typography that sell."
+  },
+  {
+    "slug": "dashboard-workspace-design",
+    "href": "/en/guide/dashboard-workspace-design/",
+    "title": "Dashboard & Workspace Playbook",
+    "category": "Playbook",
+    "desc": "Data-dense operational dashboards, metrics cards, table hierarchy, and action bars."
+  },
+  {
+    "slug": "mobile-app-ui-design",
+    "href": "/en/guide/mobile-app-ui-design/",
+    "title": "Mobile App UI Playbook",
+    "category": "Playbook",
+    "desc": "Native mobile UX, thumb-reach zones, bottom navigation, gestures, and tactile feel."
+  },
+  {
+    "slug": "existing-project-ui-renovation",
+    "href": "/en/guide/existing-project-ui-renovation/",
+    "title": "Existing-Project UI Renovation",
+    "category": "Technique",
+    "desc": "Refactoring an ugly or outdated web application without breaking existing code."
+  },
+  {
+    "slug": "fix-ai-ui-slop",
+    "href": "/en/guide/fix-ai-ui-slop/",
+    "title": "Fixing Generic AI UI Slop",
+    "category": "Technique",
+    "desc": "Identify and eliminate purple gradients, centered card grids, and generic corporate copy."
+  },
+  {
+    "slug": "side-by-side-style-comparison",
+    "href": "/en/guide/side-by-side-style-comparison/",
+    "title": "Side-by-Side Direction Comparison",
+    "category": "Technique",
+    "desc": "How to generate 3 distinct design explorations in parallel and pick the winner."
+  },
+  {
+    "slug": "real-screen-blind-review",
+    "href": "/en/guide/real-screen-blind-review/",
+    "title": "Real-Screen Blind Review",
+    "category": "Quality",
+    "desc": "Rigorous screenshot-based visual and usability review protocol."
+  },
+  {
+    "slug": "ui-design-skill-vs-generators",
+    "href": "/en/guide/ui-design-skill-vs-generators/",
+    "title": "UI Design Skills vs. Generators",
+    "category": "Comparison",
+    "desc": "Why contextual Agent Skills outperform black-box frontend code generators."
+  }
+]

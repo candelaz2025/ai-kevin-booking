@@ -1,0 +1,1002 @@
+[
+  {
+    "num": "01",
+    "slug": "arcade-platformer",
+    "en": "Arcade Platformer",
+    "th": "เกมตู้กระโดดข้ามด่าน",
+    "cat": "เกม",
+    "suit": "คลิปอธิบาย/โปรโมตสายสนุกพลังงานสูง เทคนิค life hack เล่าเรื่องแบบเลเวลอัปทีละขั้น คอนเทนต์เกมและเทคโนโลยี",
+    "pen": "Cheerful retro side-scrolling arcade platformer aesthetic. Bright pixel-inspired world with chunky platforms, question-mark blocks, coins and pipes. [subject] appears as a playful game level that scrolls sideways, camera hopping left to right, each idea popping in like a collected coin or power-up. High-energy, upbeat mood with snappy jump-cut motion.",
+    "pth": "สไตล์เกมตู้กระโดดข้ามด่านสีสดใส เล่า [subject] เป็นด่านเกมที่เลื่อนไปด้านข้าง เก็บเหรียญทีละจังหวะ สนุก พลังงานสูง"
+  },
+  {
+    "num": "02",
+    "slug": "art-deco-poster",
+    "en": "Art Deco Poster",
+    "th": "โปสเตอร์อาร์ตเดโค",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "เปิดตัวสินค้า/โปรเจกต์ใหญ่ ตัวเลขผลลัพธ์โดดเด่น คอนเทนต์เงินๆทองๆ หรูพรีเมียม และประกาศงานอีเวนต์แบบอลังการ",
+    "pen": "Luxurious art deco poster aesthetic. Deep midnight navy backgrounds with gleaming gold geometric ornamentation, perfectly symmetrical compositions. [subject] unfolds as a series of poster chapters, each key idea revealed like a grand unveiling ceremony with slow, regal camera movement. Cinematic, premium, and ceremonial mood, wide framed shots with dramatic spotlighting.",
+    "pth": "โปสเตอร์อาร์ตเดโค ทองบนพื้นน้ำเงินเข้ม สมมาตร เปิดเผย [subject] ทีละบทเหมือนพิธีเปิดตัวสุดอลังการ"
+  },
+  {
+    "num": "03",
+    "slug": "art-nouveau",
+    "en": "Art Nouveau",
+    "th": "โปสเตอร์อาร์ตนูโว",
+    "cat": "มินิมอล",
+    "suit": "สินค้าเครื่องสำอาง ชา คาเฟ่ งานแต่ง และแบรนด์วัฒนธรรมที่อยากดูสวยหรู ละมุน พรีเมียม",
+    "pen": "Elegant art nouveau aesthetic. Flowing organic curves, delicate floral borders, and soft botanical motifs in muted golds and sage tones. [subject] blooms gently across the frame like illustrations in a vintage poster book, slow drifting camera with graceful unfurling transitions. Dreamy, romantic, refined mood with soft luminous lighting.",
+    "pth": "โปสเตอร์อาร์ตนูโว เส้นโค้งอ่อนช้อยลายดอกไม้ เล่า [subject] แบบนุ่มนวล สวยหรูพรีเมียม"
+  },
+  {
+    "num": "04",
+    "slug": "batik-textile",
+    "en": "Batik Textile",
+    "th": "ผ้าบาติก",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "สินค้าหัตถกรรม แฟชั่น ผ้า อาหารและท่องเที่ยวไทย/อาเซียน คลิปอธิบายที่อยากให้อบอุ่น ทำมือ ดูพรีเมียม",
+    "pen": "Warm batik textile aesthetic. Rich hand-dyed fabric textures with intricate wax-resist patterns in deep indigo, terracotta and gold. [subject] is presented through fabric that folds, ripples and unfurls, each idea revealed like unfolding a beautiful cloth. Cozy, artisanal, premium mood with warm side lighting that shows off the textile weave.",
+    "pth": "ผ้าบาติกย้อมมือลายประณีต คลี่ผ้าเผย [subject] ทีละพับ อบอุ่น ทำมือ แต่พรีเมียม"
+  },
+  {
+    "num": "05",
+    "slug": "bauhaus-geometric",
+    "en": "Bauhaus Geometric",
+    "th": "โปสเตอร์เบาเฮาส์",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายข้อมูล ตัวเลข และแบรนด์ดีไซน์ที่อยากดูเฉียบ คม เป็นงานศิลปะ",
+    "pen": "Bold Bauhaus geometric aesthetic. Primary colors of red, blue and yellow against black and white, abstract circles, triangles and grids recomposing on every beat. [subject] is broken into graphic modules that snap into new compositions, quick geometric transitions. Sharp, confident, avant-garde mood with flat lighting and strong diagonal framing.",
+    "pth": "โปสเตอร์เบาเฮาส์ เรขาคณิตสีปฐมภูมิ จัดองค์ประกอบ [subject] ใหม่ทุกจังหวะ เฉียบ คม มีความเป็นศิลปะ"
+  },
+  {
+    "num": "06",
+    "slug": "bento-product",
+    "en": "Bento Product",
+    "th": "การ์ดเปิดตัวสินค้า",
+    "cat": "มินิมอล",
+    "suit": "เปิดตัวสินค้า/แอป/ฟีเจอร์ใหม่ สาย SaaS และ AI tools คลิปอธิบายตัวเลขที่อยากดูพรีเมียมสไตล์งาน keynote",
+    "pen": "Sleek keynote-style product launch aesthetic. Dark premium stage with soft spotlight, minimal floating product cards arranged like a bento box. [subject] is revealed as one input transforming into many results, cards gliding in with smooth camera dolly moves. Calm, premium, confident mood with clean centered framing and subtle depth of field.",
+    "pth": "สไตล์งาน keynote เปิดตัวสินค้า ฉากมืดพรีเมียม การ์ด [subject] เลื่อนเข้าทีละใบ จากหนึ่งสิ่งสู่ผลลัพธ์มากมาย"
+  },
+  {
+    "num": "07",
+    "slug": "blocky-avatar-world",
+    "en": "Blocky Avatar World",
+    "th": "โลกตัวต่อบล็อก",
+    "cat": "มินิมอล",
+    "suit": "คลิปสั้นสายเกม เด็ก-วัยรุ่น การเงินส่วนตัวแบบสนุกๆ เล่าเรื่องแบบผ่านด่าน และคลิปขายของที่ดูเหมือนภารกิจในเกม",
+    "pen": "Chunky block-built toy world aesthetic. Bright cubic characters and voxel-style environments in saturated candy colors, bouncy snap-together animation. [subject] is told as a game quest where each tip is a mission checkpoint, camera cutting between mission cards with playful jump transitions. Fun, lighthearted, adventurous mood with medium shots that feel like gameplay.",
+    "pth": "โลกตัวต่อบล็อกสีสดใส เล่า [subject] เป็นเควสต์ในเกม ผ่านด่านทีละข้อ สนุกเหมือนเล่นเกม"
+  },
+  {
+    "num": "08",
+    "slug": "blueprint-technical",
+    "en": "Blueprint Technical",
+    "th": "พิมพ์เขียววิศวกร",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปอธิบายเทคโนโลยี วิศวกรรม การเงินที่มีตัวเลขเยอะ รีวิวสเปกสินค้า ที่อยากดูมีข้อมูล น่าเชื่อถือ",
+    "pen": "Technical blueprint aesthetic. Deep blue grid paper with crisp white line drawings, measurement annotations and technical callouts. [subject] is drafted before your eyes like an engineering schematic, lines drawing themselves in, specs appearing as dimension labels. Precise, trustworthy, analytical mood with slow pan and zoom over the drafting table.",
+    "pth": "พิมพ์เขียววิศวกร พื้นน้ำเงินเส้นขาว วาด [subject] เป็นแบบแปลนทีละเส้น น่าเชื่อถือ มีข้อมูลแน่น"
+  },
+  {
+    "num": "09",
+    "slug": "caption-first-hormozi",
+    "en": "Caption First Hormozi",
+    "th": "แคปชันตัวใหญ่สายไวรัล",
+    "cat": "การ์ตูน",
+    "suit": "คลิปสั้น TikTok/Reels/Shorts ที่ต้องหยุดนิ้วคนดูตั้งแต่ 1 วินาทีแรก สรุปความรู้เร็ว เคล็ดลับ ข่าวเทค และคลิปขายของ",
+    "pen": "Viral short-form caption-first aesthetic. Massive bold captions slammed over a punchy presenter, high-contrast colors and fast rhythm cuts. [subject] is chopped into rapid-fire hooks and one-line tips, each key phrase popping on screen in big kinetic type with hard whip transitions. Aggressive, scroll-stopping, high-energy mood, tight face framing with constant motion.",
+    "pth": "แคปชันตัวใหญ่สไตล์ไวรัล ยิง [subject] เป็นทีละประโยคเด็ดสั้นๆ ตัวหนังสือเต้นรัว หยุดนิ้วคนดูได้ทันที"
+  },
+  {
+    "num": "10",
+    "slug": "cartoon-network-flat",
+    "en": "Cartoon Network Flat",
+    "th": "การ์ตูนทีวียุค 2010",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายเรื่องครอบครัว เด็ก ไลฟ์สไตล์ โปรโมตสินค้าน่ารักๆ ที่อยากให้ฟีลการ์ตูนทีวีเช้าวันเสาร์",
+    "pen": "Playful 2010s flat TV cartoon aesthetic. Round rubbery characters, bold outlines and bright candy-colored worlds with simple squash-and-stretch animation. [subject] plays out like a Saturday-morning cartoon episode, characters reacting to each idea with comedic takes, scene transitions as cartoon wipes. Sweet, silly, wholesome mood with medium wide shots full of movement.",
+    "pth": "การ์ตูนทีวีแฟลตสไตล์ยุค 2010 ตัวละครยืดหยุ่นน่ารัก เล่า [subject] เป็นตอนการ์ตูนเช้าวันเสาร์ สดใส อารมณ์ดี"
+  },
+  {
+    "num": "11",
+    "slug": "cel-anime-90s",
+    "en": "Cel Anime 90s",
+    "th": "อนิเมะยุค 90",
+    "cat": "การ์ตูน",
+    "suit": "เล่าเรื่องนอสตัลจิก ซาบซึ้ง เปิดตัวไอเดีย/สินค้าแบบมหัศจรรย์ เคล็ดลับที่มีจุดพีคใหญ่",
+    "pen": "Nostalgic 90s cel anime aesthetic. Hand-painted backgrounds, sparkling speed lines, dramatic rose-tinted close-ups with shimmering highlights. [subject] unfolds as an anime episode, each revelation framed like a magical power-up scene with sweeping camera push-ins and sparkle bursts. Emotional, sparkly, heartfelt mood with dynamic cinematic framing.",
+    "pth": "อนิเมะเซลยุค 90 ประกายวิบวับ เล่า [subject] เป็นตอนอนิเมะ เปิดเผยไอเดียแบบฉากเพิ่มพลัง ซาบซึ้ง นอสตัลจิก"
+  },
+  {
+    "num": "12",
+    "slug": "chalkboard",
+    "en": "Chalkboard",
+    "th": "กระดานชอล์ก",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คลิปสอนความรู้ how-to คณิต การเงิน วิทย์ ภาษา และซีรีส์ \"บทเรียนวันนี้\" ที่อยากดูทำมือ อบอุ่น ทีละขั้น",
+    "pen": "Cozy chalkboard classroom aesthetic. Dark slate surface with hand-drawn chalk lettering and diagrams, occasional chalk dust puffs. [subject] is written and sketched in real time like a lesson, hand drawing each diagram, underlining key points with chalk strokes. Warm, handmade, step-by-step mood with steady overhead shots of the board.",
+    "pth": "กระดานชอล์กห้องเรียน เขียนและวาด [subject] ทีละขั้นเหมือนครูสอน อบอุ่น ทำมือ เข้าใจง่าย"
+  },
+  {
+    "num": "13",
+    "slug": "chibi-sticker",
+    "en": "Chibi Sticker",
+    "th": "สติกเกอร์จิบิน่ารัก",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบาย/โปรโมตน่ารัก เคล็ดลับแอป AI ทิปส์ไลฟ์สไตล์ การเงิน และมาสคอตแบรนด์สไตล์สติกเกอร์ LINE",
+    "pen": "Cute chibi sticker aesthetic. Bouncy little round characters with oversized heads in bright pastel worlds, sticker peel-on animations. [subject] is delivered by sticker mascots that bounce in with each idea, popping speech bubbles and stamp-style labels. Adorable, energetic, friendly mood with tight framing on the characters' expressive reactions.",
+    "pth": "สติกเกอร์จิบิตัวกลมน่ารัก เด้งเข้ามาเล่า [subject] ทีละประเด็น สดใส เป็นกันเอง สไตล์สติกเกอร์ LINE"
+  },
+  {
+    "num": "14",
+    "slug": "claymation",
+    "en": "Claymation",
+    "th": "ดินน้ำมันสต็อปโมชัน",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายที่อยากให้อบอุ่น จับต้องได้ เรื่องเงิน การเรียน สุขภาพ เด็ก ครอบครัว ของกิน ของขวัญ และรีวิวแบบเป็นกันเอง",
+    "pen": "Warm claymation stop-motion aesthetic. Hand-sculpted clay characters and sets with visible fingerprints and soft squashy motion, one frame at a time. [subject] is built up like a clay diorama, props reshaped between cuts to illustrate each point with charming handmade charm. Cozy, tactile, heartfelt mood with close macro shots of the clay textures.",
+    "pth": "ดินน้ำมันสต็อปโมชัน ปั้น [subject] เป็นฉากดินเหนียวทีละเฟรม อบอุ่น จับต้องได้ เป็นกันเอง"
+  },
+  {
+    "num": "15",
+    "slug": "clean-apple-ui",
+    "en": "Clean Apple Ui",
+    "th": "หน้าจอ Mac สะอาดตา",
+    "cat": "UI/เทคโนโลยี · มินิมอล",
+    "suit": "คลิป AI เทคโนโลยี แอป ซอฟต์แวร์ แกดเจ็ต รีวิวพรีเมียม ที่อยากดูสะอาด แพง ทันสมัย",
+    "pen": "Clean Apple-style UI aesthetic. Minimal light interface with frosted glass panels, smooth spring animations and generous white space. [subject] is demonstrated through an immaculate desktop screen, windows gliding in with silky ease, gentle zooms on key features. Premium, calm, futuristic mood with crisp centered framing and soft studio lighting.",
+    "pth": "หน้าจอ Mac สะอาดตา พา [subject] เดินผ่านอินเทอร์เฟซเรียบหรู แพง ทันสมัย ดูสบายตา"
+  },
+  {
+    "num": "16",
+    "slug": "collage-cutout",
+    "en": "Collage Cutout",
+    "th": "คอลลาจกระดาษตัดแปะ",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คลิปเล่าเรื่องสายครีเอทีฟ แฟชั่น ดนตรี อาหาร ท่องเที่ยว สรุปข่าวเทรนด์ รีวิววัยรุ่น ที่อยากดูทำมือ เสียงดัง มีพลัง",
+    "pen": "Loud handmade collage cutout aesthetic. Torn paper scraps, mixed textures and bold ripped-photo edges slapped together in chaotic layers. [subject] is assembled on the fly like a zine page, each idea pasted in with a snap, paper strips flying across the frame. Rebellious, energetic, tactile mood with jittery handheld-style framing.",
+    "pth": "คอลลาจกระดาษตัดแปะ ฉีก แปะ ซ้อน เล่า [subject] แบบซีนทำมือ เสียงดัง มีพลัง ครีเอทีฟ"
+  },
+  {
+    "num": "17",
+    "slug": "corporate-flat-character",
+    "en": "Corporate Flat Character",
+    "th": "ตัวละครแฟลตสายองค์กร",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายเทคโนโลยี แอป AI ธุรกิจ การเงินส่วนตัว HR ออฟฟิศ ที่อยากดูมืออาชีพแต่เป็นมิตร",
+    "pen": "Professional flat corporate illustration aesthetic. Clean vector characters with simple friendly faces in soft geometric office scenes, smooth morphing transitions. [subject] is explained by workplace characters demonstrating each concept, UI panels sliding in beside them. Competent, approachable, trustworthy mood with balanced mid-wide framing.",
+    "pth": "ตัวละครแฟลตสายองค์กรสะอาดตา สาธิต [subject] ผ่านตัวละครออฟฟิศ มืออาชีพ เป็นกันเอง น่าเชื่อถือ"
+  },
+  {
+    "num": "18",
+    "slug": "cozy-island-life",
+    "en": "Cozy Island Life",
+    "th": "ชีวิตบนเกาะแสนอบอุ่น",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายที่อยากให้อบอุ่น ไม่เครียด การเงิน การประหยัด ไลฟ์สไตล์ สินค้าน่ารัก ของใช้ในบ้าน ท่องเที่ยวทะเล และคลิปสอนเด็ก",
+    "pen": "Cozy tropical island aesthetic. Soft rounded characters in a sunny seaside village, swaying palms, gentle waves and pastel skies. [subject] is shared like a friendly chat between island neighbors, conversations drifting by the beach, ideas bobbing in like beach balls. Relaxed, heartwarming, cheerful mood with wide sunny establishing shots.",
+    "pth": "ชีวิตบนเกาะแสนอบอุ่น คุย [subject] แบบเพื่อนบ้านริมทะเล ชิล น่ารัก ไม่เครียด"
+  },
+  {
+    "num": "19",
+    "slug": "crayon-naive",
+    "en": "Crayon Naive",
+    "th": "ภาพวาดสีเทียนเด็ก",
+    "cat": "การ์ตูน · งานพิมพ์/กระดาษ",
+    "suit": "คอนเทนต์ครอบครัว เด็ก การศึกษา อธิบายเรื่องง่ายๆ ให้เป็นมิตร สินค้าน่ารัก ของขวัญ ที่อยากดูอบอุ่น ขำๆ ทำมือ",
+    "pen": "Naive crayon drawing aesthetic. Wobbly hand-drawn lines in bright wax-crayon colors on textured paper, charmingly imperfect shapes. [subject] is drawn live like a child's picture book, each idea sketched in with cheerful doodles, scribbles wiggling into form. Playful, innocent, warm mood with full-frame paper texture and gentle page-turn transitions.",
+    "pth": "ภาพวาดสีเทียนเด็กๆ วาด [subject] ทีละเส้นแบบสมุดภาพ อบอุ่น ขำๆ ทำมือ เป็นกันเอง"
+  },
+  {
+    "num": "20",
+    "slug": "crime-poster-loading",
+    "en": "Crime Poster Loading",
+    "th": "หน้าโหลดเกมแก๊งเมือง",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "story reel สายคูล/สายลุย ไกด์เมือง ไลฟ์สไตล์ รถยนต์ ภารกิจและชาเลนจ์ เปิดตัวสินค้าแบบหน้าโหลดเกม",
+    "pen": "Urban crime-poster game-loading aesthetic. Tilted sunset gradient panels, bold gangster-movie typography and mission banners with street hustle energy. [subject] loads like a video game start screen, each section announced as a mission objective with dramatic panel slams. Cool, gritty, adrenaline-fueled mood with angled cinematic framing and neon city glow.",
+    "pth": "หน้าโหลดเกมแก๊งเมือง โปสเตอร์พระอาทิตย์ตกเอียงๆ ประกาศ [subject] เป็นภารกิจทีละด่าน เท่ ลุย มีพลัง"
+  },
+  {
+    "num": "21",
+    "slug": "cyberpunk-neon-noir",
+    "en": "Cyberpunk Neon Noir",
+    "th": "ไซเบอร์พังก์นีออน",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปสายเทค AI และเกม เรื่องเล่ากลางคืนหรือตะลุยของกินย่านกลางคืน และการเปิดเผยที่เริ่มจากคำสั่งเดียวแล้วได้ผลลัพธ์หลายอย่าง",
+    "pen": "A neon-drenched cyberpunk city at night, rain beading on dark metal and puddles throwing back cyan and magenta light. [subject] drifts through the glow: slow dolly shots along crowded neon alleys, moody close-ups of flickering holographic signs, haze and steam curling under street lamps. Deep blues and electric pinks clash with inky blacks; the camera moves slow and deliberate while the city pulses with energy. Wet, cinematic, and a little dangerous.",
+    "pth": "เมืองไซเบอร์พังก์กลางคืนฝนตก แสงนีออนสะท้อนผิวถนนเปียก เล่า [subject] ด้วยภาพช้า ๆ มีชั้นหมอก มู้ดดาร์ก ดราม่าแต่เท่"
+  },
+  {
+    "num": "22",
+    "slug": "dark-horror-ink",
+    "en": "Dark Horror Ink",
+    "th": "นิทานหมึกสยองขวัญ",
+    "cat": "มินิมอล",
+    "suit": "เรื่องผี เรื่องลึกลับ การเปิดโปง \"ความจริงที่ไม่รู้\" เทศกาลฮาโลวีน และโปรโมชันธีมกลางคืนแบบสยองแต่ไม่โหด",
+    "pen": "A hand-inked gothic storybook come to life: flickering candlelight, circling crows, and props that crawl and stir on their own. [subject] unfolds through a dark, creepy-cute inked world, every frame scratched in fine black lines with a single blood-red accent. Slow creeping pans give way to sudden page-turn reveals; shadows loom large and the mood is playfully spooky, never gory. Vintage paper texture, dim lantern glow, and a whispering, haunted calm.",
+    "pth": "นิทานภาพหมึกสไตล์โกธิก เทียนกระพริบ อีกาตัวดำ เล่า [subject] แบบสยองแต่น่ารัก เติมสีแดงเลือดแค่จุดเดียว"
+  },
+  {
+    "num": "23",
+    "slug": "data-infographic",
+    "en": "Data Infographic",
+    "th": "อินโฟกราฟิกข้อมูล",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปอธิบายที่ขับด้วยตัวเลข การเงิน ค่าไฟ ราคาสินค้า สถิติและงานวิจัย เรื่อง \"กี่บาท/กี่หน่วย\" ที่อยากให้ดูเป็นสำนักข่าวกราฟิก",
+    "pen": "A crisp newsroom graphics desk at work: flat bar charts rising, line graphs racing forward, and counting numbers ticking up in bold type. [subject] is told through one strong accent colour carrying every key figure, with leader lines, annotated call-outs, and clean flat icons snapping into place. The camera glides across an ordered canvas with quick punch-in close-ups on the winning stat. Smart, precise, and quietly confident.",
+    "pth": "อินโฟกราฟิกแบบโต๊ะกราฟิกสำนักข่าว ชาร์ตแฟลต ตัวเลขนับขึ้นเร็ว ใช้สีเดียวเน้นหัวใจสำคัญ อ่าน [subject] ได้ในพริบตา"
+  },
+  {
+    "num": "24",
+    "slug": "doodle-notebook",
+    "en": "Doodle Notebook",
+    "th": "ขีดเขียนในสมุดจด",
+    "cat": "การ์ตูน",
+    "suit": "คลิปสรุปความรู้ติวสอบ how-to ไอเดียธุรกิจ แก้ความเชื่อผิด ๆ และคอนเทนต์ AI/เทคที่อยากให้ดูเป็นกันเองเหมือนเพื่อนจดโน้ตให้",
+    "pen": "An open notebook filling itself with hand-drawn doodles: arrows, stars, circled keywords, and wobbly diagrams sketching in real time. [subject] is explained through playful hand-lettered notes, underlines, and margin doodles that pop and bounce as each idea lands. The camera slides over the paper with warm top-down lighting and ink-pen texture. Smart, friendly, and easy to read.",
+    "pth": "สมุดจดที่วาดตัวเองไปด้วย ลูกศร ดาว วงกลมล้อมคำสำคัญ เล่า [subject] แบบเพื่อนช่วยติว ดูเป็นกันเอง อ่านง่าย"
+  },
+  {
+    "num": "25",
+    "slug": "felt-craft",
+    "en": "Felt Craft",
+    "th": "งานผ้าสักหลาด",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คอนเทนต์พ่อแม่ลูก งานคราฟต์ ร้านเล็ก ๆ แบบแฮนด์เมด ทิปส์ไลฟ์สไตล์อบอุ่น และโปรโมชันของขวัญที่อยากได้ฟีลทำมือ",
+    "pen": "A cosy felt board world where fuzzy cut-outs, stitched seams, yarn trails, and wooden buttons make up everything. [subject] plays out in soft squash-and-stretch motion, characters and props bobbing and wobbling like sewn toys. Warm pastel wool textures, gentle bokeh backgrounds, and slow friendly push-ins keep the mood tender. Handmade, huggable, and full of craft-shop warmth.",
+    "pth": "โลกผ้าสักหลาดนุ่ม ๆ ขอบเย็บ ด้ายสีไม้กระดุม เล่า [subject] ด้วยภาพขยับแบบตุ๊กตาเย็บมือ อบอุ่น น่าจับต้อง"
+  },
+  {
+    "num": "26",
+    "slug": "fighting-game-vs",
+    "en": "Fighting Game Vs",
+    "th": "เกมต่อสู้ VS",
+    "cat": "เกม",
+    "suit": "คอนเทนต์ที่ขายไฟต์ \"ชนะปัญหา\" ได้ เช่น สู้บิล สู้เดดไลน์ ทิปส์แบบหมัดต่อหมัด และการเปิดเผย before/after แบบจัดเต็ม",
+    "pen": "A loud arcade fighting game: two health bars across the top, a glowing 'VS' screen, and each idea landing as a punchy hit with impact flashes. [subject] is framed as a winnable fight — every step strikes with screen shake, combo counters, and a K.O. payoff on the final result. Fast cuts, dynamic angles, neon stage lighting, and high-energy music keep the adrenaline up. Playful, competitive, and very gamer.",
+    "pth": "เกมต่อสู้อาร์เคด แถบเลือดสองข้าง ตัวหนังสือ VS โชว์ เล่า [subject] เป็นการต่อสู้ที่ชนะได้ ทุกสเต็ปคือหมัดที่เข้าป้าย"
+  },
+  {
+    "num": "27",
+    "slug": "flat-retro-cartoon",
+    "en": "Flat Retro Cartoon",
+    "th": "การ์ตูนแฟลตยุค 60",
+    "cat": "การ์ตูน",
+    "suit": "คลิปขายของ โปรโมชัน ข่าวสั้นแนวสนุก ๆ การอธิบายเทคโนโลยี และคอนเทนต์ที่อยากให้ดูสดใส กวน ๆ ติดตา",
+    "pen": "A cheerful flat cartoon in a bold 60s style: thick outlines, limited retro palettes, and characters with big expressive eyes. [subject] bounces through snappy scenes with starbursts, motion squiggles, and punchy onomatopoeia popping around every gag. The camera cuts fast with slight vintage grain, and the mood is mischievous and bright. Funny, eye-catching, and full of retro mischief.",
+    "pth": "การ์ตูนแฟลตสไตล์ยุค 60 เส้นหนา สีย้อนยุค ตัวละครตาโต เล่า [subject] ด้วยจังหวะสนุก มีมุกแทรก กวน ๆ ติดตา"
+  },
+  {
+    "num": "28",
+    "slug": "frutiger-aero",
+    "en": "Frutiger Aero",
+    "th": "กระจกฟ้าใสยุค 2000",
+    "cat": "มินิมอล",
+    "suit": "คลิปสอนใช้แอป/ซอฟต์แวร์ ของใช้สายสะอาดสดชื่น น้ำดื่ม สกินแคร์ เที่ยวทะเล และคอนเทนต์ย้อนยุค Y2K/Vista ที่อยากได้ฟีลบวก ๆ",
+    "pen": "Glossy 2000s tech optimism: translucent glass panels, dewy green grass, tropical fish, and sparkling water droplets over soft sky-blue gradients. [subject] floats through a clean, airy world of lens flares, bubble reflections, and aqua highlights. Smooth slow camera glides, bright daylight, and a hopeful, upbeat tone make everything feel fresh and alive. Nostalgic, polished, and endlessly optimistic.",
+    "pth": "กระจกใส ฟองอากาศ หญ้าเขียวชุ่มน้ำ โทนฟ้าอ่อนแบบยุค 2000 เล่า [subject] ด้วยภาพสะอาด สดใส อบอุ่น มองโลกในแง่ดี"
+  },
+  {
+    "num": "29",
+    "slug": "gameboy-1bit",
+    "en": "Gameboy 1bit",
+    "th": "เกมพกพาจอขาวดำ",
+    "cat": "เกม",
+    "suit": "คลิปสายเกม เล่าความรู้แบบ \"ผ่านด่าน/สู้บอส\" การเงินส่วนตัวแบบสนุก และคลิปขายของที่อยากให้รู้สึกเหมือนได้ไอเท็ม",
+    "pen": "A tiny 1-bit monochrome game world on a pixelated dot-matrix screen, rendered in four shades of grey-green. [subject] plays out as chunky pixel tiles scrolling past, chiptune blips driving the pace, and each win triggering an 'ITEM GET!' jingle. Hard cuts between simple grid-based scenes, occasional screen flash on the big payoff, and a nostalgic handheld feel throughout. Charming, retro, and brutally simple.",
+    "pth": "เกมพกพาขาวดำพิกเซลใหญ่ เสียงชิปจูนจิ๋ว เล่า [subject] เป็นการผจญภัยผ่านด่าน จบด้วยจิงเกิล \"ได้ไอเท็ม!\" สุดคลาสสิก"
+  },
+  {
+    "num": "30",
+    "slug": "geometric-tile-pattern",
+    "en": "Geometric Tile Pattern",
+    "th": "ลายกระเบื้องเรขาคณิต",
+    "cat": "มินิมอล",
+    "suit": "คอนเทนต์สายดีไซน์ที่ต้องการจังหวะเร็ว ทิปส์ AI ท็อป 3 ลิสต์ ตัวเลข และโปรโมชันที่อยากดูเฉียบคมแบบโปสเตอร์สวิส",
+    "pen": "A moving Swiss poster built from geometric tiles: bold primary shapes, strict grids, and flat colour blocks snapping and rotating in perfect rhythm. [subject] is cut to an upbeat 120 BPM pulse — every beat triggers a tile flip, a type slam, or a colour swap. Tight overhead shots mixed with dynamic tilts, high contrast, and zero wasted space. Punchy, rhythmic, and razor-sharp design.",
+    "pth": "โปสเตอร์เรขาคณิตขยับได้ ตารางสวิส สีบล็อกสด เล่า [subject] ด้วยจังหวะดนตรีเร็ว กระเบื้องพลิกตามบีท คมกริบ ไม่เสียพื้นที่"
+  },
+  {
+    "num": "31",
+    "slug": "glitch-datamosh",
+    "en": "Glitch Datamosh",
+    "th": "กลิตช์ดิจิทัล",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปเทค AI เกม ข่าวด่วน \"ความจริงที่คุณยังไม่รู้\" และโปรโมชันที่อยากให้ดูแรง ทันสมัย แต่ยังอ่านง่าย",
+    "pen": "A digital signal coming apart and snapping back: RGB splits, scanline tears, pixel-sorting smears, and datamosh blooms that glitch the frame then resolve it. [subject] cuts through the distortion with bold, readable type that survives every glitch. Fast stuttery cuts, occasional freeze-frames, and a palette of electric blues and magentas on black. Aggressive, modern, and impossible to ignore.",
+    "pth": "สัญญาณดิจิทัลแตกแล้วกลับมาติด จอฉีก สี RGB แยก เล่า [subject] ด้วยเอฟเฟกต์กลิตช์ที่แรงแต่ตัวหนังสือยังอ่านชัด ทันสมัยสะดุดตา"
+  },
+  {
+    "num": "32",
+    "slug": "gothic-metroidvania",
+    "en": "Gothic Metroidvania",
+    "th": "เกมผจญภัยโกธิก",
+    "cat": "เกม",
+    "suit": "คลิปเล่าเรื่องแบบผจญภัยเป็นด่าน ๆ สายเกม เทค AI ความลึกลับ ประวัติศาสตร์ และรีวิวแบบ \"ได้ไอเทมใหม่\" ตลอดทาง",
+    "pen": "A dark gothic adventure world: towering cathedrals, candlelit corridors, and ancient stone chambers mapped like an explorable game level. [subject] unfolds as a quest — each idea unlocks a new room, each milestone drops a glowing item pickup with a chime. Side-scrolling camera moves, layered parallax depth, moody moonlight and torch glow. Mysterious, cinematic, and full of discovery.",
+    "pth": "โลกโกธิกมืดขลัง โบสถ์สูง ทางเดินเทียน เล่า [subject] เป็นเควสต์ผจญภัย เปิดห้องใหม่ทีละด่าน มีไอเท็มเรืองแสงให้เก็บตลอดทาง"
+  },
+  {
+    "num": "33",
+    "slug": "grain-gradient-spray",
+    "en": "Grain Gradient Spray",
+    "th": "สเปรย์ไล่สีเกรนนุ่ม",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คลิปอธิบายเทค/AI/ครีเอเตอร์ และคลิปขายของที่อยากได้ลุคพรีเมียมแบบงานพิมพ์ริโซพ่นสเปรย์ แคปชันคมแต่พื้นผิวมีเกรน",
+    "pen": "A soft risograph-print world: sprayed grain gradients blooming across a pale grey table, objects rendered in grainy duotone washes. [subject] is carried by tactile printed textures — halftone speckles, oversized soft gradients, and crisp sticker-like captions floating on top. Slow elegant camera drifts with macro close-ups on the grain. Premium, crafted, and quietly artistic.",
+    "pth": "โลกงานพิมพ์ริโซ สเปรย์ไล่สีเกรนนุ่มบนพื้นเทาอ่อน เล่า [subject] ด้วยพื้นผิวกระดาษแท้ แคปชันคมชัด ดูพรีเมียมแบบคราฟต์"
+  },
+  {
+    "num": "34",
+    "slug": "grain-illustration",
+    "en": "Grain Illustration",
+    "th": "ภาพประกอบเกรนนุ่ม",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คลิปอธิบายสไตล์อินโฟกราฟิกน่ารัก เทคโนโลยี แอป AI การเงินส่วนตัว การเรียน สุขภาพ และรีวิวสินค้าที่อยากดูเป็นมิตรทันสมัย",
+    "pen": "A friendly grain-textured illustration world: soft speckled fills, rounded characters, and warm pastel palettes that feel like a beloved infographic. [subject] unfolds through gentle scene transitions, icons that assemble piece by piece, and text blocks settling into clean layouts. The camera moves calmly with occasional playful zooms. Approachable, modern, and warmly human.",
+    "pth": "ภาพประกอบเกรนนุ่ม ตัวละครกลม ๆ สีพาสเทลอุ่น เล่า [subject] แบบอินโฟกราฟิกน่ารัก ทันสมัย เป็นมิตรกับทุกคน"
+  },
+  {
+    "num": "35",
+    "slug": "groovy-70s",
+    "en": "Groovy 70s",
+    "th": "ปกแผ่นเสียงยุค 70",
+    "cat": "มินิมอล",
+    "suit": "คลิปอารมณ์ดีย้อนยุค เพลง แฟชั่นวินเทจ ร้านกาแฟ ของแต่งบ้าน เทศกาล และคลิปอธิบายที่อยากให้ดูเป็นมิตรไม่ซีเรียส",
+    "pen": "A groovy 70s album-cover world: swirling psychedelic patterns, chunky retro type, and warm oranges, browns, and mustard yellows. [subject] rides a slow wavy zoom through flower-power backdrops, vinyl grooves, and bubbly lettering that bounces to a funky beat. Slightly grainy film texture, laid-back camera sways, and a carefree sunny mood. Retro, joyful, and effortlessly cool.",
+    "pth": "ปกแผ่นเสียงยุค 70 ลายหมุนวน ตัวหนังสือหนาย้อนยุค โทนส้มน้ำตาล เล่า [subject] ด้วยจังหวะฟังก์ สบาย ๆ สนุก ไม่ซีเรียส"
+  },
+  {
+    "num": "36",
+    "slug": "hanna-barbera-60s",
+    "en": "Hanna Barbera 60s",
+    "th": "การ์ตูนซิทคอมยุค 60",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายสายฮาอบอุ่น ทิปส์แบบตอนต่อตอน มุกหักมุมแบบตลกซิทคอม และการขายสินค้าแบบโฆษณาทีวียุค 60",
+    "pen": "A classic 60s TV cartoon sitcom: simple flat characters trotting past endlessly repeating backgrounds, deadpan expressions, and vintage commercial bumpers. [subject] plays out as an episode — step-by-step gags, a double-take twist, and a wink-at-the-camera product spot. Snappy vintage cuts, slightly faded colours, and a warm, dry comic tone. Cosy, funny, and charmingly retro.",
+    "pth": "การ์ตูนซิทคอมยุค 60 ตัวละครเดินผ่านฉากวนซ้ำ เล่า [subject] เป็นตอนสั้น ๆ มีมุกหักมุมแบบตลกนิ่ง ปิดด้วยสปอตโฆษณาย้อนยุค"
+  },
+  {
+    "num": "37",
+    "slug": "hd-2d-pixel",
+    "en": "Hd 2d Pixel",
+    "th": "พิกเซล HD-2D",
+    "cat": "เกม",
+    "suit": "สายเกม แฟนตาซี เทคแบบเวทมนตร์ เรื่อง \"เลเวลอัป\" และการเปิดเผยรางวัลที่อยากได้ลุคไดโอรามาแสงสวยแทนพิกเซลย้อนยุคธรรมดา",
+    "pen": "A premium HD-2D diorama world: detailed pixel characters standing in fully 3D-lit miniature landscapes with dynamic lighting, depth of field, and god rays. [subject] plays out as a cinematic journey through the diorama — slow camera orbits, dramatic light sweeps, and a 'summon' moment where the key reveal glows from within the scene. Rich fantasy atmosphere, warm highlights, cool shadow tones. Nostalgic yet luxurious.",
+    "pth": "โลกพิกเซล HD-2D แบบไดโอรามาแสงจริง ตัวละครพิกเซลในฉาก 3 มิติ เล่า [subject] ด้วยภาพซีนีมาติก มีช็อตเปิดเผยแบบ \"ซัมมอน\" เรืองแสง"
+  },
+  {
+    "num": "38",
+    "slug": "impossible-geometry",
+    "en": "Impossible Geometry",
+    "th": "สถาปัตย์ลวงตา",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายช้า ๆ ฉลาด ๆ เครื่องมือ AI วิธีใช้งาน สเต็ปไกด์ และการเปิดตัวสินค้าที่อยากให้ดูน่าพอใจแบบพัซเซิล",
+    "pen": "A calm pastel isometric world of impossible geometry: staircases that loop, mechanisms that turn ninety degrees and click perfectly into place. [subject] unfolds as a satisfying puzzle — each idea is a small machine that folds, rotates, and locks in with a soft mechanical click. Slow deliberate camera moves, clean soft shadows, and a palette of muted pastels. Clever, soothing, and deeply satisfying.",
+    "pth": "โลกไอโซเมตริกสีพาสเทล สถาปัตย์ลวงตาหมุน 90 องศาแล้วล็อกพอดี เล่า [subject] เป็นพัซเซิลทีละกลไก เงียบ ฉลาด ดูแล้วอิ่มใจ"
+  },
+  {
+    "num": "39",
+    "slug": "ink-splat-shooter",
+    "en": "Ink Splat Shooter",
+    "th": "เกมยิงสาดสี",
+    "cat": "เกม",
+    "suit": "คลิปสายวัยรุ่น เสียงดัง สนุก เกมยิงแข่งกัน โปรโมตรองเท้า แกดเจ็ต ขนม และแบรนด์ที่อยากให้ดูสดแบบสาดสีนีออน",
+    "pen": "A loud neon paint-splatter arena: ink blobs splashing across white walls, sticker-style UI popping up, and a turf meter tracking the story's progress. [subject] plays out as a fast, playful shootout — every idea lands with a paint blast, bright colour explosions, and quick energetic cuts. Bold saturated colours, never dark, with a constant sense of motion and victory. Bright, loud, and full of game-feel.",
+    "pth": "สนามสาดสียิงกัน สีนีออนกระเด็นเต็มจอ มิเตอร์วัดความคืบหน้า เล่า [subject] แบบเกมยิงสุดมัน ทุกไอเดียคือการสาดสี สดใส ไม่เคยมืด"
+  },
+  {
+    "num": "40",
+    "slug": "islamic-geometric",
+    "en": "Islamic Geometric",
+    "th": "ลายกระเบื้องโมร็อกโก",
+    "cat": "มินิมอล",
+    "suit": "คอนเทนต์สายงานฝีมือประณีต ท่องเที่ยว วัฒนธรรม ชา กาแฟ น้ำหอม ผ้า ของแต่งบ้าน และโปรโมชันที่อยากให้ดูหรูแบบเรขาคณิต",
+    "pen": "An elegant world of Islamic geometric art: intricate Moroccan tile patterns blooming, folding, and interlocking with perfect symmetry. [subject] emerges through calm, luxurious motion — star polygons unfolding, tessellations shifting colour, gold and deep-teal patterns radiating outward. Slow majestic camera moves, soft glowing light, and a meditative pace. Crafted, precise, and timelessly beautiful.",
+    "pth": "ลายกระเบื้องเรขาคณิตแบบโมร็อกโก ดอกดาวเรขาคณิตค่อย ๆ บาน เล่า [subject] ด้วยภาพสงบ หรู ประณีตแบบงานฝีมือชั้นสูง"
+  },
+  {
+    "num": "41",
+    "slug": "iso-flat-space",
+    "en": "Iso Flat Space",
+    "th": "อวกาศไอโซเมตริก",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายเทคโนโลยี AI แอป การเล่า \"มันทำงานอย่างไร\" และเปิดตัวสินค้าที่อยากให้ดูสนุก เบา เป็นกันเองเหมือนเล่นของเล่น",
+    "pen": "A glossy pastel isometric space world built like a premium toy diorama: smooth toy-like planets, glossy ringed orbs, and floating glass UI cards hover over a soft gradient starfield. [subject] is explained as the camera slowly orbits the whole scene, ideas popping into place one beat at a time with bouncy eases. Creamy pink, mint and sky-blue palette with soft studio highlights. Wide-to-medium framing, gentle gliding motion, bright playful tech-toy mood.",
+    "pth": "โลกอวกาศไอโซเมตริกมันวาวเหมือนของเล่น เล่า [subject] เป็นไดโอรามาที่กล้องหมุนวนช้า ๆ ไอเดียโผล่มาวางทีละชิ้น สดใส สนุก เป็นมิตร"
+  },
+  {
+    "num": "42",
+    "slug": "kinetic-typography",
+    "en": "Kinetic Typography",
+    "th": "ตัวอักษรเคลื่อนไหว",
+    "cat": "มินิมอล",
+    "suit": "คลิปที่ตัวอักษรคือพระเอกของภาพ — คำคม ตัวเลขและสถิติ เปิดตัวสินค้าเทคโนโลยี และงานแบรนด์ที่อยากได้ลุคคม เท่ เหมือนงาน motion study ของสตูดิโอ",
+    "pen": "Bold kinetic typography on a clean minimal backdrop: oversized letters scale, slide and stagger into rhythm with snappy studio motion. [subject] is told entirely through moving type — key words slam in, numbers count up huge, accents pop in one sharp color. Black, white and a single vivid accent on flat negative space. Tight centered framing, fast percussive cuts, confident sharp design-studio mood.",
+    "pth": "ตัวอักษรยักษ์เคลื่อนไหวเป็นภาพหลัก เล่า [subject] ด้วยจังหวะเร็ว ๆ ตัวเลขเด้งขึ้น คำสำคัญกระแทกเข้าจอ คม เท่ เหมือนงานสตูดิโอ"
+  },
+  {
+    "num": "43",
+    "slug": "kurzgesagt-flat",
+    "en": "Kurzgesagt Flat",
+    "th": "อธิบายวิทยาศาสตร์แบบแฟลต",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายวิทยาศาสตร์ สุขภาพ อวกาศ \"ทำไมมันทำงานแบบนั้น\" ตัวเลขใหญ่ ๆ และการเปิดตัวสินค้าแบบพรีเมียม นุ่มนวล อยากให้คนดูรู้สึกฉลาดไปด้วย",
+    "pen": "A glowing flat science-explainer universe in original flat design: deep-space gradients, smooth rounded shapes, floating particles and tiny curious birds drift through calm compositions. [subject] unfolds with elegant zoom-through transitions as each idea lights up one by one. Rich indigo, teal and warm gold palette. Wide framing with slow deliberate camera moves, curious and premium mood.",
+    "pth": "จักรวาลอธิบายวิทยาศาสตร์แบบแฟลตเรืองแสง เล่า [subject] ผ่านซูมทะลุฉากนุ่มนวล ไอเดียสว่างขึ้นทีละชิ้น นิ่ง ฉลาด พรีเมียม"
+  },
+  {
+    "num": "44",
+    "slug": "ligne-claire",
+    "en": "Ligne Claire",
+    "th": "การ์ตูนยุโรปเส้นใส",
+    "cat": "มินิมอล",
+    "suit": "คลิปเล่าเรื่องแบบผจญภัย ประวัติแบรนด์ ท่องเที่ยว และอธิบาย \"วิธีทำงาน/ฟีเจอร์สินค้า\" ที่อยากให้ดูชัด น่าเชื่อถือ ไม่เสียงดัง",
+    "pen": "Clean-line European comic style with one uniform ink line and flat sophisticated colors: detailed adventure-album backgrounds, neatly composed panels and calm sequential storytelling. [subject] is told like a journey across beautifully drawn sets, one clear beat per frame, with a single dramatic highlight moment. Muted refined palette with precise detail. Steady medium-wide framing, measured smooth motion, clear trustworthy mood.",
+    "pth": "การ์ตูนยุโรปเส้นใสสีแบน เล่า [subject] เหมือนอัลบั้มผจญภัย ฉากละเอียด ทีละจังหวะชัด ๆ เรียบหรู น่าเชื่อถือ"
+  },
+  {
+    "num": "45",
+    "slug": "lineart-monoline",
+    "en": "Lineart Monoline",
+    "th": "ลายเส้นเดียวต่อเนื่อง",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายเทค AI How-to การเงิน โพสต์ \"ไอเดียเดียว\" และโปรโมชันที่อยากได้ลุคฉลาด มินิมอล พรีเมียม อ่านง่ายบนมือถือ",
+    "pen": "A single continuous pen line drawing everything on a light background: one unbroken stroke loops, morphs and redraws itself from idea to idea without lifting. [subject] flows as the line transforms — scenes dissolve into the next concept in one elegant gesture. White space with one subtle accent color. Centered minimal framing, fluid drawing animation, calm smart premium mood.",
+    "pth": "เส้นปากกาต่อเนื่องเส้นเดียววาดเล่า [subject] เส้นลื่นไหลเปลี่ยนรูปจากไอเดียหนึ่งไปอีกไอเดีย มินิมอล ฉลาด อ่านง่าย"
+  },
+  {
+    "num": "46",
+    "slug": "lineless-tartakovsky",
+    "en": "Lineless Tartakovsky",
+    "th": "แอนิเมชันไร้เส้นสายแอ็กชัน",
+    "cat": "มินิมอล",
+    "suit": "คลิปเล่าเรื่องดราม่า จุดเปลี่ยนชีวิต เคล็ดลับ \"ท่าเดียวพลิกเกม\" เปิดตัวสินค้า และเรื่องการเงิน/พัฒนาตัวเองที่อยากให้ดูซินิมาติก ทรงพลัง เหมือนหนัง",
+    "pen": "Bold lineless action animation in the Tartakovsky spirit: huge flat color shapes, vast dramatic negative space, widescreen letterbox framing and a giant looming sun. [subject] builds through long tense stillness, then releases in one explosive decisive strike. Deep oranges, blood reds and shadow blacks. Slow epic pacing with sudden violent motion, lone-warrior cinematic mood.",
+    "pth": "แอนิเมชันไร้เส้นสายโทนแอ็กชัน เล่า [subject] แบบซินิมาติก นิ่งตึงเครียดแล้วระเบิดออกในท่าเดียว ทรงพลัง ดราม่า"
+  },
+  {
+    "num": "47",
+    "slug": "liquid-glass-ui",
+    "en": "Liquid Glass Ui",
+    "th": "กระจกเหลวบนมือถือ",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปเทค แอป AI \"พิมพ์พรอมต์เดียวได้ผลลัพธ์\" เปิดตัวสินค้า โปรโมชันร้านออนไลน์ และเคล็ดลับการเงิน/งานที่อยากให้ดูพรีเมียม ลื่น เหมือนอยู่บนหน้าจอมือถือ",
+    "pen": "Premium liquid-glass motion with frosted translucent panels and light-refraction physics: glass cards stretch, wobble and snap with springy satisfying ease. [subject] plays out inside glowing phone-screen framings, information floating in refracted glass layers. Soft aurora gradients behind crisp glass. Close vertical framing, smooth elastic motion, satisfying high-end tech mood.",
+    "pth": "กระจกเหลวโปร่งแสงบนมือถือ เล่า [subject] ผ่านการ์ดแก้วเด้งยืดหดแบบยางยืด ลื่น พรีเมียม น่ากดดูซ้ำ"
+  },
+  {
+    "num": "48",
+    "slug": "liquid-shape-morph",
+    "en": "Liquid Shape Morph",
+    "th": "รูปทรงเหลวไหลลื่น",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายและโปรโมชันที่อยากให้สนุก สดใส — เคล็ดลับแอป ขนม ความงาม โพสต์ไอเดียเดียว และเปิดเผยตัวเลขแบบฉ่ำ ๆ เหมือนดูริล Lottie",
+    "pen": "Juicy liquid morphing motion where every change feels like a splash: blobs stretch, droplets merge and forms melt seamlessly into new shapes. [subject] is carried by elastic liquid transitions — each idea drips, pops and reshapes into the next. Candy-bright gradients with glossy highlights. Dynamic playful framing, bouncy continuous flow, bright juicy satisfying mood.",
+    "pth": "รูปทรงเหลวไหลลื่น เล่า [subject] ด้วยการละลายหยดน้ำและมอร์ฟฉ่ำ ๆ ไอเดียเปลี่ยนรูปกันไม่หยุด สดใส สนุก ลื่นไหล"
+  },
+  {
+    "num": "49",
+    "slug": "lofi-rpg-undertale",
+    "en": "Lofi Rpg Undertale",
+    "th": "ฉากต่อสู้ RPG โลไฟ",
+    "cat": "เกม",
+    "suit": "คลิปเล่าเรื่อง \"เจอปัญหาแล้วผ่านด่าน\" คลิปความรู้ การเงินส่วนตัว สายเกม/เทค และคลิปขายของที่อยากให้รู้สึกเหมือนเพิ่งได้ไอเท็มใหม่ในเกม",
+    "pen": "Lo-fi retro RPG battle scene with pixel UI boxes and a dark cozy glow: turn-based dialogue text types out, a small soul-heart dodges in the bullet box, damage numbers tick. [subject] plays as a boss fight — the problem is the boss, each tip lands as a turn, victory bursts into an ITEM GET moment. Near-black purple with neon cyan and gold accents. Centered game-screen framing, choppy retro pacing, cozy underdog mood.",
+    "pth": "ฉากต่อสู้ RPG โลไฟ เล่า [subject] เหมือนสู้บอสในเกม ปัญหาคือบอส ทิปคือเทิร์นโจมตี ชนะแล้วขึ้นจอได้ไอเท็ม สนุก น่าติดตาม"
+  },
+  {
+    "num": "50",
+    "slug": "manga-screentone",
+    "en": "Manga Screentone",
+    "th": "มังงะสกรีนโทน",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายสุดไฮป์ เทค การเงิน How-to และการเปิดตัวสินค้า ที่อยากให้ดราม่าแต่สนุกเหมือนอ่านมังงะโชเน็นรายสัปดาห์",
+    "pen": "A weekly shonen manga page come alive: black ink art, screentone shading, radiating speed lines and hand-lettered Thai SFX bursts like ตึง!! and ปิ๊ง!! with one spot color. [subject] unfolds across dramatic panel zooms and impact frames, every reveal hitting like a chapter cliffhanger. High-contrast black and white with a single vivid accent. Punchy dynamic framing, explosive rhythmic cuts, dramatic fun hype mood.",
+    "pth": "มังงะสกรีนโทนขาวดำ เล่า [subject] เหมือนหน้าหนังสือโชเน็น เส้นสปีด เสียงเอฟเฟกต์ไทยตัวใหญ่ ทุกเฉลยกระแทกใจ ดราม่า สนุก"
+  },
+  {
+    "num": "51",
+    "slug": "mascot-on-flat",
+    "en": "Mascot On Flat",
+    "th": "มาสคอตบนพื้นเรียบ",
+    "cat": "การ์ตูน",
+    "suit": "คลิปอธิบายเร็วบนมือถือ เคล็ดลับ AI/เครื่องมือ เล่า \"แบบเก่า vs แบบใหม่\" และเรื่อง 3 ขั้นตอน ที่อยากได้ลุคสะอาด อ่านง่าย ผลิตไว",
+    "pen": "One cheerful mascot reacting to one idea at a time on a flat pastel background: the mascot pops in, gestures at sticker-chip labels, and plays out old-way-vs-new-way gags with snappy timing. [subject] is delivered in quick readable beats, each step stamped with a sticker chip and a number payoff. Clean pastel flats, big clear shapes. Tight phone framing, fast pop-in motion, friendly no-fuss mood.",
+    "pth": "มาสคอตตัวเดียวบนพื้นเรียบ เล่า [subject] ทีละไอเดียพร้อมสติกเกอร์ป้ายกำกับ ฉากเก่า-vs-ใหม่ อ่านง่าย เร็ว เป็นกันเอง"
+  },
+  {
+    "num": "52",
+    "slug": "match3-candy",
+    "en": "Match3 Candy",
+    "th": "เกมเรียงลูกอม",
+    "cat": "เกม",
+    "suit": "คอนเทนต์ \"เลเวลอัป\" ความท้าทายออมเงิน เคล็ดลับทีละขั้น โปรโมชัน และแบรนด์ขนม เด็ก ความงาม ที่อยากเล่าเรื่องเป็นด่านเกมพร้อมจอ HUD",
+    "pen": "A bright match-3 candy game world: glossy candy pieces swap, pop and chain into combo bursts while the HUD score climbs, stars fill and goal ticks check off. [subject] plays as a game level — each step clears a row until the big color-bomb payoff explodes. Saturated candy pink, mint and grape on a clean board. Game-screen framing, snappy satisfying pops, playful rewarding mood.",
+    "pth": "โลกเกมเรียงลูกอมสีสันสด เล่า [subject] เป็นด่านเกม ลูกอมแตกระเบิด คะแนนขึ้น ดาวเต็ม สุดท้ายบอมบ์สีใหญ่ระเบิด สนุก น่าลุ้น"
+  },
+  {
+    "num": "53",
+    "slug": "memphis-80s",
+    "en": "Memphis 80s",
+    "th": "เมมฟิสยุค 80",
+    "cat": "มินิมอล",
+    "suit": "คอนเทนต์เสียงดัง สนุก สายเด็กวัยรุ่น — เปิดตัวสินค้า โปรโมชัน เคล็ดลับเทค/AI ลิสต์และรีวิว ที่อยากให้ดูสด กวน ติดตาเหมือนทีวีเด็กยุค 90",
+    "pen": "A loud 90s kids-TV ident in Memphis style: hard-edged stickers, squiggles, terrazzo textures and confetti bursts slam over a backdrop that changes on every hit. [subject] drops in bold saturated shapes — each reveal punctuated by graphic pops and playful bounces. Electric pink, cobalt, sunshine yellow and mint. Bold centered framing, punchy cut-on-beat motion, loud happy youthful mood.",
+    "pth": "สไตล์เมมฟิสยุค 80 เสียงดังสีสด เล่า [subject] ด้วยสติกเกอร์ขอบแข็ง ลายขีดยุกยิก ฉากเปลี่ยนทุกจังหวะ สนุก กวน ติดตา"
+  },
+  {
+    "num": "54",
+    "slug": "mid-century-editorial",
+    "en": "Mid Century Editorial",
+    "th": "การ์ตูนโมเดิร์นยุค 50",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายฉลาด มีสไตล์เรโทร — เคล็ดลับการเงิน/ธุรกิจ How-to โปรโมชัน และบทนำช่อง ที่อยากให้ดูเรียบหรู มั่นใจ เหมือนปกนิตยสารยุค 50",
+    "pen": "1950s editorial animation with Saul Bass-inspired title cards: geometric character shapes, halftone textures and graphic wipes move with calm confidence. [subject] is presented like a mid-century magazine spread — chapter cards, elegant diagrams and a smooth bold finale. Muted teal, mustard and warm beige palette. Composed graphic framing, measured assured motion, smart stylish retro mood.",
+    "pth": "การ์ตูนโมเดิร์นยุค 50 เล่า [subject] เหมือนปกนิตยสารเรโทร การ์ดบทตอน ไดอะแกรมสวย ๆ เรียบหรู มั่นใจ ฉลาด"
+  },
+  {
+    "num": "55",
+    "slug": "monster-battle-ui",
+    "en": "Monster Battle Ui",
+    "th": "เกมต่อสู้มอนสเตอร์",
+    "cat": "เกม · UI · เทคโนโลยี",
+    "suit": "คลิปเล่าเรื่องแบบเกมต่อสู้ — ปัญหาคือมอนสเตอร์ วิธีแก้คือท่าโจมตี ผลลัพธ์คือค่าสถานะและเลเวลอัป",
+    "pen": "A turn-based monster-battle game UI: HP bars, stat panels and command menus frame the scene as a wild monster appears. [subject] plays as a fight — the problem is the monster, each solution fires as an attack with damage numbers and hit flashes, and the win ends on a LEVEL UP stat screen. Dark arena backdrop with glowing neon UI. Game-battle framing, dramatic hit pacing, triumphant gamer mood.",
+    "pth": "หน้าจอเกมต่อสู้มอนสเตอร์ เล่า [subject] แบบเทิร์นเบส ปัญหาคือบอส ท่าแก้ปัญหาคือท่าโจมตี พร้อมตัวเลขดาเมจ จบด้วยจอเลเวลอัป มันส์ สะใจ"
+  },
+  {
+    "num": "56",
+    "slug": "nang-yai-shadow",
+    "en": "Nang Yai Shadow",
+    "th": "หนังใหญ่ หนังตะลุง",
+    "cat": "มินิมอล",
+    "suit": "คอนเทนต์มรดกไทย นิทานพื้นบ้าน รามเกียรติ์ เล่า \"วิธีทำ/ที่มา\" และโปรโมชันแบรนด์ไทยที่อยากได้ลุคอบอุ่น ทำมือ มีรากเหง้า",
+    "pen": "Traditional Thai shadow-puppet theatre: perforated hide puppets glide on rods across a glowing cloth screen, lit by a warm flickering lamp. [subject] unfolds as a shadow play — characters enter from the edges, scenes shift with gentle cloth-light waves, and one moment flares in dramatic lamp glow. Deep amber, ember orange and ink black palette. Theatrical framed-screen composition, slow graceful motion, warm hand-crafted heritage mood.",
+    "pth": "หนังใหญ่หนังตะลุง เล่า [subject] บนจอผ้าเรืองแสง ตัวหนังสลักลายเคลื่อนไหวช้า ๆ แสงตะเกียงอบอุ่น อบอวลวัฒนธรรมไทย"
+  },
+  {
+    "num": "57",
+    "slug": "neo-brutalism",
+    "en": "Neo Brutalism",
+    "th": "นีโอบรูทัลลิซึม",
+    "cat": "มินิมอล",
+    "suit": "คลิปเทค แอป AI ครีเอเตอร์ และร้านออนไลน์ — เคล็ดลับ เปิดตัวสินค้า \"ฉันทำแบบนี้\" และคลิป affiliate ที่อยากให้ดูเหมือนเว็บคลิกได้ สนุก ชัด",
+    "pen": "Playful neo-brutalist web UI in motion: bold pastel blocks with thick black borders, hard drop shadows, stickers and scrolling marquee tickers. [subject] is told like a clickable website — buttons physically press, panels snap open, tooltips pop with punchy timing. Pastel pink, blue and yellow against stark black outlines. Snappy interface framing, tactile click-and-snap motion, bold playful confident mood.",
+    "pth": "นีโอบรูทัลลิซึมสีพาสเทลขอบดำหนา เล่า [subject] เหมือนเว็บคลิกได้ ปุ่มกดยุบ แผงเด้งเปิด สติกเกอร์แปะ สนุก ชัด มั่นใจ"
+  },
+  {
+    "num": "58",
+    "slug": "op-art",
+    "en": "Op Art",
+    "th": "ศิลปะลวงตา",
+    "cat": "มินิมอล",
+    "suit": "คลิป \"หยุดนิ้วเลื่อน\" — อธิบายเทค/AI งานดีไซน์/แบรนด์ เปิดตัวสินค้า และตัวเลขยอดขาย ที่อยากได้ลุคกราฟิกแรง ลวงตา ติดตา",
+    "pen": "A moving op-art print: black-and-white illusion fields pulse, rotate and warp in hypnotic geometric waves, with one terracotta hero object anchoring the composition. [subject] emerges from the shifting patterns — ideas ripple out as the field breathes and bends. Strict monochrome with a single terracotta accent. Bold full-bleed framing, slow hypnotic wave motion, striking gallery-grade mood.",
+    "pth": "ศิลปะลวงตาขาวดำเคลื่อนไหว เล่า [subject] ท่ามกลางแพทเทิร์นเรขาคณิตที่พลิ้วเป็นคลื่น พร้อมวัตถุสีส้มอิฐตัวเอก แรง ติดตา หยุดนิ้วเลื่อน"
+  },
+  {
+    "num": "59",
+    "slug": "origami-fold",
+    "en": "Origami Fold",
+    "th": "พับกระดาษโอริงามิ",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คลิปอธิบายและประกาศที่อยากให้ละมุน น่ารัก — เคล็ดลับ How-to เด็ก ครอบครัว ของขวัญ และ \"ไอเดียใหญ่หนึ่งเดียว\" ที่เล่าแบบไดโอรามากระดาษพับ",
+    "pen": "A folded-paper diorama world: origami shapes unfold into the scene, paper cranes lift off and drift away, every idea arriving as a delicate paper fold. [subject] is told in a pastel paper world of soft creases and gentle shadows, scenes folding in and out in endless gentle motion. Powder pastel palette with warm paper grain. Soft diorama framing, delicate continuous folding motion, gentle delightful mood.",
+    "pth": "โลกโอริงามิกระดาษพับ เล่า [subject] ผ่านฉากกระดาษที่พับเข้ามา นกกระเรียนกระดาษบินออก ละมุน น่ารัก อบอุ่น"
+  },
+  {
+    "num": "60",
+    "slug": "painterly-arcane",
+    "en": "Painterly Arcane",
+    "th": "ภาพเพ้นต์ดราม่า",
+    "cat": "มินิมอล",
+    "suit": "คลิปอธิบายเทค/AI โทนยิ่งใหญ่ ซินิมาติก เปิดตัวแกดเจ็ต ฮุกเรื่องเล่า และคอนเทนต์เกม/ครีเอเตอร์ ที่อยากให้รู้สึกเหมือนหนังแอนิเมชันวาดมือ ไม่ใช่แฟลตน่ารัก",
+    "pen": "A painterly animated-film look: rich brushwork textures, dramatic cinematic lighting and epic painted backgrounds sweep across the frame. [subject] unfolds with slow sweeping camera moves through an oil-painted world — expressive characters, glowing skies and one grand reveal. Deep jewel tones with luminous highlights. Cinematic widescreen framing, majestic deliberate motion, epic emotional mood.",
+    "pth": "ภาพเพ้นต์ดราม่าเหมือนหนังแอนิเมชันวาดมือ เล่า [subject] ด้วยแสงซินิมาติก ฉากหลังสีน้ำมันสุดอลังการ กล้องกวาดช้า ๆ ยิ่งใหญ่ ซาบซึ้ง"
+  },
+  {
+    "num": "61",
+    "slug": "paper-diorama-layered",
+    "en": "Paper Diorama Layered",
+    "th": "ไดโอรามากระดาษซ้อนชั้น",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "เล่าเรื่องอบอุ่นทำมือ คลิปอธิบาย ทิปส์ เด็ก คราฟต์ อาหาร ร้านเล็ก ๆ และการประกาศไอเดียเดียว",
+    "pen": "Handcrafted layered paper-theatre diorama, cardstock sets in warm pastel tones with red curtains. [subject] plays out as a paper stage show, camera pushing gently through paper layers while rod puppets and props on wires move each chapter along. Warm, handmade, theatrical mood.",
+    "pth": "สไตล์ไดโอรามากระดาษซ้อนชั้นแบบโรงละครหุ่น เล่า [subject] ผ่านฉากกระดาษหลายเลเยอร์ อบอุ่น ทำมือ"
+  },
+  {
+    "num": "62",
+    "slug": "pencil-sketch",
+    "en": "Pencil Sketch",
+    "th": "ภาพร่างดินสอ",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คอนเทนต์เบื้องหลัง/วิธีทำ จากไอเดียสู่ของจริง สอนวาด ครีเอทีฟ และรีวิวสินค้าที่อยากให้ดูคราฟต์มีฝีมือ",
+    "pen": "Hand-drawn pencil sketch animation on warm paper, grey graphite lines with cross-hatching and soft eraser marks. [subject] is drawn live, rough outlines refined stroke by stroke as the camera stays close on the page, each scene sketching itself into frame. Intimate, artisanal, work-in-progress mood.",
+    "pth": "แอนิเมชันภาพร่างดินสอบนกระดาษนุ่ม ๆ วาด [subject] ทีละเส้นแบบเห็นฝีมือช่าง อบอุ่น เป็นกันเอง"
+  },
+  {
+    "num": "63",
+    "slug": "persona-style-ui",
+    "en": "Persona Style Ui",
+    "th": "เมนูเกม JRPG สุดเท่",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปลุ้นระทึกแบบเปิดเผยของลับ ทิปส์เดียว ข่าว AI/เทค เปิดตัวสินค้า แฟลชเซลล์ จัดอันดับ และควิซ",
+    "pen": "Hyper-stylized JRPG menu aesthetic in bold red, black and white with jagged cut-paper panels. [subject] unfolds as a stylish game interface, panels swinging in with screen-shake pops and ransom-note type slams, building to one full-screen hype moment. Electric, confident, rebellious energy.",
+    "pth": "สไตล์เมนูเกม JRPG สุดเท่ แดงดำขาว เล่า [subject] ผ่านพาเนลที่สวิงเข้าพร้อมฟอนต์ดุดัน มันส์ เปรี้ยว สะใจ"
+  },
+  {
+    "num": "64",
+    "slug": "pixel-art",
+    "en": "Pixel Art",
+    "th": "พิกเซลอาร์ต 16 บิต",
+    "cat": "เกม",
+    "suit": "คลิปสายเกม เทคโนโลยี AI/ครีเอเตอร์ เล่าเรื่องแบบผ่านด่าน และคลิปขายของที่อยากให้รู้สึกเหมือนได้ไอเท็มในเกม",
+    "pen": "16-bit retro pixel art world with chunky sprites, dithered skies and chunky HUD text. [subject] plays as a classic side-scrolling level, the hero hopping platforms and collecting pixel items while chiptune bleeps drive the pace. Nostalgic, playful, arcade-fresh energy.",
+    "pth": "พิกเซลอาร์ต 16 บิตยุคเกมเก่า เล่า [subject] แบบด่านเกมกระโดดเก็บไอเท็ม สนุก คิดถึงวัยเด็ก"
+  },
+  {
+    "num": "65",
+    "slug": "pop-art-warhol",
+    "en": "Pop Art Warhol",
+    "th": "ป๊อปอาร์ตซิลค์สกรีน",
+    "cat": "มินิมอล",
+    "suit": "คลิปขายของและแอฟฟิลิเอต ตัวเลขซ้ำ ๆ เรื่องเงินและการเติบโต เปิดตัวสินค้า และการประกาศแบบจัดเต็ม",
+    "pen": "Warhol-style silkscreen pop art gallery with repeating colourway grids, halftone textures and soup-can repetition. [subject] is tiled across the frame in neon pink, cyan and yellow variants while squeegee-pull transitions wipe between grids. Loud, iconic, gallery-pop swagger.",
+    "pth": "ป๊อปอาร์ตสไตล์วอร์ฮอล ซิลค์สกรีนสีแสบซ้ำช่อง เล่า [subject] แบบแกลเลอรีภาพซ้ำสะดุดตา ดัง สนุก"
+  },
+  {
+    "num": "66",
+    "slug": "pop-comic",
+    "en": "Pop Comic",
+    "th": "คอมิกป๊อป",
+    "cat": "การ์ตูน",
+    "suit": "วิดีโอสั้นพลังงานสูง ข่าวเทค/AI เปรียบเทียบก่อน-หลัง เปิดตัวสินค้า ทิปส์แบบมินิคอมิก",
+    "pen": "Spider-Verse style pop comic frames with Ben-Day dots, misprint textures, starburst SFX lettering and speech balloons. [subject] explodes across split panels with whip-crack cuts and POW-style impact frames, each beat landing like a comic page turn. Frenetic, bold, youth-culture voltage.",
+    "pth": "คอมิกป๊อปสไตล์สไปเดอร์เวิร์ส จุดเบนเดย์ บับเบิลคำพูด เล่า [subject] แบบการ์ตูนแอ็กชันจังหวะเร็ว มันส์จัด"
+  },
+  {
+    "num": "67",
+    "slug": "preschool-simple",
+    "en": "Preschool Simple",
+    "th": "การ์ตูนเด็กเล็ก",
+    "cat": "การ์ตูน",
+    "suit": "แบรนด์เด็กและครอบครัว ทิปส์พ่อแม่/โรงเรียน ฮาวทูง่าย ๆ และเรื่องยากที่อยากอธิบายให้เข้าใจสุด ๆ",
+    "pen": "Bright preschool TV-show look with flat chunky shapes, sunny primary colours and a friendly puppet mascot. [subject] is taught gently, one simple idea per scene with white text boxes and soft bouncy motion, the mascot pointing at each new thing. Sweet, patient, reassuringly simple warmth.",
+    "pth": "การ์ตูนเด็กเล็กสดใส รูปทรงเรียบง่าย เล่า [subject] แบบรายการทีวีเด็ก น่ารัก เข้าใจง่าย อบอุ่น"
+  },
+  {
+    "num": "68",
+    "slug": "ps1-lowpoly",
+    "en": "Ps1 Lowpoly",
+    "th": "เกม 3D โลว์โพลียุค 90",
+    "cat": "เกม",
+    "suit": "คอนเทนต์เกม เทค และเลเวลอัป ทิปส์แบบเควสต์ เปิดตัวสินค้าแบบได้ไอเท็ม ตัวเลขแบบแถบ HP และชาเลนจ์นับถอยหลัง",
+    "pen": "Nostalgic PS1-era low-poly 3D platformer with jittery vertices, dithered textures and blocky menus. [subject] runs as a retro game level, collectibles spinning in the air, warp-ins flashing between zones, stats rendered as FF7-style bars. Chunky, nostalgic, quest-driven charm.",
+    "pth": "เกม 3D โลว์โพลียุค PS1 เล่า [subject] แบบด่านเกมเก่า เก็บของ วาร์ปข้ามโซน คิดถึงยุค 90"
+  },
+  {
+    "num": "69",
+    "slug": "psychedelic-bold-cartoon",
+    "en": "Psychedelic Bold Cartoon",
+    "th": "การ์ตูนไซเคเดลิก",
+    "cat": "การ์ตูน",
+    "suit": "คอนเทนต์วัยรุ่นสนุก ๆ ทิปส์เทค/AI ขนมเครื่องดื่ม เกม ดนตรี อีเวนต์ และไอเดียแหวกที่อยากให้สะดุดฟีด",
+    "pen": "Acid-bright psychedelic cartoon in a neon jelly world where every object has eyes, swirling in slow liquid motion. [subject] melts and morphs through warping scenes, colours bleeding into each other with a dreamy lo-fi pulse. Wild, playful, head-trip energy that pops off the feed.",
+    "pth": "การ์ตูนไซเคเดลิกนีออนโลกเยลลี่ ทุกอย่างมีตา เล่า [subject] แบบหมุนวนฝัน ๆ แหวก สะดุดตา"
+  },
+  {
+    "num": "70",
+    "slug": "retro-crt-terminal",
+    "en": "Retro Crt Terminal",
+    "th": "จอเทอร์มินัลยุค 80",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปสายเทค AI โค้ด เกมเก่า ความรู้ที่อยากให้ดูเหมือนสั่งคอมแล้วได้ผล และคลิปขายของสายแกดเจ็ต",
+    "pen": "80s CRT terminal aesthetic with green phosphor text, scanlines, screen flicker and a blinking cursor on deep black. [subject] is typed out command by command, each keystroke triggering glowing ASCII reveals and retro boot-up sequences. Nerdy, satisfying, hacker-nostalgia mood.",
+    "pth": "จอเทอร์มินัลยุค 80 ข้อความเขียวบนจอดำ เล่า [subject] แบบพิมพ์คำสั่งแล้วผลลัพธ์เด้งขึ้น เท่ เนิร์ด คิดถึงยุคเก่า"
+  },
+  {
+    "num": "71",
+    "slug": "risograph-zine",
+    "en": "Risograph Zine",
+    "th": "ซีนพิมพ์ริโซกราฟ",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "แบรนด์อินดี้ อีเวนต์ ดนตรี ครีเอเตอร์ คลิปเล่าวิธีทำ และเดโมเครื่องมือ ที่อยากให้ดูพิมพ์มือไม่เนี้ยบแบบบริษัท",
+    "pen": "Risograph zine texture with overprinted neon inks, grain, halftone shadows and sticker collage edges. [subject] is laid out like a hand-printed fanzine, pages flipping with ink-bleed transitions and off-register print charm. Raw, DIY, underground-print energy.",
+    "pth": "ซีนพิมพ์ริโซกราฟ หมึกซ้อนสามสี เกรนดิบ ๆ เล่า [subject] แบบนิตยสารทำมือ ดิบ อินดี้ มีเสน่ห์"
+  },
+  {
+    "num": "72",
+    "slug": "rubber-hose-vintage",
+    "en": "Rubber Hose Vintage",
+    "th": "การ์ตูนแขนยางยุค 30",
+    "cat": "การ์ตูน",
+    "suit": "เล่าเรื่องสนุกอบอุ่น ทิปส์และฮาวทู แบรนด์เด็กและครอบครัว อาหาร ร้านเล็ก ๆ และการประกาศไอเดียเดียวแบบขำ ๆ",
+    "pen": "1930s rubber-hose cartoon short with bouncy ink toons, pie-cut eyes, white gloves and sepia film grain. [subject] plays out as a black-and-white matinee short, characters jiggling to ragtime rhythm with typewriter gag cards between scenes. Cheerful, nostalgic, vaudeville mischief.",
+    "pth": "การ์ตูนแขนยางยุค 30 ขาวดำฟิล์มเก่า เล่า [subject] แบบหนังสั้นโรงหนังโบราณ เด้ง ๆ ขำ ๆ คิดถึงวันวาน"
+  },
+  {
+    "num": "73",
+    "slug": "sci-fi-hud",
+    "en": "Sci Fi Hud",
+    "th": "หน้าจอ HUD ไซไฟ",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "คลิปสายเทค AI แกดเจ็ต รีวิวสินค้า การวิเคราะห์ข้อมูลแบบสแกนแล้วเจอ และคลิปขายของที่อยากให้ดูล้ำ",
+    "pen": "Futuristic sci-fi HUD with holographic cyan overlays, scanning reticles, rotating data rings and glowing wireframe readouts. [subject] is analysed layer by layer, the camera locked on as targeting brackets snap onto each detail with digital lock-on beeps. Sleek, precise, high-tech intensity.",
+    "pth": "หน้าจอ HUD ไซไฟโฮโลแกรมสีฟ้า เล่า [subject] แบบสแกนวิเคราะห์ทีละชั้น ล้ำ เท่ ดูไฮเทค"
+  },
+  {
+    "num": "74",
+    "slug": "screen-as-stage",
+    "en": "Screen As Stage",
+    "th": "เล่าเรื่องบนหน้าจอคอม",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "เรื่องเทค AI และโปรดักทิวิตี้บนหน้าจอเดสก์ท็อป สอนใช้เครื่องมือ โปรโมตแอป/แกดเจ็ต ตัวเลขก่อน-หลัง และอธิบายเวิร์กโฟลว์",
+    "pen": "Glowing night-mode desktop where the screen itself is the stage, windows tiling and a cursor clicking with real weight. [subject] unfolds through live typing, drags and ENTER keystrokes, a cute mascot cursor guiding each step as apps open and results pop in. Clever, tactile, screen-real magic.",
+    "pth": "เล่าเรื่องบนหน้าจอคอมโหมดกลางคืน เล่า [subject] ผ่านการพิมพ์ คลิก ลากจริง ๆ เหมือนนั่งดูข้าง ๆ สนุก เห็นภาพ"
+  },
+  {
+    "num": "75",
+    "slug": "screenprint-gig-poster",
+    "en": "Screenprint Gig Poster",
+    "th": "โปสเตอร์คอนเสิร์ตสกรีนมือ",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คอนเทนต์ที่ต้องรู้สึกเหมือนอีเวนต์ เปิดตัว คอนเสิร์ต ดรอป เซลล์ นับถอยหลัง เดโมเครื่องมือ และเรื่องราวครีเอเตอร์",
+    "pen": "Hand-pulled gig poster in four spot inks with heavy hatching, a giant sun, crowd silhouettes and tour-date typography. [subject] is announced like a one-night-only show, ink layers slamming in with rock-poster impact and paper-texture punch. Electric, collectible, poster-wall energy.",
+    "pth": "โปสเตอร์คอนเสิร์ตสกรีนมือ หมึกสี่สี ลายเส้นหนา เล่า [subject] แบบประกาศอีเวนต์คืนเดียว มันส์ เก็บสะสมได้"
+  },
+  {
+    "num": "76",
+    "slug": "silhouette-limbo",
+    "en": "Silhouette Limbo",
+    "th": "ภาพเงาดำ",
+    "cat": "มินิมอล",
+    "suit": "เล่าเรื่องอารมณ์หม่นแบบภาพยนตร์ ความลึกลับ ความคิดยามดึก เรื่องเทค/AI และการเปิดตัวสินค้าพรีเมียมแบบนิ่ง ๆ",
+    "pen": "Limbo-style silhouette film of pure ink-black shapes drifting through glowing fog over still black water. [subject] emerges as shadow scenes, a single ember-orange accent flickering through the dark while mist rolls slowly past. Haunting, cinematic, quiet mystery.",
+    "pth": "ภาพเงาดำสไตล์ Limbo ในหมอกเรืองแสง เล่า [subject] แบบเงาดำลอยในความมืด ลึกลับ ภาพยนตร์ เงียบแต่ทรงพลัง"
+  },
+  {
+    "num": "77",
+    "slug": "social-ui-mockup",
+    "en": "Social Ui Mockup",
+    "th": "เล่าเรื่องผ่านแชต",
+    "cat": "UI/เทคโนโลยี",
+    "suit": "เล่าเรื่องแบบแชท รีวิว/ขายของปักตะกร้า ข่าวไวรัล และคลิป AI/เทคโนโลยีที่อยากให้คนดูรู้สึกเหมือนเลื่อนโซเชียลจริง",
+    "pen": "Realistic social-media UI come to life, chat bubbles, typing indicators and scrolling feeds filling the frame. [subject] plays out inside the apps themselves, messages popping in with notification pings, likes bursting and the camera swiping between threads. Familiar, snappy, scroll-stopping realism.",
+    "pth": "เล่าเรื่องผ่านหน้าจอแชตและโซเชียลจำลอง เล่า [subject] แบบแชทเด้ง ฟีดเลื่อน เหมือนกำลังเล่นมือถือจริง คุ้นเคย เร็ว"
+  },
+  {
+    "num": "78",
+    "slug": "soft-3d-product",
+    "en": "Soft 3d Product",
+    "th": "สินค้า 3D นุ่มนิ่ม",
+    "cat": "มินิมอล",
+    "suit": "โชว์เคสสินค้าและคลิปแอฟฟิลิเอต อธิบายแอป/AI/เทค อธิบายวิธีทำงาน เปิดตัวเลข และประกาศเปิดตัว",
+    "pen": "Premium soft 3D render world with puffy rounded icons on podiums, squishy candy-coloured materials and a vinyl-toy mascot. [subject] is showcased in glossy diorama scenes, the camera orbiting smoothly as products bounce in with springy ease. Friendly, polished, premium-toy delight.",
+    "pth": "สินค้า 3D นุ่มนิ่มสีลูกกวาดบนแท่นโชว์ เล่า [subject] แบบเรนเดอร์พรีเมียมเป็นมิตร นุ่ม น่ารัก ดูแพง"
+  },
+  {
+    "num": "79",
+    "slug": "stipple-dotwork",
+    "en": "Stipple Dotwork",
+    "th": "ภาพจุดแกะลาย",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "คลิปอธิบายเชิงบรรณาธิการ วิทยาศาสตร์และธรรมชาติ วิธีทำงานของสิ่งต่าง ๆ การเงินและข้อมูล และสรุปหนังสือ/คอร์ส",
+    "pen": "Engraved scientific plate built entirely from ink stipple dots with one restrained accent colour and annotated call-outs. [subject] is revealed dot by dot, the camera gliding over engraved diagrams as cross-sections assemble with museum-plate precision. Calm, intelligent, editorial elegance.",
+    "pth": "ภาพจุดแกะลายแบบแผ่นภาพวิทยาศาสตร์โบราณ เล่า [subject] ด้วยจุดหมึกทีละจุด ใจเย็น ฉลาด ดูมีรสนิยม"
+  },
+  {
+    "num": "80",
+    "slug": "sumi-e-ink",
+    "en": "Sumi E Ink",
+    "th": "ภาพวาดหมึกซูมิเอะ",
+    "cat": "งานพิมพ์/กระดาษ",
+    "suit": "เล่าเรื่องใจเย็น ชา อาหาร สุขภาพ คราฟต์ ท่องเที่ยว วัฒนธรรมเอเชีย ปรัชญา/มายด์เซ็ต และการอธิบายไอเดียเดียวแบบเรียบง่าย",
+    "pen": "Living sumi-e ink painting with bold brush strokes, drifting mist and one red seal stamp on rice paper. [subject] forms as ink blooms across the page, strokes sweeping in time with the narration while empty space breathes between scenes. Meditative, graceful, timeless stillness.",
+    "pth": "ภาพวาดหมึกซูมิเอะบนกระดาษสา หมึกบาน หมอกลอย เล่า [subject] แบบภาพวาดมีชีวิต สงบ งาม เหนือกาลเวลา"
+  },
+  {
+    "num": "81",
+    "slug": "supercell-chunky",
+    "en": "Supercell Chunky",
+    "th": "เกมวางแผน 3D ตัวอ้วน",
+    "cat": "มินิมอล",
+    "suit": "คอนเทนต์เกมมิฟาย ท้าทายออมเงิน เลเวลอัป จัดอันดับ เปิดกล่อง และอะไรก็ตามที่อยากให้รู้สึกเหมือนชนะ",
+    "pen": "Chunky mobile-strategy game aesthetic, chubby 3D characters, cards, treasure chests and gold coins in candy colours. [subject] is gamified as a strategy battle, camera panning across a toy-like arena while each win bursts with coins and confetti. Loud, cheerful, rewarding mood.",
+    "pth": "สไตล์เกมวางแผน 3D ตัวอ้วนสีแคนดี้ เล่า [subject] เป็นสนามรบของเล่น ทุกชัยชนะมีเหรียญระเบิด สนุก รางวัลเยอะ"
+  },
+  {
+    "num": "82",
+    "slug": "superflat",
+    "en": "Superflat",
+    "th": "ซูเปอร์แฟลต",
+    "cat": "มินิมอล",
+    "suit": "รีลสายป็อปคัลเจอร์ สินค้าเด็ก ของเล่น ขนม ประกาศแฟนอาร์ต และคอนเทนต์ที่อยากให้เด้งเหมือนสติกเกอร์แคนดี้มีชีวิต",
+    "pen": "Murakami-style superflat pop-art world — loud, dense, pattern-packed 2D scenes in electric candy colours, smiling flowers and grinning characters floating everywhere. [subject] is told as a joyful sticker sheet that never stops moving, with bold outlines and screen-tone textures. Fast kinetic motion, playful elastic bounces, tight medium shots packed edge to edge. Purely happy, loud, collectible mood.",
+    "pth": "ศิลปะซูเปอร์แฟลตสีจัดจังหวะไว เล่า [subject] เหมือนสติกเกอร์แคนดี้ที่ขยับได้ตลอดเวลา สนุก ดัง ติดตา"
+  },
+  {
+    "num": "83",
+    "slug": "tech-editorial-line",
+    "en": "Tech Editorial Line",
+    "th": "ภาพประกอบบล็อกเทค",
+    "cat": "UI · เทคโนโลยี · มินิมอล",
+    "suit": "คลิปเทค AI แอป SaaS เปิดตัวสินค้า และคอนเทนต์ข้อมูลที่อยากดูฉลาด สงบ เป็นมิตร",
+    "pen": "Clean editorial illustration style — crisp blue-ink line work on soft paper-white backgrounds with dotted grids, orbiting diagrams and neat modular layouts. [subject] builds itself on screen: lines draw in, modules orbit and snap together in calm, logical motion. Minimal colour palette with one confident accent, plenty of whitespace, composed for clear centre framing. Smart, calm, friendly mood — a design-magazine feed in motion.",
+    "pth": "ภาพประกอบสายเอดิทอเรียล ลายเส้นสะอาดบนพื้นขาว เล่า [subject] ให้ค่อยๆ ประกอบตัวเองขึ้นมา ฉลาด สงบ อ่านง่าย"
+  },
+  {
+    "num": "84",
+    "slug": "thai-lai-thai",
+    "en": "Thai Lai Thai",
+    "th": "ลายไทยร่วมสมัย",
+    "cat": "ไทย",
+    "suit": "คอนเทนต์อวดความเป็นไทย งานหัตถกรรม อาหาร สกินแคร์ โปรเทศกาล และเรื่องวัฒนธรรม-ประวัติศาสตร์ที่อยากให้ดูหรู สง่างาม",
+    "pen": "Contemporary Thai lai-thai art style — flowing kanok patterns, gold-leaf gradients and deep jewel tones on dark elegant backdrops, like a temple mural come alive. [subject] unfolds through graceful ornamental reveals: floral motifs bloom, gold lines trace across the frame, each idea crowned with a luxurious golden flourish. Slow ceremonial camera drifts over rich textures. Luxurious, graceful, unmistakably Thai mood.",
+    "pth": "ลายไทยร่วมสมัยสีทองวิจิตร เล่า [subject] แบบจิตรกรรมฝาผนังที่มีชีวิต สง่างาม หรูหรา มีเอกลักษณ์ไทยชัดเจน"
+  },
+  {
+    "num": "85",
+    "slug": "thai-vintage-cinema",
+    "en": "Thai Vintage Cinema",
+    "th": "ป้ายหนังไทยวินเทจ",
+    "cat": "ไทย",
+    "suit": "โปรดักต์ดรอป คลิปขายของ ข่าวใหญ่ ประกาศสไตล์หนัง และแบรนด์ไทยย้อนยุคที่อยากให้เสียงดัง สนุก ติดตา",
+    "pen": "Hand-painted Thai retro cinema billboard style — sunburst backgrounds, puffy 3D titles, ribbons, rubber stamps and bold brush lettering in hot saturated colours. [subject] is announced like a movie premiere: the camera punches in on the title card, dramatic rays burst outward, scenes swipe like painted posters. Fast, theatrical, high-energy editing with poster-chapter framing. Loud, fun, nostalgic Thai blockbuster mood.",
+    "pth": "ป้ายหนังไทยวินเทจวาดมือ สีสดตัวอักษร 3D เปิด [subject] เหมือนรอบปฐมทัศน์ สนุก เสียงดัง นึกถึงวันวาน"
+  },
+  {
+    "num": "86",
+    "slug": "toon-battle-royale",
+    "en": "Toon Battle Royale",
+    "th": "เกม 3D แบทเทิลรอยัล",
+    "cat": "เกม",
+    "suit": "ชาเลนจ์ ทิปเลเวลอัป จัดอันดับ เปิดกล่อง ของแถม เคานต์ดาวน์ และคอนเทนต์ทีม/สควอดที่อยากให้รู้สึกเหมือนชนะเกม",
+    "pen": "Bright cartoon 3D battle-royale lobby — glossy toon-shaded world, rarity-coloured loot from grey to glowing gold, drop crates, countdown banners and a closing storm ring on the horizon. [subject] plays as a match: the camera orbits the lobby arena, highlights drop from the sky, each result lands with a rarity-tier glow and victory fanfare. Punchy, competitive, hype energy with bold centre-stage framing. Every beat feels like a win.",
+    "pth": "โลกแบทเทิลรอยัลการ์ตูน 3D สีสด เล่า [subject] เป็นแมตช์ลุ้นของดรอป ทุกผลลัพธ์คือชัยชนะ มันส์ ฮายป์"
+  },
+  {
+    "num": "87",
+    "slug": "toon-cel-adventure",
+    "en": "Toon Cel Adventure",
+    "th": "ผจญภัยโลกกว้างเซลเชด",
+    "cat": "การ์ตูน",
+    "suit": "ทิปออมเงิน-พัฒนาตัวเอง เปิดตัวสินค้า (สินค้าคือสมบัติ) คลิปเกม/เทค และประกาศสนุกๆ ที่เล่าเป็นเควสต์มีรางวัล",
+    "pen": "Open-world cel-shaded cartoon adventure — vibrant grassy fields, sparkling rivers, chunky treasure chests and a cheerful quest marker bobbing in 3D space. [subject] becomes a quest: the camera sweeps across the map, each step marked by a glowing waypoint, the payoff revealed as a golden treasure opening. Warm sunlight, soft shadows, adventurous travelling shots with wide landscape framing. Playful, uplifting, rewarding mood.",
+    "pth": "ผจญภัยโลกกว้างเซลเชด เล่า [subject] เป็นเควสต์ล่าสมบัติ ทุกขั้นตอนคือจุดหมายระหว่างทาง สดใส คุ้มค่าที่ติดตาม"
+  },
+  {
+    "num": "88",
+    "slug": "toy-brick-stopmotion",
+    "en": "Toy Brick Stopmotion",
+    "th": "ตัวต่อสต็อปโมชัน",
+    "cat": "เกม",
+    "suit": "คลิปอธิบายแบบจับต้องได้ ตัวเลขที่ \"ก่อตัว\" เปรียบเทียบก่อน-หลัง ของเล่น การศึกษา และร้านเล็กๆ ที่อยากให้ดูทำมือแต่สนุก",
+    "pen": "Glossy toy-brick brickfilm style — studded blocks assembled piece by piece with tactile stop-motion choppiness, macro shallow depth of field, candy-bright studio lighting. [subject] is literally built: bricks click into place step by step, then burst apart in a playful explosion before rebuilding into the answer. Chunky close-up framing, satisfying snap feel in every motion. Hand-made, clever, joyful mood.",
+    "pth": "ตัวต่อของเล่นทำสต็อปโมชัน เล่า [subject] แบบค่อยๆ ต่อเป็นชิ้นๆ แล้วระเบิดออก จับต้องได้ สนุก มีฝีมือ"
+  },
+  {
+    "num": "89",
+    "slug": "ukiyo-e-woodblock",
+    "en": "Ukiyo E Woodblock",
+    "th": "ภาพพิมพ์แกะไม้อุกิโยะเอะ",
+    "cat": "งานพิมพ์ · กระดาษ",
+    "suit": "เรื่องญี่ปุ่น ท่องเที่ยว อาหาร ประวัติศาสตร์ และโปรสินค้าพรีเมียมที่อยากให้ดูงานศิลป์ ตื่นเต้น และสง่างาม",
+    "pen": "Ukiyo-e woodblock print style — deep Prussian-blue seas and skies, one vermilion accent, carved line textures and flat framed compositions like Edo-era prints. [subject] is revealed as a gallery of prints: the camera glides across panels, a great wave swells and breaks at the turning point, cherry blossoms drift across transitions. Stately, deliberate motion; each scene a framed artwork. Bold, elegant, timeless mood.",
+    "pth": "ภาพพิมพ์แกะไม้อุกิโยะเอะ เล่า [subject] เหมือนแกลเลอรีภาพพิมพ์ญี่ปุ่น คลื่นยักษ์ซัดตรงจุดไคลแมกซ์ งดงาม ทรงพลัง"
+  },
+  {
+    "num": "90",
+    "slug": "vaporwave-synthwave",
+    "en": "Vaporwave Synthwave",
+    "th": "ซินธ์เวฟยุค 80",
+    "cat": "มินิมอล",
+    "suit": "คลิปเทค AI เพลง เกม ไลฟ์สไตล์กลางคืน เปิดตัวสินค้า และคอนเทนต์สายเรโทรที่อยากให้ดูเท่ คลาสสิกยุค 80",
+    "pen": "80s synthwave outrun aesthetic — neon pink-and-teal gradients, a striped chrome sun, glowing grid highways and glass panels with VHS bloom and scanline grain. [subject] cruises through a night drive: the camera pushes forward along the grid, chrome titles swing in, stats flare up in neon. Retro-smooth motion with dreamy camera glides and soft lens bloom. Cool, nostalgic, electric-midnight mood.",
+    "pth": "ซินธ์เวฟยุค 80 ขับรถกลางคืนบนถนนนีออน เล่า [subject] ผ่านแสงไฟวับวาบ เท่ เรโทร ใจเต้นแรง"
+  },
+  {
+    "num": "91",
+    "slug": "vintage-map-adventure",
+    "en": "Vintage Map Adventure",
+    "th": "แผนที่นักสำรวจ",
+    "cat": "มินิมอล",
+    "suit": "How-to โร้ดแมป ไทม์ไลน์ รีวิวท่องเที่ยว-อาหาร และเรื่องประวัติศาสตร์ที่เล่าเป็นการเดินทางล่าสมบัติ",
+    "pen": "Old engraved explorer's map style — aged parchment, etched coastlines, red route lines, wax seals and pop-up paper landmarks that rise from the surface. [subject] is an expedition: the camera travels along the red route, pins drop at each milestone, landmarks unfold in 3D with a satisfying paper pop. Top-down and slow-tracking map shots, warm candlelight tones. Adventurous, classic, storybook-explorer mood.",
+    "pth": "แผนที่นักสำรวจเก่าแก่ เล่า [subject] เป็นการเดินทางตามเส้นทางสีแดง ทุกจุดคือหมุดหมาย สนุกเหมือนผจญภัยล่าสมบัติ"
+  },
+  {
+    "num": "92",
+    "slug": "visual-novel",
+    "en": "Visual Novel",
+    "th": "เกมวิชวลโนเวล",
+    "cat": "เกม",
+    "suit": "รีลเล่าเรื่องสายเกม ทิปความรัก/การเรียน คำถาม \"จะเลือกอันไหน\" เปรียบเทียบก่อน-หลัง และโปรสินค้าสไตล์ \"ได้ไอเท็ม\"",
+    "pen": "Anime visual-novel game style — a painted school-day backdrop, anime cast in bright cel shading, rounded dialogue boxes and choice menus with a mouse-cursor click. [subject] plays like a story route: choices branch with sparkling transitions, dialogue types on line by line, the payoff arrives as a full-screen CG unlock with chimes. Intimate close-up framing on characters, dramatic text-reveal pacing. Cute, emotional, choice-driven mood.",
+    "pth": "วิชวลโนเวลสไตล์อนิเมะ เล่า [subject] เหมือนเล่นเกมจีบสาว มีตัวเลือก มีบทสนทนา และ CG พิเศษตอนจบ"
+  },
+  {
+    "num": "93",
+    "slug": "vox-doc-collage",
+    "en": "Vox Doc Collage",
+    "th": "บอร์ดหลักฐานสารคดี",
+    "cat": "งานพิมพ์ · กระดาษ",
+    "suit": "ข่าว เศรษฐกิจ ประวัติศาสตร์ คลิปสืบสวน และรีวิวที่อยากให้ดูมีหลักฐาน น่าเชื่อถือ แต่ยังเล่าสนุก",
+    "pen": "Vox-style documentary evidence-board collage — newspaper clippings, red-string connections, highlighted documents, photos and sticky notes pinned on a dark corkboard. [subject] is investigated: the camera zooms between pieces of evidence, strings pull tight to connect them, key facts stamp on with highlight swipes. Sharp investigative motion, evidence-first close-up framing, restrained but cinematic pacing. Smart, credible, gripping mood.",
+    "pth": "บอร์ดหลักฐานสารคดีสไตล์ Vox เล่า [subject] แบบสืบสวน ปักหมุด เชื่อมโยงด้วยเส้นแดง น่าเชื่อถือ เข้มข้น"
+  },
+  {
+    "num": "94",
+    "slug": "voxel-block",
+    "en": "Voxel Block",
+    "th": "เกาะวอกเซล",
+    "cat": "เกม",
+    "suit": "คลิปเทค AI สายช่าง \"วิธีทำ\" เกม แอป สินค้าร้านเล็ก และคอนเทนต์เด็ก-ครอบครัวที่อยากให้ดูอบอุ่น สร้างได้จริง",
+    "pen": "Cosy voxel diorama world — soft-lit cube landscapes where forests, houses and gadgets are all built from tiny colourful blocks, like a toy model come alive. [subject] is constructed voxel by voxel: blocks rain down and snap together, the camera orbits the growing diorama, each idea completed with a satisfying click. Warm daylight, miniature-toy depth of field, gentle orbiting shots. Wholesome, clever, hand-built mood.",
+    "pth": "โลกไดโอราม่าวอกเซล เล่า [subject] แบบค่อยๆ ต่อบล็อกทีละก้อน อบอุ่น น่ารัก ดูเป็นของจริงที่จับต้องได้"
+  },
+  {
+    "num": "95",
+    "slug": "watercolor-storybook",
+    "en": "Watercolor Storybook",
+    "th": "นิทานสีน้ำ",
+    "cat": "การ์ตูน",
+    "suit": "ครอบครัว เด็ก การศึกษา อาหาร งานคราฟต์ ต้นไม้ และทิปไลฟ์สไตล์สายอบอุ่นที่อยากให้ดูนุ่มนวลเหมือนนิทาน",
+    "pen": "Gentle watercolour storybook style — soft painted textures, blooming wet washes in pastel tones, pencil linework and paper cards on a cosy painted-room backdrop. [subject] unfolds like a picture book: colours bloom across the page, paper cut-outs drift in on strings, the big moment lands with a soft colour splash. Slow, breathy page-turn pacing with warm full-page framing. Tender, calm, nostalgic mood.",
+    "pth": "นิทานสีน้ำนุ่มนวล เล่า [subject] เหมือนเปิดหนังสือภาพ สีระบายซึมช้าๆ อบอุ่น ละมุน ใจเย็น"
+  },
+  {
+    "num": "96",
+    "slug": "webtoon-manhwa",
+    "en": "Webtoon Manhwa",
+    "th": "เว็บตูนเกาหลี",
+    "cat": "การ์ตูน",
+    "suit": "รีลเล่าเรื่องสไตล์เว็บตูน ทิปเลเวลอัปชีวิต เปรียบเทียบก่อน-หลัง คว้าเครื่องราง และฮุกแบบ \"ระบบเพิ่งให้เควสต์มา\"",
+    "pen": "Korean webtoon/manhwa style — bold panel layouts, dramatic speed lines, glowing status windows and system alerts, glossy character art with sharp highlights. [subject] reads like a hit webtoon: vertical-scroll panel reveals, 'QUEST ACCEPTED' blue windows pop up, glow-up moments hit with radiant panel bursts. Fast, cinematic panel cuts with dramatic zoom framing. Addictive, dramatic, power-fantasy mood.",
+    "pth": "เว็บตูนเกาหลีสายมันฮวา เล่า [subject] เหมือนอ่านเว็บตูนฮิต มีหน้าต่างเควสต์เด้ง ทุกฉากคือพลังเพิ่ม น่าติดตาม"
+  },
+  {
+    "num": "97",
+    "slug": "whiteboard-explainer",
+    "en": "Whiteboard Explainer",
+    "th": "วาดอธิบายบนไวต์บอร์ด",
+    "cat": "มินิมอล",
+    "suit": "สอน How-to บทเรียนเป็นขั้น เงิน/เรียน/งาน ไอเดียแมพ และพรีเซนต์ฟีเจอร์ที่อยากให้เข้าใจง่ายเหมือนครูวาดให้ดู",
+    "pen": "Hand-drawn whiteboard explainer style — bold black marker strokes on a clean white surface, doodled icons, arrows and mind-maps drawn in real time by a friendly hand. [subject] is drawn as it's explained: the camera follows the marker's path, each concept sketched then circled, erased sections make way for the next step. Clear top-down board framing, steady drawing pace. Honest, clear, teacher-warm mood.",
+    "pth": "วาดอธิบายบนไวต์บอร์ด เล่า [subject] ให้ครูวาดให้ดูทีละขั้น ชัดเจน เข้าใจง่าย เป็นกันเอง"
+  },
+  {
+    "num": "98",
+    "slug": "windows95-retro-os",
+    "en": "Windows95 Retro Os",
+    "th": "เดสก์ท็อปยุค 95",
+    "cat": "UI · เทคโนโลยี",
+    "suit": "คลิปเทค AI วิธีแก้ปัญหา โปรแอป-แกดเจ็ต และมีมสายย้อนยุคที่เล่นกับ error/loading ได้อย่างตลกแต่เข้าใจง่าย",
+    "pen": "Authentic Windows 95 desktop aesthetic — teal desktop, grey beveled windows, chunky dialogs, progress bars, the hourglass cursor, clip art and Paint plus WordArt flourishes. [subject] happens on the desktop: windows pop open and drag around, errors and loading bars punctuate the beats, a pixelated cursor clicks through every step. Deadpan meme-friendly motion, screen-capture framing. Nostalgic, funny, weirdly comforting mood.",
+    "pth": "เดสก์ท็อป Windows 95 เล่า [subject] บนหน้าจอคอมยุค 90 หน้าต่างเด้ง เออร์เรอร์โผล่ ตลก นึกถึงวันวาน"
+  },
+  {
+    "num": "99",
+    "slug": "xray-everyman",
+    "en": "Xray Everyman",
+    "th": "อธิบายแบบแฟลตมินิมอล",
+    "cat": "มินิมอล",
+    "suit": "คลิป \"ข้างในทำงานยังไง\" — เทค AI แกดเจ็ต ร่างกาย กระแสเงิน และพรีเซนต์ฟีเจอร์ที่เผยไส้ให้เห็นแบบสวย เรียบ สบายตา",
+    "pen": "Flat minimal editorial style with a violet x-ray twist — one warm hero character on calm pastel fields, layers peeling back to reveal glowing violet x-ray views of the inside. [subject] is explored from the inside out: the camera pans across clean sections, cutaway views light up one by one, x-ray overlays pulse gently over everyday objects. Smooth, clinical-but-kind motion with clean diagram framing. Curious, calm, satisfying mood.",
+    "pth": "สไตล์แฟลตมินิมอลผ่าเอ็กซเรย์ เล่า [subject] จากข้างในออกมา สีพาสเทลสบายตา มีชั้นเอ็กซเรย์สีม่วงเรืองแสง น่าอยากรู้"
+  },
+  {
+    "num": "100",
+    "slug": "y2k-chrome",
+    "en": "Y2k Chrome",
+    "th": "โครเมียม Y2K",
+    "cat": "UI · เทคโนโลยี",
+    "suit": "คลิปเทค AI แอป แกดเจ็ต เพลง-แฟชั่นสายย้อนยุค และคอนเทนต์ Gen Z ที่อยากได้ฟีล Y2K สดใส มันวาว เกินต้าน",
+    "pen": "Glossy Y2K chrome aesthetic — liquid-metal bubble letters, iridescent gradients, star sparkles and frosted plastic textures in electric pinks and silvers. [subject] shines through a 2000s filter: chrome titles spin and reflect, glossy blobs bounce across the frame, sparkle bursts mark every beat. Bouncy, shiny, maximalist motion with close-up glam framing. Playful, flashy, irresistibly fun mood.",
+    "pth": "โครเมียม Y2K มันวาว เล่า [subject] ผ่านตัวหนังสือโลหะเหลวและประกายดาว สดใส ฟู่ฟ่า สนุกเกินต้าน"
+  }
+]

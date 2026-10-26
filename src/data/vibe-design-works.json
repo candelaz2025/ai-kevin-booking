@@ -1,0 +1,1552 @@
+[
+  {
+    "slug": "foundry",
+    "href": "/en/works/foundry/",
+    "title": "Fieldwork Type",
+    "description": "Independent type foundry",
+    "alt": "Fieldwork Type · Independent type foundry",
+    "image": "https://ui.oiloil.org/works/foundry/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The website of an independent type foundry (from 1440×900, responsive down to 390 wide). The first screen features a flagship typeface: visitors can type their own text and adjust size, weight and width. Further down: the family's weight chart, the character set, in-use examples, and licenses chosen by use (desktop, web, app) that can be added to the cart.\nThe type tester and the license picker are the heart of this piece: the setting changes as you type, and the license price updates with every option. Design the first screen, the tester panel expanded, and license selection.",
+    "prompt_zh": "一家独立字体铸造厂的官网（1440×900 起，响应式到 390 宽）：首屏展示一款主打字体，访客可以直接输入自己的文字试排，调字号、字重和字宽；往下是字体家族的字重表、字符集、使用案例，以及按使用场景（桌面、网页、App）选授权并加入购物车。\n试字和授权选择是这件作品的核心：输入时排版当场变化，授权价格随选项更新。设计首屏、试字面板展开、授权选择三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/foundry/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/foundry/live/index.html"
+  },
+  {
+    "slug": "ops",
+    "href": "/en/works/ops/",
+    "title": "Nightwatch",
+    "description": "Operations monitoring and incident response",
+    "alt": "Nightwatch · Operations monitoring and incident response",
+    "image": "https://ui.oiloil.org/works/ops/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A monitoring and on-call tool for a medium-sized platform team (1440×900), with an English interface: service topology, latency, error-rate and traffic charts, recent deployments, logs, and traces; during an incident, show alerts, the current on-call person, and an incident timeline.\nAn incident unfolding is the core: the failing service and affected downstream services should be obvious in the topology. Dragging the time range should align charts, deployment markers, and logs so users can see which deployment caused the problem.\nDesign three states: a healthy overview; an incident in progress with an alert and the affected path highlighted in the topology; and logs and traces opened at the error peak to identify the deployment responsible.",
+    "prompt_zh": "一个给中等规模平台团队用的监控和值班工具（1440×900），界面用英文：服务拓扑，延迟、错误率、流量曲线，最近的发布，日志和调用链；出故障时有告警、当前值班人和事件时间线。\n故障正在发生是这件作品的核心：拓扑上出问题的服务和受牵连的下游一眼能看到；拖动时间范围，曲线、发布标记和日志对齐，能看出是哪一次发布引起的。\n设计三个状态：一切正常的总览、故障进行中（告警触发、拓扑标出受影响路径）、在错误峰值上展开日志和调用链并定位到那次发布。",
+    "views": [
+      "https://ui.oiloil.org/works/ops/img/view-1.webp",
+      "https://ui.oiloil.org/works/ops/img/view-2.webp",
+      "https://ui.oiloil.org/works/ops/img/view-3.webp",
+      "https://ui.oiloil.org/works/ops/img/view-4.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/ops/live/index.html"
+  },
+  {
+    "slug": "tide",
+    "href": "/en/works/tide/",
+    "title": "Tide",
+    "description": "Surf and tide forecast app",
+    "alt": "Tide · Surf and tide forecast app",
+    "image": "https://ui.oiloil.org/works/tide/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A surf and tide forecast app for surfers (390×844): a list of saved surf spots, and for each spot today's and the next seven days' wave height, period, wind direction and speed, a tide curve, and a suggestion for the best time to go.\nTides and conditions change over time, which makes this a data-visualization piece: drag the timeline and the waves, wind and tide update together. Design the spot list, a single spot's detail, and dragging the timeline to a specific moment. Deliver `index.html` and a three-screen side-by-side `screens.html`.",
+    "prompt_zh": "一个冲浪者用的浪况与潮汐预报 App（390×844）：收藏的浪点列表、单个浪点今天和未来七天的浪高、周期、风向风速、潮汐曲线，以及“什么时候去最好”的时段建议。\n潮汐和浪况随时间变化，是这件作品的数据可视化核心：拖动时间轴，浪、风、潮一起更新。设计浪点列表、单个浪点详情、拖动时间轴查看某个时刻三个状态。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/tide/img/view-1.webp",
+      "https://ui.oiloil.org/works/tide/img/view-2.webp",
+      "https://ui.oiloil.org/works/tide/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/tide/live/index.html"
+  },
+  {
+    "slug": "herbarium",
+    "href": "/en/works/herbarium/",
+    "title": "Herbarium",
+    "description": "Alpine Botanical Specimen Fabric",
+    "alt": "Herbarium · Alpine Botanical Specimen Fabric",
+    "image": "https://ui.oiloil.org/works/herbarium/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "",
+    "views": [
+      "https://ui.oiloil.org/works/herbarium/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/herbarium/live/index.html"
+  },
+  {
+    "slug": "volders-grain",
+    "href": "/en/works/volders-grain/",
+    "title": "Atelier Volders",
+    "description": "Grain & Tenon · Handcrafted furniture workshop website",
+    "alt": "Atelier Volders · Grain & Tenon · Handcrafted furniture workshop website",
+    "image": "https://ui.oiloil.org/works/volders-grain/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The website of Atelier Volders, a two-person woodworking workshop at Korenlei 14 in Ghent, Belgium (from 1440×900, responsive down to 390 wide), with an English interface. They make only one object: De Drievoet, a three-legged solid oak stool turned and wedged by hand from timber air-dried for three years, produced in a single monthly batch of 24 stools.\nIt comes in three heights (32 cm low hearth stool €240, 45 cm dining & desk stool €270, 62 cm counter stool with ash foot-ring €310) and three finishes (soap-scrubbed raw oak, fumed dark oak, boiled linseed oil & beeswax). Visitors can switch height and finish in real time, explore the six-week making process, underside hot-iron batch stamp and Saturday open hours, and reserve a stool from the current batch. No product photos are provided.",
+    "prompt_zh": "比利时根特 Korenlei 14 号的一家双人木工坊官网（1440×900 起，响应式到 390 宽），界面用英文。工坊只做一件器物：手工车削、楔入榫卯的实心橡木三脚凳 De Drievoet。木料在河岸棚下自然风干三年，每月只开窑做一批、固定 24 张。\n提供三种高度（32 cm 炉边矮凳 €240、45 cm 餐桌与书桌凳 €270、62 cm 带白蜡木脚圈的高脚凳 €310）和三种表面处理（白亚麻籽皂洗原木、氨熏深褐橡木、熟亚麻籽油蜂蜡）。访客可以实时切换高度与木料表面查看变化，了解六周制作工序、凳底热烙批次印记与周六工坊开放时间，并预留当月批次。不提供现成产品照片。",
+    "views": [
+      "https://ui.oiloil.org/works/volders-grain/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/volders-grain/live/index.html"
+  },
+  {
+    "slug": "vesper",
+    "href": "/en/works/vesper/",
+    "title": "Vesper",
+    "description": "API usage billing console",
+    "alt": "Vesper · API usage billing console",
+    "image": "https://ui.oiloil.org/works/vesper/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Design an API usage billing and customer invoice console for AI and developer tool teams, with an English interface at a desktop viewport of 1440×900. Users can manage subscription plans and live API usage, review amounts due and invoice exceptions for the current cycle, filter customers or invoices by status and usage threshold, and open a record to inspect line items, payment and Webhook timelines, and event payloads. Include payment retries, quota adjustments, and invoice exports.\n\nImplement three key states: the everyday workspace with revenue and usage trends, customer or invoice lists, and live filtering; an exception invoice detail view with a usage breakdown, status timeline, and recovery actions; and a quick command palette. Deliver an offline-ready `index.html` and capture `shots/desktop.png`, `shots/state-1.png`, and `shots/state-2.png` at 1440×900, DPR=2.",
+    "prompt_zh": "为 AI 与开发者工具团队设计一个 API 用量计费与客户账单管理后台，采用英文界面，桌面视口为 1440×900。用户可以管理订阅方案与实时 API 用量，查看本周期应收金额和异常账单，按状态与用量阈值筛选客户或账单，并打开单条记录查看计费明细、扣款与 Webhook 时间线及事件报文，完成重试扣款、调整配额或导出账单等操作。\n\n实现三个关键状态：展示收入与用量走势、客户或账单列表及实时筛选的日常工作区；展示用量拆解、状态时间线和恢复操作的异常账单详情；以及快捷命令面板。交付可离线打开的 `index.html`，并以 1440×900、DPR=2 截取 `shots/desktop.png`、`shots/state-1.png` 和 `shots/state-2.png`。",
+    "views": [
+      "https://ui.oiloil.org/works/vesper/img/view-1.webp",
+      "https://ui.oiloil.org/works/vesper/img/view-2.webp",
+      "https://ui.oiloil.org/works/vesper/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/vesper/live/index.html"
+  },
+  {
+    "slug": "chess",
+    "href": "/en/works/chess/",
+    "title": "Forkside",
+    "description": "Chess tactics lessons",
+    "alt": "Forkside · Chess tactics lessons",
+    "image": "https://ui.oiloil.org/works/chess/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A chess tactics learning website (starting at 1440×900, responsive down to 390 pixels wide), with an English interface, for amateur players rated 800–1600. Teach one tactic at a time, such as forks, pins, skewers, and discovered attacks, with step-by-step board explanations followed by a few puzzles.\nThe core is arrows and highlights appearing on the board step by step with the explanation. When a correct move is made, such as a knight jumping to a fork square, two attack lines light up simultaneously. An incorrect move should show the opponent's specific response rather than merely saying “wrong.” Make the pieces and board refined, with materials created through image generation or 3D rendering rather than default piece icons.\nDesign three states: a lesson explanation; solving a puzzle; and the tactic revealed after solving it.",
+    "prompt_zh": "一个国际象棋战术学习网站（1440×900 起，响应式到 390 宽），界面用英文，给等级分 800–1600 的业余棋手：一次学一种战术（双攻、牵制、串击、闪击），每课先在棋盘上一步步讲解，再做几道题。\n讲解时，棋盘上的箭头和高亮跟着讲解一步步出现；做题时走出正确一步（比如马跳到双攻格），两条攻击线同时亮起；走错时给出对手具体怎么应对，而不是一句“错了”。这是这件作品的核心。棋子和棋盘要精致，用生图或三维渲染做出材质，不用默认棋子图标。\n设计三个状态：一课的讲解、做题进行中、解出题目时战术揭晓。",
+    "views": [
+      "https://ui.oiloil.org/works/chess/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/chess/live/index.html"
+  },
+  {
+    "slug": "wrist",
+    "href": "/en/works/wrist/",
+    "title": "Splitwater",
+    "description": "Swimming workout watch app",
+    "alt": "Splitwater · Swimming workout watch app",
+    "image": "https://ui.oiloil.org/works/wrist/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A watch app for recording pool workouts (design each screen at 198×242 without drawing a watch case or strap), with an English interface: lengths, pace, heart rate, a rest countdown, and a post-swim summary.\nOne glance at the wrist should be enough: each screen has one large number as its main subject; the length count jumps briefly after each completed length; during rest, a countdown ring completes and a vibration signals that it is time to get back in the water. The screen gets wet, so use rotation of the crown to unlock it and show the corresponding state in the interface.\nColors: a pure-black watch display, pool cyan as the main color, and white numbers. Do not use warm colors.\nDesign five screens: swimming, rest countdown, water lock, pause and end, and workout summary. Deliver `index.html` with one interactive screen and `screens.html` with all five screens side by side. Capture screenshots at 198×242, DPR=4.",
+    "prompt_zh": "一个记录泳池训练的手表 App（屏幕按 198×242 设计，不画表壳和表带），界面用英文：训练中的趟数、配速、心率、休息倒计时，以及游完后的总结。\n抬腕一眼就够是这件作品的核心：每一屏只有一个大数字是主角；每游完一趟，趟数跳一下；休息时一圈倒计时环走完就震动提示下水。屏幕会沾水，所以用转动表冠来解锁，界面上要有对应的状态。\n配色：纯黑的表盘底，泳池的青色做主色，白色数字；不用暖色。\n设计五屏：训练中、休息倒计时、屏幕锁定、暂停与结束、训练总结。交付 `index.html`（一块可操作的屏）和把五屏并排的 `screens.html`。截图按 198×242、DPR=4。",
+    "views": [
+      "https://ui.oiloil.org/works/wrist/img/view-1.webp",
+      "https://ui.oiloil.org/works/wrist/img/view-2.webp",
+      "https://ui.oiloil.org/works/wrist/img/view-3.webp",
+      "https://ui.oiloil.org/works/wrist/img/view-4.webp",
+      "https://ui.oiloil.org/works/wrist/img/view-5.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/wrist/live/index.html"
+  },
+  {
+    "slug": "minutes",
+    "href": "/en/works/minutes/",
+    "title": "Minutes",
+    "description": "AI meeting notes",
+    "alt": "Minutes · AI meeting notes",
+    "image": "https://ui.oiloil.org/works/minutes/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A desktop app for wrapping up meetings (1440×900): a meeting list; for a single meeting, the transcript (speakers labeled, with timestamps) and automatically organized notes, decisions and action items. Click any sentence in the notes to jump to the matching spot in the transcript and replay that part.\nMoving back and forth between the notes and what was actually said is the heart of this piece; it should not become yet another chat box. Design the meeting list, a single meeting's notes and transcript, and clicking a note to jump back to the original words.",
+    "prompt_zh": "一个会后整理会议的桌面应用（1440×900）：会议列表，单场会议的逐字稿（区分发言人、带时间戳），自动整理出的纪要、决定和待办；点纪要里任一句话，能跳到逐字稿对应的位置并回放那一段。\n纪要和原话之间的来回对照是这件作品的核心，不做成又一个聊天框。设计会议列表、单场会议的纪要与逐字稿、点击纪要跳回原话三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/minutes/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/minutes/live/index.html"
+  },
+  {
+    "slug": "sleep",
+    "href": "/en/works/sleep/",
+    "title": "Luma",
+    "description": "Meditation and sleep",
+    "alt": "Luma · Meditation and sleep",
+    "image": "https://ui.oiloil.org/works/sleep/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "An app that helps adults who struggle with sleep relax and fall asleep (390×844), with an English interface: a bedtime wind-down routine, guided breathing and meditation, a mix of sleep sounds, and a morning report on last night's sleep.\nBreathing guidance is the core: the image expands and contracts with the breathing rhythm, such as inhaling for 4 seconds, holding for 7, and exhaling for 8. It should be comfortable to look at at night. The morning report should convey how the night went at a glance without piling up metrics. Avoid the cliché of a purple starry gradient with a moon illustration.\nDesign three screens: Tonight with a wind-down routine, recommended exercises, and sound mixing; a breathing exercise in progress; and a morning sleep report showing time to fall asleep, awakenings, sleep stages across the night, and comparison with this week. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个帮睡不好的成年人放松入睡的 App（390×844），界面用英文：睡前放松流程、引导呼吸和冥想、助眠声音混合，早上看昨晚的睡眠报告。\n呼吸引导是这件作品的核心：画面随呼吸节奏（例如吸气 4 秒、屏息 7 秒、呼气 8 秒）扩张和收缩，晚上看着眼睛舒服。早上的报告要一眼看出昨晚睡得怎样，不堆指标。不要落到紫色星空渐变加月亮插画的俗套。\n设计三屏：今晚（放松流程、推荐练习、声音混合）、一次呼吸练习进行中、早上的睡眠报告（入睡用时、醒来次数、整夜睡眠阶段、和本周比较）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/sleep/img/view-1.webp",
+      "https://ui.oiloil.org/works/sleep/img/view-2.webp",
+      "https://ui.oiloil.org/works/sleep/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/sleep/live/index.html"
+  },
+  {
+    "slug": "chronos",
+    "href": "/en/works/chronos/",
+    "title": "Chronos",
+    "description": "Astronomical Horology Manufacture",
+    "alt": "Chronos · Astronomical Horology Manufacture",
+    "image": "https://ui.oiloil.org/works/chronos/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "",
+    "views": [
+      "https://ui.oiloil.org/works/chronos/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/chronos/live/index.html"
+  },
+  {
+    "slug": "itinerary",
+    "href": "/en/works/itinerary/",
+    "title": "Roam",
+    "description": "Group trip planner",
+    "alt": "Roam · Group trip planner",
+    "image": "https://ui.oiloil.org/works/itinerary/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "An app for planning a trip with friends (390×844): a trip laid out day by day, each day with places, times, transport and booking details, and the day's route on a map. Stops can be dragged into a new order, and everyone on the trip can see the change.\nReordering a day by dragging, with the map route following along, is the tactile core of this piece. Design the trip overview, one day's plan with its map, and dragging to change the order. Deliver `index.html` and a three-screen side-by-side `screens.html`.",
+    "prompt_zh": "一个和朋友一起规划旅行的 App（390×844）：一次旅行按天排好行程，每天有地点、时间、交通和预订信息，地图上能看到当天路线；可以拖动调整顺序，同行的人能看到改动。\n按天拖动重排、地图路线跟着变化，是这件作品的手感核心。设计旅行总览、某一天的行程与地图、拖动调整顺序三个状态。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/itinerary/img/view-1.webp",
+      "https://ui.oiloil.org/works/itinerary/img/view-2.webp",
+      "https://ui.oiloil.org/works/itinerary/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/itinerary/live/index.html"
+  },
+  {
+    "slug": "archon",
+    "href": "/en/works/archon/",
+    "title": "Archon",
+    "description": "Distributed Agent Runtime",
+    "alt": "Archon · Distributed Agent Runtime",
+    "image": "https://ui.oiloil.org/works/archon/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "",
+    "views": [
+      "https://ui.oiloil.org/works/archon/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/archon/live/index.html"
+  },
+  {
+    "slug": "bank",
+    "href": "/en/works/bank/",
+    "title": "Pact",
+    "description": "Digital banking",
+    "alt": "Pact · Digital banking",
+    "image": "https://ui.oiloil.org/works/bank/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A digital banking app for freelancers and young professionals (390×844), with an English interface: balance, recent transactions, this month's spending, savings goals, card management, and transfers. The bank name, card designs, and merchant logos are all fictional.\nTransfers and card controls are the core: choosing a recipient, entering an amount on a numeric keypad, and confirming the transfer should feel reassuring and efficient. Freezing a card with one tap should produce a clear state change.\nDesign three screens: Home with balance, recent transactions, and monthly spending; Cards with the card face, freeze control, limits, and contactless payments; and the transfer flow from entering an amount to successful sending. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个给自由职业者和年轻上班族用的数字银行 App（390×844），界面用英文：余额、最近交易、本月花销、储蓄目标、银行卡管理和转账。银行名、卡面和商户标志都是虚构的。\n转账和卡片控制是这件作品的核心：选收款人、用数字键盘输入金额、确认发送的那一下要让人安心又利落；一键冻结卡片要有清楚的状态变化。\n设计三屏：首页（余额、最近交易、本月花销）、银行卡（卡面、冻结、限额、无接触支付）、转账流程（输入金额到发送成功）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/bank/img/view-1.webp",
+      "https://ui.oiloil.org/works/bank/img/view-2.webp",
+      "https://ui.oiloil.org/works/bank/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/bank/live/index.html"
+  },
+  {
+    "slug": "mercier-voice",
+    "href": "/en/works/mercier-voice/",
+    "title": "Fonderie Mercier",
+    "description": "Bronze, with a Voice · Family bronze bell foundry website",
+    "alt": "Fonderie Mercier · Bronze, with a Voice · Family bronze bell foundry website",
+    "image": "https://ui.oiloil.org/works/mercier-voice/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The website of Fonderie Mercier, a third-generation family bell foundry at Quai Saint-Vincent 28 on the Saône river quay in Lyon (from 1440×900, responsive down to 390 wide), with an English interface. They cast a single signature object in 78% copper / 22% tin bell bronze using rammed river-sand moulds: Le Bourdon de Table, lathe-tuned to a precise musical pitch and poured once a month in a fixed lot of 18 bells.\nIt comes in three sizes and pitches (Ø 72 mm desk bell A4 440Hz €180, Ø 96 mm courtyard bell F#4 370Hz €240, Ø 124 mm wall bell with forged iron bracket D4 293.7Hz €340) and three patinas (raw lathe-turned bronze, smoked bronze, verdigris). Visitors can listen to each pitch, switch size and patina, explore the five-stage pouring process, cold-stamped crown record and Friday open hours, and prepare a reservation slip for the next monthly pour. No product photos are provided.",
+    "prompt_zh": "法国里昂索恩河畔 Quai Saint-Vincent 28 号的一家三代家族铸钟坊官网（1440×900 起，响应式到 390 宽），界面用英文。工坊用 78% 铜、22% 锡的钟铜在河沙模中浇铸案头与建筑青铜钟 Le Bourdon de Table，冷却后上车床旋削内壁调准音高，每月只开炉浇铸一次、固定 18 只。\n提供三种尺寸与音高（Ø 72 mm 案头钟 A4 440Hz €180、Ø 96 mm 庭院钟 F#4 370Hz €240、Ø 124 mm 附锻铁壁架与生皮拉绳的门廊钟 D4 293.7Hz €340）及三种包浆（车床原色青铜、烟熏深褐、盐霜铜绿）。访客可以试听三个音高、切换尺寸与包浆，查看五道浇铸调音工序、冠部冷钢印记录与周五开放时间，并填写下一炉的预留单。不提供现成照片。",
+    "views": [
+      "https://ui.oiloil.org/works/mercier-voice/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/mercier-voice/live/index.html"
+  },
+  {
+    "slug": "nowplaying",
+    "href": "/en/works/nowplaying/",
+    "title": "Still",
+    "description": "Now-playing music widget",
+    "alt": "Still · Now-playing music widget",
+    "image": "https://ui.oiloil.org/works/nowplaying/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A &quot;now playing&quot; music widget that sits in a corner of the desktop or a web page (shown on a clean 1440×900 canvas): cover art, track title, artist, progress, playback controls and volume. It can expand to show what's up next and the lyrics.\nFeel is the heart of this piece: scrubbing the progress, the transition of cover and info when the track changes, and expanding and collapsing should all be smooth. Design the collapsed state, expanded with the queue, and expanded with lyrics.",
+    "prompt_zh": "一个放在桌面或网页角落的“正在播放”音乐小组件（在 1440×900 的干净展示画布上展示）：封面、歌名、歌手、进度、播放控制、音量，可以展开看接下来要播的歌和歌词。\n手感是这件作品的核心：拖动进度、切歌时封面和信息的过渡、展开与收起都要顺。设计收起、展开看队列、展开看歌词三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/nowplaying/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/nowplaying/live/index.html"
+  },
+  {
+    "slug": "math",
+    "href": "/en/works/math/",
+    "title": "Fold",
+    "description": "Interactive mathematics learning",
+    "alt": "Fold · Interactive mathematics learning",
+    "image": "https://ui.oiloil.org/works/math/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A course app that helps adults relearn mathematics through hands-on interaction (390×844), with an English interface: a course map and lessons composed of small interactive steps, each requiring an action rather than reading an explanation.\nThe core is a lesson explaining why a circle's area is πr²: cut the circle into sectors, drag a slider to make the slices finer and arrange them alternately, and assemble a near-rectangle whose sides are πr and r. Let the formula emerge from the geometry. Follow it with a short question, with specific feedback for both correct and incorrect answers.\nDesign three screens: the course map; the circle halfway through unfolding into a rectangle; and answering a question with feedback. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个让成年人通过动手重新学数学的课程 App（390×844），界面用英文：课程地图，以及由一小步一小步互动组成的课，每一步都要求用户动手操作，而不是读一段讲解。\n核心是一节讲“圆的面积为什么是 πr²”的课：把圆切成扇形，拖动滑杆切得越来越细并交错铺开，扇形拼成一个近似长方形，两条边分别是 πr 和 r，公式从图形里自己长出来。之后有一道小题，答对、答错各有具体的反馈。\n设计三屏：课程地图、拖动到一半的圆变长方形、答题与反馈。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/math/img/view-1.webp",
+      "https://ui.oiloil.org/works/math/img/view-2.webp",
+      "https://ui.oiloil.org/works/math/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/math/live/index.html"
+  },
+  {
+    "slug": "pricing",
+    "href": "/en/works/pricing/",
+    "title": "Meridian",
+    "description": "SaaS pricing page",
+    "alt": "Meridian · SaaS pricing page",
+    "image": "https://ui.oiloil.org/works/pricing/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A pricing page for a team collaboration product (starting at 1440×900, responsive down to 390 pixels wide), with an English interface: three tiers, monthly and annual billing, total pricing based on team size, a feature comparison table, and frequently asked questions. The product name and features are fictional.\nPrices changing immediately are the core of this work: dragging the team-size control or switching between monthly and annual billing makes each tier’s price roll to its new value, and the recommended tier changes with team size; as the feature comparison table scrolls, the tier names stick to the top. Do not arrange three identical rounded cards in a row.\nColors: a pure-white background, ink-black text, and emerald as the only accent. Do not use warm white, beige, or orange.\nDesign three states: the default view, annual billing for a 25-person team, and the expanded feature comparison.",
+    "prompt_zh": "一个团队协作产品的定价页（1440×900 起，响应式到 390 宽），界面用英文：三个档位、月付和年付切换、按团队人数算总价、功能对比表和常见问题。产品名和功能都是虚构的。\n价格当场变化是这件作品的核心：拖动人数、切换月付年付时，每档的价格数字滚动到新值，推荐的档位跟着人数变；功能对比表往下滚时档位名吸在顶上。不要做成三张一样的圆角卡片排一排。\n配色：纯白底、墨黑字、祖母绿做唯一强调色；不用暖白、米色和橙色。\n设计三个状态：默认、年付加 25 人团队、展开功能对比。",
+    "views": [
+      "https://ui.oiloil.org/works/pricing/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/pricing/live/index.html"
+  },
+  {
+    "slug": "neuron",
+    "href": "/en/works/neuron/",
+    "title": "Neuron",
+    "description": "Interactive science explanation",
+    "alt": "Neuron · Interactive science explanation",
+    "image": "https://ui.oiloil.org/works/neuron/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "An interactive explanatory website about how a neural network recognizes handwritten digits (starting at 1440×900, responsive down to 390 pixels wide), with an English interface, for curious adults without a mathematics background.\nThe first screen's core: handwrite a digit on a small grid, watch the signal pass through the network layer by layer as activations light up, and see one of ten output bars rise. Recognition must actually work: you may train a small network offline and bundle its weights in `assets/`. Below are scroll-led explanations of weights, layers, and training, each with a hands-on interaction, such as dragging a weight to see how the output changes.\nDesign three states: writing a digit and getting a result on the first screen; interacting with an explanatory section in the middle; and two outputs competing when an ambiguous digit is written.",
+    "prompt_zh": "一个讲神经网络如何认出手写数字的互动讲解网站（1440×900 起，响应式到 390 宽），界面用英文，给没有数学背景、但好奇的成年人。\n首屏的核心：在一块小格子上手写一个数字，信号一层层穿过网络，每层的激活亮起来，最后十个输出里有一根冲高。识别必须真的能用：可以离线训练一个小网络，把权重打包进 `assets/`。往下是随滚动展开的几段讲解：权重、层、训练，每段都有能动手的东西（例如拖动一个权重，看输出怎么变）。\n设计三个状态：首屏写下一个数字并得出结果、中段某个讲解区块的交互、写一个模棱两可的数字时两个答案在争。",
+    "views": [
+      "https://ui.oiloil.org/works/neuron/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/neuron/live/index.html"
+  },
+  {
+    "slug": "agenflow",
+    "href": "/en/works/agenflow/",
+    "title": "Agenflow",
+    "description": "AI Agent Orchestration Engine",
+    "alt": "Agenflow · AI Agent Orchestration Engine",
+    "image": "https://ui.oiloil.org/works/agenflow/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Build an English landing page for Agenflow, aimed at developers who need to connect models, tools, and multiple agents. Use a release-readiness workflow to explain parallel execution, run observation, checkpoint recovery, and human review.\n\nThe hero should introduce the product with “Complex tasks. Beautifully orchestrated.” and a working workspace. The primary action is Run a workflow. The workspace has Topology / Events views and shows ready, running, interrupted, and completed states. After an interruption, preserve the existing events and the checkpoint at step 2 so users can retry in place. On completion, Inspect run opens an audit record that can be exported as JSON.\n\nContinue with sections on live events, human review, model and tool collaboration, workflow definitions, and audit evidence. Copy copies the workflow definition, and Start building provides a downloadable workflow JSON. Navigation and dialogs must each lead to a concrete result.\n\nUse green-tinted graphite black, lime accents, Space Grotesk for display text, and Inter for body text. The main desktop viewport is 1440×1000; also accommodate mobile layouts at 390×844 and 360×800. Embed all CSS, JavaScript, SVG, fonts, and licenses in index.html so it runs when opened directly.\n\nDeliver an interactive local website prototype. Execution steps, event times, and fingerprints use preset data. Mark exported records as landing page previews; human approval stays pending. Keep screenshots of the desktop cover, full page, mobile layout, run states, and audit view, and add the piece to the gallery.",
+    "prompt_zh": "制作 Agenflow 的英文落地页，面向需要连接模型、工具和多个智能体的开发者。通过一条 release-readiness 工作流，解释并行执行、过程观察、检查点恢复与人工审核。\n\n首屏以“Complex tasks. Beautifully orchestrated.”和可运行的工作区说明产品。主操作为 Run a workflow；工作区提供 Topology / Events 切换，展示准备、执行中、中断和完成状态。执行中断后保留已有事件与第 2 步检查点，用户可以原地重试；完成后通过 Inspect run 查看审计记录并导出 JSON。\n\n页面继续展示实时事件、人工审核、模型与工具协作、工作流定义和审计凭证。Copy 复制工作流定义，Start building 提供可下载的工作流 JSON；导航与弹窗均有对应结果。\n\n采用偏绿的石墨黑、青柠强调色、Space Grotesk 展示字体与 Inter 正文字体。桌面主视口为 1440×1000，兼顾 390×844 与 360×800 手机布局。CSS、JavaScript、SVG、字体和许可证均内嵌到 index.html，直接打开即可运行。\n\n交付为本地可交互的官网原型。执行过程、事件时间和指纹使用预设数据，导出记录标注为落地页预览；人工审批保持待审核。保留桌面封面、整页、手机、运行状态和审计截图，并录入画廊。",
+    "views": [
+      "https://ui.oiloil.org/works/agenflow/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/agenflow/live/index.html"
+  },
+  {
+    "slug": "revenue",
+    "href": "/en/works/revenue/",
+    "title": "Runrate",
+    "description": "SaaS revenue dashboard",
+    "alt": "Runrate · SaaS revenue dashboard",
+    "image": "https://ui.oiloil.org/works/revenue/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A desktop app for indie developers and small teams to watch their subscription revenue (1440×900): MRR, new, expansion, contraction, churn and net revenue retention, with monthly trends. Open a month to see which customers drove the change, and open a customer to see their subscription history.\nThe home screen should first answer &quot;how did the money change this month&quot;, rather than piling up metric cards. Design the overview, a month expanded into its changes, and a single customer's detail.",
+    "prompt_zh": "一个给独立开发者和小团队看订阅收入的桌面应用（1440×900）：MRR、新增、升级、降级、流失、净收入留存，按月看趋势，点开某个月能看到是哪些客户带来了变化，每个客户能看到订阅历史。\n首页先回答“这个月钱是怎么变的”，而不是堆指标卡。设计总览、展开某个月的变化明细、单个客户详情三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/revenue/img/view-1.webp",
+      "https://ui.oiloil.org/works/revenue/img/view-2.webp",
+      "https://ui.oiloil.org/works/revenue/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/revenue/live/index.html"
+  },
+  {
+    "slug": "skills",
+    "href": "/en/works/skills/",
+    "title": "Skillset",
+    "description": "Agent Skill collection",
+    "alt": "Skillset · Agent Skill collection",
+    "image": "https://ui.oiloil.org/works/skills/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A collection website for AI Agent Skills (starting at 1440×900, responsive down to 390 pixels wide), with an English interface: developers browse, search, and install Skills for agents such as Claude Code and Codex. Each Skill lists its purpose, supported agents, installation command, version, installation count, and examples of what an agent produces with it. Skill names and authors are fictional. Use agent names as text only, without their logos.\nCreativity is the first priority. Do not make a grid of icons and rounded cards filling the screen. The core: browsing should feel like discovering useful tools; opening a Skill reveals a comparison of the agent's output before and after using it, and selecting your agent lets you copy its matching installation command with one click.\nDesign three states: homepage discovery; search and filter results; and an individual Skill's details and installation.",
+    "prompt_zh": "一个 AI Agent Skill 的合集网站（1440×900 起，响应式到 390 宽），界面用英文：开发者在这里浏览、搜索和安装给 Claude Code、Codex 等 Agent 用的 Skill。每个 Skill 有用途、支持哪些 Agent、安装命令、版本、安装量，以及用了它之后 Agent 做出来的东西。Skill 名和作者虚构，Agent 名称只用文字，不放对方标志。\n有创意是第一要求，不要做成一屏图标加圆角卡片的网格。核心：逛的时候像在发现好用的工具；打开一个 Skill，能看到 Agent 用它之前和之后的产出对比，选好自己的 Agent 后一键复制对应的安装命令。\n设计三个状态：首页发现、搜索和筛选结果、单个 Skill 详情与安装。",
+    "views": [
+      "https://ui.oiloil.org/works/skills/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/skills/live/index.html"
+  },
+  {
+    "slug": "cycle",
+    "href": "/en/works/cycle/",
+    "title": "Phase",
+    "description": "Cycle and women's health",
+    "alt": "Phase · Cycle and women's health",
+    "image": "https://ui.oiloil.org/works/cycle/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A period and cycle tracking app for women aged 18–45 (390×844), with an English interface: the current cycle day and phase, predictions for the next period and fertile window, logging flow, symptoms, and mood, and identifying patterns across several months.\nThe core is logging today's experience in a few taps and a cycle view whose predictions update with the records. The voice should be trustworthy and respectful, like a friend who understands medicine. Avoid default pink, flowers, and cartoon uteruses.\nDesign three screens: Today with cycle day, phase, and predictions; a quick logging panel for flow, symptoms, mood, and notes; and cycle history and patterns showing the lengths of the last six cycles and when symptoms occur. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个给 18–45 岁女性用的经期和周期追踪 App（390×844），界面用英文：今天是周期第几天、处在哪个阶段、下次经期和易孕期的预测，记录经量、症状、情绪，并看出几个月来的规律。\n几下就能记完今天，以及预测随记录更新的周期视图，是这件作品的核心。语气可信、尊重人，像一个懂医学的朋友。不要默认的粉色、花朵和卡通子宫。\n设计三屏：今天（周期日、阶段、预测）、快速记录面板（经量、症状、情绪、备注）、周期历史与规律（最近六个周期的长度、症状出现的时段）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/cycle/img/view-1.webp",
+      "https://ui.oiloil.org/works/cycle/img/view-2.webp",
+      "https://ui.oiloil.org/works/cycle/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/cycle/live/index.html"
+  },
+  {
+    "slug": "apidocs",
+    "href": "/en/works/apidocs/",
+    "title": "Dispatch",
+    "description": "Developer API docs",
+    "alt": "Dispatch · Developer API docs",
+    "image": "https://ui.oiloil.org/works/apidocs/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The developer documentation site of a payments or messaging API company (from 1440×900, responsive down to 390 wide): navigation on the left, the article in the middle, and code samples on the right that switch between languages (cURL, Node, Python). It includes a quickstart, a full reference for one endpoint (parameter table, request and response examples, error codes), and search.\nWhile you read, the code samples follow the current section, and the chosen language is remembered across the site. Design the quickstart page, an endpoint reference page, and search open.",
+    "prompt_zh": "一家支付或消息类 API 公司的开发者文档站（1440×900 起，响应式到 390 宽）：左侧导航、中间正文、右侧可切换语言（cURL、Node、Python）的代码示例；有快速开始、某个接口的完整参考（参数表、请求与响应示例、错误码）、搜索。\n读文档时代码示例跟着当前段落走，切换语言后全站记住。设计快速开始页、接口参考页、搜索打开三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/apidocs/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/apidocs/live/index.html"
+  },
+  {
+    "slug": "teashop",
+    "href": "/en/works/teashop/",
+    "title": "Off Hours",
+    "description": "Specialty tea subscription store",
+    "alt": "Off Hours · Specialty tea subscription store",
+    "image": "https://ui.oiloil.org/works/teashop/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The online store of a specialty tea brand (from 1440×900, responsive down to 390 wide): the main product is a monthly tea subscription, and it also sells loose-leaf tea and teaware on their own. It covers origins and tasting notes and brewing advice; the subscription can be set by flavor preference, amount and frequency.\nConfiguring the subscription is the heart of this piece: as options change, this month's teas and the price update on the spot. Design the first screen, a product detail page, and subscription setup.",
+    "prompt_zh": "一家精品茶品牌的电商网站（1440×900 起，响应式到 390 宽）：主打每月寄送的茶叶订阅，也单卖茶叶和茶具；有产地与风味说明、冲泡建议，订阅可以选口味偏好、份量和频率。\n订阅配置是这件作品的核心：选项改变时，这个月会寄来的茶和价格当场更新。设计首屏、商品详情、订阅配置三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/teashop/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/teashop/live/index.html"
+  },
+  {
+    "slug": "volders-hearth",
+    "href": "/en/works/volders-hearth/",
+    "title": "Atelier Volders",
+    "description": "River Timber · Handcrafted furniture workshop website",
+    "alt": "Atelier Volders · River Timber · Handcrafted furniture workshop website",
+    "image": "https://ui.oiloil.org/works/volders-hearth/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The website of Atelier Volders, a two-person woodworking workshop at Korenlei 14 in Ghent, Belgium (from 1440×900, responsive down to 390 wide), with an English interface. They make only one object: De Drievoet, a three-legged solid oak stool turned and wedged by hand from timber air-dried for three years, produced in a single monthly batch of 24 stools.\nIt comes in three heights (32 cm low hearth stool €240, 45 cm dining & desk stool €270, 62 cm counter stool with ash foot-ring €310) and three finishes (soap-scrubbed raw oak, fumed dark oak, boiled linseed oil & beeswax). Visitors can switch height and finish in real time, explore the six-week making process, underside hot-iron batch stamp and Saturday open hours, and reserve a stool from the current batch. No product photos are provided.",
+    "prompt_zh": "比利时根特 Korenlei 14 号的一家双人木工坊官网（1440×900 起，响应式到 390 宽），界面用英文。工坊只做一件器物：手工车削、楔入榫卯的实心橡木三脚凳 De Drievoet。木料在河岸棚下自然风干三年，每月只开窑做一批、固定 24 张。\n提供三种高度（32 cm 炉边矮凳 €240、45 cm 餐桌与书桌凳 €270、62 cm 带白蜡木脚圈的高脚凳 €310）和三种表面处理（白亚麻籽皂洗原木、氨熏深褐橡木、熟亚麻籽油蜂蜡）。访客可以实时切换高度与木料表面查看变化，了解六周制作工序、凳底热烙批次印记与周六工坊开放时间，并预留当月批次。不提供现成产品照片。",
+    "views": [
+      "https://ui.oiloil.org/works/volders-hearth/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/volders-hearth/live/index.html"
+  },
+  {
+    "slug": "mercier-pour",
+    "href": "/en/works/mercier-pour/",
+    "title": "Fonderie Mercier",
+    "description": "Eighteen Bells · Family bronze bell foundry website",
+    "alt": "Fonderie Mercier · Eighteen Bells · Family bronze bell foundry website",
+    "image": "https://ui.oiloil.org/works/mercier-pour/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The website of Fonderie Mercier, a third-generation family bell foundry at Quai Saint-Vincent 28 on the Saône river quay in Lyon (from 1440×900, responsive down to 390 wide), with an English interface. They cast a single signature object in 78% copper / 22% tin bell bronze using rammed river-sand moulds: Le Bourdon de Table, lathe-tuned to a precise musical pitch and poured once a month in a fixed lot of 18 bells.\nIt comes in three sizes and pitches (Ø 72 mm desk bell A4 440Hz €180, Ø 96 mm courtyard bell F#4 370Hz €240, Ø 124 mm wall bell with forged iron bracket D4 293.7Hz €340) and three patinas (raw lathe-turned bronze, smoked bronze, verdigris). Visitors can listen to each pitch, switch size and patina, explore the five-stage pouring process, cold-stamped crown record and Friday open hours, and prepare a reservation slip for the next monthly pour. No product photos are provided.",
+    "prompt_zh": "法国里昂索恩河畔 Quai Saint-Vincent 28 号的一家三代家族铸钟坊官网（1440×900 起，响应式到 390 宽），界面用英文。工坊用 78% 铜、22% 锡的钟铜在河沙模中浇铸案头与建筑青铜钟 Le Bourdon de Table，冷却后上车床旋削内壁调准音高，每月只开炉浇铸一次、固定 18 只。\n提供三种尺寸与音高（Ø 72 mm 案头钟 A4 440Hz €180、Ø 96 mm 庭院钟 F#4 370Hz €240、Ø 124 mm 附锻铁壁架与生皮拉绳的门廊钟 D4 293.7Hz €340）及三种包浆（车床原色青铜、烟熏深褐、盐霜铜绿）。访客可以试听三个音高、切换尺寸与包浆，查看五道浇铸调音工序、冠部冷钢印记录与周五开放时间，并填写下一炉的预留单。不提供现成照片。",
+    "views": [
+      "https://ui.oiloil.org/works/mercier-pour/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/mercier-pour/live/index.html"
+  },
+  {
+    "slug": "vesper-ledger",
+    "href": "/en/works/vesper-ledger/",
+    "title": "Vesper",
+    "description": "Settlement Ledger · API usage billing console",
+    "alt": "Vesper · Settlement Ledger · API usage billing console",
+    "image": "https://ui.oiloil.org/works/vesper-ledger/img/cover.webp",
+    "model": "DeepSeek 4.1 Flash",
+    "prompt_en": "Design an API usage billing and customer invoice console for AI and developer tool teams, with an English interface at a desktop viewport of 1440×900. Users can manage subscription plans and live API usage, review amounts due and invoice exceptions for the current cycle, filter customers or invoices by status and usage threshold, and open a record to inspect line items, payment and Webhook timelines, and event payloads. Include payment retries, quota adjustments, and invoice exports.\n\nImplement three key states: the everyday workspace with revenue and usage trends, customer or invoice lists, and live filtering; an exception invoice detail view with a usage breakdown, status timeline, and recovery actions; and a quick command palette. Deliver an offline-ready `index.html` and capture `shots/desktop.png`, `shots/state-1.png`, and `shots/state-2.png` at 1440×900, DPR=2.",
+    "prompt_zh": "为 AI 与开发者工具团队设计一个 API 用量计费与客户账单管理后台，采用英文界面，桌面视口为 1440×900。用户可以管理订阅方案与实时 API 用量，查看本周期应收金额和异常账单，按状态与用量阈值筛选客户或账单，并打开单条记录查看计费明细、扣款与 Webhook 时间线及事件报文，完成重试扣款、调整配额或导出账单等操作。\n\n实现三个关键状态：展示收入与用量走势、客户或账单列表及实时筛选的日常工作区；展示用量拆解、状态时间线和恢复操作的异常账单详情；以及快捷命令面板。交付可离线打开的 `index.html`，并以 1440×900、DPR=2 截取 `shots/desktop.png`、`shots/state-1.png` 和 `shots/state-2.png`。",
+    "views": [
+      "https://ui.oiloil.org/works/vesper-ledger/img/view-1.webp",
+      "https://ui.oiloil.org/works/vesper-ledger/img/view-2.webp",
+      "https://ui.oiloil.org/works/vesper-ledger/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/vesper-ledger/live/index.html"
+  },
+  {
+    "slug": "volders-wedge",
+    "href": "/en/works/volders-wedge/",
+    "title": "Atelier Volders",
+    "description": "The Wedged Oak · Handcrafted furniture workshop website",
+    "alt": "Atelier Volders · The Wedged Oak · Handcrafted furniture workshop website",
+    "image": "https://ui.oiloil.org/works/volders-wedge/img/cover.webp",
+    "model": "DeepSeek 4.1 Flash",
+    "prompt_en": "The website of Atelier Volders, a two-person woodworking workshop at Korenlei 14 in Ghent, Belgium (from 1440×900, responsive down to 390 wide), with an English interface. They make only one object: De Drievoet, a three-legged solid oak stool turned and wedged by hand from timber air-dried for three years, produced in a single monthly batch of 24 stools.\nIt comes in three heights (32 cm low hearth stool €240, 45 cm dining & desk stool €270, 62 cm counter stool with ash foot-ring €310) and three finishes (soap-scrubbed raw oak, fumed dark oak, boiled linseed oil & beeswax). Visitors can switch height and finish in real time, explore the six-week making process, underside hot-iron batch stamp and Saturday open hours, and reserve a stool from the current batch. No product photos are provided.",
+    "prompt_zh": "比利时根特 Korenlei 14 号的一家双人木工坊官网（1440×900 起，响应式到 390 宽），界面用英文。工坊只做一件器物：手工车削、楔入榫卯的实心橡木三脚凳 De Drievoet。木料在河岸棚下自然风干三年，每月只开窑做一批、固定 24 张。\n提供三种高度（32 cm 炉边矮凳 €240、45 cm 餐桌与书桌凳 €270、62 cm 带白蜡木脚圈的高脚凳 €310）和三种表面处理（白亚麻籽皂洗原木、氨熏深褐橡木、熟亚麻籽油蜂蜡）。访客可以实时切换高度与木料表面查看变化，了解六周制作工序、凳底热烙批次印记与周六工坊开放时间，并预留当月批次。不提供现成产品照片。",
+    "views": [
+      "https://ui.oiloil.org/works/volders-wedge/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/volders-wedge/live/index.html"
+  },
+  {
+    "slug": "mercier-bell",
+    "href": "/en/works/mercier-bell/",
+    "title": "Fonderie Mercier",
+    "description": "The Tuning Sheet · Family bronze bell foundry website",
+    "alt": "Fonderie Mercier · The Tuning Sheet · Family bronze bell foundry website",
+    "image": "https://ui.oiloil.org/works/mercier-bell/img/cover.webp",
+    "model": "DeepSeek 4.1 Flash",
+    "prompt_en": "The website of Fonderie Mercier, a third-generation family bell foundry at Quai Saint-Vincent 28 on the Saône river quay in Lyon (from 1440×900, responsive down to 390 wide), with an English interface. They cast a single signature object in 78% copper / 22% tin bell bronze using rammed river-sand moulds: Le Bourdon de Table, lathe-tuned to a precise musical pitch and poured once a month in a fixed lot of 18 bells.\nIt comes in three sizes and pitches (Ø 72 mm desk bell A4 440Hz €180, Ø 96 mm courtyard bell F#4 370Hz €240, Ø 124 mm wall bell with forged iron bracket D4 293.7Hz €340) and three patinas (raw lathe-turned bronze, smoked bronze, verdigris). Visitors can listen to each pitch, switch size and patina, explore the five-stage pouring process, cold-stamped crown record and Friday open hours, and prepare a reservation slip for the next monthly pour. No product photos are provided.",
+    "prompt_zh": "法国里昂索恩河畔 Quai Saint-Vincent 28 号的一家三代家族铸钟坊官网（1440×900 起，响应式到 390 宽），界面用英文。工坊用 78% 铜、22% 锡的钟铜在河沙模中浇铸案头与建筑青铜钟 Le Bourdon de Table，冷却后上车床旋削内壁调准音高，每月只开炉浇铸一次、固定 18 只。\n提供三种尺寸与音高（Ø 72 mm 案头钟 A4 440Hz €180、Ø 96 mm 庭院钟 F#4 370Hz €240、Ø 124 mm 附锻铁壁架与生皮拉绳的门廊钟 D4 293.7Hz €340）及三种包浆（车床原色青铜、烟熏深褐、盐霜铜绿）。访客可以试听三个音高、切换尺寸与包浆，查看五道浇铸调音工序、冠部冷钢印记录与周五开放时间，并填写下一炉的预留单。不提供现成照片。",
+    "views": [
+      "https://ui.oiloil.org/works/mercier-bell/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/mercier-bell/live/index.html"
+  },
+  {
+    "slug": "archon-bust",
+    "href": "/en/works/archon-bust/",
+    "title": "Archon",
+    "description": "The Open Kernel · Distributed Agent Runtime",
+    "alt": "Archon · The Open Kernel · Distributed Agent Runtime",
+    "image": "https://ui.oiloil.org/works/archon-bust/img/cover.webp",
+    "model": "DeepSeek 4.1 Flash",
+    "prompt_en": "Build the English official website for **ARCHON** (&quot;The Sovereign Agent Fabric&quot;), an open-source distributed agent runtime for systems engineers and agent developers (desktop 1440×900, responsive down to 390×844 mobile).\nCore product capabilities & interactive sections:\n- Hero section: striking monumental brand visual and engraving/diagram centerpiece, paired with an interactive platform installation terminal (macOS / Linux / Windows tabs with one-click copy and status feedback).\n- Interactive Workload Execution Trace: clicking Execute Workload advances a live 4-stage pipeline (01 Ingest → 02 Plan DAG → 03 Dispatch 4 isolated workers → 04 Commit durable checkpoint) with real-time event bus logs.\n- 6-Module Kernel Topology & Contract Inspector (Agent Runtime, Planner, Memory, Scheduler, Tool Gateway, Model Router): clicking any module node updates the contract inspector with its Input, Output, Semantics, and interface signature.\n- Runtime specification table, 3-step boot sequence with archon.yaml config preview/copy, and deployment FAQ.\nDeliver `index.html`; keep the three-direction comparison in `_work/style-explorer.html`.",
+    "prompt_zh": "Build the English official website for **ARCHON** (&quot;The Sovereign Agent Fabric&quot;), an open-source distributed agent runtime for systems engineers and agent developers (desktop 1440×900, responsive down to 390×844 mobile).\nCore product capabilities &amp; interactive sections:\n- Hero section: striking monumental brand visual and engraving/diagram centerpiece, paired with an interactive platform installation terminal (macOS / Linux / Windows tabs with one-click copy and status feedback).\n- Interactive Workload Execution Trace: clicking Execute Workload advances a live 4-stage pipeline (01 Ingest → 02 Plan DAG → 03 Dispatch 4 isolated workers → 04 Commit durable checkpoint) with real-time event bus logs.\n- 6-Module Kernel Topology &amp; Contract Inspector (Agent Runtime, Planner, Memory, Scheduler, Tool Gateway, Model Router): clicking any module node updates the contract inspector with its Input, Output, Semantics, and interface signature.\n- Runtime specification table, 3-step boot sequence with archon.yaml config preview/copy, and deployment FAQ.\nDeliver `index.html`; keep the three-direction comparison in `_work/style-explorer.html`.",
+    "views": [
+      "https://ui.oiloil.org/works/archon-bust/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/archon-bust/live/index.html"
+  },
+  {
+    "slug": "tv",
+    "href": "/en/works/tv/",
+    "title": "Yeying",
+    "description": "TV streaming app",
+    "alt": "Yeying · TV streaming app",
+    "image": "https://ui.oiloil.org/works/tv/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A streaming app for the living-room TV, operated with a remote (1920×1080, viewed from three metres away), with a Chinese interface: recommendations and category rows on the home screen, a title's detail page with episode selection, and playback with progress and the next episode. Titles, posters, and stills are fictional, and the posters are generated as a matching set.\nRemote focus is the heart of this piece: when the arrow keys move the focus, you can tell where you are at a glance. Use the keyboard arrow keys and Enter to stand in for the remote. Text should be large, and each screen should hold few things.\nDesign three states: the home screen (with focus resting on a poster), a title's detail page with episode selection, and playback. Capture screenshots at 1920×1080, DPR=1.",
+    "prompt_zh": "一个在客厅电视上用遥控器操作的流媒体 App（1920×1080，三米外观看），界面用中文：首页的推荐和分类片单、单部作品的详情与选集、播放中的进度和下一集。片名、海报和剧照都是虚构的，海报用生图成套制作。\n遥控器的焦点是这件作品的核心：方向键移动焦点时，一眼知道自己在哪。用键盘方向键和回车模拟遥控器。字要大，一屏的东西要少。\n设计三个状态：首页（焦点停在一张海报上）、作品详情与选集、播放中。截图按 1920×1080、DPR=1。",
+    "views": [
+      "https://ui.oiloil.org/works/tv/img/view-1.webp",
+      "https://ui.oiloil.org/works/tv/img/view-2.webp",
+      "https://ui.oiloil.org/works/tv/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/tv/live/index.html"
+  },
+  {
+    "slug": "chat2",
+    "href": "/en/works/chat2/",
+    "title": "Sonar",
+    "description": "Team messaging",
+    "alt": "Sonar · Team messaging",
+    "image": "https://ui.oiloil.org/works/chat2/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A desktop messaging app for companies with 30–300 people (1440×900): channels, groups, and direct messages on the left, and the ongoing conversation in the middle. Messages include text, images, files, code snippets, polls, and emoji reactions. Use a Chinese interface.\nThe sense of immediacy is the heart of this piece: sending a message, several colleagues typing at once, opening a thread on one message, and other people's replies and reactions appearing in real time should all feel smooth and have weight. Do not turn it into an email client or a task board.\nDesign three states: everyday conversation in a busy channel; a thread opened on one message; mentioning a colleague in the input box and dropping in a file, ready to send.",
+    "prompt_zh": "一个给 30–300 人公司用的即时通讯桌面端（1440×900）：左边是频道、群组和私聊，中间是正在进行的对话。消息里有文字、图片、文件、代码片段、投票和表情回应。界面用中文。\n聊天的即时感是这件作品的核心：发出一条消息、几个同事同时在输入、对某一条展开话题回复、别人的回复和表情实时冒出来，都要顺手、有分量。不要做成邮件客户端或任务看板。\n设计三个状态：一个热闹频道里的日常对话；在某条消息上展开话题回复；在输入框里 @ 同事、拖进文件后准备发送。",
+    "views": [
+      "https://ui.oiloil.org/works/chat2/img/view-1.webp",
+      "https://ui.oiloil.org/works/chat2/img/view-2.webp",
+      "https://ui.oiloil.org/works/chat2/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/chat2/live/index.html"
+  },
+  {
+    "slug": "gacha",
+    "href": "/en/works/gacha/",
+    "title": "Klak",
+    "description": "After-Work Club · Capsule toy collecting app",
+    "alt": "Klak · After-Work Club · Capsule toy collecting app",
+    "image": "https://ui.oiloil.org/works/gacha/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A capsule toy collecting app (390×844): users get a few turns each day. Turn the knob, watch a capsule roll out, twist it open to reveal a small collectible, and complete a series to unlock a secret edition.\nThe feel of the knob's resistance, the capsule's fall and bounce, and the reveal when the shell opens are central to this piece. Make common and rare rewards feel different.\nDesign three screens: the idle capsule machine with the current series visible, the opening and reveal, and the collection album with collected, missing, and secret editions. Deliver `index.html` and `screens.html` with all three screens side by side.",
+    "prompt_zh": "一个扭蛋收集 App（390×844）：每天可以扭几次，转动旋钮，扭蛋滚出来，拧开蛋壳得到一个小摆件，收集满一个系列能解锁隐藏款。\n旋钮的阻尼、扭蛋落下弹跳、开壳揭晓（普通款与稀有款要有区别），是这件作品的手感核心。\n设计三屏：扭蛋机待机（看得到本期系列）、开壳揭晓、系列收集册（有已收集、未收集、隐藏款）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/gacha/img/view-1.webp",
+      "https://ui.oiloil.org/works/gacha/img/view-2.webp",
+      "https://ui.oiloil.org/works/gacha/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/gacha/live/index.html"
+  },
+  {
+    "slug": "car",
+    "href": "/en/works/car/",
+    "title": "Yantu",
+    "description": "In-car infotainment",
+    "alt": "Yantu · In-car infotainment",
+    "image": "https://ui.oiloil.org/works/car/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The main interface of an in-car infotainment screen (1920×720, readable at a glance while driving), with a Chinese interface: a navigation map, currently playing music, climate controls, and common vehicle controls.\nShifting priorities on the same screen is the core of this work: normally the map takes the lead while music and climate controls each occupy a small area; as a turn approaches, the turn guidance automatically enlarges and music makes room; when adjusting the climate, a temperature slider rises and everything else dims. Make buttons large enough to press accurately without looking. Draw the map yourself rather than using a real map service.\nColors: a nighttime blue-black background and an electric-blue navigation route, with amber reserved for warnings and turn guidance. Do not use warm white or beige.\nDesign three states: cruising, approaching a turn, and adjusting the climate. Capture screenshots at 1920×720, DPR=1.",
+    "prompt_zh": "一块汽车中控屏的主界面（1920×720，驾驶中一眼要读完），界面用中文：导航地图、正在播放的音乐、空调，以及常用的车辆控制。\n同屏主次的切换是这件作品的核心：平时地图为主，音乐和空调各占一小块；快到路口时转向提示自动放大，音乐让位；调空调时温度滑条升起来，其余变暗。按钮够大，手指不看也按得准。地图自己画，不用真实地图服务。\n配色：夜间的蓝黑底，导航路线用电光蓝，只有警示和转向提示用琥珀色；不用暖白、米色。\n设计三个状态：巡航中、临近转弯、调节空调。截图按 1920×720、DPR=1。",
+    "views": [
+      "https://ui.oiloil.org/works/car/img/view-1.webp",
+      "https://ui.oiloil.org/works/car/img/view-2.webp",
+      "https://ui.oiloil.org/works/car/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/car/live/index.html"
+  },
+  {
+    "slug": "onboard",
+    "href": "/en/works/onboard/",
+    "title": "Heye",
+    "description": "Sign-in and onboarding",
+    "alt": "Heye · Sign-in and onboarding",
+    "image": "https://ui.oiloil.org/works/onboard/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The sign-in, sign-up, and first-run onboarding of a team knowledge-base product (shown on a clean 1440×900 canvas and adapted to a 390-wide screen), with a Chinese interface: email sign-in, a six-digit verification code, a three-step onboarding (choose a purpose, invite colleagues, pick the first template), and a completion screen.\nClear feedback at every step is the heart of this piece: the code fills in box by box and can be pasted in one go; when it is wrong, the row shakes once and says why. Progress carries through the three onboarding steps, and what you chose stays visible in the next step. One thing per screen, with as few words as possible.\nDesign four states: sign-in, entering the code (including one wrong attempt), the second onboarding step, and completion.",
+    "prompt_zh": "一个团队知识库产品的登录注册和首次使用引导（展示在 1440×900 的干净画布上，同时适配 390 宽），界面用中文：邮箱登录、六位验证码、三步引导（选用途、邀请同事、选第一个模板）和完成。\n每一步都有明确反馈是这件作品的核心：验证码逐格跳、能整段粘贴，输错时这一行抖一下并说清原因；引导的三步之间进度是连着的，选完的内容在下一步还看得见。一屏只做一件事，字越少越好。\n设计四个状态：登录、输入验证码（含一次输错）、引导第二步、完成。",
+    "views": [
+      "https://ui.oiloil.org/works/onboard/img/view-1.webp",
+      "https://ui.oiloil.org/works/onboard/img/view-2.webp",
+      "https://ui.oiloil.org/works/onboard/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/onboard/live/index.html"
+  },
+  {
+    "slug": "slots",
+    "href": "/en/works/slots/",
+    "title": "Candy Glass Arcade",
+    "description": "Fruit slot machine game",
+    "alt": "Candy Glass Arcade · Fruit slot machine game",
+    "image": "https://ui.oiloil.org/works/slots/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A casual slot machine game app (390×844) played with virtual coins, with no real money involved: pull a lever or press a button, watch three to five reels spin and stop in sequence, and collect coins and celebrate when a winning line appears.\nThe reels slowing down, the crisp stops, the highlighted winning lines, and the changing coin count are central to the feel of this piece.\nDesign three screens: idle with a bet placed, reels spinning, and the winning payout. Also include an ordinary non-winning result. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个休闲老虎机小游戏 App（390×844），用游戏币玩，不涉及真钱：拉杆或按按钮，三到五条转轮滚动、依次停下，连线中奖时有收币与庆祝。\n转轮的减速、停轮的顿挫、中奖连线的高亮、币数跳动，是这件作品的手感核心。\n设计三屏：待机下注、转轮滚动中、中奖结算（另有一个没中的普通结果）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/slots/img/view-1.webp",
+      "https://ui.oiloil.org/works/slots/img/view-2.webp",
+      "https://ui.oiloil.org/works/slots/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/slots/live/index.html"
+  },
+  {
+    "slug": "chat",
+    "href": "/en/works/chat/",
+    "title": "Around the Table",
+    "description": "Team messaging",
+    "alt": "Around the Table · Team messaging",
+    "image": "https://ui.oiloil.org/works/chat/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A desktop messaging app for companies with 30–300 people (1440×900), with channels, groups, and direct messages on the left and the current conversation in the center. Messages include text, images, files, code snippets, polls, and emoji reactions. Use a Chinese interface.\nThe immediacy of chatting is the core of this work: sending a message, several colleagues typing at once, opening a thread on a specific message, and other people's replies and reactions appearing in real time should all feel natural and substantial. Do not turn it into an email client or a task board.\nDesign three states: everyday conversation in a lively channel; a thread opened on a message; and mentioning a colleague with @ and dragging a file into the composer, ready to send.",
+    "prompt_zh": "一个给 30–300 人公司用的即时通讯桌面端（1440×900）：左边是频道、群组和私聊，中间是正在进行的对话。消息里有文字、图片、文件、代码片段、投票和表情回应。界面用中文。\n聊天的即时感是这件作品的核心：发出一条消息、几个同事同时在输入、对某一条展开话题回复、别人的回复和表情实时冒出来，都要顺手、有分量。不要做成邮件客户端或任务看板。\n设计三个状态：一个热闹频道里的日常对话；在某条消息上展开话题回复；在输入框里 @ 同事、拖进文件后准备发送。",
+    "views": [
+      "https://ui.oiloil.org/works/chat/img/view-1.webp",
+      "https://ui.oiloil.org/works/chat/img/view-2.webp",
+      "https://ui.oiloil.org/works/chat/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/chat/live/index.html"
+  },
+  {
+    "slug": "mail",
+    "href": "/en/works/mail/",
+    "title": "Post",
+    "description": "Email client",
+    "alt": "Post · Email client",
+    "image": "https://ui.oiloil.org/works/mail/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Post, an email client for people who handle hundreds of emails a day.\nBuild its main interface (1440×900): an inbox, an open email, and a quick reply. Use realistic email content, mixing work correspondence, bills, and notifications.\nGive clearing the inbox a distinctive feel: for example, a processed email slides away immediately and the count drops.\nAlso capture a screenshot of the empty inbox state.",
+    "prompt_zh": "产品：「Post」，一个给每天处理上百封邮件的人用的邮件客户端。\n做它的主界面（1440×900）：收件箱、正在读的一封邮件、快速回复。邮件内容要真实（工作往来、账单、通知混在一起）。\n记忆点：清空收件箱的手感，例如处理完一封邮件时它当场收走、计数减少。\n再截一张收件箱清零时的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/mail/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/mail/live/index.html"
+  },
+  {
+    "slug": "clips",
+    "href": "/en/works/clips/",
+    "title": "Moments",
+    "description": "Short-video app",
+    "alt": "Moments · Short-video app",
+    "image": "https://ui.oiloil.org/works/clips/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A short-video app (390×844) featuring creators with different styles, such as cooking, bicycle repair, city walks, and life with cats. Use a Chinese interface.\nThe feel of browsing videos is the core: swiping up to the next clip, the moment of a double-tap like, and the video continuing to play while comments slide up from below. Generate the video imagery; you may use ffmpeg to turn it into short loops with camera pushes, pulls, parallax, or multiple frames. Keep each clip under 1.5MB.\nDesign three screens: full-screen playback with the video, creator, caption, likes, comments, and sharing; the comments sheet open; and a creator profile with a work grid. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个短视频 App（390×844），内容来自几位风格不同的创作者，比如做饭、修自行车、城市漫步、养猫。界面用中文。\n刷视频的手感是这件作品的核心：上滑切到下一条、双击点赞的那一下、评论区从下方拉起时视频不停。视频画面用生图制作，可以配 ffmpeg 做成几秒的循环短片（推拉、视差、多帧），每段控制在 1.5MB 以内。\n设计三屏：全屏播放（视频、作者、文案、点赞评论分享）、评论区拉起、创作者主页（作品网格）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/clips/img/view-1.webp",
+      "https://ui.oiloil.org/works/clips/img/view-2.webp",
+      "https://ui.oiloil.org/works/clips/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/clips/live/index.html"
+  },
+  {
+    "slug": "circuit",
+    "href": "/en/works/circuit/",
+    "title": "Circuit Lab",
+    "description": "Physics teaching laboratory",
+    "alt": "Circuit Lab · Physics teaching laboratory",
+    "image": "https://ui.oiloil.org/works/circuit/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "An online circuit laboratory for middle school physics classes (1440×900, used on classroom computers and all-in-one displays), with a Chinese interface: drag batteries, bulbs, switches, resistors, and ammeters from the equipment box onto the workbench and connect them with wires.\nClosing the switch is the core: current flows along wires, bulbs brighten and dim realistically in series and parallel circuits, and the ammeter readings change accordingly. In a short circuit, the wire glows red and sparks, and the interface points out the incorrect connection. Generate equipment imagery with realistic materials, keeping the lighting direction and viewing angle consistent across the set.\nDesign three states: an experiment task with an empty workbench; a completed series circuit with the switch closed; and a parallel circuit or a short circuit.",
+    "prompt_zh": "一个给初中物理课用的在线电路实验室（1440×900，在教室电脑和一体机上用），界面用中文：从器材盒把电池、灯泡、开关、电阻、电流表拖到实验台，用导线连起来。\n合上开关的那一下是这件作品的核心：电流沿导线流动，灯泡按串联、并联真实地变亮变暗，电流表读数跟着变；接成短路时导线发红、冒火花，并指出是哪里接错了。器材用生图做出真实材质，同一批统一光向和视角。\n设计三个状态：一道实验任务和空实验台、搭好串联电路后合上开关、改成并联或接成短路。",
+    "views": [
+      "https://ui.oiloil.org/works/circuit/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/circuit/live/index.html"
+  },
+  {
+    "slug": "wrapped",
+    "href": "/en/works/wrapped/",
+    "title": "Tempo",
+    "description": "2026 Wrapped · Year in music",
+    "alt": "Tempo · 2026 Wrapped · Year in music",
+    "image": "https://ui.oiloil.org/works/wrapped/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The “Your 2026 Wrapped” report in the Tempo music app. Users tap through it page by page at the end of the year, then share it on social media.\n\nStyle: bold, rhythmic, and playful, with large blocks of color, oversized type, strong typography, and a different palette on each page while keeping the whole set cohesive. It should feel like a magazine in motion.\n\nDesign three pages as vertical stories with a progress bar at the top:\n- Opening: you listened for 48,213 minutes this year.\n- Your favorite artist: the artist's name, how many times you listened, and your percentile among their listeners. Use a fictional artist.\n- Your music personality: a personality label based on listening habits and a few lines describing it.\nMake the entrance animations for numbers and text memorable, and turn listening time into a quantity people can see. Choose an attractive frame for screenshots.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Tempo」音乐 App 的“你的 2026 年度报告”，用户在年底会一页一页点着看，然后分享到社交网络。\n\n风格：大胆、有节奏感、好玩：大色块、超大的字、强烈的排版、每一页一种配色但整套统一。像一份会动的杂志。\n\n设计 3 页（竖屏故事形式，顶部有进度条）：\n- 开场：你今年听了 48,213 分钟。\n- 你最爱的歌手：歌手名字、听了多少次、你是前百分之几的听众（歌手是虚构的）。\n- 你的音乐性格：根据听歌习惯得出的一个性格标签和几句描述。\n记忆点：数字和文字的出场动效，以及把“听歌时长”画成看得见的量。截图时选好看的一帧。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/wrapped/img/view-1.webp",
+      "https://ui.oiloil.org/works/wrapped/img/view-2.webp",
+      "https://ui.oiloil.org/works/wrapped/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/wrapped/live/index.html"
+  },
+  {
+    "slug": "device",
+    "href": "/en/works/device/",
+    "title": "Ohm 1",
+    "description": "Hardware product website",
+    "alt": "Ohm 1 · Hardware product website",
+    "image": "https://ui.oiloil.org/works/device/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Ohm 1, a palm-sized desktop synthesizer and sampler with an aluminum body, 16 keys, four knobs, and a small screen.\n\nBuild the homepage for its product website:\n- Take cues from industrial design brands: precise, restrained, and slightly playful. Consider dot-matrix or monospace type, generous whitespace, and a monochrome palette with one signal color.\n- Make the device the focal point. Draw it in SVG or CSS, either as a front-facing top view or an isometric view. Make it refined and believable, including knobs, keys, the screen, and screws.\n- Make the device on the page playable: dragging a knob could change the waveform on the screen, or pressing a key could light it up.\n- Include a specifications table, three main selling points, a price, and a preorder button.",
+    "prompt_zh": "产品：「Ohm 1」，一台桌面合成器和采样器，巴掌大小，铝合金机身，16 个按键、4 个旋钮、一块小屏幕。\n\n做它的产品官网首页：\n- 气质参考工业设计品牌：精确、克制、带一点玩心；可以用点阵字或等宽字、大量留白、单色加一种信号色。\n- 产品本身是主角：用 SVG 或 CSS 画出这台机器（正面俯视或等轴测都可以），要画得精致可信，旋钮、按键、屏幕、螺丝细节都要有。\n- 记忆点：页面上的机器可以玩，例如拖动旋钮时屏幕上的波形跟着变，或者按下按键亮起。\n- 要有：规格参数表、三个核心卖点、价格和预订按钮。",
+    "views": [
+      "https://ui.oiloil.org/works/device/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/device/live/index.html"
+  },
+  {
+    "slug": "podcast",
+    "href": "/en/works/podcast/",
+    "title": "Listen",
+    "description": "Podcast app",
+    "alt": "Listen · Podcast app",
+    "image": "https://ui.oiloil.org/works/podcast/img/cover.webp",
+    "model": "GPT 6 Luna",
+    "prompt_en": "Product: Listen, a Chinese-language podcast app for subscribing to shows, listening to episodes, reading transcripts, and sharing from a particular sentence.\nDesign three key screens: home with continue listening and subscription updates; playback with artwork, progress, chapters, and playback speed; and a transcript with the current sentence highlighted and a sentence selection action for sharing.\nMake one playback or sharing action memorable. Draw or generate the podcast artwork; do not use copyrighted artwork from real shows.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Listen」，一个中文播客 App：订阅节目、听单集、看文字稿、从某一句话开始分享。\n设计 3 个关键屏：首页（继续收听、订阅更新）、播放页（封面、进度、章节、倍速）、文字稿（当前句高亮，可选中一句分享）。\n记忆点放在播放或分享的某一个动作上。节目封面用代码画或生成，不用真实节目的版权封面。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/podcast/img/view-1.webp",
+      "https://ui.oiloil.org/works/podcast/img/view-2.webp",
+      "https://ui.oiloil.org/works/podcast/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/podcast/live/index.html"
+  },
+  {
+    "slug": "studio",
+    "href": "/en/works/studio/",
+    "title": "ROOMIN",
+    "description": "Recording studio booking website",
+    "alt": "ROOMIN · Recording studio booking website",
+    "image": "https://ui.oiloil.org/works/studio/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个城市里独立录音棚和排练室的预约网站：看房间和设备，选时段预约。做预约页面。",
+    "views": [
+      "https://ui.oiloil.org/works/studio/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/studio/live/index.html"
+  },
+  {
+    "slug": "match",
+    "href": "/en/works/match/",
+    "title": "In Tune",
+    "description": "Dating app",
+    "alt": "In Tune · Dating app",
+    "image": "https://ui.oiloil.org/works/match/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A dating app (390×844) for city professionals aged 25–35 who want a serious relationship. Use a Chinese interface. Instead of left/right swiping, each profile consists of photos and question-and-answer prompts. Users like a specific photo or answer and add a message.\nThe core is the moment of connecting with a particular answer and writing an opening message, and the match when both people like each other. Generate the profile photos in a consistent photographic style, like real snapshots taken by friends rather than studio portraits or model photography. Do not copy the appearance of Hinge or another dating product.\nDesign three screens: browsing a person's profile; liking an answer and writing an opener; and entering a conversation after a successful match. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个交友 App（390×844），给 25–35 岁、想认真谈恋爱的城市上班族。界面用中文。不靠左右滑：每个人的资料由几张照片和几段问答组成，用户对某一张照片或某一个回答点赞，再附一句话。\n对一个具体回答心动并写下开场白的那一下，以及双方互相喜欢时的配对时刻，是这件作品的核心。人物照片用生图，统一摄影风格，像朋友随手拍的真实照片，不像影楼照或模特图。不要照抄 Hinge 或其他交友产品的样子。\n设计三屏：浏览一个人的资料、对一条回答点赞并写开场白、配对成功后进入对话。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/match/img/view-1.webp",
+      "https://ui.oiloil.org/works/match/img/view-2.webp",
+      "https://ui.oiloil.org/works/match/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/match/live/index.html"
+  },
+  {
+    "slug": "canvas",
+    "href": "/en/works/canvas/",
+    "title": "Loom Whiteboard",
+    "description": "Collaborative whiteboard",
+    "alt": "Loom Whiteboard · Collaborative whiteboard",
+    "image": "https://ui.oiloil.org/works/canvas/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Loom Whiteboard, an online whiteboard for product team meetings, with sticky notes, connections, grouping, voting, and several people writing at once.\nBuild its main interface (1440×900): a requirements discussion in progress, with realistic sticky note content and several colleagues' cursors on the canvas.\nMake collaboration feel immediate: votes on a note increase as people vote, and other people's cursors move with their names attached.\nAlso capture a screenshot with several sticky notes selected.",
+    "prompt_zh": "产品：「Loom 白板」，一个给产品团队开会用的在线白板：便签、连线、分组、投票，几个人同时在上面写。\n做它的主界面（1440×900）：一场正在进行的需求讨论，画布上有真实的便签内容和几位同事的光标。\n记忆点：多人协作的手感，例如投票时便签上的票数当场增加、别人的光标带着名字移动。\n再截一张选中多张便签后的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/canvas/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/canvas/live/index.html"
+  },
+  {
+    "slug": "pusher",
+    "href": "/en/works/pusher/",
+    "title": "Ding! Mint Arcade",
+    "description": "Coin pusher game",
+    "alt": "Ding! Mint Arcade · Coin pusher game",
+    "image": "https://ui.oiloil.org/works/pusher/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A coin pusher game app (390×844): a vertical overhead or angled view of the machine, with a pusher plate moving back and forth. Players tap the coin slot to drop coins. Coins pushed over the edge count as winnings, with occasional prizes or special coins.\nFalling, stacking, colliding, and tumbling coins should have a believable physical feel.\nDesign three screens: dropping coins at the start, a pile just about to tip over the edge, and collected winnings including prizes or special coins. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个推币机小游戏 App（390×844）：竖屏俯视或斜视角的推币台，推板来回推动，玩家点击投币口把硬币投下去，硬币堆被推到边缘掉落就算收获，偶尔掉出奖品或特殊币。\n硬币落下、堆叠、被推挤、从边缘坠落要有可信的物理手感。\n设计三屏：开局投币、币堆即将被推下的临界时刻、掉落收获（含奖品或特殊币）。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/pusher/img/view-1.webp",
+      "https://ui.oiloil.org/works/pusher/img/view-2.webp",
+      "https://ui.oiloil.org/works/pusher/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/pusher/live/index.html"
+  },
+  {
+    "slug": "vinyl",
+    "href": "/en/works/vinyl/",
+    "title": "Slow Groove",
+    "description": "Vinyl music player",
+    "alt": "Slow Groove · Vinyl music player",
+    "image": "https://ui.oiloil.org/works/vinyl/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A “Now Playing” module in a desktop music app: a record spins on the turntable, the tonearm lowers to start playback, and lyrics and playback controls sit beside it.\nFocus on tactile interaction and material detail. Dragging the tonearm can jump to a point in the song, and pausing lets the record slow to a stop. Use a fictional album, artist, and song; draw or generate the cover.\nMake the moment of placing the tonearm on the record memorable. Capture the main state, paused state, and tonearm dragging state.",
+    "prompt_zh": "一个桌面端音乐 App 里的“正在播放”模块：唱片在转盘上转，唱臂落下开始播放，旁边是歌词和播放控制。\n手感和质感是重点：拖动唱臂可以跳到歌曲的某一段，暂停时唱片慢慢停下。唱片封面、歌手和歌曲都是虚构的，封面用代码画或生成。\n记忆点就是“把唱臂放上去”那一下。截主状态、暂停状态、拖动唱臂时的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/vinyl/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/vinyl/live/index.html"
+  },
+  {
+    "slug": "club",
+    "href": "/en/works/club/",
+    "title": "Inner Circle",
+    "description": "Interest communities and local events",
+    "alt": "Inner Circle · Interest communities and local events",
+    "image": "https://ui.oiloil.org/works/club/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个找附近兴趣小组参加线下活动的社交 App，比如读书会、夜跑、桌游。做三个关键屏。App 屏幕按 390×844。",
+    "views": [
+      "https://ui.oiloil.org/works/club/img/view-1.webp",
+      "https://ui.oiloil.org/works/club/img/view-2.webp",
+      "https://ui.oiloil.org/works/club/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/club/live/index.html"
+  },
+  {
+    "slug": "upload",
+    "href": "/en/works/upload/",
+    "title": "Chute",
+    "description": "File upload module",
+    "alt": "Chute · File upload module",
+    "image": "https://ui.oiloil.org/works/upload/img/cover.webp",
+    "model": "Claude Fable 5.1",
+    "prompt_en": "The upload module of a file sharing tool (desktop 1440×900, with the module centered): drag in files, show upload progress, then generate a sharing link with an expiry date and password after upload.\nGive file drop feedback, simultaneous progress for multiple files, and the moment of copying a link a satisfying feel.\nCapture three states: dragging files in, uploading, and completed with sharing available.",
+    "prompt_zh": "一个文件分享工具的上传模块（桌面 1440×900，模块居中）：把文件拖进来、上传进度、上传完成后生成分享链接并设置有效期和密码。\n拖入时的反馈、多个文件同时上传时的进度、复制链接的那一下，都要有手感。\n截拖入中、上传中、完成可分享三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/upload/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/upload/live/index.html"
+  },
+  {
+    "slug": "scent",
+    "href": "/en/works/scent/",
+    "title": "TRACE",
+    "description": "Perfume brand store",
+    "alt": "TRACE · Perfume brand store",
+    "image": "https://ui.oiloil.org/works/scent/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个小众香水品牌的线上店铺。做店铺首页和一款香水的详情页。",
+    "views": [
+      "https://ui.oiloil.org/works/scent/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/scent/live/index.html"
+  },
+  {
+    "slug": "grove",
+    "href": "/en/works/grove/",
+    "title": "Grove",
+    "description": "Focus timer that grows a forest",
+    "alt": "Grove · Focus timer that grows a forest",
+    "image": "https://ui.oiloil.org/works/grove/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A “grow a tree while you focus” app (390×844): start focusing and a small tree grows from a seed. Leave to play on your phone partway through and the tree withers. Focus long enough and the tree is planted in your own grove, which gradually fills up day by day and week by week.\nDesign three screens: choosing a tree species and duration before starting, a focus session with the tree growing, and the completed session with one more tree in the grove and a view of this week's grove. Include a withered-tree state for giving up.\nDeliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个“专注时种树”的 App（390×844）：开始专注，一棵小树从种子长起来；中途离开去玩手机，树就会枯掉。专注够久，树种进自己的林子里，林子按天、按周慢慢长满。\n设计三屏：选树种和时长准备开始、专注进行中（树正在长）、专注结束后林子多了一棵（可回看本周的林子）。“放弃”时树枯萎也要有对应的状态。\n交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/grove/img/view-1.webp",
+      "https://ui.oiloil.org/works/grove/img/view-2.webp",
+      "https://ui.oiloil.org/works/grove/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/grove/live/index.html"
+  },
+  {
+    "slug": "copilot",
+    "href": "/en/works/copilot/",
+    "title": "Forge",
+    "description": "AI coding assistant",
+    "alt": "Forge · AI coding assistant",
+    "image": "https://ui.oiloil.org/works/copilot/img/cover.webp",
+    "model": "GPT 6 Astra",
+    "prompt_en": "Product: Forge, a desktop AI coding assistant. A conversation sits on the left, with the code being edited and the terminal on the right. Users can watch it read files, edit code, and run tests step by step.\nBuild its main interface (1440×900) with realistic data: filenames, diffs, and test output that look like a real project.\nMake the AI's work visible and memorable: steps light up one by one, diff lines appear progressively, and tests turn from red to green.\nAlso capture a state where it is waiting for the user to confirm a risky change.",
+    "prompt_zh": "产品：「Forge」，一个桌面端的 AI 编程助手：左边是对话，右边是它正在改的代码和终端，能看到它一步步读文件、改代码、跑测试。\n做它的主界面（1440×900），数据要真实（像真实项目的文件名、diff、测试输出）。\n记忆点：让 AI 干活的过程看得见，步骤一个个亮起、diff 一行行出现、测试从红变绿。\n再截一张“等待用户确认一处危险修改”的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/copilot/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/copilot/live/index.html"
+  },
+  {
+    "slug": "sneaker",
+    "href": "/en/works/sneaker/",
+    "title": "Bu",
+    "description": "Stride 3 · Running shoe product page",
+    "alt": "Bu · Stride 3 · Running shoe product page",
+    "image": "https://ui.oiloil.org/works/sneaker/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Bu, an independent running shoe brand's product page for its flagship Stride 3 shoe.\nBuild the product detail page with multi-angle product images, color and size selection, key selling points, realistic reviews, and an add-to-cart action.\nDraw the shoe in code or generate it with available tools; make it refined and believable. Make color changes memorable by updating the shoe's color immediately when a colorway is selected.",
+    "prompt_zh": "产品：「步」，一个独立跑鞋品牌的官网商品页，卖它的旗舰跑鞋 Stride 3。\n做商品详情页：多角度产品图、颜色和尺码选择、核心卖点、真实的评价、加入购物车。\n鞋子用代码画或可用工具生成，要画得精致可信。记忆点：切换配色时鞋子当场换颜色。",
+    "views": [
+      "https://ui.oiloil.org/works/sneaker/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/sneaker/live/index.html"
+  },
+  {
+    "slug": "molecule",
+    "href": "/en/works/molecule/",
+    "title": "Between Molecules",
+    "description": "Chemistry learning · Molecule building",
+    "alt": "Between Molecules · Chemistry learning · Molecule building",
+    "image": "https://ui.oiloil.org/works/molecule/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A molecule-building app for high school chemistry students (landscape tablet, 1366×1024), with a Chinese interface: drag atoms from an element tray onto the workbench, where bonds snap into place automatically. Molecules form their actual spatial geometry and can be rotated, with ball-and-stick and space-filling models, alongside the molecular formula, name, and bond angles.\nThe core is the whole molecule springing from a flat arrangement into its actual three-dimensional shape as the last atom connects: water bends to 104.5° and methane opens into a regular tetrahedron. Render with three.js, with attractive materials and lighting rather than a textbook illustration. Keep explanatory text minimal and let the interactions communicate the principles.\nDesign three states: a building task with an empty workbench; building in progress with bond-snapping feedback; and rotating the completed molecule. Capture at 1366×1024, DPR=2, naming the images `shots/app.png`, `app-2.png`, and so on. No `screens.html` is needed.",
+    "prompt_zh": "一个给高中生学化学的分子搭建 App（平板横屏 1366×1024），界面用中文：从元素栏把原子拖上工作台，化学键自动吸附；分子按真实的空间构型成形，可以转动查看，切换球棍模型和比例模型，旁边是分子式、名称和键角。\n最后一个原子接上时，整个分子从平面一下弹成真实的立体形状（水分子弯成 104.5°，甲烷撑成正四面体），这是这件作品的核心。用 three.js 渲染，材质和光照要好看，不要做成教科书插图。少放说明文字，让操作本身把道理讲清楚。\n设计三个状态：一道搭建任务和空工作台、正在搭建（键吸附时的反馈）、分子成形后转动查看。截图按 1366×1024、DPR=2，命名 `shots/app.png`、`app-2.png` 这样排下去，不需要 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/molecule/img/view-1.webp",
+      "https://ui.oiloil.org/works/molecule/img/view-2.webp",
+      "https://ui.oiloil.org/works/molecule/img/view-3.webp",
+      "https://ui.oiloil.org/works/molecule/img/view-4.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/molecule/live/index.html"
+  },
+  {
+    "slug": "relay",
+    "href": "/en/works/relay/",
+    "title": "Routewise",
+    "description": "AI API platform website",
+    "alt": "Routewise · AI API platform website",
+    "image": "https://ui.oiloil.org/works/relay/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The website for an AI model API aggregation platform similar to OpenRouter (starting at 1440×900, responsive down to 390 pixels wide), with a Chinese interface, for developers in China: one API key gives access to hundreds of models from dozens of providers, with unified billing, automatic failover, and routing by price or latency. Provider and model names should be fictional but believable.\nCreativity is the first priority. Do not make another AI website with a dark gradient and a code block. The core is making routing visible: a request leaves your code and is routed to a provider; if that provider fails, it switches to a backup automatically, with price and latency immediately visible. The model marketplace supports filtering and comparison by provider, context length, and price.\nDesign three states: the first screen; filtering and comparing in the model marketplace; and the routing and failover process for a request.",
+    "prompt_zh": "一个类似 OpenRouter 的 AI 模型 API 中转平台官网（1440×900 起，响应式到 390 宽），界面用中文，面向国内开发者：一个 API Key 接入几十家厂商的几百个模型，统一计费、自动容灾、按价格或延迟路由。厂商和模型名虚构，但要写得像真的。\n有创意是第一要求，不要做成又一个“深色渐变加代码块”的 AI 官网。核心是把路由讲得看得见：一个请求从你的代码出发，被路由到某家厂商；那家出故障时自动切到备用，价格和延迟当场可见。模型市场能按厂商、上下文长度、价格筛选和比较。\n设计三个状态：首屏、模型市场的筛选与比较、一次请求的路由与容灾过程。",
+    "views": [
+      "https://ui.oiloil.org/works/relay/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/relay/live/index.html"
+  },
+  {
+    "slug": "letter",
+    "href": "/en/works/letter/",
+    "title": "Letters from Afar",
+    "description": "Slow social postcard app",
+    "alt": "Letters from Afar · Slow social postcard app",
+    "image": "https://ui.oiloil.org/works/letter/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个慢社交 App：给远方的笔友写明信片，信会按真实距离在路上走几天才送到。做三个关键屏。App 屏幕按 390×844。",
+    "views": [
+      "https://ui.oiloil.org/works/letter/img/view-1.webp",
+      "https://ui.oiloil.org/works/letter/img/view-2.webp",
+      "https://ui.oiloil.org/works/letter/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/letter/live/index.html"
+  },
+  {
+    "slug": "roast",
+    "href": "/en/works/roast/",
+    "title": "North Latitude Roasters",
+    "description": "Specialty coffee subscription website",
+    "alt": "North Latitude Roasters · Specialty coffee subscription website",
+    "image": "https://ui.oiloil.org/works/roast/img/cover.webp",
+    "model": "GPT 6 Astra",
+    "prompt_en": "Product: North Latitude Roasters, a small roastery that ships seasonal coffee beans through a monthly subscription.\nBuild its homepage with seasonal beans and their origins, tasting notes, and roast levels; subscription plans; the roasting and shipping schedule; pricing; and a subscribe button.\nGive it the quality of a leading consumer brand website: strong typography, restrained colors, and carefully considered details. Draw product images such as bean bags and coffee beans in code, or generate them with available tools.\nMake one interaction memorable: for example, recommended beans update immediately when users choose flavor preferences.",
+    "prompt_zh": "产品：「北纬 Roasters」，一家小型烘焙坊，按月订阅寄送当季咖啡豆。\n做官网首页：当季豆子（产地、风味、烘焙度）、订阅方案、烘焙和寄送的节奏、价格与订阅按钮。\n像一线消费品牌官网那样有质感：好的排版、克制的颜色、讲究的细节。产品图用代码画（豆袋、咖啡豆）或可用工具生成。\n记忆点放在一个能互动的地方，例如选择风味偏好时推荐的豆子当场变化。",
+    "views": [
+      "https://ui.oiloil.org/works/roast/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/roast/live/index.html"
+  },
+  {
+    "slug": "watch",
+    "href": "/en/works/watch/",
+    "title": "DIAL",
+    "description": "Smartwatch face store",
+    "alt": "DIAL · Smartwatch face store",
+    "image": "https://ui.oiloil.org/works/watch/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个智能手表配套 App 里的表盘商店：浏览表盘、自定义表盘、同步到手表。做三个关键屏。App 屏幕按 390×844。",
+    "views": [
+      "https://ui.oiloil.org/works/watch/img/view-1.webp",
+      "https://ui.oiloil.org/works/watch/img/view-2.webp",
+      "https://ui.oiloil.org/works/watch/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/watch/live/index.html"
+  },
+  {
+    "slug": "brew",
+    "href": "/en/works/brew/",
+    "title": "Cup Line",
+    "description": "Coffee machine brewing component",
+    "alt": "Cup Line · Coffee machine brewing component",
+    "image": "https://ui.oiloil.org/works/brew/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Help me design a brewing component in a home coffee machine app: see the current stage of this cup on the phone, adjust its strength and output volume, and know when it is ready to drink. I want to refine this single component as far as possible and make it different from everything on the market. It must actually run and be interactive. Put several sketches on a comparison page for me to review, then pick the one you think is best and refine it fully.",
+    "prompt_zh": "帮我设计一个家用咖啡机 App 里的萃取组件：在手机上看这杯咖啡做到哪一步了、调这一杯的浓度和出液量、知道什么时候能喝。我想把这一个组件打磨到极致，做到和市面上的都不一样，要能真实运行、能操作。几张草图放到对比页里给我看，然后你先挑你觉得最好的那张，直接打磨到位。",
+    "views": [
+      "https://ui.oiloil.org/works/brew/img/view-1.webp",
+      "https://ui.oiloil.org/works/brew/img/view-2.webp",
+      "https://ui.oiloil.org/works/brew/img/view-3.webp",
+      "https://ui.oiloil.org/works/brew/img/view-4.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/brew/live/index.html"
+  },
+  {
+    "slug": "trail",
+    "href": "/en/works/trail/",
+    "title": "Ridge Trail",
+    "description": "Hiking app",
+    "alt": "Ridge Trail · Hiking app",
+    "image": "https://ui.oiloil.org/works/trail/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Ridge Trail, a hiking route app for finding routes, checking elevation and difficulty, and getting live navigation once the hike starts.\nDesign three key screens: route details with a map, elevation profile, duration, and supply points; the hike in progress with distance to the next junction and remaining ascent; and a completed hike record.\nDraw maps and terrain in code instead of using real map screenshots. Make the elevation or route presentation memorable.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「山径」，一个徒步路线 App：找路线、看海拔和难度、出发后实时导航。\n设计 3 个关键屏：路线详情（地图、海拔剖面、用时、补给点）、正在走（离下一个岔路口多远、还剩多少爬升）、走完后的记录。\n地图和地形用代码画，不用真实地图截图。记忆点放在海拔或路线的呈现上。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/trail/img/view-1.webp",
+      "https://ui.oiloil.org/works/trail/img/view-2.webp",
+      "https://ui.oiloil.org/works/trail/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/trail/live/index.html"
+  },
+  {
+    "slug": "maker",
+    "href": "/en/works/maker/",
+    "title": "Lin Yu’s Workshop",
+    "description": "Indie developer personal website",
+    "alt": "Lin Yu’s Workshop · Indie developer personal website",
+    "image": "https://ui.oiloil.org/works/maker/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一位独立开发者的个人主页：他做的几款小产品、正在做的事、写过的文章。做首页。",
+    "views": [
+      "https://ui.oiloil.org/works/maker/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/maker/live/index.html"
+  },
+  {
+    "slug": "claw",
+    "href": "/en/works/claw/",
+    "title": "Gotcha!",
+    "description": "Online claw machine",
+    "alt": "Gotcha! · Online claw machine",
+    "image": "https://ui.oiloil.org/works/claw/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "An online claw machine app (390×844): move the claw with a joystick or directional buttons, then press grab. The claw descends, closes, and lifts. The toy may slip out or be carried to the exit, and a successful catch goes into the user's collection cabinet.\nThe claw's sway and closing force, the toy slipping out, and its fall into the exit are central to the feel of this piece.\nDesign three screens: aiming, the claw lifting with the outcome still uncertain, and the collection cabinet after a successful catch. Include a failed catch where the toy slips out. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个线上抓娃娃机 App（390×844）：摇杆或方向按钮移动爪子，按下抓取，爪子下降、合拢、提起，娃娃可能滑落也可能被送到出口，抓中后进入自己的收藏柜。\n爪子的晃动、合拢力度、娃娃的滑落与掉进出口，是这件作品的手感核心。\n设计三屏：对准位置、爪子提起途中（成败未定）、抓中后的收藏柜。另有一个没抓住、娃娃滑落的状态。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/claw/img/view-1.webp",
+      "https://ui.oiloil.org/works/claw/img/view-2.webp",
+      "https://ui.oiloil.org/works/claw/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/claw/live/index.html"
+  },
+  {
+    "slug": "checkout",
+    "href": "/en/works/checkout/",
+    "title": "Pinch Checkout",
+    "description": "E-commerce checkout module",
+    "alt": "Pinch Checkout · E-commerce checkout module",
+    "image": "https://ui.oiloil.org/works/checkout/img/cover.webp",
+    "model": "Claude Sonnet 5.5",
+    "prompt_en": "A checkout module for an independent designer brand's online store (desktop 1440×900, checkout panel centered): shopping list, shipping address, payment method, and order confirmation.\nEach step should flow smoothly, with clear states for every input: being filled in, invalid, and completed. Order completion should feel joyful, beyond merely showing a checkmark.\nCapture three states: filling in the form, a validation error, and a successful order.",
+    "prompt_zh": "一个独立设计师品牌网店的结账模块（桌面 1440×900，结账面板居中）：购物清单、收货地址、支付方式、下单成功。\n每一步都顺、每个输入都有清楚的状态（填写中、出错、完成）。下单成功那一下要让人开心，而不是弹一个对勾。\n截填写中、校验出错、下单成功三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/checkout/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/checkout/live/index.html"
+  },
+  {
+    "slug": "calendar",
+    "href": "/en/works/calendar/",
+    "title": "Cadence",
+    "description": "Calendar app",
+    "alt": "Cadence · Calendar app",
+    "image": "https://ui.oiloil.org/works/calendar/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Cadence, a calendar for freelancers that brings meetings, focus time, and client deadlines together.\nDesign three key screens: today with events and free slots on a timeline; this week with busy and free days easy to spot; and creating an event from a single sentence, such as “Review the draft with Lin Jia for an hour on Thursday afternoon.”\nMake a user action memorable, such as dragging an event block to reschedule it.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Cadence」，一个给自由职业者用的日历：把会议、专注时间和接单截止日期排在一起。\n设计 3 个关键屏：今天（时间轴上的日程和空档）、本周（一眼看出哪天太满、哪天有空）、新建日程（用一句话就能建好，例如“周四下午和林嘉对稿一小时”）。\n记忆点放在一个用户动作上，例如拖动日程块改时间。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/calendar/img/view-1.webp",
+      "https://ui.oiloil.org/works/calendar/img/view-2.webp",
+      "https://ui.oiloil.org/works/calendar/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/calendar/live/index.html"
+  },
+  {
+    "slug": "lims",
+    "href": "/en/works/lims/",
+    "title": "GridStore",
+    "description": "Laboratory sample management system",
+    "alt": "GridStore · Laboratory sample management system",
+    "image": "https://ui.oiloil.org/works/lims/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个给生物医药实验室用的样本管理系统：样本入库、冷冻存放位置、检测流程和审计记录。做主界面。",
+    "views": [
+      "https://ui.oiloil.org/works/lims/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/lims/live/index.html"
+  },
+  {
+    "slug": "reader",
+    "href": "/en/works/reader/",
+    "title": "Margins",
+    "description": "Tablet e-reader",
+    "alt": "Margins · Tablet e-reader",
+    "image": "https://ui.oiloil.org/works/reader/img/cover.webp",
+    "model": "Claude Opus 5.5",
+    "prompt_en": "The tablet reading interface of a long-form reading app, designed in portrait at 1024×1366 and placed on a presentation canvas: body text, highlighting, annotations, a table of contents, and reading progress.\nFocus on Chinese long-form typography: carefully handle font size, line height, paragraph spacing, and punctuation spacing so ten minutes of reading feels comfortable. Users can write a short annotation after highlighting text.\nCapture three states: reading, highlighting and writing an annotation, and an open table of contents.",
+    "prompt_zh": "一个长篇阅读 App 在平板上的阅读界面（按 1024×1366 竖屏设计，放在展示画布中）：正文排版、划线、批注、目录、阅读进度。\n中文长文排版是重点：字号、行距、段距、标点挤压都要讲究，读十分钟不累。划线后可以写一句批注。\n截阅读中、划线并写批注、打开目录三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/reader/img/view-1.webp",
+      "https://ui.oiloil.org/works/reader/img/view-2.webp",
+      "https://ui.oiloil.org/works/reader/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/reader/live/index.html"
+  },
+  {
+    "slug": "silver",
+    "href": "/en/works/silver/",
+    "title": "MORROW",
+    "description": "Arc Band · Independent silver jewelry website",
+    "alt": "MORROW · Arc Band · Independent silver jewelry website",
+    "image": "https://ui.oiloil.org/works/silver/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个独立银饰工作室的品牌网站，卖手工戒指和吊坠，支持刻字。做一款戒指的详情页。",
+    "views": [
+      "https://ui.oiloil.org/works/silver/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/silver/live/index.html"
+  },
+  {
+    "slug": "camera",
+    "href": "/en/works/camera/",
+    "title": "Corner",
+    "description": "Film Camera · Film simulation camera app",
+    "alt": "Corner · Film Camera · Film simulation camera app",
+    "image": "https://ui.oiloil.org/works/camera/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The shooting interface of a film simulation camera app (390×844): a viewfinder, film stock selection, exposure dial, and shutter.\nUse code or a generated image to create a street scene in the viewfinder. Changing film stock should immediately change its tones. Give the shutter crisp feedback, and let the photo settle into the album corner as though it has just been developed.\nDesign three states: the viewfinder, changing film stock, and just after taking a photo. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "一个胶片模拟相机 App 的拍摄界面（390×844）：取景画面、胶片型号切换、曝光拨盘、快门。\n取景画面用代码或生成的图片做一张街景，切换胶片型号时色调当场变化。快门按下有干脆的反馈，拍完的照片像冲洗出来一样落进相册角落。\n设计取景界面、切换胶片时、刚拍完三个状态。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/camera/img/view-1.webp",
+      "https://ui.oiloil.org/works/camera/img/view-2.webp",
+      "https://ui.oiloil.org/works/camera/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/camera/live/index.html"
+  },
+  {
+    "slug": "folio",
+    "href": "/en/works/folio/",
+    "title": "Lin Xiaoman",
+    "description": "Illustrator portfolio",
+    "alt": "Lin Xiaoman · Illustrator portfolio",
+    "image": "https://ui.oiloil.org/works/folio/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一位独立绘本插画师的个人网站：作品集、正在连载的绘本、合作邀约。做首页和一个作品详情页。",
+    "views": [
+      "https://ui.oiloil.org/works/folio/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/folio/live/index.html"
+  },
+  {
+    "slug": "ledger",
+    "href": "/en/works/ledger/",
+    "title": "Penny",
+    "description": "Budgeting app",
+    "alt": "Penny · Budgeting app",
+    "image": "https://ui.oiloil.org/works/ledger/img/cover.webp",
+    "model": "GPT 6 Luna",
+    "prompt_en": "Product: Penny, a spending and budgeting app for young people in their first few years of work. It automatically recognizes bank card spending, sets monthly budgets by category, and warns when a category is close to its limit.\nThere are many distinctive products in this category. First understand what makes each recognizable, then develop your own approach.\nDesign three key screens: this month's overview with the amount left to spend and progress by category; transaction details with category editing; and a monthly review. Make a user action or the presentation of a number memorable.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Penny」，给刚工作几年的年轻人用的记账和预算 App：自动识别银行卡消费、按类别做月度预算、提醒快超支的类别。\n品类里风格鲜明的产品有很多，先想清楚它们各自靠什么被认出来，再做出你自己的一套。\n设计 3 个关键屏：本月概览（还能花多少、各类别预算进度）、一笔消费的详情与分类修改、月度回顾。记忆点放在一个用户动作或一个数字的呈现上。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/ledger/img/view-1.webp",
+      "https://ui.oiloil.org/works/ledger/img/view-2.webp",
+      "https://ui.oiloil.org/works/ledger/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/ledger/live/index.html"
+  },
+  {
+    "slug": "contract",
+    "href": "/en/works/contract/",
+    "title": "MOQI",
+    "description": "AI contract review website",
+    "alt": "MOQI · AI contract review website",
+    "image": "https://ui.oiloil.org/works/contract/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个给企业法务团队用的 AI 合同审阅产品的官网。做首页。",
+    "views": [
+      "https://ui.oiloil.org/works/contract/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/contract/live/index.html"
+  },
+  {
+    "slug": "robot",
+    "href": "/en/works/robot/",
+    "title": "Island Coding",
+    "description": "Coding adventures for children",
+    "alt": "Island Coding · Coding adventures for children",
+    "image": "https://ui.oiloil.org/works/robot/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A coding puzzle app for children aged 6–10 (landscape tablet, 1366×1024), with a Chinese interface and as little text as possible: command blocks on the left for moving forward, turning left or right, jumping, picking up objects, and repeating a set number of times; an isometric island level on the right starring a small robot.\nAfter Run is pressed, the robot executes the program one tile at a time while the current block is highlighted. It tumbles when it hits a wall; at the finish, a treasure chest opens and stars fly into the progress indicator. Generate the character, scenery, and props as a coordinated set after writing an asset style guide. Give the robot three or four expressions or poses.\nDesign three states: the start of a level with an empty block area; an assembled program running; and level-completion results. Also capture a collision failure. Capture at 1366×1024, DPR=2, naming the images `shots/app.png`, `app-2.png`, and so on. No `screens.html` is needed.",
+    "prompt_zh": "一个给 6–10 岁孩子学编程的闯关 App（平板横屏 1366×1024），界面用中文，字越少越好：左边是指令积木（前进、左转、右转、跳、拾取、重复几次），右边是一座等距视角的小岛关卡，主角是一个小机器人。\n按下运行后，机器人一格一格执行，当前那块积木同步高亮；走错撞墙会摔个跟头，走到终点打开宝箱、星星飞进进度。主角、场景、道具用生图做，先写素材风格说明再成套出图，主角要有三四种表情或姿态。\n设计三个状态：关卡开始和空积木区、拼好程序正在运行、通关结算；另截一张撞墙失败。截图按 1366×1024、DPR=2，命名 `shots/app.png`、`app-2.png` 这样排下去，不需要 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/robot/img/view-1.webp",
+      "https://ui.oiloil.org/works/robot/img/view-2.webp",
+      "https://ui.oiloil.org/works/robot/img/view-3.webp",
+      "https://ui.oiloil.org/works/robot/img/view-4.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/robot/live/index.html"
+  },
+  {
+    "slug": "weather",
+    "href": "/en/works/weather/",
+    "title": "Sky",
+    "description": "Weather widget",
+    "alt": "Sky · Weather widget",
+    "image": "https://ui.oiloil.org/works/weather/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A set of phone home screen widgets in small, medium, and large sizes, plus a detail card opened from a widget: current weather, the next few hours, and tomorrow.\nLet the weather happen inside the interface: rain falls in the widget when it is raining, and colors follow the sky at dusk. Information must be readable at a glance; do not sacrifice temperature and time for effects.\nArrange all three sizes together on a presentation canvas. Capture sunny, rainy, and evening states.",
+    "prompt_zh": "一组手机桌面小组件（小、中、大三个尺寸）和一张点开后的详情卡：现在的天气、接下来几小时、明天。\n让天气当场发生：下雨时组件里在下雨，傍晚时颜色跟着天色走。信息要一眼可读，不能为了效果牺牲温度和时间。\n在展示画布上把三个尺寸排在一起，截晴天、雨天、傍晚三个状态。",
+    "views": [
+      "https://ui.oiloil.org/works/weather/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/weather/live/index.html"
+  },
+  {
+    "slug": "wrapped-vinyl",
+    "href": "/en/works/wrapped-vinyl/",
+    "title": "Tempo",
+    "description": "A Year in Dots · Year in music",
+    "alt": "Tempo · A Year in Dots · Year in music",
+    "image": "https://ui.oiloil.org/works/wrapped-vinyl/img/cover.webp",
+    "model": "DeepSeek 4.1 Flash",
+    "prompt_en": "The “Your 2026 Wrapped” report in the Tempo music app. Users tap through it page by page at the end of the year, then share it on social media.\n\nStyle: bold, rhythmic, and playful, with large blocks of color, oversized type, strong typography, and a different palette on each page while keeping the whole set cohesive. It should feel like a magazine in motion.\n\nDesign three pages as vertical stories with a progress bar at the top:\n- Opening: you listened for 48,213 minutes this year.\n- Your favorite artist: the artist's name, how many times you listened, and your percentile among their listeners. Use a fictional artist.\n- Your music personality: a personality label based on listening habits and a few lines describing it.\nMake the entrance animations for numbers and text memorable, and turn listening time into a quantity people can see. Choose an attractive frame for screenshots.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Tempo」音乐 App 的“你的 2026 年度报告”，用户在年底会一页一页点着看，然后分享到社交网络。\n\n风格：大胆、有节奏感、好玩：大色块、超大的字、强烈的排版、每一页一种配色但整套统一。像一份会动的杂志。\n\n设计 3 页（竖屏故事形式，顶部有进度条）：\n- 开场：你今年听了 48,213 分钟。\n- 你最爱的歌手：歌手名字、听了多少次、你是前百分之几的听众（歌手是虚构的）。\n- 你的音乐性格：根据听歌习惯得出的一个性格标签和几句描述。\n记忆点：数字和文字的出场动效，以及把“听歌时长”画成看得见的量。截图时选好看的一帧。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/wrapped-vinyl/img/view-1.webp",
+      "https://ui.oiloil.org/works/wrapped-vinyl/img/view-2.webp",
+      "https://ui.oiloil.org/works/wrapped-vinyl/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/wrapped-vinyl/live/index.html"
+  },
+  {
+    "slug": "editor",
+    "href": "/en/works/editor/",
+    "title": "Cut",
+    "description": "Video editor",
+    "alt": "Cut · Video editor",
+    "image": "https://ui.oiloil.org/works/editor/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Cut, a desktop video editor for short-form creators with a media library, preview, multitrack timeline, and subtitles.\nBuild its main interface (1440×900) while editing a 58-second video about a local venue, with video, voiceover, music, and subtitle tracks on the timeline.\nDraw footage in code or generate it with available tools; do not use copyrighted film or TV screenshots. Make a timeline interaction memorable, such as updating the preview immediately while dragging an edit point.\nAlso capture the state after subtitles have been generated automatically.",
+    "prompt_zh": "产品：「Cut」，一个给短视频创作者用的桌面剪辑工具：素材库、预览、多轨时间线、字幕。\n做它的主界面（1440×900）：正在剪一条 58 秒的探店视频，时间线上有视频、配音、音乐和字幕轨。\n画面用代码画或可用工具生成，不用有版权的影视截图。记忆点放在时间线的操作上，例如拖动剪辑点时预览当场跟着变。\n再截一张自动生成字幕后的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/editor/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/editor/live/index.html"
+  },
+  {
+    "slug": "keeb",
+    "href": "/en/works/keeb/",
+    "title": "KEEB",
+    "description": "Key Order · Mechanical keyboard configurator",
+    "alt": "KEEB · Key Order · Mechanical keyboard configurator",
+    "image": "https://ui.oiloil.org/works/keeb/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个机械键盘品牌的官网，用户可以在线选外壳、轴体、键帽，定制自己的键盘。做在线配置页面。",
+    "views": [
+      "https://ui.oiloil.org/works/keeb/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/keeb/live/index.html"
+  },
+  {
+    "slug": "pulse",
+    "href": "/en/works/pulse/",
+    "title": "Pulse",
+    "description": "Fitness and recovery app",
+    "alt": "Pulse · Fitness and recovery app",
+    "image": "https://ui.oiloil.org/works/pulse/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Pulse, a running and recovery tracking app that connects to a watch, for runners who train seriously.\n\nStyle: data is the main visual. Use oversized numbers, strong contrast, a dark background, and one energetic signal color. Charts should be refined, with numbers represented as visible quantities through rings, bars, and heatmap cells.\n\nDesign three key screens:\n- Today: a recovery score such as 78, sleep, heart rate variability, and a recommended training intensity for the day.\n- Run summary: distance, pace, heart rate zones, a realistic route drawn in SVG, and split paces.\n- This week's training load: seven days of load and recovery, making overtraining apparent at a glance.\nMake the recovery score presentation memorable enough that users want to check it every morning.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Pulse」，一个跑步和恢复追踪 App，连接手表，给认真训练的跑者用。\n\n风格：数据就是主视觉。超大的数字、强烈的对比、深色背景配一种有能量的信号色；图表要精致，数字画成看得见的量（环、条、热力格子）。\n\n设计 3 个关键屏：\n- 今天：恢复分数（例如 78）、睡眠、心率变异性，给出今天建议的训练强度。\n- 一次跑步的总结：距离、配速、心率区间、路线（用 SVG 画一条真实感的路线）、分段配速。\n- 本周训练负荷：七天的负荷和恢复，是否过度训练一眼看出。\n记忆点：恢复分数的呈现方式，要让人每天早上都想打开看一眼。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/pulse/img/view-1.webp",
+      "https://ui.oiloil.org/works/pulse/img/view-2.webp",
+      "https://ui.oiloil.org/works/pulse/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/pulse/live/index.html"
+  },
+  {
+    "slug": "cards",
+    "href": "/en/works/cards/",
+    "title": "Linked Cards",
+    "description": "Linked card notes",
+    "alt": "Linked Cards · Linked card notes",
+    "image": "https://ui.oiloil.org/works/cards/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个卡片式笔记软件，给做研究和写作的人用：每条想法是一张卡片，卡片之间可以互相链接。做主界面。",
+    "views": [
+      "https://ui.oiloil.org/works/cards/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/cards/live/index.html"
+  },
+  {
+    "slug": "recipe",
+    "href": "/en/works/recipe/",
+    "title": "Hearth",
+    "description": "Kitchen recipe app for tablets",
+    "alt": "Hearth · Kitchen recipe app for tablets",
+    "image": "https://ui.oiloil.org/works/recipe/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Hearth, a cooking app that sits on the kitchen counter and can be used even with oily hands.\nDesign three key screens in portrait at 1024×1366: recipe details with ingredient quantities adjusted for servings; cooking mode with one step per screen, large text, and timers; and a record of the finished dish.\nMake the timing and next-step prompts in cooking mode memorable and legible from two meters away.\nDeliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「灶」，一个放在厨房台面上的做菜 App，手上沾着油也能用。\n设计 3 个关键屏（按 1024×1366 竖屏）：菜谱详情（食材按人数换算）、烹饪模式（一步一屏、大字、计时器）、做完后的记录。\n记忆点：烹饪模式里的计时和下一步提示，隔着两米也看得清。\n交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/recipe/img/view-1.webp",
+      "https://ui.oiloil.org/works/recipe/img/view-2.webp",
+      "https://ui.oiloil.org/works/recipe/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/recipe/live/index.html"
+  },
+  {
+    "slug": "knot",
+    "href": "/en/works/knot/",
+    "title": "knot Bracelet Studio",
+    "description": "Custom handmade bracelets",
+    "alt": "knot Bracelet Studio · Custom handmade bracelets",
+    "image": "https://ui.oiloil.org/works/knot/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一家卖手作编绳手链的小店，支持在线定制颜色、编法、串珠和尺寸。做在线定制页面。",
+    "views": [
+      "https://ui.oiloil.org/works/knot/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/knot/live/index.html"
+  },
+  {
+    "slug": "sonar-desk",
+    "href": "/en/works/sonar-desk/",
+    "title": "Sonar",
+    "description": "Signal Room · Team messaging",
+    "alt": "Sonar · Signal Room · Team messaging",
+    "image": "https://ui.oiloil.org/works/sonar-desk/img/cover.webp",
+    "model": "DeepSeek 4.1 Flash",
+    "prompt_en": "A desktop messaging app for companies with 30–300 people (1440×900): channels, groups, and direct messages on the left, and the ongoing conversation in the middle. Messages include text, images, files, code snippets, polls, and emoji reactions. Use a Chinese interface.\nThe sense of immediacy is the heart of this piece: sending a message, several colleagues typing at once, opening a thread on one message, and other people's replies and reactions appearing in real time should all feel smooth and have weight. Do not turn it into an email client or a task board.\nDesign three states: everyday conversation in a busy channel; a thread opened on one message; mentioning a colleague in the input box and dropping in a file, ready to send.",
+    "prompt_zh": "一个给 30–300 人公司用的即时通讯桌面端（1440×900）：左边是频道、群组和私聊，中间是正在进行的对话。消息里有文字、图片、文件、代码片段、投票和表情回应。界面用中文。\n聊天的即时感是这件作品的核心：发出一条消息、几个同事同时在输入、对某一条展开话题回复、别人的回复和表情实时冒出来，都要顺手、有分量。不要做成邮件客户端或任务看板。\n设计三个状态：一个热闹频道里的日常对话；在某条消息上展开话题回复；在输入框里 @ 同事、拖进文件后准备发送。",
+    "views": [
+      "https://ui.oiloil.org/works/sonar-desk/img/view-1.webp",
+      "https://ui.oiloil.org/works/sonar-desk/img/view-2.webp",
+      "https://ui.oiloil.org/works/sonar-desk/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/sonar-desk/live/index.html"
+  },
+  {
+    "slug": "ride",
+    "href": "/en/works/ride/",
+    "title": "Pickup",
+    "description": "Ride-hailing app",
+    "alt": "Pickup · Ride-hailing app",
+    "image": "https://ui.oiloil.org/works/ride/img/cover.webp",
+    "model": "Claude Sonnet 5.5",
+    "prompt_en": "The screen after booking a ride in a ride-hailing app (390×844): an approaching car on a map, driver and vehicle details, estimated arrival, and trip progress after pickup.\nDraw the road network and route in code instead of using real map screenshots. Waiting for the car is the most anxious moment, so make its distance immediately apparent.\nCapture three states: waiting, car arrived, and trip in progress. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "打车 App 里下单之后的界面（390×844）：地图上车辆正在靠近、司机和车辆信息、预计到达、上车后的行程进度。\n地图用代码画（路网、路线），不用真实地图截图。最焦虑的时刻是等车，让“车还有多远”一眼可见。\n截等车、车到了、行程中三个状态。交付 `index.html` 和三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/ride/img/view-1.webp",
+      "https://ui.oiloil.org/works/ride/img/view-2.webp",
+      "https://ui.oiloil.org/works/ride/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/ride/live/index.html"
+  },
+  {
+    "slug": "freight",
+    "href": "/en/works/freight/",
+    "title": "DOVO",
+    "description": "Cross-border logistics SaaS website",
+    "alt": "DOVO · Cross-border logistics SaaS website",
+    "image": "https://ui.oiloil.org/works/freight/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个给中小外贸公司用的跨境物流 SaaS（订舱、报价、追踪货物、清关文件）的官网。做首页。",
+    "views": [
+      "https://ui.oiloil.org/works/freight/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/freight/live/index.html"
+  },
+  {
+    "slug": "tracker",
+    "href": "/en/works/tracker/",
+    "title": "Relay",
+    "description": "Project and sprint management",
+    "alt": "Relay · Project and sprint management",
+    "image": "https://ui.oiloil.org/works/tracker/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Relay, a task and sprint management tool for software teams of 20–200 people.\n\nBuild its main workspace (1440×900):\n- Left navigation for teams, projects, my tasks, and inbox. In the center, show the current sprint as a task list or board. Tasks have an ID, title, status, priority, assignee avatar, and estimate. Use plenty of realistic data: twenty to thirty tasks with names that sound like actual software development work.\n- Feel: dark, refined, and dense, like a professional tool used eight hours a day. Keep rows compact, keyboard shortcuts visible throughout, and status icons consistent and recognizable.\n- Make the keyboard command palette memorable. A shortcut opens it, and a few typed characters let users navigate, change a status, or assign someone. Capture it open with a query being typed.\n- Also capture a task detail sidebar open.",
+    "prompt_zh": "产品：「Relay」，一个给 20–200 人软件团队用的任务和迭代管理工具。\n\n做它的主工作界面（1440×900）：\n- 左侧导航（团队、项目、我的任务、收件箱），中间是当前迭代的任务列表或看板，任务有编号、标题、状态、优先级、负责人头像、预计时间。数据要多、要真实（二三十条任务，名字像真实的软件开发任务）。\n- 气质：深色、精致、高密度，像每天用 8 小时的专业工具。行高紧凑、键盘快捷键随处可见、状态图标统一且有辨识度。\n- 记忆点：按下快捷键弹出的命令面板，输入几个字就能跳转、改状态、指派人。截一张命令面板打开、正在输入的状态。\n- 再截一张任务详情侧栏打开的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/tracker/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/tracker/live/index.html"
+  },
+  {
+    "slug": "oil-git",
+    "href": "/en/works/oil-git/",
+    "title": "Oil Git",
+    "description": "Git visualization tool website",
+    "alt": "Oil Git · Git visualization tool website",
+    "image": "https://ui.oiloil.org/works/oil-git/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Build a landing page for this product so we can first review the direction.\n\nChoose B, “A clear desktop reader.” This version is the best, but the wording needs to communicate clearly. Change the description to “Git visualization viewer” and keep iterating from this version.\n\nChange the title to Oil Git, refine the animations, and give them a stronger sense of breathing. Do not emphasize the product's release stage.",
+    "prompt_zh": "做一个这个产品的落地页，先看看方向。\n\n选 B · 一本清楚的桌面读本。这版最好，但文字传达要写清楚，描述文案改为“Git 可视化查看工具”。基于这一版继续迭代。\n\n标题改为 Oil Git，优化动画，呼吸感再强一点。不要强调产品是哪个发布阶段。",
+    "views": [
+      "https://ui.oiloil.org/works/oil-git/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/oil-git/live/index.html"
+  },
+  {
+    "slug": "lingo",
+    "href": "/en/works/lingo/",
+    "title": "Pip",
+    "description": "Language learning app",
+    "alt": "Pip · Language learning app",
+    "image": "https://ui.oiloil.org/works/lingo/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Pip, an app that teaches English through mini-games for working adults, ten minutes a day. Its mascot is an expressive little bird, drawn in SVG with three to four expressions.\n\nGive it a strong personality like Duolingo: saturated brand colors, chunky dimensional buttons that sink when pressed, rounded heavy type, and exaggerated but clear feedback. Develop your own approach rather than copying Duolingo's green and owl.\n\nDesign three key screens:\n- Learning path: a winding route of levels with completed, current, and locked levels clearly distinguished. Show a streak, experience points, and lives at the top.\n- Question: a word selection fill-in-the-blank or listen-and-choose-an-image question, showing the feedback after a correct answer.\n- Lesson complete: a results page with experience points, streak, accuracy, and the mascot celebrating.\nMake a correct answer memorable: the button, animations that suggest sound, and the mascot's reaction should make users want another question. This should be apparent in screenshots.\nDesign the app screens at 390×844. Deliver `index.html` and `screens.html` with the three screens side by side.",
+    "prompt_zh": "产品：「Pip」，一个用小游戏学英语的 App，面向上班族，每天 10 分钟。有一个吉祥物：一只会做表情的小鸟（用 SVG 画，有 3–4 种表情）。\n\n风格要像多邻国那样有强烈的个性：高饱和的品牌色、厚实有立体感的按钮（按下去会陷下去）、圆润粗壮的字体、夸张但清楚的反馈。但不要照抄多邻国的绿色和猫头鹰，做出自己的一套。\n\n设计 3 个关键屏：\n- 学习路径：一条弯曲的关卡路线，已完成、当前、未解锁的关卡一眼能分清，顶部有连续天数、经验值、生命。\n- 答题：一道选词填空或听音选图的题，展示答对后的反馈状态。\n- 完成一课：结算页，经验值、连续天数、正确率，吉祥物在庆祝。\n记忆点：答对那一下，按钮、音效感的动效、吉祥物反应要让人想再来一题。截图里要能看出来。\nApp 屏幕按 390×844 设计，交付 `index.html` 和把三屏并排的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/lingo/img/view-1.webp",
+      "https://ui.oiloil.org/works/lingo/img/view-2.webp",
+      "https://ui.oiloil.org/works/lingo/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/lingo/live/index.html"
+  },
+  {
+    "slug": "anime",
+    "href": "/en/works/anime/",
+    "title": "The Last Train of Summer",
+    "description": "Original anime series website",
+    "alt": "The Last Train of Summer · Original anime series website",
+    "image": "https://ui.oiloil.org/works/anime/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "The official promotional website for an original Japanese anime series: story, characters, promotional video, broadcast schedule, and production team. Build the homepage. The title, characters, and key visual must all be original; do not use characters or logos from existing works.",
+    "prompt_zh": "一部原创日本动画新番的官方宣传网站：故事、角色、PV、放送时间、制作阵容。做首页。作品名、角色和主视觉都要原创，不使用任何现有作品的角色和标志。",
+    "views": [
+      "https://ui.oiloil.org/works/anime/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/anime/live/index.html"
+  },
+  {
+    "slug": "home",
+    "href": "/en/works/home/",
+    "title": "In-between",
+    "description": "Smart home dashboard",
+    "alt": "In-between · Smart home dashboard",
+    "image": "https://ui.oiloil.org/works/home/img/cover.webp",
+    "model": "GPT 6 Astra",
+    "prompt_en": "A 10-inch touchscreen control panel mounted on a living room wall, designed in landscape at 1280×800 and centered on a presentation canvas: lighting, temperature, curtains, and scenes for arriving home, watching a movie, and sleeping.\nAdjustments should take effect immediately in the interface: dimming the lights also dims the panel, and opening the curtains lets light into the scene.\nCapture the main state, the movie scene after switching, and a temperature adjustment state.",
+    "prompt_zh": "一块挂在客厅墙上的 10 寸触屏中控（按 1280×800 横屏设计，放在展示画布中间）：灯光、温度、窗帘、场景模式（回家、观影、睡眠）。\n拖动调节时，结果当场发生在界面上：调暗灯光，面板本身也跟着变暗；拉开窗帘，画面里透进光。\n截主状态、切换到“观影”场景后的状态、调温时的状态。",
+    "views": [
+      "https://ui.oiloil.org/works/home/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/home/live/index.html"
+  },
+  {
+    "slug": "diary",
+    "href": "/en/works/diary/",
+    "title": "Gathered Pages",
+    "description": "Photo collage journal app",
+    "alt": "Gathered Pages · Photo collage journal app",
+    "image": "https://ui.oiloil.org/works/diary/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "A digital journaling app for young people who enjoy recording everyday life through collages of photos, stickers, and tape. Build three key screens: today's journal page, the materials drawer, and browsing by month. Design the app screens at 390×844.",
+    "prompt_zh": "一个电子手账 App，给喜欢用照片、贴纸、胶带拼贴记录日常的年轻人用。做三个关键屏：今天的手账页、素材抽屉、按月翻看。App 屏幕按 390×844。",
+    "views": [
+      "https://ui.oiloil.org/works/diary/img/view-1.webp",
+      "https://ui.oiloil.org/works/diary/img/view-2.webp",
+      "https://ui.oiloil.org/works/diary/img/view-3.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/diary/live/index.html"
+  },
+  {
+    "slug": "stay",
+    "href": "/en/works/stay/",
+    "title": "Nest",
+    "description": "Wanting Lakeside Cabin · Cabin details and booking",
+    "alt": "Nest · Wanting Lakeside Cabin · Cabin details and booking",
+    "image": "https://ui.oiloil.org/works/stay/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Nest, a booking website for carefully selected guesthouses.\nBuild a guesthouse detail and booking page with photos, room types, amenities, location, date selection, a price breakdown, and a booking button.\nPhotos may be generated with available tools; label them as generated images. Make date selection and the price breakdown memorable: for example, calculate the total and nightly prices immediately after dates are selected.",
+    "prompt_zh": "产品：「栖」，一个精选民宿的预订网站。\n做一家民宿的详情和预订页：照片、房型、设施、位置、日期选择和价格明细、预订按钮。\n照片可以用可用工具生成，写明是生成图。记忆点放在选日期和价格明细上，例如选了日期后总价和每晚价格当场算出来。",
+    "views": [
+      "https://ui.oiloil.org/works/stay/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/stay/live/index.html"
+  },
+  {
+    "slug": "muse",
+    "href": "/en/works/muse/",
+    "title": "muse",
+    "description": "AI image and video canvas",
+    "alt": "muse · AI image and video canvas",
+    "image": "https://ui.oiloil.org/works/muse/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个给设计师和创意团队用的 AI 生图、生视频工具，所有提示词、参考图和生成结果都放在一张无限画布上。做工作区主界面。",
+    "views": [
+      "https://ui.oiloil.org/works/muse/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/muse/live/index.html"
+  },
+  {
+    "slug": "components",
+    "href": "/en/works/components/",
+    "title": "Kiln",
+    "description": "Component library website",
+    "alt": "Kiln · Component library website",
+    "image": "https://ui.oiloil.org/works/components/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Product: Kiln, an open-source component library for React developers with more than 40 components, including buttons, inputs, dropdowns, command palettes, dialogs, tooltips, tables, and date pickers. It supports theme customization.\n\nBuild its website homepage, optionally with a component detail page:\n- Show real interactive components directly on the homepage, rather than screenshots. A “component wall” should contain working components that users can click, type into, and switch.\n- Take cues from the precision and restraint of leading developer tool websites: mostly black and white, at most one accent color, a strict grid, and monospace type for code and numbers.\n- Make a theme controller memorable: dragging radius, density, or accent color controls changes every component on the page immediately.\n- Include a copyable installation command, code snippets, navigation by component category, and realistic usage figures such as GitHub stars and weekly downloads, avoiding overly round numbers.",
+    "prompt_zh": "产品：「Kiln」，一个给 React 开发者用的开源组件库：按钮、输入框、下拉、命令面板、弹窗、提示、表格、日期选择等 40 多个组件，支持主题定制。\n\n做它的官网首页（可以加一个组件详情页）：\n- 首页要直接展示真实可交互的组件，而不是截图：一块“组件墙”里放着能点、能输入、能切换的真组件。\n- 气质参考一线开发者工具官网的精确与克制：黑白为主，最多一种强调色，严格的网格，等宽字体用在代码和数字上。\n- 记忆点：一个主题调节器，拖动圆角、密度或强调色，整页所有组件当场一起变化。\n- 要有：安装命令（可复制）、代码片段、组件分类导航、一段真实的使用数据（例如 GitHub 星数、周下载量，数字不整齐）。",
+    "views": [
+      "https://ui.oiloil.org/works/components/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/components/live/index.html"
+  },
+  {
+    "slug": "reel",
+    "href": "/en/works/reel/",
+    "title": "reel",
+    "description": "AI storyboard editor",
+    "alt": "reel · AI storyboard editor",
+    "image": "https://ui.oiloil.org/works/reel/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "",
+    "prompt_zh": "一个把剧本变成短片的 AI 分镜工具，给做广告和短视频的小团队用：写剧本，生成分镜，再排成镜头时间线。做主编辑界面。",
+    "views": [
+      "https://ui.oiloil.org/works/reel/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/reel/live/index.html"
+  },
+  {
+    "slug": "oil-find",
+    "href": "/en/works/oil-find/",
+    "title": "Oil Find",
+    "description": "macOS file search website",
+    "alt": "Oil Find · macOS file search website",
+    "image": "https://ui.oiloil.org/works/oil-find/img/cover.webp",
+    "model": "GPT 6.1 Sol",
+    "prompt_en": "Improve the design of our current landing page. I think we could explore several design directions for me to review. The current download action does not feel compelling enough, or perhaps it is not prominent enough.\n\nDownload entry 01: choose version 01, “Native release · Download first.”",
+    "prompt_zh": "优化一下我们现在的落地页设计。我觉得可以出几个不同的设计方向，我来看看。现在的下载感觉号召力不够，或者说不够明显。\n\n下载入口 01：选 01 原生发布 · 下载先行 这个版本吧。",
+    "views": [
+      "https://ui.oiloil.org/works/oil-find/img/view-1.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/oil-find/live/index.html"
+  },
+  {
+    "slug": "voice",
+    "href": "/en/works/voice/",
+    "title": "Echo",
+    "description": "AI voice assistant",
+    "alt": "Echo · AI voice assistant",
+    "image": "https://ui.oiloil.org/works/voice/img/cover.webp",
+    "model": "Claude Opus 5.5",
+    "prompt_en": "A full-screen mobile interface for an AI voice assistant (390×844), focused on visualizing sound. Waiting for speech, listening, thinking, and answering should each have a distinct form.\nWhen answering, show a result card below, such as a meeting it has booked for you, rather than only a glowing orb. A purple-blue glowing orb is the most common default; avoid that approach.\nCapture all four states. Deliver `index.html` and `screens.html` showing the states side by side.",
+    "prompt_zh": "一个 AI 语音助手在手机上的全屏界面（390×844），重点是声音的可视化：等你说话、正在听、正在想、正在回答四个状态各有自己的形态。\n回答时下方出现一张结果卡（例如帮你订好的会议），不要只是一个发光的球。紫蓝发光球是最常见的默认，不要做成那样。\n截四个状态，交付 `index.html` 和并排展示的 `screens.html`。",
+    "views": [
+      "https://ui.oiloil.org/works/voice/img/view-1.webp",
+      "https://ui.oiloil.org/works/voice/img/view-2.webp",
+      "https://ui.oiloil.org/works/voice/img/view-3.webp",
+      "https://ui.oiloil.org/works/voice/img/view-4.webp"
+    ],
+    "live_url": "https://ui.oiloil.org/works/voice/live/index.html"
+  }
+]
