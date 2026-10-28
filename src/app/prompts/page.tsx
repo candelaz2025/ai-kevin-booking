@@ -202,6 +202,46 @@ const AI_RANDOM_PRESETS: Record<string, RandomPreset[]> = {
         AUDIO_SOUND_DESIGN: 'Heavy Hans Zimmer Inception Braam horns, Sub-bass drop, Mechanical ticking clock, Heartbeat pulse, Explosive orchestral climax'
       }
     }
+  ],
+
+  // 9. A9 Micro-Drama Instant Producer (Google Flow Engine)
+  'a9-micro-drama-instant-producer': [
+    {
+      titleHint: 'Face-slap revenge: แม่บ้านปลอมตัวเป็นทายาทหมื่นล้าน',
+      values: {
+        TROPE_PRESET: '⭐ Face-slap revenge (ตอกกลับสะใจ / ทวงคืนศักดิ์ศรี)',
+        SERIES_TITLE: 'The Secret Heiress: ทายาทหมื่นล้านในคราบแม่บ้าน',
+        DRAMA_SYNOPSIS: 'ทายาทสาวตระกูลอสังหาฯ หมื่นล้าน ปลอมตัวเป็นแม่บ้านในบริษัทคู่แข่งเพื่อสืบหาหลักฐานที่ครอบครัวเธอถูกใส่ร้าย จนกระทั่งถูกหัวหน้างานดูถูกและสาดกาแฟใส่กลางล็อบบี้ ต่อหน้าพนักงานทุกคน',
+        PROTAGONIST_VOICE_LOCK: 'Mali: Thai woman, about 25, medium-high pitch, Central Thai accent, soft clear voice, polite with quick soft sentence endings',
+        ANTAGONIST_VOICE_LOCK: 'Krit: Thai man, about 45, deep arrogant tone, Central Thai accent, fast condescending speech pace',
+        OPENING_HOOK_STYLE: 'The first line is an insult, a shock or a confession (คำสบประมาท / เรื่องช็อก)',
+        CAMERA_AND_MOOD: 'Dramatic push-ins on reactions (Micro-drama look), 9:16 vertical ratio, modern luxury Bangkok office, soft impact rule'
+      }
+    },
+    {
+      titleHint: 'Hidden CEO: ประธานบริษัทพันล้านในคราบช่างเทคนิค',
+      values: {
+        TROPE_PRESET: '💼 Hidden CEO (ประธานบริษัทปลอมตัว)',
+        SERIES_TITLE: 'The Undercover Chairman: ประธานหนุ่มกับพนักงานจอมอวดดี',
+        DRAMA_SYNOPSIS: 'ประธานใหญ่แอบลงตรวจไซส์งานก่อสร้างในชุดช่างซ่อม แต่ถูกผู้จัดการโครงการข่มขู่และไล่ออกเพราะไม่ยอมจ่ายส่วยใต้โต๊ะ',
+        PROTAGONIST_VOICE_LOCK: 'Thee: Thai man, about 30, calm deep authoritative voice, Central Thai accent, steady slow pace',
+        ANTAGONIST_VOICE_LOCK: 'Sombat: Thai man, about 50, harsh raspy tone, aggressive loud delivery',
+        OPENING_HOOK_STYLE: 'Open in the middle of the action (เปิดฉากกลางความขัดแย้ง)',
+        CAMERA_AND_MOOD: 'Handheld gritty tracking shot, high contrast lighting, dramatic face-off'
+      }
+    },
+    {
+      titleHint: 'Rebirth revenge: เกิดใหม่ในวันแต่งงานเพื่อล้างแค้น',
+      values: {
+        TROPE_PRESET: '⏳ Rebirth revenge (เกิดใหม่มาแก้แค้น)',
+        SERIES_TITLE: 'Second Life Bride: เกิดใหม่ในคืนวิวาห์เลือด',
+        DRAMA_SYNOPSIS: 'นางเอกถูกสามีและน้องสาวต่างแม่วางยาพิษในวันแต่งงาน แต่ลืมตาตื่นขึ้นมาอีกครั้งในเช้าวันหมั้นเมื่อ 3 ปีก่อน เธอจึงพลิกแผนฉีกหน้ากากทุกคนกลางงานเลี้ยง',
+        PROTAGONIST_VOICE_LOCK: 'Rada: Thai woman, about 26, cold elegant crystal voice, precise articulation',
+        ANTAGONIST_VOICE_LOCK: 'Win: Thai man, about 28, sweet hypocritical tone, deceptive charm',
+        OPENING_HOOK_STYLE: 'Open on a glimpse of the climax then flash back to the past',
+        CAMERA_AND_MOOD: 'Anamorphic 35mm lens, luxury chandelier reflections, moody chiaroscuro'
+      }
+    }
   ]
 };
 

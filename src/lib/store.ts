@@ -1663,6 +1663,126 @@ For every single episode, provide:
 - Audio stings, fast pacing edits, and subtitle placement instructions for mobile vertical screen.`
   },
   {
+    id: 'a9-micro-drama-instant-producer',
+    title: 'A9 Micro-Drama & Short Film Producer: วางพล็อตซีรีส์ & คุมเสียงตัวละคร (Google Flow Engine V5.0)',
+    slug: 'a9-micro-drama-instant-producer',
+    category: 'AI Video Creation',
+    description: 'โคลนจาก Google Flow (A9 Studio) ระบบสร้างซีรีส์ละครสั้นแนวตั้ง & หนังสั้นด้วย Drama Beat Engine (Hook 0-2s -> Setup -> Pressure -> Turn -> Payoff -> Cliffhanger), คุมเสียง Voice Lock, กำหนดช็อต และส่งออกเป็น Video Prompt JSON สำหรับ Google Flow, Kling, Veo 3',
+    targetRole: 'Showrunner / Micro-Drama Screenwriter / Video Prompt Engineer',
+    aiModel: 'Google Flow / Kling AI / Claude 3.7 / Veo 3',
+    tags: ['A9 Studio', 'Google Flow', 'Micro-Drama', 'หนังสั้น AI', 'ละครสั้น', 'Drama Beat Engine', 'Voice Lock', 'TikTok Series', 'Cliffhanger'],
+    isFeatured: true,
+    copyCount: 1420,
+    authorName: 'อ. Kevin (AI Studio)',
+    createdAt: '2026-10-25T08:59:00.000Z',
+    variables: [
+      {
+        key: 'TROPE_PRESET',
+        label: 'Trope ละครสั้น (จาก 10 Presets ของ A9 Studio)',
+        defaultValue: 'Face-slap revenge (ตอกกลับสะใจ / ทวงคืนศักดิ์ศรี)',
+        type: 'text'
+      },
+      {
+        key: 'SERIES_TITLE',
+        label: 'ชื่อเรื่องหรือชื่อโปรเจกต์',
+        defaultValue: 'The Secret Heiress: ทายาทหมื่นล้านในคราบแม่บ้าน',
+        type: 'text'
+      },
+      {
+        key: 'DRAMA_SYNOPSIS',
+        label: 'เรื่องย่อและความขัดแย้งหลัก (Conflict & Stakes)',
+        defaultValue: 'ทายาทสาวตระกูลอสังหาฯ หมื่นล้าน ปลอมตัวเป็นแม่บ้านในบริษัทคู่แข่งเพื่อสืบหาหลักฐานที่ครอบครัวเธอถูกใส่ร้าย จนกระทั่งถูกหัวหน้างานดูถูกและสาดกาแฟใส่กลางล็อบบี้ ต่อหน้าพนักงานทุกคน',
+        type: 'textarea'
+      },
+      {
+        key: 'PROTAGONIST_VOICE_LOCK',
+        label: 'Voice Lock ตัวเอก (ชื่อ, เพศ, อายุ, สำเนียง, ลักษณะเสียง)',
+        defaultValue: 'Mali: Thai woman, about 25, medium-high pitch, Central Thai accent, soft clear voice, polite with quick soft sentence endings',
+        type: 'text'
+      },
+      {
+        key: 'ANTAGONIST_VOICE_LOCK',
+        label: 'Voice Lock ตัวร้าย (ชื่อ, เพศ, อายุ, สำเนียง, ลักษณะเสียง)',
+        defaultValue: 'Krit: Thai man, about 45, deep arrogant tone, Central Thai accent, fast condescending speech pace',
+        type: 'text'
+      },
+      {
+        key: 'OPENING_HOOK_STYLE',
+        label: 'รูปแบบเปิดเรื่อง 2 วินาทีแรก (Hook Style)',
+        defaultValue: 'The first line is an insult, a shock or a confession (คำสบประมาท / เรื่องช็อก / คำสารภาพ)',
+        type: 'text'
+      },
+      {
+        key: 'CAMERA_AND_MOOD',
+        label: 'สไตล์กล้องและอารมณ์ภาพ (Camera & Aesthetic)',
+        defaultValue: 'Dramatic push-ins on reactions (Micro-drama look), 9:16 vertical ratio, modern luxury Bangkok office contrast, no gore, soft impact rule',
+        type: 'text'
+      }
+    ],
+    templateContent: `# A9 MICRO-DRAMA & SHORT FILM INSTANT PRODUCER (GOOGLE FLOW ENGINE V5.0)
+Trope: {{TROPE_PRESET}}
+Project: {{SERIES_TITLE}}
+Opening Hook Style: {{OPENING_HOOK_STYLE}}
+Visual Style & Ratio: {{CAMERA_AND_MOOD}}
+
+## DRAMATIC SYNOPSIS & CORE PREMISE
+{{DRAMA_SYNOPSIS}}
+
+## VOICE LOCK SPECIFICATIONS (TTS & LIP-SYNC CONSISTENCY)
+- Protagonist: {{PROTAGONIST_VOICE_LOCK}}
+- Antagonist: {{ANTAGONIST_VOICE_LOCK}}
+
+==================================================
+## INSTRUCTIONS FOR A9 SHOWRUNNER & SCREENWRITER
+==================================================
+You are the Showrunner and Senior Screenwriter of A9 STUDIO, operating the Drama Beat Engine V5.0. 
+Write a high-retention vertical micro-drama / short film designed for Google Flow, Kling AI, Runway Gen-3, and Veo 3.
+
+### 1. DRAMA BEAT ROLE PLAN (EXACT 6-SHOT EPISODE STRUCTURE)
+- SHOT 1 [HOOK]: Conflict already exploding within the first 2 seconds. The opening line must be an insult, shock, or confession. Syllables max 70% of limit.
+- SHOT 2 [SETUP]: Who is who, who wants what. Power dynamic clearly displayed.
+- SHOT 3 [PRESSURE]: The antagonist pushes harder, humiliating or threatening the protagonist; audience emotional tension peaks.
+- SHOT 4 [TURN]: The game flips! (Secret evidence revealed, phone call from Chairman, or unexpected identity reveal).
+- SHOT 5 [PAYOFF]: The vindication moment! Antagonist's stunned/terrified reaction, power dynamic permanently reversed.
+- SHOT 6 [CLIFF / END]: One complete revealing sentence cut right on the reaction before the credits roll.
+
+### 2. SOFT IMPACT & RETENTION RULES
+- Never show the direct moment of physical contact (slap = raised hand, cut immediately to face turned aside).
+- Dialogue: Natural Central Thai, exactly one speaker per shot, strictly syllable-counted (4s = max 12, 6s = max 20, 8s = max 28).
+
+### 3. EXACT GOOGLE FLOW & KLING VIDEO PROMPT JSON (PER SHOT)
+Provide production-ready JSON for each shot following the exact Google Flow 10.11 spec:
+\`\`\`json
+{
+  "voice_lock": {
+    "SpeakerName": "{{PROTAGONIST_VOICE_LOCK}}"
+  },
+  "audio": {
+    "type": "lip_sync_dialogue",
+    "spoken_language": "Thai (Central Thai accent)",
+    "speaker": "Mali",
+    "line": "[Thai dialogue here]",
+    "timing": "speech starts at 0.3s and ends before 5.3s",
+    "delivery": "tense emotion, restrained acting energy",
+    "others": "everyone else in the shot keeps their lips closed and does not speak"
+  },
+  "scene_action": "[Exact cinematic description: characters, wardrobe, position, lighting, Bangkok luxury office]",
+  "motion": "[Camera push-in on protagonist eyes with micro-drama intensity]",
+  "camera_movement": "dramatic push-in tracking subject",
+  "acting_energy": "high emotional restraint",
+  "ending": "cut on gasp reaction",
+  "emotion": "shock turning to cold confidence",
+  "sfx": "sharp glass shatter, ambient office hum, no music",
+  "music": "NO MUSIC",
+  "setting": "Bangkok luxury corporate office lobby",
+  "aspect_ratio": "9:16",
+  "characters": [{ "name": "Mali", "acting": "speaking naturally with piercing cold stare" }],
+  "render_rules": "keep characters, wardrobe and place identical to start frame; no subtitles, no text, no logos; soft impact rule enforced"
+}
+\`\`\`
+`
+  },
+  {
     id: 'brand-product-commercial-director',
     title: 'Brand & Product Promo Video: สปอตโฆษณาเปิดตัวสินค้าระดับลักชัวรี (Commercial Ad)',
     slug: 'brand-product-commercial-director',
