@@ -212,9 +212,9 @@ export default function PromptsPage() {
             </div>
           </Link>
 
-          {/* 3. Vibe Design (Oil UI) Banner */}
+          {/* 3. Website Design (Oil UI) Banner */}
           <Link
-            href="/prompts/vibe-design"
+            href="/prompts/website-design"
             className="group block relative overflow-hidden rounded-2xl border border-indigo-500/40 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-indigo-400 transition-all shadow-xl hover:shadow-indigo-500/10"
           >
             <div className="flex items-start justify-between gap-3">
@@ -228,7 +228,7 @@ export default function PromptsPage() {
                       97 STYLES
                     </span>
                     <h3 className="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">
-                      Vibe Design
+                      Website Design
                     </h3>
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">

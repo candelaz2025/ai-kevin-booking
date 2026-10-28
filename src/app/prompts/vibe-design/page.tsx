@@ -41,7 +41,6 @@ interface WorkItem {
   image: string;
   model: string;
   prompt_en?: string;
-  prompt_zh?: string;
   views?: string[];
   live_url?: string;
 }
@@ -67,8 +66,6 @@ export default function VibeDesignPage() {
   const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
   const [copiedInstallCmd, setCopiedInstallCmd] = useState<boolean>(false);
   const [copiedGitCmd, setCopiedGitCmd] = useState<boolean>(false);
-  const [copiedChinese, setCopiedChinese] = useState<boolean>(false);
-  const [showChineseOriginal, setShowChineseOriginal] = useState<boolean>(false);
 
   // Filter models
   const modelCounts = useMemo(() => {
@@ -119,7 +116,7 @@ export default function VibeDesignPage() {
   };
 
   // Copy helper
-  const handleCopyText = async (text: string, type: 'prompt' | 'install' | 'git' | 'zh') => {
+  const handleCopyText = async (text: string, type: 'prompt' | 'install' | 'git') => {
     try {
       await navigator.clipboard.writeText(text);
       if (type === 'prompt') {
@@ -131,9 +128,6 @@ export default function VibeDesignPage() {
       } else if (type === 'git') {
         setCopiedGitCmd(true);
         setTimeout(() => setCopiedGitCmd(false), 2000);
-      } else if (type === 'zh') {
-        setCopiedChinese(true);
-        setTimeout(() => setCopiedChinese(false), 2000);
       }
     } catch (e) {
       console.error(e);
@@ -143,7 +137,6 @@ export default function VibeDesignPage() {
   const openWorkModal = (w: WorkItem) => {
     setSelectedWork(w);
     setModalView('cover');
-    setShowChineseOriginal(false);
   };
 
   return (
@@ -165,7 +158,7 @@ export default function VibeDesignPage() {
             Prompts
           </Link>
           <ChevronRight className="w-3 h-3 text-slate-600" />
-          <span className="text-indigo-400 font-semibold">Vibe Design (Oil UI)</span>
+          <span className="text-indigo-400 font-semibold">Website Design (Oil UI)</span>
         </nav>
 
         {/* Hero Section */}
@@ -178,7 +171,7 @@ export default function VibeDesignPage() {
             <div className="flex flex-wrap items-center gap-2.5 mb-5">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
                 <Palette className="w-3.5 h-3.5 text-indigo-400" />
-                Vibe Design &bull; Oil UI
+                Website Design &bull; Oil UI
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
                 <Sparkles className="w-3 h-3" />
@@ -216,7 +209,7 @@ export default function VibeDesignPage() {
             </h1>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-8">
-              หมดยุคดีไซน์ AI หน้าตาซ้ำซาก สี่เหลี่ยมสีม่วงแบบเดิมๆ <strong>Vibe Design (Oil UI)</strong>{' '}
+              หมดยุคดีไซน์ AI หน้าตาซ้ำซาก สี่เหลี่ยมสีม่วงแบบเดิมๆ <strong>Website Design (Oil UI)</strong>{' '}
               คือชุดทักษะสำหรับ AI (Claude Code, OpenAI Codex, DeepSeek Harness, Cursor & Windsurf) 
               ที่สอนให้ AI คิดแบบ Senior Designer กำหนดคาแรคเตอร์ โทนสี ฟอนต์ และจัดวางสัดส่วนให้โดดเด่นสะกดสายตา
             </p>
@@ -538,7 +531,7 @@ export default function VibeDesignPage() {
                   หลักการคิด 5 ขั้นตอนของ Oil UI
                 </h2>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  &ldquo;先定下一句设计北极星，再让构图、字体、色彩、素材和交互都朝它靠拢，做出一眼认得出来的界面。克制是留下最有力量的选择、删掉没有贡献的元素，不是把所有风格磨成中庸。&rdquo;
+                  &ldquo;กำหนด Design North Star ให้ชัดเจนเป็นอันดับแรก จากนั้นปรับโครงสร้าง ฟอนต์ โทนสี เนื้อหา และการมีปฏิสัมพันธ์ให้ตอบโจทย์ร่วมกัน เพื่อสร้างหน้าตาที่โดดเด่นน่าจดจำตั้งแต่แรกเห็น การตัดสิ่งที่ไม่จำเป็นออกคือการคงไว้ซึ่งพลังของดีไซน์ที่แท้จริง&rdquo;
                 </p>
               </div>
 
@@ -546,10 +539,10 @@ export default function VibeDesignPage() {
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="w-7 h-7 rounded-lg bg-indigo-500 text-white font-bold text-xs flex items-center justify-center">1</span>
-                  <h3 className="font-bold text-white text-base">探索并收敛方向 (Explore & Converge)</h3>
+                  <h3 className="font-bold text-white text-base">Explore & Converge (สำรวจและกำหนดทิศทาง)</h3>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                  ตอบ 3 คำถามก่อนลงมือ: หน้าตานี้คือของประเภทไหน (品类)? ผู้ใช้งานเข้ามาดูอะไรบน First Fold? และผลิตภัณฑ์ระดับแถวหน้าในวงการนี้ทำอย่างไร? เสนอ 3 สไตล์ที่มีความต่างทางสายตาชัดเจน
+                  ตอบ 3 คำถามก่อนลงมือ: หน้าตานี้คือเว็บไซต์ประเภทไหน (Category)? ผู้ใช้งานเข้ามาดูอะไรบน First Fold? และผลิตภัณฑ์ระดับแถวหน้าในวงการนี้ทำอย่างไร? เสนอ 3 สไตล์ที่มีความต่างทางสายตาชัดเจน
                 </p>
                 <div className="bg-slate-950 p-3 rounded-xl font-mono text-[11px] text-indigo-300">
                   Direction 1: Editorial & Craft &bull; Direction 2: Tactical & Data-Dense &bull; Direction 3: Kinetic & Immersive
@@ -560,7 +553,7 @@ export default function VibeDesignPage() {
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="w-7 h-7 rounded-lg bg-indigo-500 text-white font-bold text-xs flex items-center justify-center">2</span>
-                  <h3 className="font-bold text-white text-base">建立视觉与交互结构 (Visual & Interaction Structure)</h3>
+                  <h3 className="font-bold text-white text-base">Visual & Interaction Structure (โครงสร้างภาพและการมีปฏิสัมพันธ์)</h3>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   คุม Hierarchy ของตัวอักษร สี สเปซ และการเคลื่อนไหว (Motion) ให้สอดคล้องกับคาแรคเตอร์ที่กำหนด ไม่ยัดเยียด Card Grid หากไม่จำเป็น
@@ -571,7 +564,7 @@ export default function VibeDesignPage() {
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="w-7 h-7 rounded-lg bg-indigo-500 text-white font-bold text-xs flex items-center justify-center">3</span>
-                  <h3 className="font-bold text-white text-base">制作并取得实际证据 (Production & Empirical Proof)</h3>
+                  <h3 className="font-bold text-white text-base">Production & Empirical Proof (การสร้างและพิสูจน์ผลงานจริง)</h3>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   สร้างหน้าตัวแทนหรือโฟลว์หลักก่อนเสมอ ตรวจสอบบน Target Viewport จริง (Desktop 1440px / Mobile 390px) ตรวจสอบความถูกต้องของการตัดคำและลำดับสายตา
@@ -582,7 +575,7 @@ export default function VibeDesignPage() {
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="w-7 h-7 rounded-lg bg-indigo-500 text-white font-bold text-xs flex items-center justify-center">4</span>
-                  <h3 className="font-bold text-white text-base">独立评审与修正 (Independent Blind Review)</h3>
+                  <h3 className="font-bold text-white text-base">Independent Blind Review (การตรวจสอบประเมินผลอิสระ)</h3>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   ประเมินผลงานผ่านภาพสกรีนช็อตจริงโดยไม่ดูคำอธิบาย (Blind Visual Review) เพื่อทดสอบว่าหน้าจอสื่อสารหน้าที่และคุณค่าของแบรนด์ได้จริงโดยไม่ต้องอ่านคำชี้แจง
@@ -593,7 +586,7 @@ export default function VibeDesignPage() {
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="w-7 h-7 rounded-lg bg-indigo-500 text-white font-bold text-xs flex items-center justify-center">5</span>
-                  <h3 className="font-bold text-white text-base">交付与使用 (Delivery & Integration)</h3>
+                  <h3 className="font-bold text-white text-base">Delivery & Integration (การส่งมอบและการนำไปใช้จริง)</h3>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-4">
                   นำผลงานไปใช้งานผ่าน Claude Code, Codex, Cursor หรือ Windsurf ได้ทันทีโดยติดตั้งคำสั่ง:
@@ -773,33 +766,6 @@ export default function VibeDesignPage() {
                       {selectedWork.prompt_en || selectedWork.description}
                     </div>
                   </div>
-
-                  {/* Chinese Original Toggle */}
-                  {selectedWork.prompt_zh && (
-                    <div>
-                      <button
-                        type="button"
-                        onClick={() => setShowChineseOriginal(!showChineseOriginal)}
-                        className="text-xs text-slate-400 hover:text-white flex items-center gap-1 underline underline-offset-4"
-                      >
-                        <span>{showChineseOriginal ? 'ซ่อน' : 'แสดง'} ต้นฉบับภาษาจีน (Chinese Original)</span>
-                      </button>
-
-                      {showChineseOriginal && (
-                        <div className="mt-2 rounded-2xl bg-slate-950/80 border border-white/10 p-3 text-xs text-slate-300 leading-relaxed relative">
-                          <button
-                            type="button"
-                            onClick={() => handleCopyText(selectedWork.prompt_zh || '', 'zh')}
-                            className="absolute top-2 right-2 p-1 text-slate-400 hover:text-white"
-                            title="Copy Chinese prompt"
-                          >
-                            {copiedChinese ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                          </button>
-                          {selectedWork.prompt_zh}
-                        </div>
-                      )}
-                    </div>
-                  )}
 
                   {/* Claude / Codex instruction tip */}
                   <div className="rounded-2xl bg-indigo-950/30 border border-indigo-500/20 p-3.5 text-xs text-slate-300 space-y-1">
