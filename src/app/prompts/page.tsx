@@ -6,7 +6,7 @@ import { PromptTemplate } from '@/lib/types';
 import {
   Sparkles, Copy, Check, Terminal, Sliders, Layers, ArrowRight,
   Search, BookOpen, Download, Share2, RefreshCw, Cpu, Code2,
-  CheckCircle2, Flame, ExternalLink, HelpCircle, Video, Film, Palette
+  CheckCircle2, Flame, ExternalLink, HelpCircle, Video, Film, Palette, Clapperboard
 } from 'lucide-react';
 
 export default function PromptsPage() {
@@ -150,12 +150,12 @@ export default function PromptsPage() {
           </p>
         </div>
 
-        {/* Video Prompt, Drama Studio & Vibe Design Feature Banners */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+        {/* Video Prompt, Drama Studio, Vibe Design & Motion Claude Feature Banners */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {/* 1. Video Prompt Library Banner */}
           <Link
             href="/prompts/video"
-            className="group block relative overflow-hidden rounded-2xl border border-pink-500/30 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-slate-900/40 p-5 hover:border-pink-500/60 transition-all shadow-xl hover:shadow-pink-500/10"
+            className="group block relative overflow-hidden rounded-2xl border border-pink-500/30 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-pink-500/60 transition-all shadow-xl hover:shadow-pink-500/10"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-start gap-3">
@@ -185,7 +185,7 @@ export default function PromptsPage() {
           {/* 2. AI Drama Studio Pinterest Catalog Banner */}
           <Link
             href="/prompts/drama"
-            className="group block relative overflow-hidden rounded-2xl border border-amber-400/40 bg-gradient-to-br from-amber-400/10 via-amber-500/10 to-slate-900/40 p-5 hover:border-amber-400/80 transition-all shadow-xl hover:shadow-amber-400/10"
+            className="group block relative overflow-hidden rounded-2xl border border-amber-400/40 bg-gradient-to-br from-amber-400/10 via-amber-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-amber-400/80 transition-all shadow-xl hover:shadow-amber-400/10"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-start gap-3">
@@ -198,7 +198,7 @@ export default function PromptsPage() {
                       77 STYLES
                     </span>
                     <h3 className="text-sm font-bold text-white group-hover:text-amber-300 transition-colors">
-                      Prompt Video ละคร
+                      Video ละคร
                     </h3>
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
@@ -215,7 +215,7 @@ export default function PromptsPage() {
           {/* 3. Vibe Design (Oil UI) Banner */}
           <Link
             href="/prompts/vibe-design"
-            className="group block relative overflow-hidden rounded-2xl border border-indigo-500/40 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-slate-900/40 p-5 hover:border-indigo-400 transition-all shadow-xl hover:shadow-indigo-500/10"
+            className="group block relative overflow-hidden rounded-2xl border border-indigo-500/40 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-indigo-400 transition-all shadow-xl hover:shadow-indigo-500/10"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-start gap-3">
@@ -225,18 +225,48 @@ export default function PromptsPage() {
                 <div>
                   <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-indigo-500 text-white uppercase tracking-wide">
-                      97 STYLES · NEW
+                      97 STYLES
                     </span>
                     <h3 className="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">
-                      Vibe Design (Oil UI)
+                      Vibe Design
                     </h3>
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
-                    UI Design Skill สำหรับ AI คลัง 97 สไตล์พร้อม Playbook & Prompts
+                    UI Design Skill สำหรับ AI คลัง 97 สไตล์ & Playbooks
                   </p>
                 </div>
               </div>
               <div className="p-1 rounded-lg bg-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors shrink-0 mt-1">
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </div>
+          </Link>
+
+          {/* 4. Motion Claude Prompt (Opus 5.5) Banner */}
+          <Link
+            href="/prompts/motion-claude"
+            className="group block relative overflow-hidden rounded-2xl border border-orange-500/40 bg-gradient-to-br from-orange-500/15 via-amber-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-orange-400 transition-all shadow-xl hover:shadow-orange-500/10"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform shrink-0 mt-0.5">
+                  <Clapperboard className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-orange-500 text-slate-950 uppercase tracking-wide">
+                      703 PROMPTS · NEW
+                    </span>
+                    <h3 className="text-sm font-bold text-white group-hover:text-orange-300 transition-colors">
+                      Motion Claude
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                    Opus 5.5 Viral Videos & Motion Code + 418 Remakes
+                  </p>
+                </div>
+              </div>
+              <div className="p-1 rounded-lg bg-orange-500/20 text-orange-400 group-hover:bg-orange-500 group-hover:text-slate-950 transition-colors shrink-0 mt-1">
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </div>

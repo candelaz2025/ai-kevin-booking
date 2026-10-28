@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
-import { Bell, User, LogOut, Menu, X, Shield, Sparkles, ChevronDown, ExternalLink, Video, Film, Mic, UserCheck, Palette } from 'lucide-react';
+import { Bell, User, LogOut, Menu, X, Shield, Sparkles, ChevronDown, ExternalLink, Video, Film, Mic, UserCheck, Palette, Clapperboard } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout, isAdmin } = useAuth();
@@ -150,6 +150,30 @@ export default function Navbar() {
                       </div>
                       <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
                         UI Design Skill สำหรับ AI คลัง 97 สไตล์พร้อม Playbook & Prompts
+                      </p>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/prompts/motion-claude"
+                    onClick={() => setPromptsDropdownOpen(false)}
+                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-orange-500 group-hover/item:text-white transition-colors">
+                      <Clapperboard className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
+                        <span className="flex items-center gap-1.5">
+                          <span>Motion Claude Prompt</span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 font-bold border border-orange-500/30">
+                            Opus 5.5
+                          </span>
+                        </span>
+                        <span className="text-[10px] text-slate-400 group-hover/item:text-amber-400 font-mono">703 Prompts</span>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                        Viral Prompts สร้างวิดีโอ & Motion Graphics โค้ดเสมือนจริง 703 ชุด
                       </p>
                     </div>
                   </Link>
@@ -371,6 +395,22 @@ export default function Navbar() {
                     <Palette className="w-3.5 h-3.5 text-indigo-400" />
                   </div>
                   <span className="text-xs text-slate-400 font-normal">UI Design Skill สำหรับ AI คลัง 97 สไตล์ & Playbooks</span>
+                </Link>
+                <Link
+                  href="/prompts/motion-claude"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-orange-300 flex items-center gap-1.5">
+                      Motion Claude Prompt
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 font-bold border border-orange-500/30">
+                        Opus 5.5
+                      </span>
+                    </span>
+                    <Clapperboard className="w-3.5 h-3.5 text-orange-400" />
+                  </div>
+                  <span className="text-xs text-slate-400 font-normal">Viral Prompts สร้างวิดีโอ & Motion Graphics โค้ด 703 ชุด</span>
                 </Link>
                 <a
                   href="https://kevin-character-lock-studio.vercel.app/"
