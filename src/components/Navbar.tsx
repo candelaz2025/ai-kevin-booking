@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
-import { Bell, User, LogOut, Menu, X, Shield, Sparkles, ChevronDown, ExternalLink, Video, Film, Mic, UserCheck, Palette, Clapperboard } from 'lucide-react';
+import { User, LogOut, Menu, X, Sparkles, ChevronDown } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout, isAdmin } = useAuth();
@@ -57,125 +57,51 @@ export default function Navbar() {
               </button>
 
               <div 
-                className={`absolute top-full left-0 pt-2 w-80 transition-all duration-200 z-50 ${
+                className={`absolute top-full left-0 pt-2 w-64 transition-all duration-200 z-50 ${
                   promptsDropdownOpen 
                     ? 'opacity-100 translate-y-0 pointer-events-auto visible' 
                     : 'opacity-0 translate-y-1 pointer-events-none invisible'
                 }`}
               >
-                <div className="rounded-2xl bg-[#09111e]/98 border border-white/10 shadow-2xl shadow-black/80 p-2 backdrop-blur-xl">
+                <div className="rounded-2xl bg-[#09111e]/98 border border-white/10 shadow-2xl shadow-black/80 p-2 backdrop-blur-xl space-y-0.5">
                   <Link
                     href="/prompts"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-amber-400 group-hover/item:text-slate-950 transition-colors">
-                      <Sparkles className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 transition-colors">
-                        Prompt Generator
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        Master Prompt สำหรับ AI Text & Code
-                      </p>
-                    </div>
+                    Prompt Generator
                   </Link>
 
                   <Link
                     href="/prompts/video"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-pink-500 group-hover/item:text-white transition-colors">
-                      <Video className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
-                        <span className="flex items-center gap-1.5">
-                          <span>Prompt Video</span>
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-bold border border-pink-500/30">
-                            100 Styles
-                          </span>
-                        </span>
-                        <span className="text-[10px] text-slate-400 group-hover/item:text-amber-400 font-mono">Native</span>
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        คลัง Prompt วิดีโอ 100 สไตล์ พร้อมคลิปตัวอย่าง
-                      </p>
-                    </div>
+                    Prompt Video
                   </Link>
 
                   <Link
                     href="/prompts/drama"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-amber-400 group-hover/item:text-slate-950 transition-colors">
-                      <Film className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
-                        <span className="flex items-center gap-1.5">
-                          <span>Prompt Video ละคร</span>
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 font-bold border border-amber-400/30">
-                            AI Drama
-                          </span>
-                        </span>
-                        <span className="text-[10px] text-slate-400 group-hover/item:text-amber-400 font-mono">77 สไตล์</span>
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        ตัวอย่างละครสั้น AI ท่ากล้อง แสง และบทพูดภาษาไทย
-                      </p>
-                    </div>
+                    Prompt Video ละคร
                   </Link>
 
                   <Link
                     href="/prompts/vibe-design"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-indigo-500 group-hover/item:text-white transition-colors">
-                      <Palette className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
-                        <span className="flex items-center gap-1.5">
-                          <span>Vibe Design</span>
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30">
-                            97 Styles
-                          </span>
-                        </span>
-                        <span className="text-[10px] text-slate-400 group-hover/item:text-amber-400 font-mono">Oil UI</span>
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        UI Design Skill สำหรับ AI คลัง 97 สไตล์พร้อม Playbook & Prompts
-                      </p>
-                    </div>
+                    Vibe Design
                   </Link>
 
                   <Link
                     href="/prompts/motion-claude"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-orange-500 group-hover/item:text-white transition-colors">
-                      <Clapperboard className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
-                        <span className="flex items-center gap-1.5">
-                          <span>Motion Claude Prompt</span>
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 font-bold border border-orange-500/30">
-                            Opus 5.5
-                          </span>
-                        </span>
-                        <span className="text-[10px] text-slate-400 group-hover/item:text-amber-400 font-mono">703 Prompts</span>
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        Viral Prompts สร้างวิดีโอ & Motion Graphics โค้ดเสมือนจริง 703 ชุด
-                      </p>
-                    </div>
+                    Motion Claude Prompt
                   </Link>
 
                   <a
@@ -183,22 +109,9 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-cyan-500 group-hover/item:text-slate-950 transition-colors">
-                      <UserCheck className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
-                        <span className="flex items-center gap-1.5">
-                          <span>Character Lock Studio Prompt</span>
-                        </span>
-                        <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover/item:text-amber-400 shrink-0" />
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        สร้าง Character Sheet & Storyboard คุมตัวละครหน้าเดิมทุกซีน
-                      </p>
-                    </div>
+                    Character Lock Studio Prompt
                   </a>
 
                   <a
@@ -206,25 +119,9 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setPromptsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item mt-1 border-t border-white/5"
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-emerald-500 group-hover/item:text-slate-950 transition-colors">
-                      <Mic className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm text-white group-hover/item:text-amber-400 flex items-center justify-between transition-colors">
-                        <span className="flex items-center gap-1.5">
-                          <span>ห้องน้องพากย์</span>
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
-                            Voice AI
-                          </span>
-                        </span>
-                        <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover/item:text-amber-400" />
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                        สตูดิโอเสียงพากย์ภาษาไทย อัดเสียง AI โคลนเสียง
-                      </p>
-                    </div>
+                    ห้องน้องพากย์
                   </a>
                 </div>
               </div>
@@ -339,111 +236,59 @@ export default function Navbar() {
             </button>
 
             {mobilePromptsOpen && (
-              <div className="pl-3 pr-2 py-1 space-y-1 border-l-2 border-amber-400/30 ml-4 my-1 bg-slate-900/40 rounded-r-xl">
+              <div className="pl-3 pr-2 py-1 space-y-0.5 border-l-2 border-amber-400/30 ml-4 my-1 bg-slate-900/40 rounded-r-xl">
                 <Link
                   href="/prompts"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <span className="font-semibold text-white block">Prompt Generator</span>
-                  <span className="text-xs text-slate-400 font-normal">Master Prompt สำหรับ AI Text & Code</span>
+                  Prompt Generator
                 </Link>
                 <Link
                   href="/prompts/video"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-pink-300 flex items-center gap-1.5">
-                      Prompt Video
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-bold border border-pink-500/30">
-                        100 Styles
-                      </span>
-                    </span>
-                    <Video className="w-3.5 h-3.5 text-pink-400" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-normal">คลัง Prompt วิดีโอ 100 สไตล์ พร้อมคลิป</span>
+                  Prompt Video
                 </Link>
                 <Link
                   href="/prompts/drama"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-amber-300 flex items-center gap-1.5">
-                      Prompt Video ละคร
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 font-bold border border-amber-400/30">
-                        AI Drama
-                      </span>
-                    </span>
-                    <Film className="w-3.5 h-3.5 text-amber-400" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-normal">ตัวอย่างละครสั้น AI ท่ากล้องและบทพูด</span>
+                  Prompt Video ละคร
                 </Link>
                 <Link
                   href="/prompts/vibe-design"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-indigo-300 flex items-center gap-1.5">
-                      Vibe Design
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30">
-                        97 Styles
-                      </span>
-                    </span>
-                    <Palette className="w-3.5 h-3.5 text-indigo-400" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-normal">UI Design Skill สำหรับ AI คลัง 97 สไตล์ & Playbooks</span>
+                  Vibe Design
                 </Link>
                 <Link
                   href="/prompts/motion-claude"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-orange-300 flex items-center gap-1.5">
-                      Motion Claude Prompt
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 font-bold border border-orange-500/30">
-                        Opus 5.5
-                      </span>
-                    </span>
-                    <Clapperboard className="w-3.5 h-3.5 text-orange-400" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-normal">Viral Prompts สร้างวิดีโอ & Motion Graphics โค้ด 703 ชุด</span>
+                  Motion Claude Prompt
                 </Link>
                 <a
                   href="https://kevin-character-lock-studio.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-cyan-300 flex items-center gap-1.5">
-                      Character Lock Studio Prompt
-                    </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-normal">สร้าง Character Sheet & Storyboard คุมตัวละครหน้าเดิมทุกซีน</span>
+                  Character Lock Studio Prompt
                 </a>
                 <a
                   href="https://hongpak-voice-studio.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-emerald-300 flex items-center gap-1.5">
-                      ห้องน้องพากย์
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
-                        Voice AI
-                      </span>
-                    </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                  </div>
-                  <span className="text-xs text-slate-400 font-normal">สตูดิโอเสียงพากย์ภาษาไทย อัดเสียง AI</span>
+                  ห้องน้องพากย์
                 </a>
               </div>
             )}
