@@ -165,14 +165,14 @@ export default function PromptsPage() {
                 <div>
                   <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-pink-500 text-white uppercase tracking-wide">
-                      100 STYLES
+                      9 STUDIOS + 100 STYLES
                     </span>
                     <h3 className="text-sm font-bold text-white group-hover:text-pink-300 transition-colors">
                       Prompt Video
                     </h3>
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
-                    สูตรสร้างวิดีโอ 100 สไตล์ พร้อมคลิปตัวอย่างและวิธีแทนค่า
+                    9 สตูดิโอโปรดักชัน รีโนเวท, UGC, อสังหาฯ และ 100 สไตล์วิดีโอ
                   </p>
                 </div>
               </div>
