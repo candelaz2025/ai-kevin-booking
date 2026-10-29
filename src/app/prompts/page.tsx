@@ -279,6 +279,9 @@ export default function PromptsPage() {
   const [showGeneratedModal, setShowGeneratedModal] = useState(false);
   const [randomPresetTitle, setRandomPresetTitle] = useState<string>('');
 
+  // Selected AI Engine Target (Google Flow, Meta AI, DreamRadar, MiniMax Hailuo H3)
+  const [targetEngine, setTargetEngine] = useState<'minimax' | 'flow' | 'meta' | 'dreamradar'>('minimax');
+
   // 500 Random Ideas & Prompts System States
   const [showPoolModal, setShowPoolModal] = useState(false);
   const [selectedPoolCategory, setSelectedPoolCategory] = useState<string>('all');
@@ -336,7 +339,7 @@ export default function PromptsPage() {
     }
   };
 
-  // Compute final generated prompt text by replacing placeholders
+  // Compute final generated prompt text by replacing placeholders and adapting to targetEngine
   const generatedPrompt = useMemo(() => {
     if (!selectedPrompt) return '';
     let result = selectedPrompt.templateContent;
@@ -345,8 +348,25 @@ export default function PromptsPage() {
       const regex = new RegExp(`{{${v.key}}}`, 'g');
       result = result.replace(regex, val);
     });
+
+    // Format special syntax when targeting MiniMax H3, Google Flow, or DreamRadar
+    if (targetEngine === 'minimax') {
+      // Find voice-over / speech lines or append off-screen voiceover tag
+      const voMatch = result.match(/(?:Voice-?over|บทพูด|เสียงพากย์|Dialogue)[:：]\s*["']?([^"'\r\n]+)["']?/i);
+      const voLine = voMatch ? voMatch[1].trim() : (variableValues['VOICE_SCRIPT'] || variableValues['HOOK_SENTENCE'] || 'กรุงเทพมหานคร เมืองหลวงที่ไม่เคยหลับใหล');
+      
+      const tagSuffix = `\n\n<d> (S1) says in an off-screen voiceover; [th] ${voLine} </d> and state lips stay closed after </d>.`;
+      if (!result.includes('<d> (S1)')) {
+        result = result + tagSuffix;
+      }
+    } else if (targetEngine === 'flow') {
+      result = `[TARGET: Google Flow Project / Multi-Camera Director]\n\n` + result;
+    } else if (targetEngine === 'dreamradar') {
+      result = `[TARGET: DreamRadar Video Engine]\n\n` + result;
+    }
+
     return result;
-  }, [selectedPrompt, variableValues]);
+  }, [selectedPrompt, variableValues, targetEngine]);
 
   // Copy handler
   const handleCopy = async () => {
@@ -1060,7 +1080,30 @@ export default function PromptsPage() {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {/* Engine Selector Pills */}
+                    <div className="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/5 mr-2">
+                      {[
+                        { key: 'minimax', label: 'MiniMax H3' },
+                        { key: 'flow', label: 'Google Flow' },
+                        { key: 'meta', label: 'Meta AI' },
+                        { key: 'dreamradar', label: 'DreamRadar' }
+                      ].map(eng => (
+                        <button
+                          key={eng.key}
+                          type="button"
+                          onClick={() => setTargetEngine(eng.key as any)}
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
+                            targetEngine === eng.key
+                              ? 'bg-amber-400 text-slate-950 shadow-sm shadow-amber-400/30'
+                              : 'text-slate-400 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          {eng.label}
+                        </button>
+                      ))}
+                    </div>
+
                     <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
                       {generatedPrompt.length.toLocaleString()} ตัวอักษร
                     </span>
