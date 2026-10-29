@@ -640,8 +640,8 @@ export default function PromptsPage() {
           </div>
         </div>
 
-        {/* Video Prompt, Drama Studio, Director Studio, Vibe Design & Motion Claude Feature Banners */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+        {/* Video Prompt, Drama Studio, Director Studio, Vibe Design, Motion Claude & MiniMax H3 Civitai Models Banners */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-12">
           {/* 1. Video Prompt Library Banner */}
           <Link
             href="/prompts/video"
@@ -787,6 +787,36 @@ export default function PromptsPage() {
                 </div>
               </div>
               <div className="p-1 rounded-lg bg-orange-500/20 text-orange-400 group-hover:bg-orange-500 group-hover:text-slate-950 transition-colors shrink-0 mt-1">
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </div>
+          </Link>
+
+          {/* 6. MiniMax H3 Civitai Models & Workflows Banner */}
+          <Link
+            href="/prompts/minimax-h3"
+            className="group block relative overflow-hidden rounded-2xl border border-purple-500/40 bg-gradient-to-br from-purple-500/15 via-indigo-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-purple-400 transition-all shadow-xl hover:shadow-purple-500/10"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-500 to-indigo-500 text-white flex items-center justify-center font-bold shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform shrink-0 mt-0.5">
+                  <Cpu className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-500 text-white uppercase tracking-wide">
+                      CIVITAI 112+
+                    </span>
+                    <h3 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">
+                      MiniMax H3 Models
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                    คลัง 112 โมเดล LoRAs & Workflows จาก Civitai สำหรับ MiniMax H3
+                  </p>
+                </div>
+              </div>
+              <div className="p-1 rounded-lg bg-purple-500/20 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors shrink-0 mt-1">
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </div>

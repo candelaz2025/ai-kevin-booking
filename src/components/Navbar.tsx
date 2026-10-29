@@ -97,6 +97,14 @@ export default function Navbar() {
                   </Link>
 
                   <Link
+                    href="/prompts/minimax-h3"
+                    onClick={() => setPromptsDropdownOpen(false)}
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
+                  >
+                    MiniMax H3 Models
+                  </Link>
+
+                  <Link
                     href="/prompts/website-design"
                     onClick={() => setPromptsDropdownOpen(false)}
                     className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
@@ -272,6 +280,13 @@ export default function Navbar() {
                   className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
                   Director Prompt Studio
+                </Link>
+                <Link
+                  href="/prompts/minimax-h3"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                >
+                  MiniMax H3 Models
                 </Link>
                 <Link
                   href="/prompts/website-design"
