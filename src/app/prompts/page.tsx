@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { PromptTemplate } from '@/lib/types';
+import pool500Data from '@/data/random-500-prompts.json';
 import confetti from 'canvas-confetti';
 import {
   Sparkles, Copy, Check, Terminal, Sliders, Layers, ArrowRight,
@@ -14,6 +15,20 @@ import {
 // ============================================================================
 // REALISTIC SMART AI PRESET DICTIONARY FOR RANDOM GENERATION
 // ============================================================================
+interface Random500Item {
+  id: string;
+  title: string;
+  category: string;
+  categoryTh: string;
+  badge: string;
+  ideaSummary: string;
+  fullPrompt: string;
+  tags: string[];
+  targetAi: string;
+  previewMedia?: string;
+  mediaType?: string;
+}
+
 interface RandomPreset {
   promptId?: string;
   category?: string;
@@ -264,6 +279,13 @@ export default function PromptsPage() {
   const [showGeneratedModal, setShowGeneratedModal] = useState(false);
   const [randomPresetTitle, setRandomPresetTitle] = useState<string>('');
 
+  // 500 Random Ideas & Prompts System States
+  const [showPoolModal, setShowPoolModal] = useState(false);
+  const [selectedPoolCategory, setSelectedPoolCategory] = useState<string>('all');
+  const [poolSearchQuery, setPoolSearchQuery] = useState<string>('');
+  const [activePoolItem, setActivePoolItem] = useState<Random500Item | null>(null);
+  const [poolCopiedId, setPoolCopiedId] = useState<string | null>(null);
+
   // Sticky Bar visibility when scrolling down
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
 
@@ -430,6 +452,30 @@ export default function PromptsPage() {
     }, 450);
   };
 
+  // 500 Random Ideas: Quick pick 1 random from 500 catalog
+  const handleRandomFrom500 = (cat?: string) => {
+    setIsRandomizing(true);
+    let items = pool500Data as Random500Item[];
+    if (cat && cat !== 'all') {
+      items = items.filter(it => it.category.toLowerCase() === cat.toLowerCase());
+    }
+    if (items.length === 0) items = pool500Data as Random500Item[];
+    const chosen = items[Math.floor(Math.random() * items.length)];
+
+    setTimeout(() => {
+      setIsRandomizing(false);
+      setActivePoolItem(chosen);
+      setShowPoolModal(true);
+      triggerConfetti();
+    }, 300);
+  };
+
+  const handleCopyPoolPrompt = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setPoolCopiedId(id);
+    setTimeout(() => setPoolCopiedId(null), 2000);
+  };
+
   // Randomize variables for the CURRENT active prompt
   const handleRandomizeCurrentVariables = () => {
     if (!selectedPrompt) return;
@@ -504,24 +550,36 @@ export default function PromptsPage() {
             นำไปใช้สร้าง Web App, ระบบ CRM, หรือคอนเทนต์ได้ทันทีโดยไม่ต้องเริ่มต้นจากศูนย์
           </p>
 
-          {/* HERO AI RANDOM PROMPT BUTTON */}
+          {/* HERO AI RANDOM PROMPT & 500 POOL BUTTONS */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
-              onClick={handleRandomPrompt}
-              disabled={isRandomizing || prompts.length === 0}
+              onClick={() => handleRandomFrom500()}
+              disabled={isRandomizing}
               className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-amber-400/25 hover:shadow-amber-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/50"
             >
               <Dices className={`w-5 h-5 text-slate-950 ${isRandomizing ? 'animate-spin' : ''}`} />
-              <span>{isRandomizing ? 'กำลังสุ่มไอเดียด้วย AI...' : '🎲 สุ่ม Prompt ด้วย AI (Random Prompt)'}</span>
+              <span>{isRandomizing ? 'กำลังสุ่มไอเดียด้วย AI...' : '🎲 สุ่มไอเดีย & Prompt 500 รายการ'}</span>
             </button>
 
-            <a
-              href="#prompt-builder"
+            <button
+              onClick={() => {
+                setActivePoolItem(null);
+                setShowPoolModal(true);
+              }}
+              className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-600/30 via-indigo-600/30 to-slate-900/80 hover:from-purple-600/40 hover:to-indigo-600/40 text-purple-200 text-sm font-bold border border-purple-500/40 hover:border-purple-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-500/10"
+            >
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              <span>คลังสุ่ม 500 ไอเดีย (ดูทั้งหมด)</span>
+            </button>
+
+            <button
+              onClick={handleRandomPrompt}
+              disabled={isRandomizing || prompts.length === 0}
               className="w-full sm:w-auto px-5 py-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-sm font-semibold border border-white/10 hover:border-amber-400/30 transition-all flex items-center justify-center gap-2"
             >
-              <Sliders className="w-4 h-4 text-amber-400" />
-              <span>ปรับแต่ง Prompt ด้วยตนเอง</span>
-            </a>
+              <Shuffle className="w-4 h-4 text-amber-400" />
+              <span>สุ่มฟอร์ม Master Prompt</span>
+            </button>
           </div>
         </div>
 
