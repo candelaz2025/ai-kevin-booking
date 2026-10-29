@@ -1319,7 +1319,119 @@ function randomStep(i){
   else if(i===5){ ["audio.music","audio.ambience","audio.mix","voice.gender","voice.tone","voice.pace","sub.pos","sub.style"].forEach(randomField); rndSfxSet(); }
   else if(i===7){ rndSet("tone"); randomField("caption"); randomField("hashtags"); }
 }
-function randomAll(){ [0,1,2,3,4,5,7].forEach(randomStep); }
+/* ===== 500 UNIQUE PRESETS RANDOM ENGINE (ZERO DUPLICATION) ===== */
+const DECK_STORAGE_KEY = "dps_deck_v1";
+const HISTORY_STORAGE_KEY = "dps_history_v1";
+
+function initDeck(){
+  const total = (window.PRESETS_500 && window.PRESETS_500.length) || 500;
+  const deck = Array.from({ length: total }, (_, i) => i);
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  try {
+    localStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(deck));
+    localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify([]));
+  } catch(e) {}
+  return deck;
+}
+
+function getDeck(){
+  try {
+    const raw = localStorage.getItem(DECK_STORAGE_KEY);
+    if(raw) {
+      const arr = JSON.parse(raw);
+      if(Array.isArray(arr) && arr.length > 0) return arr;
+    }
+  } catch(e) {}
+  return initDeck();
+}
+
+function getHistory(){
+  try {
+    const raw = localStorage.getItem(HISTORY_STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+  } catch(e) {}
+  return [];
+}
+
+function updateCounterUI(){
+  const hist = getHistory();
+  const total = (window.PRESETS_500 && window.PRESETS_500.length) || 500;
+  const el = document.querySelector("#rndCounter");
+  if(el){
+    el.textContent = `${hist.length}/${total}`;
+    el.title = `สุ่มไปแล้ว ${hist.length} จาก ${total} แบบ (ไม่ซ้ำ)`;
+  }
+}
+
+function applyPreset(p){
+  if(!p) return;
+  S.genre = p.genre || "drama";
+  S.style = p.style || "photoreal";
+  S.premise = p.premise || "";
+  S.setting = p.setting || "";
+  S.relation = p.relation || "";
+  S.ending = p.ending || "";
+  S.hookType = p.hookType || "pain";
+  S.hookText = p.hookText || "";
+  S.beats = Array.isArray(p.beats) ? [...p.beats] : [];
+  
+  if(Array.isArray(p.chars) && p.chars.length){
+    S.chars = p.chars.map((c, idx) => Object.assign(blankChar(idx), c));
+  }
+  
+  if(Array.isArray(p.shots) && p.shots.length){
+    S.shots = p.shots.map(s => Object.assign({}, s));
+  } else {
+    S.shots = buildStoryboard();
+  }
+
+  if(p.audio){
+    S.audio.music = p.audio.music || "auto";
+    S.audio.ambience = p.audio.ambience || "auto";
+    S.audio.sfx = Array.isArray(p.audio.sfx) ? [...p.audio.sfx] : [];
+  }
+
+  if(p.voice){
+    S.voice.gender = p.voice.gender || "female";
+    S.voice.tone = p.voice.tone || "warm";
+    S.voice.pace = p.voice.pace || "medium";
+  }
+
+  if(p.caption) S.caption = p.caption;
+  if(p.hashtags) S.hashtags = p.hashtags;
+}
+
+function randomAll(){
+  if(window.PRESETS_500 && window.PRESETS_500.length){
+    let deck = getDeck();
+    let history = getHistory();
+
+    if(!deck.length){
+      deck = initDeck();
+      history = [];
+      toast("สุ่มครบ 500 แบบแล้ว! ระบบรีเซ็ตลำดับใหม่เพื่อสุ่มต่อได้ไม่จำกัด");
+    }
+
+    const nextIdx = deck.pop();
+    history.push(nextIdx);
+
+    try {
+      localStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(deck));
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
+    } catch(e) {}
+
+    const preset = window.PRESETS_500[nextIdx];
+    applyPreset(preset);
+    updateCounterUI();
+    return { count: history.length, total: window.PRESETS_500.length, title: preset.title };
+  }
+
+  [0,1,2,3,4,5,7].forEach(randomStep);
+  return null;
+}
 
 let lastSnap = null;
 function snap(){ lastSnap = JSON.stringify(S); const b = document.querySelector("#btnUndo"); if(b) b.hidden = false; }
@@ -1585,6 +1697,7 @@ function render(){
   renderSteps();
   $("#stage").innerHTML = RENDERERS[S.step]();
   renderPanel(); syncHeader();
+  updateCounterUI();
   const st = document.querySelector(".only-m"); if(st) st.style.display = "";
 }
 /* ===== APP: events, actions, AI, init ===== */
@@ -1736,7 +1849,18 @@ const el_btnReset = $("#btnReset"); if(el_btnReset) el_btnReset.addEventListener
   this.dataset.arm=""; this.textContent="ล้างโปรเจกต์";
   S = initialState(); Object.keys(preview).forEach(k=>delete preview[k]); ai.hooks=[]; ai.err=""; save(); render(); toast("ล้างโปรเจกต์แล้ว");
 });
-const el_btnRndAll = $("#btnRndAll"); if(el_btnRndAll) el_btnRndAll.addEventListener("click", () => { snap(); randomAll(); save(); render(); toast("สุ่มทั้งโปรเจกต์แล้ว กดเลิกสุ่มได้ที่มุมบน"); });
+const el_btnRndAll = $("#btnRndAll"); 
+if(el_btnRndAll) el_btnRndAll.addEventListener("click", () => { 
+  snap(); 
+  const res = randomAll(); 
+  save(); 
+  render(); 
+  if(res) {
+    toast(`🎲 สุ่มแบบที่ ${res.count}/${res.total} (ไม่ซ้ำ): ${res.title}`);
+  } else {
+    toast("สุ่มทั้งโปรเจกต์แล้ว กดเลิกสุ่มได้ที่มุมบน");
+  }
+});
 const el_btnUndo = $("#btnUndo"); if(el_btnUndo) el_btnUndo.addEventListener("click", undoRandom);
 const el_btnAiAll = $("#btnAiAll"); if(el_btnAiAll) el_btnAiAll.addEventListener("click", () => aiRandomRun([0,1,2,3,4,5,7]));
 const el_btnAiCancel = $("#btnAiCancel"); if(el_btnAiCancel) el_btnAiCancel.addEventListener("click", () => { if(ai.ctrl) ai.ctrl.abort(); });
@@ -1749,8 +1873,131 @@ function setView(v){
 const el_vwWizard = $("#vwWizard"); if(el_vwWizard) el_vwWizard.addEventListener("click", ()=>setView("wizard"));
 const el_vwPrompt = $("#vwPrompt"); if(el_vwPrompt) el_vwPrompt.addEventListener("click", ()=>{ setView("prompt"); window.scrollTo({top:0}); });
 
+/* ===== 500 PRESETS BROWSER MODAL ===== */
+let modal500Genre = "all";
+let modal500Query = "";
+
+function renderModal500List(){
+  const container = document.querySelector("#modal500List");
+  if(!container || !window.PRESETS_500) return;
+
+  const q = modal500Query.toLowerCase().trim();
+  const filtered = window.PRESETS_500.filter(p => {
+    if(modal500Genre !== "all" && p.genre !== modal500Genre) return false;
+    if(q){
+      const matchTitle = (p.title||"").toLowerCase().includes(q);
+      const matchPremise = (p.premise||"").toLowerCase().includes(q);
+      const matchChar = (p.chars||[]).some(c => (c.name||"").toLowerCase().includes(q) || (c.nameEn||"").toLowerCase().includes(q));
+      if(!matchTitle && !matchPremise && !matchChar) return false;
+    }
+    return true;
+  });
+
+  if(!filtered.length){
+    container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#64748B">ไม่พบไอเดียที่ตรงกับการค้นหา</div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(p => {
+    const charName = p.chars && p.chars[0] ? p.chars[0].name : "ตัวละคร";
+    const gObj = GENRES[p.genre] || { th: p.genre };
+    return `<div class="preset-card" data-presetid="${p.id}">
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px">
+          <span class="tag" style="font-size:10px;padding:2px 6px">${esc(gObj.th)}</span>
+          <span style="font-size:11px;font-family:var(--font-mono);color:#F59E0B">#${p.id}</span>
+        </div>
+        <div class="preset-card-title">${esc(p.title)}</div>
+        <div class="preset-card-premise">${esc(p.premise)}</div>
+      </div>
+      <div class="preset-card-meta">
+        <span>👤 ${esc(charName)}</span>
+        <span class="btn sm" style="padding:2px 8px;font-size:11px">เลือกใช้ ➔</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function initModal500(){
+  const modal = document.querySelector("#modal500");
+  const btnOpen = document.querySelector("#btnBrowse500");
+  const btnClose = document.querySelector("#modal500CloseBtn");
+  const backdrop = document.querySelector("#modal500Close");
+  const searchInput = document.querySelector("#modal500Search");
+  const chipsContainer = document.querySelector("#modal500Chips");
+
+  if(!modal || !btnOpen) return;
+
+  btnOpen.addEventListener("click", () => {
+    modal.hidden = false;
+    renderModal500List();
+  });
+
+  const close = () => { modal.hidden = true; };
+  if(btnClose) btnClose.addEventListener("click", close);
+  if(backdrop) backdrop.addEventListener("click", close);
+
+  if(searchInput){
+    searchInput.addEventListener("input", (e) => {
+      modal500Query = e.target.value;
+      renderModal500List();
+    });
+  }
+
+  if(chipsContainer){
+    const chipsList = [
+      { id: "all", label: "ทั้งหมด (500)" },
+      { id: "drama", label: "ดราม่า" },
+      { id: "boss", label: "ประธานบริษัท" },
+      { id: "horror", label: "ผี / สยองขวัญ" },
+      { id: "action", label: "แอ็คชั่น" },
+      { id: "romance", label: "โรแมนซ์" },
+      { id: "ugc", label: "UGC ป้ายยา" },
+      { id: "comedy", label: "คอมเมดี้" },
+      { id: "anime_jp", label: "อนิเมะ JP" },
+      { id: "donghua_cn", label: "อนิเมะ CN" },
+      { id: "period", label: "ย้อนยุค" },
+      { id: "adventure", label: "ไซเบอร์พังค์" }
+    ];
+
+    chipsContainer.innerHTML = chipsList.map(c => `
+      <button type="button" class="chip" data-m500genre="${c.id}" ${c.id===modal500Genre?'aria-pressed="true"':""}>
+        ${c.label}
+      </button>
+    `).join("");
+
+    chipsContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-m500genre]");
+      if(!btn) return;
+      modal500Genre = btn.dataset.m500genre;
+      chipsContainer.querySelectorAll(".chip").forEach(ch => {
+        ch.setAttribute("aria-pressed", ch.dataset.m500genre === modal500Genre);
+      });
+      renderModal500List();
+    });
+  }
+
+  const listContainer = document.querySelector("#modal500List");
+  if(listContainer){
+    listContainer.addEventListener("click", (e) => {
+      const card = e.target.closest(".preset-card");
+      if(!card) return;
+      const id = parseInt(card.dataset.presetid, 10);
+      const found = window.PRESETS_500 ? window.PRESETS_500.find(p => p.id === id) : null;
+      if(found){
+        snap();
+        applyPreset(found);
+        save();
+        render();
+        close();
+        toast(`เลือกไอเดีย #${found.id}: ${found.title} แล้ว!`);
+      }
+    });
+  }
+}
+
 /* ---- init ---- */
-load(); setView("wizard"); render();
+load(); setView("wizard"); render(); initModal500();
 (async () => {
   try{
     if(window.claude && window.claude.use){

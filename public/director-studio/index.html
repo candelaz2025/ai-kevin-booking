@@ -28,7 +28,14 @@
     <div class="tools">
       <button class="btn sm ai" id="btnAiAll" type="button" hidden>✦ AI สุ่มทั้งโปรเจกต์</button>
       <button class="btn sm" id="btnAiCancel" type="button" hidden>ยกเลิก AI</button>
-      <button class="btn sm primary" id="btnRndAll" type="button">🎲 สุ่มทั้งโปรเจกต์</button>
+      
+      <!-- 500 Unique Presets Random System -->
+      <button class="btn sm primary" id="btnRndAll" type="button" title="สุ่มทีละแบบจาก 500 ไอเดียโดยไม่ซ้ำกันเลย">
+        🎲 สุ่ม 500 แบบ (ไม่ซ้ำ)
+      </button>
+      <span id="rndCounter" class="tag" style="background:rgba(245,158,11,0.15);color:#FBBF24;border:1px solid rgba(245,158,11,0.35);font-family:var(--font-mono);font-size:11px;font-weight:700" title="จำนวนที่สุ่มไปแล้วจาก 500 แบบ">0/500</span>
+      <button class="btn sm ghost" id="btnBrowse500" type="button" title="เปิดดูรายการไอเดียทั้งหมด 500 แบบ">📋 คลัง 500 ไอเดีย</button>
+
       <button class="btn sm" id="btnUndo" type="button" hidden>↶ เลิกสุ่ม</button>
       <button class="btn sm ghost" id="btnTheme" type="button" aria-label="สลับธีมสว่าง/มืด">◐ ธีม</button>
       <button class="btn sm ghost danger" id="btnReset" type="button">ล้างโปรเจกต์</button>
@@ -48,8 +55,32 @@
     <aside class="panel" id="panel" aria-label="Prompt ที่ประกอบแล้ว"></aside>
   </main>
 </div>
+
+<!-- Modal 500 Presets Browser -->
+<div id="modal500" class="modal500" hidden>
+  <div class="modal500-backdrop" id="modal500Close"></div>
+  <div class="modal500-content">
+    <div class="modal500-head">
+      <div>
+        <h3 style="font-size:16px;color:#fff;margin:0;display:flex;align-items:center;gap:8px">
+          <span>📋 คลังไอเดียภาพยนตร์และซีรีส์ 500 แบบ (ไม่ซ้ำ)</span>
+          <span class="tag" style="background:rgba(245,158,11,0.2);color:#FBBF24;border-color:rgba(245,158,11,0.4)">500 PRESETS</span>
+        </h3>
+        <p class="muted small" style="margin-top:2px">คลิกเพื่อนำไอเดียทั้งหมด (เรื่อง, ตัวละคร, สไตล์, Storyboard, เสียงพากย์ MiniMax H3) มาใส่ในโปรเจกต์ทันที</p>
+      </div>
+      <button class="btn sm ghost" id="modal500CloseBtn" type="button">✕ ปิด</button>
+    </div>
+    <div class="modal500-tools">
+      <input type="text" id="modal500Search" placeholder="ค้นหาไอเดีย, คีย์เวิร์ด, แนวดราม่า, ประธานบริษัท, สยองขวัญ, ตัวละคร..." class="search-input">
+      <div class="modal500-chips" id="modal500Chips"></div>
+    </div>
+    <div class="modal500-list" id="modal500List"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" hidden></div>
 
+<script src="/director-studio/presets-500.js"></script>
 <script src="/director-studio/studio.js"></script>
 </body>
 </html>
