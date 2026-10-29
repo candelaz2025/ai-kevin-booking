@@ -24,7 +24,7 @@ export default function DirectorStudioPage() {
       )}
 
       <iframe
-        src="/director-studio/index.html"
+        src="/director-studio/index.html?v=500-pro"
         style={{
           width: '100vw',
           height: '100dvh',
