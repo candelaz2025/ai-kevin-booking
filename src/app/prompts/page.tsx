@@ -562,8 +562,8 @@ export default function PromptsPage() {
           </div>
         </div>
 
-        {/* Video Prompt, Drama Studio, Vibe Design & Motion Claude Feature Banners */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {/* Video Prompt, Drama Studio, Director Studio, Vibe Design & Motion Claude Feature Banners */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
           {/* 1. Video Prompt Library Banner */}
           <Link
             href="/prompts/video"
@@ -577,7 +577,7 @@ export default function PromptsPage() {
                 <div>
                   <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-pink-500 text-white uppercase tracking-wide">
-                      9 STUDIOS + 100 STYLES
+                      9 STUDIOS
                     </span>
                     <h3 className="text-sm font-bold text-white group-hover:text-pink-300 transition-colors">
                       Prompt Video
@@ -624,7 +624,37 @@ export default function PromptsPage() {
             </div>
           </Link>
 
-          {/* 3. Website Design (Oil UI) Banner */}
+          {/* 3. Director Prompt Studio Banner */}
+          <Link
+            href="/prompts/director-studio"
+            className="group block relative overflow-hidden rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-500/15 via-teal-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-emerald-400 transition-all shadow-xl hover:shadow-emerald-500/10"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-slate-950 flex items-center justify-center font-bold shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform shrink-0 mt-0.5">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 uppercase tracking-wide">
+                      8-STEP WIZARD
+                    </span>
+                    <h3 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      Director Studio
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                    สร้าง Prompt ละเอียดระดับผู้กำกับ ล็อกหน้าตัวละคร Storyboard & Subtitle
+                  </p>
+                </div>
+              </div>
+              <div className="p-1 rounded-lg bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors shrink-0 mt-1">
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </div>
+          </Link>
+
+          {/* 4. Website Design (Oil UI) Banner */}
           <Link
             href="/prompts/website-design"
             className="group block relative overflow-hidden rounded-2xl border border-indigo-500/40 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-indigo-400 transition-all shadow-xl hover:shadow-indigo-500/10"
@@ -654,7 +684,7 @@ export default function PromptsPage() {
             </div>
           </Link>
 
-          {/* 4. Motion Claude Prompt (Opus 5.5) Banner */}
+          {/* 5. Motion Claude Prompt (Opus 5.5) Banner */}
           <Link
             href="/prompts/motion-claude"
             className="group block relative overflow-hidden rounded-2xl border border-orange-500/40 bg-gradient-to-br from-orange-500/15 via-amber-500/10 to-slate-900/40 p-4 sm:p-5 hover:border-orange-400 transition-all shadow-xl hover:shadow-orange-500/10"
