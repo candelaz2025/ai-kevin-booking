@@ -105,7 +105,7 @@ const ENGINES = {
 
 function initialState(){
   return {
-    step:0, genre:"drama", style:"photoreal", scope:"single", engine:"minimax",
+    step:0, genre:"drama", style:"photoreal", scope:"single", engine:"minimax", minimaxMode:"reftovideo",
     premise:"", ending:"", relation:"", setting:"", topic:"", product:{name:"",look:"",usp:""},
     audio:{music:"auto",ambience:"auto",sfx:[],mix:"vo_first"}, voice:{gender:"female",tone:"warm",pace:"medium"}, sub:{on:"on",lang:"th",lang2:"",pos:"lower",style:"clean"},
     chars:[blankChar(0)],
@@ -858,7 +858,7 @@ const preview = {}; // reference image previews, memory only (never persisted)
 const productImgs = []; // product image previews, memory only
 
 function load(){
-  try{ const r = localStorage.getItem(KEY); if(r){ const o = JSON.parse(r); S = Object.assign(initialState(), o); if(!S.chars||!S.chars.length) S.chars=[blankChar(0)]; if(!GENRES[S.genre]) S.genre="drama"; if(!STYLES[S.style]) S.style="photoreal"; if(!Array.isArray(S.audio.sfx)) S.audio.sfx=[]; } }catch(e){}
+  try{ const r = localStorage.getItem(KEY); if(r){ const o = JSON.parse(r); S = Object.assign(initialState(), o); if(!S.chars||!S.chars.length) S.chars=[blankChar(0)]; if(!GENRES[S.genre]) S.genre="drama"; if(!STYLES[S.style]) S.style="photoreal"; if(!Array.isArray(S.audio.sfx)) S.audio.sfx=[]; if(!S.minimaxMode) S.minimaxMode="reftovideo"; } }catch(e){}
 }
 let saveT;
 function save(){ clearTimeout(saveT); saveT = setTimeout(()=>{ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }, 300); }
@@ -922,8 +922,150 @@ function buildPrompt(){
   return buildMetaAiPrompt();
 }
 
-/* 1. MiniMax Hailuo H3 Master Production Prompt (Story + Character Lock + Voice-Over) */
+/* 1. MiniMax Hailuo H3 Master Production Prompt Engine */
 function buildMinimaxPrompt(){
+  const mode = S.minimaxMode || "reftovideo";
+  if(mode === "texttoimage") return buildMinimaxT2IPrompt();
+  if(mode === "imagetovideo") return buildMinimaxI2VPrompt();
+  return buildMinimaxR2VPrompt();
+}
+
+/* 1A. MiniMax Hailuo H3 - Text-to-Image (T2I Keyframe / Master Character Anchor) */
+function buildMinimaxT2IPrompt(){
+  const g = GENRES[S.genre], st = STYLES[S.style], ar = PLATFORMS[S.platform];
+  const out = [];
+
+  // 1. SPECIFICATION HEADER
+  out.push(
+    "[MODEL: MiniMax Hailuo - Text-to-Image (T2I) Master Visual Keyframe]\n" +
+    "[FORMAT: " + aspectTxt(ar) + "] [RESOLUTION: 4K Ultra-Sharp Cinematic Still Frame]\n" +
+    "[VISUAL STYLE: " + st.txt + ", 85mm portrait lens, f/1.8 shallow depth of field, authentic micro skin pores, natural film grain]\n" +
+    "[GENRE: " + (g.en || g.th) + " (" + g.mood + ")] [LIGHTING & PALETTE: " + g.light + "]"
+  );
+
+  // 2. PRIMARY SUBJECT & CHARACTER ANCHOR
+  const used = S.chars.map((c, i) => ({ c, i })).filter(o => o.c.name || o.c.nameEn || o.c.face || o.c.hair || o.c.age || o.c.body || o.c.wardrobe);
+  const primaryChar = used.length ? used[0].c : { name: "นลิน", nameEn: "Nalin", role: "Lead Protagonist", age: "26-28", job: "creative professional", face: "refined oval face, delicate almond-shaped eyes, gentle brow, natural warm Asian skin tone", hair: "neat natural black hair with gentle loose wave", body: "slender, natural posture", wardrobe: "stylish casual minimal cream sweater over crisp white shirt" };
+
+  const charName = primaryChar.name || primaryChar.nameEn || "Lead Protagonist";
+  const appStr = appearance(primaryChar);
+  const poseExp = primaryChar.traits ? primaryChar.traits + ", expressive gentle eyes with emotional depth" : "calm introspective expression, eyes directly engaging the viewer with lifelike emotional resonance";
+
+  out.push(
+    "PRIMARY SUBJECT & CHARACTER ANCHOR (T2I):\n" +
+    "• Subject: (S1) " + charName + " [" + (primaryChar.role || "Lead") + "]\n" +
+    "• Facial & Physical Anchor: " + appStr + "\n" +
+    "• Costume & Styling: " + (primaryChar.wardrobe || "tasteful contemporary cinematic wardrobe with clean tailoring") + "\n" +
+    "• Pose & Facial Expression: " + poseExp + "\n" +
+    "• Eyes & Skin Realism: Crystal-clear eye reflections with visible iris textures, soft natural moisture highlights, authentic human skin pores without artificial digital smoothing or airbrushing."
+  );
+
+  if(used.length > 1){
+    const secChar = used[1].c;
+    out.push(
+      "SECONDARY SUBJECT (BACKGROUND / SUPPORT):\n" +
+      "• Secondary Character: (S2) " + (secChar.name || secChar.nameEn || "Supporting Character") + " - " + appearance(secChar) + "\n" +
+      "• Position: Standing in soft background focus, creating cinematic narrative depth between characters."
+    );
+  }
+
+  // 3. SCENE COMPOSITION & ENVIRONMENT
+  const env = (S.setting || "").trim() || "cinematic Bangkok metropolitan setting, quiet intimate atmosphere during twilight golden hour";
+  out.push(
+    "SCENE COMPOSITION & ENVIRONMENT:\n" +
+    "• Environment: " + env + "\n" +
+    "• Framing: Medium Close-up (MCU), balanced rule of thirds composition, rich volumetric depth.\n" +
+    "• Cinematic Atmosphere: " + g.light + ", subtle air dust particles floating in the light beams, beautifully rendered circular bokeh highlights in the deep background."
+  );
+
+  if(productOn()){
+    const pr = S.product;
+    out.push(
+      "FEATURED PRODUCT INTEGRATION:\n" +
+      "• Product: " + (pr.name.trim() || "Featured Product") + (pr.look.trim() ? " (" + pr.look.trim() + ")" : "") + "\n" +
+      "• Placement: Featured naturally in foreground or held by character, sharp label focus and authentic product lighting."
+    );
+  }
+
+  // 4. RENDERING DIRECTIVES
+  out.push(
+    "T2I PRODUCTION DIRECTIVES:\n" +
+    "Produce a single master-grade still frame. Focus on photographic credibility, natural anatomy, realistic eye catchlights, and authentic texture. This still frame will serve as the master reference image for subsequent video generation."
+  );
+
+  // 5. NEGATIVE PROMPT
+  out.push(
+    "NEGATIVE PROMPT (T2I):\n" +
+    "mutated hands, distorted fingers, extra limbs, bad anatomy, deformed facial features, cross-eyed, plastic doll skin, oversaturated colors, anime drawing, 3d render, cartoon illustration, blurry focus, watermark, signature, low resolution."
+  );
+
+  return out.join("\n\n");
+}
+
+/* 1B. MiniMax Hailuo H3 - Image-to-Video (I2V Motion + Closed Lips Voiceover) */
+function buildMinimaxI2VPrompt(){
+  const g = GENRES[S.genre], st = STYLES[S.style];
+  const langCode = (S.sub.lang || "th").toLowerCase().split("-")[0] || "th";
+  const out = [];
+
+  // 1. SPECIFICATION HEADER
+  const move1 = (S.shots[0] && S.shots[0].move) || "Slow cinematic push-in (dolly-in)";
+  const size1 = (S.shots[0] && (SIZES[S.shots[0].size] || S.shots[0].size)) || "Medium Close-up";
+  const dur1 = (S.shots[0] && S.shots[0].dur) || 6;
+
+  out.push(
+    "[MODEL: MiniMax Hailuo H3 - Image-to-Video (I2V) Motion Director Prompt]\n" +
+    "[INPUT SOURCE: Reference First Frame / Keyframe Image Uploaded]\n" +
+    "[MOTION DURATION: 0:00 - " + fmt(dur1) + " (" + dur1 + " seconds)] [MOTION STRENGTH: Natural Subtle Realism]\n" +
+    "[CAMERA DYNAMICS: " + move1 + " | Framing: " + size1 + "]\n" +
+    "[VISUAL STYLE: " + st.txt + "]"
+  );
+
+  // 2. FIRST FRAME ANIMATION & MOTION DYNAMICS
+  const char1 = S.chars[0] || {};
+  const premise = (S.premise || "").trim();
+  let act1 = (S.shots[0] && S.shots[0].action ? S.shots[0].action : (premise || "A beautiful cinematic drone shot of Bangkok skyline during sunset")).trim();
+
+  let vo1 = (S.shots[0] && (S.shots[0].vo || S.shots[0].dia)) ? stripVO(S.shots[0].vo || S.shots[0].dia) : (S.hookText || "กรุงเทพมหานคร เมืองหลวงที่ไม่เคยหลับใหล");
+  vo1 = vo1.trim();
+
+  let motionBlock = "FIRST FRAME ANIMATION & MOTION DYNAMICS (I2V):\n" +
+                    act1 + ".";
+
+  if(S.vo !== "none" && vo1){
+    motionBlock += "\n<d> (S1) says in an off-screen voiceover; [" + langCode + "] " + vo1 + " </d> and state lips stay closed after </d>.";
+  }
+
+  motionBlock += "\n\n• Micro-Movements: Natural breathing cadence, gentle eye gaze shift with subtle blinking, soft facial muscle relaxation, hair lightly swaying in ambient airflow.\n" +
+                 "• Environment Dynamics: Organic light and shadow play, background atmospheric particles drifting, subtle optical depth shifts.";
+
+  out.push(motionBlock);
+
+  // 3. TEMPORAL CONSISTENCY & LOCK DIRECTIVE
+  out.push(
+    "TEMPORAL CONSISTENCY DIRECTIVES (I2V):\n" +
+    "Strictly preserve 100% fidelity to the uploaded first frame image. Keep facial bone structure, eye shape, nose, skin complexion, hair styling, and clothing completely identical from start to finish. Zero identity drift, zero facial morphing during camera movement. Subject's lips must remain naturally closed during the entire off-screen voiceover."
+  );
+
+  // 4. AUDIO & SOUND DESIGN
+  const audioParts = [];
+  if(S.audio.music && S.audio.music !== "auto") audioParts.push("Music: " + S.audio.music);
+  if(S.audio.ambience && S.audio.ambience !== "auto") audioParts.push("Ambience: " + S.audio.ambience);
+  if(S.audio.sfx && S.audio.sfx.length) audioParts.push("SFX: " + S.audio.sfx.join(", "));
+  if(!audioParts.length) audioParts.push("Music: Subtle atmospheric cinematic score | Ambience: Natural room tone and environmental texture");
+  out.push("AUDIO & SOUND DESIGN:\n" + audioParts.join(" | "));
+
+  // 5. NEGATIVE PROMPT
+  out.push(
+    "NEGATIVE PROMPT (I2V):\n" +
+    "camera jitter, rapid zoom, jerky frame transitions, facial warping, deforming mouth, mouth moving during off-screen narration, floating objects, mutating fingers, clothing changing color, low frame rate, pixelated artifacts."
+  );
+
+  return out.join("\n\n");
+}
+
+/* 1C. MiniMax Hailuo H3 - Reference-to-Video (R2V Multi-Shot with Subject Lock) */
+function buildMinimaxR2VPrompt(){
   const g = GENRES[S.genre], st = STYLES[S.style], ar = PLATFORMS[S.platform];
   const langCode = (S.sub.lang || "th").toLowerCase().split("-")[0] || "th";
   const tl = timeline();
@@ -932,14 +1074,15 @@ function buildMinimaxPrompt(){
 
   // 1. SPECIFICATION HEADER
   out.push(
-    "[MODEL: MiniMax Hailuo H3 - Master Cinematic Director Prompt]\n" +
+    "[MODEL: MiniMax Hailuo H3 - Reference-to-Video (R2V / Subject Reference)]\n" +
+    "[SUBJECT REFERENCE BINDING: Lock Character @Image1 as (S1) Lead Protagonist" + (S.chars.length > 1 ? " | @Image2 as (S2)" : "") + "]\n" +
     "[FORMAT: " + aspectTxt(ar) + "] [DURATION: " + fmt(total) + " (" + (S.shots.length || nShots()) + " shots)]\n" +
     "[VISUAL STYLE: " + st.txt + "]\n" +
     "[GENRE: " + (g.en || g.th) + " (" + g.mood + ")] [PACING: " + g.pace + "]\n" +
     "[LIGHTING & COLOR: " + g.light + "]"
   );
 
-  // 2. STORY & NARRATIVE ARCHITECTURE (เนื้อเรื่อง story แบบเต็ม)
+  // 2. STORY & NARRATIVE ARCHITECTURE
   const storyLines = [];
   const premise = (S.premise || "").trim();
   if(premise) storyLines.push("• Story Premise: " + premise);
@@ -956,7 +1099,7 @@ function buildMinimaxPrompt(){
   }
   out.push("STORY & NARRATIVE CONTEXT:\n" + storyLines.join("\n"));
 
-  // 3. CHARACTER IDENTITY LOCK (การล็อคตัวละคร MiniMax H3)
+  // 3. CHARACTER IDENTITY & SUBJECT REFERENCE LOCK
   const used = S.chars.map((c, i) => ({ c, i })).filter(o => o.c.name || o.c.nameEn || o.c.face || o.c.hair || o.c.age || o.c.body || o.c.wardrobe);
   const charBlocks = [];
 
@@ -969,7 +1112,7 @@ function buildMinimaxPrompt(){
       const jobStr = c.job ? ", " + c.job : "";
       const appStr = appearance(c);
 
-      let b = "• (" + speakerId + ") " + charName + roleStr + jobStr + ":\n" +
+      let b = "• (" + speakerId + ") " + charName + roleStr + jobStr + " [Bound to @Image" + (idx + 1) + "]:\n" +
               "  - Facial & Physical Anchor: " + appStr;
       if(c.wardrobe) b += "\n  - Signature Costume / Wardrobe: " + c.wardrobe;
       if(c.traits || c.flaw) b += "\n  - Character Demeanor: " + [c.traits, c.flaw ? "flaw: " + c.flaw : ""].filter(Boolean).join("; ");
@@ -977,17 +1120,17 @@ function buildMinimaxPrompt(){
     });
   } else {
     charBlocks.push(
-      "• (S1) Lead Protagonist [Lead]: 26-28 years old, natural Asian facial features, authentic skin texture and pores, neat natural black hair, casual modern attire.\n" +
+      "• (S1) Lead Protagonist [Lead, Bound to @Image1]: 26-28 years old, natural Asian facial features, authentic skin texture and pores, neat natural black hair, casual modern attire.\n" +
       "  - Facial & Physical Anchor: Consistent expressive eyes, realistic skin tone, calm and focused emotional demeanor."
     );
   }
 
   charBlocks.push(
-    "STRICT CHARACTER IDENTITY LOCK (MiniMax H3 Directive):\n" +
-    "Maintain 100% identical facial bone structure, eye shape and color, nose bridge, skin tone, pore texture, and hairstyle for each character across every shot, camera cut, and angle. Zero facial morphing, zero identity drift, no beautification smoothing. Retain character costume and signature traits consistently throughout the entire sequence."
+    "STRICT CHARACTER SUBJECT LOCK (MiniMax H3 R2V Directive):\n" +
+    "Lock 100% facial landmarks, bone structure, eye shape, nose bridge, skin tone, pore texture, and hairstyle from @Image1 for (S1) across every shot, camera cut, and angle. Zero facial morphing, zero identity drift between wide shots and close-ups. Retain character costume and signature traits consistently throughout the entire sequence."
   );
 
-  out.push("CHARACTER IDENTITY LOCK:\n" + charBlocks.join("\n\n"));
+  out.push("CHARACTER IDENTITY & SUBJECT REFERENCE LOCK:\n" + charBlocks.join("\n\n"));
 
   // 4. PRODUCT LOCK (if applicable)
   if(productOn()){
@@ -1008,7 +1151,7 @@ function buildMinimaxPrompt(){
     const vo1 = S.hookText || "กรุงเทพมหานคร เมืองหลวงที่ไม่เคยหลับใหล";
 
     shotsOut.push(
-      "[SHOT 1] (0:00 - 0:05 | Wide Aerial Establishing | Slow cinematic drone sweep | Subject: (S1))\n" +
+      "[SHOT 1] (0:00 - 0:05 | Wide Aerial Establishing | Slow cinematic drone sweep | Subject: (S1) [@Image1])\n" +
       "Action: " + act1 + "\n" +
       "<d> (S1) says in an off-screen voiceover; [" + langCode + "] " + vo1 + " </d> and state lips stay closed after </d>."
     );
@@ -1016,7 +1159,7 @@ function buildMinimaxPrompt(){
     if(S.ending || (S.beats && S.beats.length > 1)){
       const act2 = (S.beats && S.beats[1]) ? S.beats[1] : (S.ending || "The character gazes thoughtfully towards the horizon as city lights begin to flicker on.");
       shotsOut.push(
-        "[SHOT 2] (0:05 - 0:10 | Medium Close-up | Subtle slow push-in | Subject: (S1))\n" +
+        "[SHOT 2] (0:05 - 0:10 | Medium Close-up | Subtle slow push-in | Subject: (S1) [@Image1])\n" +
         "Action: (S1) stands at a quiet rooftop viewpoint, wind gently moving their hair, eyes reflecting the warm twilight glow with subtle emotional depth.\n" +
         "<d> (S1) says in an off-screen voiceover; [" + langCode + "] ทุกความฝันที่นี่ มีราคาที่ต้องจ่ายเสมอ </d> and state lips stay closed after </d>."
       );
@@ -1038,7 +1181,7 @@ function buildMinimaxPrompt(){
 
       const timeRange = tl[i] ? fmt(tl[i][0]) + " - " + fmt(tl[i][1]) : "0:00 - 0:05";
       const sizeStr = SIZES[s.size] || s.size;
-      const whoLabel = s.who === "all" ? "All Characters" : "(" + speaker + ")";
+      const whoLabel = s.who === "all" ? "All Characters" : "(" + speaker + ") [@Image" + speaker.slice(1) + "]";
 
       let block = "[SHOT " + (i + 1) + "] (" + timeRange + " | " + sizeStr + " | " + s.move + " | Subject: " + whoLabel + ")\n" +
                   "Action: " + act;
@@ -1064,8 +1207,8 @@ function buildMinimaxPrompt(){
 
   // 7. NEGATIVE PROMPT (MINIMAX H3)
   out.push(
-    "NEGATIVE PROMPT (MINIMAX H3):\n" +
-    "mutated face, face morphing, distorted facial features, plastic skin texture, oversaturated, low resolution, unnatural eyes, multiple heads, deformed limbs, floating objects, jerky camera shake, mouth moving during off-screen dialogue, blurry background, video artifacts."
+    "NEGATIVE PROMPT (MINIMAX H3 R2V):\n" +
+    "mutated face, face morphing, distorted facial features, plastic skin texture, inconsistent character appearance, low resolution, unnatural eyes, multiple heads, deformed limbs, floating objects, jerky camera shake, mouth moving during off-screen dialogue, blurry background, video artifacts."
   );
 
   return out.join("\n\n");
@@ -1601,7 +1744,16 @@ function stepBoard(){
 function monitor(extra){
   const p = buildPrompt();
   const curEng = S.engine || "minimax";
+  const mmMode = S.minimaxMode || "reftovideo";
   const engLabel = (ENGINES[curEng] || ENGINES.minimax).th;
+  
+  const mmModeLabels = {
+    texttoimage: "Text to Image",
+    imagetovideo: "Image to Video",
+    reftovideo: "Ref to Video"
+  };
+  const modeBadge = curEng === "minimax" ? ` [${mmModeLabels[mmMode] || "Ref to Video"}]` : "";
+
   return `<div class="mon ${extra||""}">
     <div style="padding:10px 12px 6px;border-bottom:1px solid #2a2c33;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:rgba(255,255,255,0.02)">
       <div style="font-size:11px;font-family:var(--font-mono);color:var(--muted);display:flex;align-items:center;gap:6px">
@@ -1612,8 +1764,26 @@ function monitor(extra){
         ${Object.keys(ENGINES).map(k=>`<button type="button" class="btn sm ${curEng===k?"primary":""}" data-setengine="${k}" style="min-height:28px;padding:2px 8px;font-size:11.5px;font-weight:600">${esc(ENGINES[k].th)}</button>`).join("")}
       </div>
     </div>
+    ${curEng === "minimax" ? `
+    <div class="mm-subbar" style="padding:7px 12px;background:rgba(245,158,11,0.06);border-bottom:1px solid rgba(245,158,11,0.18);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div style="font-size:11.5px;font-family:var(--font-mono);color:#FBBF24;display:flex;align-items:center;gap:6px;font-weight:700">
+        <span>⚡ โหมด MiniMax H3:</span>
+      </div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <button type="button" class="btn sm ${mmMode==="texttoimage"?"primary":""}" data-minimaxmode="texttoimage" style="min-height:26px;padding:2px 8px;font-size:11px;font-weight:600;border-radius:6px" title="โหมด Text to Image: สร้างภาพตั้งต้น First Frame และ Character Anchor ระดับ 4K">
+          🖼️ Text to Image (T2I)
+        </button>
+        <button type="button" class="btn sm ${mmMode==="imagetovideo"?"primary":""}" data-minimaxmode="imagetovideo" style="min-height:26px;padding:2px 8px;font-size:11px;font-weight:600;border-radius:6px" title="โหมด Image to Video: ขยับภาพแรกเป็นวิดีโอ พร้อมกล้อง ฟิสิกส์ และ Voiceover ปิดปาก">
+          🎬 Image to Video (I2V)
+        </button>
+        <button type="button" class="btn sm ${mmMode==="reftovideo"?"primary":""}" data-minimaxmode="reftovideo" style="min-height:26px;padding:2px 8px;font-size:11px;font-weight:600;border-radius:6px" title="โหมด Ref to Video: สตอรี่บอร์ดหลายช็อต ล็อคหน้าตัวละคร @Image อ้างอิงต่อเนื่อง">
+          👤 Ref to Video (R2V)
+        </button>
+      </div>
+    </div>
+    ` : ""}
     <div class="mon-bar">
-      <span class="rec"><i class="dot"></i> ${esc(engLabel.toUpperCase())} PROMPT</span>
+      <span class="rec"><i class="dot"></i> ${esc(engLabel.toUpperCase())}${esc(modeBadge.toUpperCase())} PROMPT</span>
       <button class="btn primary sm" type="button" data-act="copyPrompt" ${p?"":"disabled"}>คัดลอก Prompt</button>
     </div>
     ${p?`<pre class="promptPre" tabindex="0">${esc(p)}</pre>`:`<div class="empty">ยังไม่มีข้อมูลพอสำหรับประกอบ Prompt เริ่มจากตั้งชื่อตัวละครและสร้าง Storyboard</div>`}
@@ -1663,11 +1833,27 @@ function syncHeader(){
   if(c) c.hidden=!ai.busy;
 }
 function stepOut(){
-  return `<div class="card">${head("Prompt พร้อมใช้","คัดลอกทั้งก้อน วางใน Meta AI แล้วแนบรูปอ้างอิงเดียวกับที่ใช้ตั้งตัวละคร")}
+  const curEng = S.engine || "minimax";
+  const mmMode = S.minimaxMode || "reftovideo";
+  
+  let guideText = "";
+  if(curEng === "minimax"){
+    if(mmMode === "texttoimage"){
+      guideText = "นำ Prompt โหมด Text to Image (T2I) นี้ไปสร้างภาพ First Frame หรือภาพถ่ายบุคคลต้นแบบใน MiniMax หรือโปรแกรมเจนภาพ เพื่อใช้เป็นภาพอ้างอิงหลัก (@Image1) สำหรับเจนวิดีโอ";
+    } else if(mmMode === "imagetovideo"){
+      guideText = "อัปโหลดภาพ First Frame ที่เจนไว้เข้า MiniMax Hailuo H3 แล้วนำ Prompt โหมด Image to Video (I2V) นี้ไปสั่งให้ภาพเคลื่อนไหวตามกล้องและฟิสิกส์ พร้อมเสียงพากย์ปิดปาก";
+    } else {
+      guideText = "นำ Prompt โหมด Ref to Video (R2V) นี้ไปใส่ใน MiniMax Hailuo H3 พร้อมแนบรูปอ้างอิงตัวละคร (@Image1) ระบบจะรักษารูปร่างหน้าตาตัวละครให้ตรงกันทุกมุมกล้องตลอดทั้ง 4 ช็อต";
+    }
+  } else {
+    guideText = "วางทั้งก้อนในช่อง prompt พร้อมแนบรูปอ้างอิง ถ้าหน้าเพี้ยนระหว่างช็อต ให้ลดจำนวนช็อต ลดการหันหน้าเกิน 45 องศา และ gen ใหม่โดยคง SYSTEM PROMPT (LOCK) ไว้เหมือนเดิมทุกครั้ง";
+  }
+
+  return `<div class="card">${head("Prompt พร้อมใช้","คัดลอกทั้งก้อน วางใน " + (ENGINES[curEng]||ENGINES.minimax).th + " พร้อมใช้งาน")}
   <div class="only-m">${monitor()}</div>
   <div class="field"><span class="lbl">เช็กก่อนส่ง</span>${checkList()}</div>
-  <div class="field"><span class="lbl">วิธีใช้ใน Meta AI</span>
-    <p class="small muted">วางทั้งก้อนในช่อง prompt พร้อมแนบรูปอ้างอิง${productOn()?" และรูปสินค้า":""} ถ้าหน้าเพี้ยนระหว่างช็อต ให้ลดจำนวนช็อต ลดการหันหน้าเกิน 45 องศา และ gen ใหม่โดยคง SYSTEM PROMPT (LOCK) ไว้เหมือนเดิมทุกครั้ง</p></div>
+  <div class="field"><span class="lbl">วิธีใช้งาน (${(ENGINES[curEng]||ENGINES.minimax).th}${curEng==="minimax"? (mmMode==="texttoimage"?" · Text to Image":mmMode==="imagetovideo"?" · Image to Video":" · Ref to Video") : ""})</span>
+    <p class="small muted">${guideText}</p></div>
   ${foot(6)}</div>`;
 }
 
@@ -1797,6 +1983,14 @@ const ACTS = {
 document.addEventListener("click", e => {
   const t = e.target.closest("button"); if(!t) return;
   if(t.dataset.setengine){ S.engine = t.dataset.setengine; save(); render(); toast("เลือกเป้าหมายเป็น " + ENGINES[S.engine].th + " แล้ว"); return; }
+  if(t.dataset.minimaxmode){
+    S.minimaxMode = t.dataset.minimaxmode;
+    save();
+    render();
+    const mmLabels = { texttoimage: "Text to Image (T2I)", imagetovideo: "Image to Video (I2V)", reftovideo: "Ref to Video (R2V)" };
+    toast("สลับเป็นโหมด: " + (mmLabels[S.minimaxMode] || S.minimaxMode));
+    return;
+  }
   if(t.dataset.cpick){ const k=t.dataset.cpick, v=t.dataset.val, box=document.querySelector("#catres-"+k), sc=box?box.scrollTop:0;
     if(k==="genre"){ S.genre=v; S.beats=[]; } else if(k==="style") S.style=v; else if(k==="loc") S.setting=LOCS[+v].en;
     save(); render(); const r=document.querySelector("#catres-"+k); if(r) r.scrollTop=sc; return; }
