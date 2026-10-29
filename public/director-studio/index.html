@@ -6,78 +6,22 @@
   <title>Director Prompt Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/director-studio/studio.css">
-  <style>
-    /* Dark mode Kevin AI Academy polish overrides */
-    :root {
-      --bg: #090A0F;
-      --surface: #12141C;
-      --surface-2: #1A1D29;
-      --fg: #F1F5F9;
-      --muted: #94A3B8;
-      --line: #262B3A;
-      --accent: #F59E0B;
-      --accent-fg: #000000;
-      --ai: #06B6D4;
-      --ok: #10B981;
-      --warn: #F59E0B;
-      --danger: #EF4444;
-      --mono-bg: #07080D;
-      --mono-fg: #E2E8F0;
-      --mono-dim: #64748B;
-    }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    }
-    .app {
-      padding-top: 12px;
-      padding-bottom: 60px;
-    }
-    .back-nav {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #94A3B8;
-      font-size: 13px;
-      text-decoration: none;
-      transition: all 0.2s;
-      margin-bottom: 8px;
-    }
-    .back-nav:hover {
-      color: #F59E0B;
-      background: rgba(245, 158, 11, 0.1);
-      border-color: rgba(245, 158, 11, 0.3);
-    }
-  </style>
 </head>
 <body data-theme="dark" data-view="wizard">
 <div class="app">
-  <div>
-    <a href="/prompts" class="back-nav">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      กลับหน้า Prompts Hub
-    </a>
-  </div>
   <header class="top">
     <div class="brand">
       <span class="eyebrow">Kevin AI Academy · Video Prompt Director</span>
       <h1>Director Prompt Studio</h1>
-      <p class="muted small">ตอบทีละขั้นแบบผู้กำกับมืออาชีพ แล้วได้ Prompt เดียวพร้อม Identity Lock คาแรกเตอร์คงที่ วางใน Meta AI / Midjourney / Kling / Hailuo / Runway ได้ทันที</p>
+      <p class="muted small">ตอบทีละขั้นแบบผู้กำกับมืออาชีพ แล้วได้ Master Prompt พร้อม Identity Lock และจัดรูปแบบรองรับ MiniMax H3, Google Flow, Meta AI & DreamRadar</p>
     </div>
     <div class="tools">
       <button class="btn sm ai" id="btnAiAll" type="button" hidden>✦ AI สุ่มทั้งโปรเจกต์</button>
       <button class="btn sm" id="btnAiCancel" type="button" hidden>ยกเลิก AI</button>
-      <button class="btn sm" id="btnRndAll" type="button">🎲 สุ่มทั้งโปรเจกต์</button>
+      <button class="btn sm primary" id="btnRndAll" type="button">🎲 สุ่มทั้งโปรเจกต์</button>
       <button class="btn sm" id="btnUndo" type="button" hidden>↶ เลิกสุ่ม</button>
-      <button class="btn sm ghost" id="btnTheme" type="button" aria-label="สลับธีมสว่าง/มืด">◐ ธีม</button>
       <button class="btn sm ghost danger" id="btnReset" type="button">ล้างโปรเจกต์</button>
     </div>
   </header>
