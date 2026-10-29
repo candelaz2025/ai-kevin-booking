@@ -922,44 +922,151 @@ function buildPrompt(){
   return buildMetaAiPrompt();
 }
 
-/* 1. MiniMax Hailuo H3 Prompt with Exact Off-Screen Voiceover Tag */
+/* 1. MiniMax Hailuo H3 Master Production Prompt (Story + Character Lock + Voice-Over) */
 function buildMinimaxPrompt(){
   const g = GENRES[S.genre], st = STYLES[S.style], ar = PLATFORMS[S.platform];
   const langCode = (S.sub.lang || "th").toLowerCase().split("-")[0] || "th";
   const tl = timeline();
+  const total = S.shots.length ? tl[S.shots.length-1][1] : (+S.clipSec || 15);
   const out = [];
 
-  // Scene Context
-  out.push("[MODEL: MiniMax Hailuo H3] [FORMAT: " + aspectTxt(ar) + "] [STYLE: " + st.txt + "]\nGENRE: " + (g.en||g.th) + " (" + g.mood + ")\nLIGHTING: " + g.light);
+  // 1. SPECIFICATION HEADER
+  out.push(
+    "[MODEL: MiniMax Hailuo H3 - Master Cinematic Director Prompt]\n" +
+    "[FORMAT: " + aspectTxt(ar) + "] [DURATION: " + fmt(total) + " (" + (S.shots.length || nShots()) + " shots)]\n" +
+    "[VISUAL STYLE: " + st.txt + "]\n" +
+    "[GENRE: " + (g.en || g.th) + " (" + g.mood + ")] [PACING: " + g.pace + "]\n" +
+    "[LIGHTING & COLOR: " + g.light + "]"
+  );
 
-  if(!S.shots.length){
-    const act = (S.premise || "A beautiful cinematic drone shot of Bangkok skyline during sunset.").trim();
-    const voText = S.hookText || "กรุงเทพมหานคร เมืองหลวงที่ไม่เคยหลับใหล";
-    out.push(act + "\n<d> (S1) says in an off-screen voiceover; [" + langCode + "] " + voText + " </d> and state lips stay closed after </d>.");
-    return out.join("\n\n");
+  // 2. STORY & NARRATIVE ARCHITECTURE (เนื้อเรื่อง story แบบเต็ม)
+  const storyLines = [];
+  const premise = (S.premise || "").trim();
+  if(premise) storyLines.push("• Story Premise: " + premise);
+  else storyLines.push("• Story Premise: กรุงเทพมหานคร เมืองหลวงที่ไม่เคยหลับใหล - เรื่องราวชีวิต ความหวัง และความฝันของผู้คนใต้แสงตะวันลับขอบฟ้า");
+
+  if((S.relation || "").trim()) storyLines.push("• Core Relationship: " + S.relation.trim());
+  if((S.setting || "").trim())  storyLines.push("• Primary Setting: " + S.setting.trim());
+  else storyLines.push("• Primary Setting: Bangkok City Skyline, Chao Phraya riverfront, warm urban golden hour sunset");
+  if((S.ending || "").trim())   storyLines.push("• Resolution / Climax: " + S.ending.trim());
+  if(S.scope === "series")      storyLines.push("• Series Format: " + S.eps + " episodes x " + S.mins + " min");
+
+  if(S.beats && S.beats.length){
+    storyLines.push("• Narrative Progression (Beats):\n" + S.beats.map((b, bi) => "  - Beat " + (bi+1) + ": " + b).join("\n"));
+  }
+  out.push("STORY & NARRATIVE CONTEXT:\n" + storyLines.join("\n"));
+
+  // 3. CHARACTER IDENTITY LOCK (การล็อคตัวละคร MiniMax H3)
+  const used = S.chars.map((c, i) => ({ c, i })).filter(o => o.c.name || o.c.nameEn || o.c.face || o.c.hair || o.c.age || o.c.body || o.c.wardrobe);
+  const charBlocks = [];
+
+  if(used.length){
+    used.forEach((o, idx) => {
+      const c = o.c;
+      const speakerId = "S" + (idx + 1);
+      const charName = label(c, o.i);
+      const roleStr = c.role ? " [" + c.role + "]" : "";
+      const jobStr = c.job ? ", " + c.job : "";
+      const appStr = appearance(c);
+
+      let b = "• (" + speakerId + ") " + charName + roleStr + jobStr + ":\n" +
+              "  - Facial & Physical Anchor: " + appStr;
+      if(c.wardrobe) b += "\n  - Signature Costume / Wardrobe: " + c.wardrobe;
+      if(c.traits || c.flaw) b += "\n  - Character Demeanor: " + [c.traits, c.flaw ? "flaw: " + c.flaw : ""].filter(Boolean).join("; ");
+      charBlocks.push(b);
+    });
+  } else {
+    charBlocks.push(
+      "• (S1) Lead Protagonist [Lead]: 26-28 years old, natural Asian facial features, authentic skin texture and pores, neat natural black hair, casual modern attire.\n" +
+      "  - Facial & Physical Anchor: Consistent expressive eyes, realistic skin tone, calm and focused emotional demeanor."
+    );
   }
 
-  S.shots.forEach((s, i) => {
-    let act = (s.action || "").trim();
-    if(!act) act = (S.setting ? S.setting + ", " : "") + (SIZES[s.size]||s.size) + " shot, " + s.move + ".";
-    
-    // Voice-over text from vo field, dia field, or hookText
-    let vo = (s.vo || "").trim();
-    if(!vo && (s.dia||"").trim()) vo = stripVO(s.dia);
-    if(!vo && i === 0 && S.hookText) vo = S.hookText.trim();
+  charBlocks.push(
+    "STRICT CHARACTER IDENTITY LOCK (MiniMax H3 Directive):\n" +
+    "Maintain 100% identical facial bone structure, eye shape and color, nose bridge, skin tone, pore texture, and hairstyle for each character across every shot, camera cut, and angle. Zero facial morphing, zero identity drift, no beautification smoothing. Retain character costume and signature traits consistently throughout the entire sequence."
+  );
 
-    let speaker = "S1";
-    if(s.who !== "all" && s.who !== undefined && s.who !== null){
-      const num = parseInt(s.who, 10);
-      speaker = "S" + (isNaN(num) ? 1 : num + 1);
-    }
+  out.push("CHARACTER IDENTITY LOCK:\n" + charBlocks.join("\n\n"));
 
-    let shotBlock = "[SHOT " + (i+1) + "] (" + (SIZES[s.size]||s.size) + ", " + s.move + ")\n" + act;
-    if(vo && S.vo !== "none"){
-      shotBlock += "\n<d> (" + speaker + ") says in an off-screen voiceover; [" + langCode + "] " + vo + " </d> and state lips stay closed after </d>.";
+  // 4. PRODUCT LOCK (if applicable)
+  if(productOn()){
+    const pr = S.product;
+    const pLines = [
+      "PRODUCT LOCK (MiniMax H3):",
+      "• Product: " + (pr.name.trim() || "Featured Product") + (pr.look.trim() ? " (" + pr.look.trim() + ")" : ""),
+      "• Packaging Consistency: Keep packaging shape, colors, branding logos, and label text 100% identical across all product frames. Label must stay legible and face the camera when featured.",
+      pr.usp.trim() ? "• Core USP: " + pr.usp.trim() : ""
+    ].filter(Boolean);
+    out.push(pLines.join("\n"));
+  }
+
+  // 5. CINEMATIC SHOT SEQUENCE & VOICE-OVER (บทพูด voice over)
+  const shotsOut = [];
+  if(!S.shots.length){
+    const act1 = (S.premise ? "Opening scene establishing the story: " + S.premise : "A beautiful cinematic drone shot of Bangkok skyline during sunset, warm golden rays reflecting across towering skyscrapers and the winding river below, cinematic atmospheric haze.").trim();
+    const vo1 = S.hookText || "กรุงเทพมหานคร เมืองหลวงที่ไม่เคยหลับใหล";
+
+    shotsOut.push(
+      "[SHOT 1] (0:00 - 0:05 | Wide Aerial Establishing | Slow cinematic drone sweep | Subject: (S1))\n" +
+      "Action: " + act1 + "\n" +
+      "<d> (S1) says in an off-screen voiceover; [" + langCode + "] " + vo1 + " </d> and state lips stay closed after </d>."
+    );
+
+    if(S.ending || (S.beats && S.beats.length > 1)){
+      const act2 = (S.beats && S.beats[1]) ? S.beats[1] : (S.ending || "The character gazes thoughtfully towards the horizon as city lights begin to flicker on.");
+      shotsOut.push(
+        "[SHOT 2] (0:05 - 0:10 | Medium Close-up | Subtle slow push-in | Subject: (S1))\n" +
+        "Action: (S1) stands at a quiet rooftop viewpoint, wind gently moving their hair, eyes reflecting the warm twilight glow with subtle emotional depth.\n" +
+        "<d> (S1) says in an off-screen voiceover; [" + langCode + "] ทุกความฝันที่นี่ มีราคาที่ต้องจ่ายเสมอ </d> and state lips stay closed after </d>."
+      );
     }
-    out.push(shotBlock);
-  });
+  } else {
+    S.shots.forEach((s, i) => {
+      let act = (s.action || "").trim();
+      if(!act) act = (S.setting ? S.setting + ", " : "") + (SIZES[s.size] || s.size) + " shot, " + s.move + ".";
+
+      let speaker = "S1";
+      if(s.who !== "all" && s.who !== undefined && s.who !== null){
+        const num = parseInt(s.who, 10);
+        speaker = "S" + (isNaN(num) ? 1 : num + 1);
+      }
+
+      let vo = (s.vo || "").trim();
+      if(!vo && (s.dia || "").trim()) vo = stripVO(s.dia);
+      if(!vo && i === 0 && S.hookText) vo = S.hookText.trim();
+
+      const timeRange = tl[i] ? fmt(tl[i][0]) + " - " + fmt(tl[i][1]) : "0:00 - 0:05";
+      const sizeStr = SIZES[s.size] || s.size;
+      const whoLabel = s.who === "all" ? "All Characters" : "(" + speaker + ")";
+
+      let block = "[SHOT " + (i + 1) + "] (" + timeRange + " | " + sizeStr + " | " + s.move + " | Subject: " + whoLabel + ")\n" +
+                  "Action: " + act;
+
+      if(vo && S.vo !== "none"){
+        block += "\n<d> (" + speaker + ") says in an off-screen voiceover; [" + langCode + "] " + vo + " </d> and state lips stay closed after </d>.";
+      }
+
+      shotsOut.push(block);
+    });
+  }
+
+  out.push("CINEMATIC SHOT SEQUENCE & VOICE-OVER (MINIMAX H3):\n" + shotsOut.join("\n\n"));
+
+  // 6. AUDIO & SOUNDSCAPE
+  const audioParts = [];
+  if(S.audio.music && S.audio.music !== "auto") audioParts.push("Music: " + S.audio.music);
+  if(S.audio.ambience && S.audio.ambience !== "auto") audioParts.push("Ambience: " + S.audio.ambience);
+  if(S.audio.sfx && S.audio.sfx.length) audioParts.push("SFX: " + S.audio.sfx.join(", "));
+  if(audioParts.length){
+    out.push("AUDIO & SOUND DESIGN:\n" + audioParts.join(" | "));
+  }
+
+  // 7. NEGATIVE PROMPT (MINIMAX H3)
+  out.push(
+    "NEGATIVE PROMPT (MINIMAX H3):\n" +
+    "mutated face, face morphing, distorted facial features, plastic skin texture, oversaturated, low resolution, unnatural eyes, multiple heads, deformed limbs, floating objects, jerky camera shake, mouth moving during off-screen dialogue, blurry background, video artifacts."
+  );
 
   return out.join("\n\n");
 }
