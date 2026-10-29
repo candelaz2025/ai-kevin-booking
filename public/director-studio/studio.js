@@ -1620,25 +1620,27 @@ document.addEventListener("change", e => {
   if(e.target.dataset && /^shots\.\d+\.dur$/.test(e.target.dataset.k||"")) render();
 });
 
-$("#btnTheme").addEventListener("click", () => {
+const el_btnTheme = $("#btnTheme"); if(el_btnTheme) el_btnTheme.addEventListener("click", () => {
   const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light");
   document.documentElement.dataset.theme = cur==="dark" ? "light" : "dark";
 });
-$("#btnReset").addEventListener("click", function(){
+const el_btnReset = $("#btnReset"); if(el_btnReset) el_btnReset.addEventListener("click", function(){
   if(this.dataset.arm!=="1"){ this.dataset.arm="1"; this.textContent="กดอีกครั้งเพื่อยืนยันล้าง"; setTimeout(()=>{ this.dataset.arm=""; this.textContent="ล้างโปรเจกต์"; },3000); return; }
   this.dataset.arm=""; this.textContent="ล้างโปรเจกต์";
   S = initialState(); Object.keys(preview).forEach(k=>delete preview[k]); ai.hooks=[]; ai.err=""; save(); render(); toast("ล้างโปรเจกต์แล้ว");
 });
-$("#btnRndAll").addEventListener("click", () => { snap(); randomAll(); save(); render(); toast("สุ่มทั้งโปรเจกต์แล้ว กดเลิกสุ่มได้ที่มุมบน"); });
-$("#btnUndo").addEventListener("click", undoRandom);
-$("#btnAiAll").addEventListener("click", () => aiRandomRun([0,1,2,3,4,5,7]));
-$("#btnAiCancel").addEventListener("click", () => { if(ai.ctrl) ai.ctrl.abort(); });
+const el_btnRndAll = $("#btnRndAll"); if(el_btnRndAll) el_btnRndAll.addEventListener("click", () => { snap(); randomAll(); save(); render(); toast("สุ่มทั้งโปรเจกต์แล้ว กดเลิกสุ่มได้ที่มุมบน"); });
+const el_btnUndo = $("#btnUndo"); if(el_btnUndo) el_btnUndo.addEventListener("click", undoRandom);
+const el_btnAiAll = $("#btnAiAll"); if(el_btnAiAll) el_btnAiAll.addEventListener("click", () => aiRandomRun([0,1,2,3,4,5,7]));
+const el_btnAiCancel = $("#btnAiCancel"); if(el_btnAiCancel) el_btnAiCancel.addEventListener("click", () => { if(ai.ctrl) ai.ctrl.abort(); });
 function setView(v){
-  document.body.dataset.view = v;
-  $("#vwWizard").setAttribute("aria-pressed", v==="wizard"); $("#vwPrompt").setAttribute("aria-pressed", v==="prompt");
+  if(document.body) document.body.dataset.view = v;
+  const w = $("#vwWizard"), p = $("#vwPrompt");
+  if(w) w.setAttribute("aria-pressed", v==="wizard");
+  if(p) p.setAttribute("aria-pressed", v==="prompt");
 }
-$("#vwWizard").addEventListener("click", ()=>setView("wizard"));
-$("#vwPrompt").addEventListener("click", ()=>{ setView("prompt"); window.scrollTo({top:0}); });
+const el_vwWizard = $("#vwWizard"); if(el_vwWizard) el_vwWizard.addEventListener("click", ()=>setView("wizard"));
+const el_vwPrompt = $("#vwPrompt"); if(el_vwPrompt) el_vwPrompt.addEventListener("click", ()=>{ setView("prompt"); window.scrollTo({top:0}); });
 
 /* ---- init ---- */
 load(); setView("wizard"); render();
