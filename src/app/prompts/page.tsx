@@ -268,6 +268,7 @@ export default function PromptsPage() {
   // Filter & Search states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [displayLimit, setDisplayLimit] = useState<number>(36);
 
   // Generator form inputs: variable values mapped by key
   const [variableValues, setVariableValues] = useState<Record<string, string>>({});
@@ -532,6 +533,20 @@ export default function PromptsPage() {
 
   const categories = ['all', ...Array.from(new Set(prompts.map(p => p.category).filter(Boolean)))];
 
+  const categoryLabelsTh: Record<string, string> = {
+    'all': 'ทั้งหมด',
+    'Motion & Animations': 'Motion & Animation (100)',
+    'Micro Drama & Series': 'ละครสั้น & ซีรีส์ (100)',
+    'Cinematic Styles': 'สไตล์วิดีโอ & หนัง (100)',
+    'UI/UX & Web Design': 'Web & UI Design (100)',
+    'SaaS & AI Agents': 'SaaS & AI Agents (100)',
+    'AI Video Creation': 'Video Master Prompts',
+    'Coding & SaaS': 'Coding & SaaS',
+    'Marketing & Sales': 'Marketing & Sales',
+    'Creative & Content': 'Creative & Content',
+    'Customer Support': 'Customer Support'
+  };
+
   const filteredPrompts = prompts.filter(p => {
     const matchCat = selectedCategory === 'all' || p.category.toLowerCase() === selectedCategory.toLowerCase();
     const matchQuery = !searchQuery ||
@@ -540,6 +555,8 @@ export default function PromptsPage() {
       p.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchCat && matchQuery;
   });
+
+  const visiblePrompts = filteredPrompts.slice(0, displayLimit);
 
   return (
     <div className="min-h-screen bg-[#080f1a] text-slate-100 selection:bg-amber-400 selection:text-slate-950 pb-28">
@@ -869,22 +886,40 @@ export default function PromptsPage() {
 
               {/* Filter pills */}
               <div className="flex flex-wrap items-center gap-1.5 text-xs">
-                {categories.map(cat => (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`px-3 py-1.5 rounded-xl font-medium transition-all flex items-center gap-1 ${
-                      selectedCategory === cat
-                        ? cat === 'AI Video Creation'
-                          ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold shadow-md shadow-pink-500/20'
-                          : 'bg-amber-400 text-slate-950 font-bold shadow-md shadow-amber-400/20'
-                        : 'bg-[#101c2d] text-slate-400 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    {cat === 'AI Video Creation' && <Video className="w-3 h-3 text-pink-300" />}
-                    <span>{cat === 'all' ? 'ทั้งหมด' : cat}</span>
-                  </button>
-                ))}
+                {categories.map(cat => {
+                  const count = cat === 'all' 
+                    ? prompts.length 
+                    : prompts.filter(p => p.category.toLowerCase() === cat.toLowerCase()).length;
+                  const label = categoryLabelsTh[cat] || cat;
+
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => { setSelectedCategory(cat); setDisplayLimit(36); }}
+                      className={`px-3 py-1.5 rounded-xl font-medium transition-all flex items-center gap-1.5 ${
+                        selectedCategory === cat
+                          ? cat === 'AI Video Creation' || cat === 'Cinematic Styles'
+                            ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold shadow-md shadow-pink-500/20'
+                            : 'bg-amber-400 text-slate-950 font-bold shadow-md shadow-amber-400/20'
+                          : 'bg-[#101c2d] text-slate-400 hover:text-white border border-white/5'
+                      }`}
+                    >
+                      {cat === 'AI Video Creation' && <Video className="w-3 h-3 text-pink-300" />}
+                      {cat === 'Motion & Animations' && <Sparkles className="w-3 h-3 text-cyan-300" />}
+                      {cat === 'Micro Drama & Series' && <Film className="w-3 h-3 text-amber-300" />}
+                      {cat === 'UI/UX & Web Design' && <Palette className="w-3 h-3 text-indigo-300" />}
+                      {cat === 'SaaS & AI Agents' && <Code2 className="w-3 h-3 text-emerald-300" />}
+                      <span>{label}</span>
+                      <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                        selectedCategory === cat 
+                          ? 'bg-black/20 text-slate-900' 
+                          : 'bg-white/10 text-slate-400'
+                      }`}>
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -901,64 +936,79 @@ export default function PromptsPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredPrompts.map(p => {
-                const isSelected = selectedPrompt?.id === p.id;
-                const isVideo = p.category === 'AI Video Creation';
-                return (
-                  <div
-                    key={p.id}
-                    onClick={() => handleSelectPrompt(p)}
-                    className={`cursor-pointer rounded-2xl p-5 border transition-all text-left relative flex flex-col justify-between ${
-                      isSelected
-                        ? isVideo
-                          ? 'bg-[#1a1426] border-pink-500 shadow-xl shadow-pink-500/10 ring-2 ring-pink-500/30'
-                          : 'bg-[#14233a] border-amber-400 shadow-xl shadow-amber-400/10 ring-2 ring-amber-400/30'
-                        : 'bg-[#0e1828] border-white/5 hover:border-white/20 hover:bg-[#121f33]'
-                    }`}
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {visiblePrompts.map(p => {
+                  const isSelected = selectedPrompt?.id === p.id;
+                  const isVideo = p.category === 'AI Video Creation' || p.category === 'Cinematic Styles' || p.category === 'Motion & Animations';
+                  return (
+                    <div
+                      key={p.id}
+                      onClick={() => handleSelectPrompt(p)}
+                      className={`cursor-pointer rounded-2xl p-5 border transition-all text-left relative flex flex-col justify-between ${
+                        isSelected
+                          ? isVideo
+                            ? 'bg-[#1a1426] border-pink-500 shadow-xl shadow-pink-500/10 ring-2 ring-pink-500/30'
+                            : 'bg-[#14233a] border-amber-400 shadow-xl shadow-amber-400/10 ring-2 ring-amber-400/30'
+                          : 'bg-[#0e1828] border-white/5 hover:border-white/20 hover:bg-[#121f33]'
+                      }`}
+                    >
+                      {p.isFeatured && (
+                        <span className={`absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1 ${
+                          isVideo
+                            ? 'bg-pink-500/10 text-pink-400 border-pink-500/30'
+                            : 'bg-amber-400/10 text-amber-400 border-amber-400/30'
+                        }`}>
+                          <Flame className="w-3 h-3" /> แนะนำ
+                        </span>
+                      )}
+
+                      <div>
+                        <span className={`text-[11px] font-medium tracking-wide uppercase flex items-center gap-1.5 mb-1.5 ${
+                          isVideo ? 'text-pink-400' : 'text-amber-400/90'
+                        }`}>
+                          {isVideo && <Video className="w-3.5 h-3.5" />}
+                          <span>{p.category}</span>
+                        </span>
+                        <h3 className="text-sm font-bold text-white line-clamp-2 mb-2 leading-snug">
+                          {p.title}
+                        </h3>
+                        <p className="text-xs text-slate-400 line-clamp-2 mb-4 leading-relaxed">
+                          {p.description}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px]">
+                        <span className="text-slate-500 font-mono">
+                          {p.variables?.length || 0} ตัวแปร
+                        </span>
+                        <span className={`font-semibold flex items-center gap-1 ${
+                          isSelected 
+                            ? isVideo ? 'text-pink-400' : 'text-amber-400' 
+                            : 'text-slate-400'
+                        }`}>
+                          {isSelected ? 'กำลังปรับแต่ง' : 'เลือกใช้'}
+                          <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Load More Button */}
+              {visiblePrompts.length < filteredPrompts.length && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={() => setDisplayLimit(prev => prev + 36)}
+                    className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 hover:text-amber-300 text-xs font-bold border border-white/10 transition-all shadow-md inline-flex items-center gap-2"
                   >
-                    {p.isFeatured && (
-                      <span className={`absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1 ${
-                        isVideo
-                          ? 'bg-pink-500/10 text-pink-400 border-pink-500/30'
-                          : 'bg-amber-400/10 text-amber-400 border-amber-400/30'
-                      }`}>
-                        <Flame className="w-3 h-3" /> แนะนำ
-                      </span>
-                    )}
-
-                    <div>
-                      <span className={`text-[11px] font-medium tracking-wide uppercase flex items-center gap-1.5 mb-1.5 ${
-                        isVideo ? 'text-pink-400' : 'text-amber-400/90'
-                      }`}>
-                        {isVideo && <Video className="w-3.5 h-3.5" />}
-                        <span>{p.category}</span>
-                      </span>
-                      <h3 className="text-sm font-bold text-white line-clamp-2 mb-2 leading-snug">
-                        {p.title}
-                      </h3>
-                      <p className="text-xs text-slate-400 line-clamp-2 mb-4 leading-relaxed">
-                        {p.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px]">
-                      <span className="text-slate-500 font-mono">
-                        {p.variables?.length || 0} ตัวแปร
-                      </span>
-                      <span className={`font-semibold flex items-center gap-1 ${
-                        isSelected 
-                          ? isVideo ? 'text-pink-400' : 'text-amber-400' 
-                          : 'text-slate-400'
-                      }`}>
-                        {isSelected ? 'กำลังปรับแต่ง' : 'เลือกใช้'}
-                        <ArrowRight className="w-3 h-3" />
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    <Layers className="w-4 h-4" />
+                    <span>โหลด Prompt เพิ่มเติม (แสดง {visiblePrompts.length} จากทั้งหมด {filteredPrompts.length})</span>
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
 

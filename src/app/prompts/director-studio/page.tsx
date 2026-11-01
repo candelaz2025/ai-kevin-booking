@@ -8,8 +8,10 @@ export default function DirectorStudioPage() {
   useEffect(() => {
     const origOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const timer = setTimeout(() => setIsLoaded(true), 600);
     return () => {
       document.body.style.overflow = origOverflow;
+      clearTimeout(timer);
     };
   }, []);
 

@@ -1,5 +1,6 @@
 import { ClassItem, Booking, SystemNotification, User, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, UserRewardData, RewardHistoryItem, Quiz, QuizQuestion, QuizSubmission, CourseLevel } from './types';
 import { supabase, isSupabaseConfigured } from './supabase';
+import all500PromptsData from '@/data/all-categories-prompts.json';
 
 // Default initial classes based on https://ai-creator-workshop.vercel.app/
 export const INITIAL_CLASSES: ClassItem[] = [
@@ -2101,10 +2102,11 @@ export async function getPromptTemplates(): Promise<PromptTemplate[]> {
   }
 
   if (!global.__app_prompts || global.__app_prompts.length === 0) {
-    global.__app_prompts = [...INITIAL_PROMPTS];
+    global.__app_prompts = [...INITIAL_PROMPTS, ...(all500PromptsData as unknown as PromptTemplate[])];
   } else {
-    // Merge any missing initial prompts
-    for (const initP of INITIAL_PROMPTS) {
+    // Merge any missing initial prompts and 500 catalog prompts
+    const fullSource = [...INITIAL_PROMPTS, ...(all500PromptsData as unknown as PromptTemplate[])];
+    for (const initP of fullSource) {
       if (!global.__app_prompts.some(p => p.id === initP.id)) {
         global.__app_prompts.push(initP);
       }
