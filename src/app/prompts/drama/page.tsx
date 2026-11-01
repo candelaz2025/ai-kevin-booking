@@ -40,189 +40,25 @@ import {
 } from 'lucide-react';
 import { dramaCatalog, getDramaMediaUrl, filterDramaItems } from '@/lib/drama-service';
 import { DramaItem, DRAMA_GROUP_NOTES } from '@/lib/drama-types';
+import { 
+  DRAMA_PRESETS_200, 
+  DRAMA_CATEGORIES_10, 
+  TropePreset 
+} from '@/data/drama-presets-200';
 
-// ============================================================================
-// A9 STUDIO / GOOGLE FLOW 10 TROPE PRESETS (CLONED & ADAPTED)
-// ============================================================================
-interface TropePreset {
-  id: string;
-  code: string;
-  title: string;
-  titleTh: string;
-  badge: string;
-  synopsis: string;
-  conflict: string;
-  protagonistVoice: string;
-  antagonistVoice: string;
-  hookLine: string;
-  hookStyle: string;
-  cameraMotion: string;
-  sfx: string;
-  colorTone: string;
+const DECK_KEY = 'kevin_drama_deck_200';
+const HISTORY_KEY = 'kevin_drama_history_200';
+
+function getShuffledDeck(): number[] {
+  const arr = Array.from({ length: DRAMA_PRESETS_200.length }, (_, i) => i);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
-const A9_TROPE_PRESETS: TropePreset[] = [
-  {
-    id: 'tr1',
-    code: 'tr1',
-    title: 'Face-slap revenge',
-    titleTh: 'ตอกกลับสะใจ / ทวงคืนศักดิ์ศรี',
-    badge: 'POPULAR ⭐',
-    synopsis: 'ทายาทสาวตระกูลอสังหาฯ หมื่นล้าน ปลอมตัวเป็นพนักงานทำความสะอาดในบริษัทคู่แข่งเพื่อสืบหาหลักฐานที่ครอบครัวเธอถูกใส่ร้าย จนกระทั่งถูกผู้จัดการฝ่ายดูถูกและสาดกาแฟใส่กลางล็อบบี้ ต่อหน้าพนักงานทุกคน',
-    conflict: 'คำดูถูกเหยียดหยามสถานะทางสังคม การเข้าใจผิดเรื่องตัวตน และการเปิดเผยฐานะที่แท้จริงให้คนดูสะใจ',
-    protagonistVoice: 'Mali: Thai woman, about 25, medium-high pitch, Central Thai accent, soft clear voice, polite with quick soft sentence endings',
-    antagonistVoice: 'Krit: Thai man, about 45, deep arrogant tone, Central Thai accent, fast condescending speech pace',
-    hookLine: 'แค่แม่บ้านกระจอกอย่างเธอ... มีสิทธิ์อะไรมามองหน้าฉันแบบนี้!',
-    hookStyle: 'The first line is an insult, a shock or a confession',
-    cameraMotion: 'Dramatic push-in on eyes with micro-drama intensity, 9:16 vertical look',
-    sfx: 'Sharp glass shatter, office silence, sub-bass riser',
-    colorTone: 'Modern luxury Bangkok office contrast, wet marble reflection'
-  },
-  {
-    id: 'tr2',
-    code: 'tr2',
-    title: 'Hidden CEO',
-    titleTh: 'ประธานบริษัทปลอมตัว',
-    badge: 'VIRAL 🔥',
-    synopsis: 'ประธานใหญ่บริษัทเทคโนโลยีระดับท็อปของประเทศ แอบลงมาตรวจสาขาหน้าร้านในชุดช่างซ่อมธรรมดา แต่ถูกผู้จัดการสาขาสั่งพักงานและขู่จะแจ้งตำรวจเพราะไม่ยอมให้ตรวจบัญชีส่วย',
-    conflict: 'การใช้อำนาจมิชอบของหัวหน้างานต่อพนักงานตัวเล็กๆ ก่อนจะพบว่าคนที่ตนกำลังข่มขู่คือเจ้าของบริษัทตัวจริง',
-    protagonistVoice: 'Thee: Thai man, about 32, calm deep authoritative voice, Central Thai accent, steady slow pace',
-    antagonistVoice: 'Chai: Thai man, about 40, loud boastful tone, aggressive fast delivery',
-    hookLine: 'ถอดชุดช่างออกไปซะ ที่นี่ไม่มีที่ให้ขยะอย่างนายยืน!',
-    hookStyle: 'Open in the middle of the action',
-    cameraMotion: 'Handheld gritty tracking shot, high contrast lighting, sudden face-off freeze',
-    sfx: 'Heavy door slam, phone ringtone from CEO VIP line',
-    colorTone: 'Industrial warm streetlamp contrast with polished corporate glass'
-  },
-  {
-    id: 'tr4',
-    code: 'tr4',
-    title: 'Mother-in-law war',
-    titleTh: 'สงครามแม่ผัวลูกสะใภ้',
-    badge: 'HIGH DRAMA 💥',
-    synopsis: 'แม่ผัวไฮโซตระกูลเก่าบังคับให้ลูกสะใภ้เซ็นใบหย่าและไล่ออกจากคฤหาสน์กลางดึก แต่ไม่รู้ว่าบริษัทที่ตระกูลกำลังจะล้มละลายนั้น รอดมาได้ด้วยเงินทุนลับของลูกสะใภ้คนนี้เอง',
-    conflict: 'ความเกลียดชังชนชั้น อคติครอบครัว และความลับเรื่องผู้ค้ำประกันการเงินตัวจริง',
-    protagonistVoice: 'Pim: Thai woman, about 27, quiet composed tone, polite but unwavering strength',
-    antagonistVoice: 'Khun Ying: Thai woman, about 58, haughty sharp soprano pitch, haughty aristocracy accent',
-    hookLine: 'คนไม่มีหัวนอนปลายเท้าอย่างเธอ ไม่มีวันได้เหยียบคฤหาสน์นี้อีกต่อไป!',
-    hookStyle: 'The first line is an insult, a shock or a confession',
-    cameraMotion: 'Low-angle slow tracking shot in opulent mansion, dramatic rim lighting',
-    sfx: 'Ticking grandfather clock, fountain echo, sudden phone vibrate',
-    colorTone: 'Deep gold and mahogany luxury darkness, low-key lighting'
-  },
-  {
-    id: 'tr5',
-    code: 'tr5',
-    title: 'Rebirth revenge',
-    titleTh: 'เกิดใหม่มาแก้แค้น',
-    badge: 'TRENDING ⏳',
-    synopsis: 'หญิงสาวถูกสามีและน้องสาวต่างแม่ทรยศและผลักตกตึกในคืนวันแต่งงาน แต่เธอกลับลืมตาตื่นขึ้นมาในเช้าวันหมั้นเมื่อ 3 ปีก่อน ด้วยความทรงจำทั้งหมด เธอจึงวางแผนซ้อนแผนเพื่อเอาคืนอย่างสาสม',
-    conflict: 'การทรยศหักหลังในครอบครัว การรู้ล่วงหน้าถึงชะตากรรม และการพลิกเกมในงานเลี้ยงหรู',
-    protagonistVoice: 'Rada: Thai woman, about 26, cold elegant crystal voice, precise icy articulation',
-    antagonistVoice: 'Win: Thai man, about 28, sweet hypocritical tone, deceptive charm',
-    hookLine: 'คิดว่าความตายจะจบทุกอย่างเหรอ... ยินดีต้อนรับสู่นรกที่ฉันเตรียมไว้ให้!',
-    hookStyle: 'Open on a glimpse of the climax then flash back to the past',
-    cameraMotion: 'Anamorphic lens flare, dutch angle vertigo effect, slow push-in',
-    sfx: 'Heartbeat thump, rewind whoosh, wine glass clinking',
-    colorTone: 'Crimson red accents against dark monochrome luxury, cinematic film grain'
-  },
-  {
-    id: 'tr6',
-    code: 'tr6',
-    title: 'Contract marriage',
-    titleTh: 'วิวาห์สัญญาจ้าง',
-    badge: 'ROMANCE 💍',
-    synopsis: 'ทายาทหนุ่มผู้เย็นชาจ้างดีไซเนอร์สาวธรรมดามาแต่งงานหลอกๆ เพื่อหนีการคลุมถุงชน แต่ในงานเลี้ยงเปิดตัว แฟนเก่าของพระเอกกลับปรากฏตัวพร้อมเปิดโปงสัญญา',
-    conflict: 'ความรักที่เริ่มต้นจากผลประโยชน์ อารมณ์หึงหวง และการปกป้องศักดิ์ศรีของอีกฝ่าย',
-    protagonistVoice: 'Grace: Thai woman, about 24, bright sweet voice, gentle warm demeanor',
-    antagonistVoice: 'Rita: Thai woman, about 26, sharp envious tone, polished modern accent',
-    hookLine: 'เธอมันก็แค่ตัวแทนราคาถูก... สัญญาแต่งงานนี้กำลังจะกลายเป็นขยะ!',
-    hookStyle: 'The first line is an insult, a shock or a confession',
-    cameraMotion: 'Smooth slider glide, shallow depth of field, warm candlelight glow',
-    sfx: 'Soft string orchestra, camera shutter clicks, soft breath gasp',
-    colorTone: 'Pastel pink and warm champagne gold, soft diffuse lighting'
-  },
-  {
-    id: 'tr8',
-    code: 'tr8',
-    title: 'Thai ghost love',
-    titleTh: 'ผีสาวรักหนุ่มอีสาน',
-    badge: 'FOLKLORE 👻',
-    synopsis: 'วิศวกรหนุ่มจากกรุงเทพฯ เดินทางมาคุมงานสร้างสะพานในหมู่บ้านชนบทแถบอีสาน และได้พบหญิงสาวสวยลึกลับที่คอยช่วยชีวิตเขาจากอันตราย ก่อนจะพบว่าเธอคือวิญญาณผู้พิทักษ์ป่าที่รอคอยเขามานับร้อยปี',
-    conflict: 'ความรักต่างภพชาติ ความเชื่อโบราณ และความจริงเบื้องหลังอุบัติเหตุสะพานขาด',
-    protagonistVoice: 'Kham: Thai woman, about 22, hauntingly sweet ethereal whisper, gentle northeastern Thai cadence',
-    antagonistVoice: 'Phra Acharn: Thai man, about 60, deep chanting resonance, grave solemn pitch',
-    hookLine: 'อย่าเพิ่งก้าวข้ามสะพานนั้นไป... ถ้าเจ้ายังอยากกลับไปเจอคนที่เจ้ารัก',
-    hookStyle: 'Quiet ordinary moment with one wrong eerie detail',
-    cameraMotion: 'Slow atmospheric pan through misty wooden stilt houses, lanterns swaying',
-    sfx: 'Night crickets, distant traditional Isan pin echo, gust of wind',
-    colorTone: 'Deep indigo midnight blue, emerald green shadows, warm oil lantern glow'
-  },
-  {
-    id: 'tr9',
-    code: 'tr9',
-    title: 'Office war comedy',
-    titleTh: 'สงครามออฟฟิศสายฮา',
-    badge: 'COMEDY 🏢',
-    synopsis: 'เด็กฝึกงาน Gen Z โดนหัวหน้าทีมรุ่นใหญ่แกล้งโยนสไลด์โปรเจกต์ 200 หน้าให้แก้งานก่อนเที่ยงคืน แต่เด็กฝึกงานใช้ AI ตัวใหม่เสร็จใน 3 นาที พร้อมส่งเมลลับถึงผู้บริหารระดับสูงแบบไม่ตั้งใจ',
-    conflict: 'ความขัดแย้งระหว่างวัฒนธรรมการทำงานแบบเก่ากับความเร็วแบบ AI สไตล์ตลกร้าย',
-    protagonistVoice: 'Beam: Thai man, about 23, energetic sarcastic Gen Z tone, fast witty banter',
-    antagonistVoice: 'Somchai: Thai man, about 48, tired authoritarian tone, exasperated sighing',
-    hookLine: 'แก้งาน 200 หน้านี้ให้เสร็จก่อนเที่ยงคืน ไม่งั้นไม่ต้องมาฝึกงานที่นี่อีก!',
-    hookStyle: 'Open in the middle of the action',
-    cameraMotion: 'Static locked frames with quick snappy whip pans matching comedic beats',
-    sfx: 'Keyboard clacking, error ding, dramatic Mexican standoff guitar twang',
-    colorTone: 'Bright saturated corporate neon pastel, high key commercial look'
-  },
-  {
-    id: 'tr11',
-    code: 'tr11',
-    title: 'Inheritance war',
-    titleTh: 'ศึกชิงมรดกเลือด',
-    badge: 'THRILLER 👑',
-    synopsis: 'ในวันเปิดพินัยกรรมของเจ้าสัวใหญ่ ลูกหลานทุกคนต่างรุมแย่งโฉนดที่ดินหมื่นล้าน แต่ทนายความประจำตระกูลกลับเปิดวิดีโอเทปลับที่เจ้าสัวบันทึกไว้ก่อนเสียชีวิตเพียง 1 ชั่วโมง',
-    conflict: 'ความโลภในตระกูล การหักหลังระหว่างพี่น้อง และปริศนาชิ้นสุดท้ายในตู้เซฟลับ',
-    protagonistVoice: 'Pawat: Thai man, about 35, cold analytical lawyer tone, steady calm conviction',
-    antagonistVoice: 'Ek: Thai man, about 38, impatient greedy tone, raised arrogant voice',
-    hookLine: 'พินัยกรรมฉบับนี้เป็นของปลอม! พ่อไม่มีทางยกมรดกให้คนนอกอย่างแก!',
-    hookStyle: 'Open on an unanswered visual question',
-    cameraMotion: 'Slow circular dolly around oak boardroom table, dramatic shadows on faces',
-    sfx: 'Thunder rumble, paper rustling, lawyer briefcase click',
-    colorTone: 'Dark walnut wood, silver rain against floor-to-ceiling windows'
-  },
-  {
-    id: 'tr14',
-    code: 'tr14',
-    title: 'Cat-head drama',
-    titleTh: 'ละครสั้นหน้าแมวไวรัล',
-    badge: 'ABSURD 🐱',
-    synopsis: 'ตัวละครในซีรีส์มีหน้าเป็นแมวเปอร์เซียและสก็อตติชโฟลด์แต่ใส่สูททำงานในออฟฟิศหรู พูดคุยเรื่องการแย่งชิงตำแหน่งประธานบริษัทด้วยท่าทางจริงจังระดับภาพยนตร์ฮอลลีวูด',
-    conflict: 'ความตึงเครียดระดับซีรีส์ดราม่าแต่ตัวละครเป็นแมวหน้าตาเคร่งขรึม',
-    protagonistVoice: 'Meow-Siri: Male Persian cat head, deep dramatic voice, serious Shakespearean delivery',
-    antagonistVoice: 'Boss-Tom: British Shorthair cat head, gruff mobster tone',
-    hookLine: 'ขนมแมวเลียซองนั้น... มันเป็นของฉันมาตั้งแต่แรกแล้ว!',
-    hookStyle: 'The first line is an insult, a shock or a confession',
-    cameraMotion: 'Extreme close up on cat eyes, macro slow motion paws adjusting tie',
-    sfx: 'Dramatic orchestral braam, soft cat purr, glass shatter',
-    colorTone: 'Film noir chiaroscuro, warm rim light on fur texture'
-  },
-  {
-    id: 'tr0',
-    code: 'tr0',
-    title: 'Single short film',
-    titleTh: 'หนังสั้น 3 องค์ จบในตอน',
-    badge: 'CINEMA 🎬',
-    synopsis: 'หนังสั้นความยาว 1 ตอนจบ วางโครงสร้าง 3 องค์ (Setup -> Confrontation -> Resolution) เล่าเรื่องราวของพ่อค้าก๋วยเตี๋ยวเรือโบราณที่ต้องเลือกระหว่างเงินชดเชยรื้อถอนร้าน หรือรักษาสูตรน้ำซุป 80 ปีของครอบครัว',
-    conflict: 'การปะทะระหว่างคุณค่าทางจิตใจและการเปลี่ยนแปลงของเมืองหลวง',
-    protagonistVoice: 'Uncle Som: Thai man, about 65, warm raspy weathered voice, heartfelt sincerity',
-    antagonistVoice: 'Agent Dan: Thai man, about 30, corporate emotionless tone, polite coldness',
-    hookLine: 'เงิน 5 ล้านนี้... พอจะซื้อความทรงจำทั้งหมดของลุงคืนมาได้ไหม?',
-    hookStyle: 'Open in the middle of the action',
-    cameraMotion: 'Smooth cinematic dolly and slider moves, 2.39:1 anamorphic widescreen',
-    sfx: 'Simmering soup broth bubbles, canal water ripples, distant train rumble',
-    colorTone: 'Warm nostalgic amber and teal, golden hour haze, rich film texture'
-  }
-];
+const A9_TROPE_PRESETS: TropePreset[] = DRAMA_PRESETS_200;
 
 export default function DramaPromptsPage() {
   // Page mode: 'producer' (A9 Engine) or 'catalog' (77 pins)
@@ -245,9 +81,29 @@ export default function DramaPromptsPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeItem, setActiveItem] = useState<DramaItem | null>(null);
 
+  // 200 Zero-Duplicate Random Deck & Browser States
+  const [randomCount, setRandomCount] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<string>('ทั้งหมด');
+  const [isBrowseModalOpen, setIsBrowseModalOpen] = useState(false);
+  const [modalSearch, setModalSearch] = useState('');
+  const [modalCategory, setModalCategory] = useState('ทั้งหมด');
+
   // Global UI feedback states
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Initialize deck state from localStorage
+  useEffect(() => {
+    try {
+      const historyStr = localStorage.getItem(HISTORY_KEY);
+      if (historyStr) {
+        const history = JSON.parse(historyStr);
+        if (Array.isArray(history)) {
+          setRandomCount(history.length);
+        }
+      }
+    } catch {}
+  }, []);
 
   // Group count calculation for catalog
   const groupCounts = useMemo(() => {
@@ -262,6 +118,33 @@ export default function DramaPromptsPage() {
   const filteredItems = useMemo(() => {
     return filterDramaItems(dramaCatalog.items, selectedGroup, typeFilter, searchQuery);
   }, [selectedGroup, typeFilter, searchQuery]);
+
+  // Filtered presets for Section 1
+  const section1Presets = useMemo(() => {
+    if (selectedCategory === 'ทั้งหมด') {
+      return DRAMA_PRESETS_200.slice(0, 20);
+    }
+    return DRAMA_PRESETS_200.filter(p => p.category === selectedCategory);
+  }, [selectedCategory]);
+
+  // Filtered presets for Modal
+  const modalFilteredPresets = useMemo(() => {
+    const q = modalSearch.trim().toLowerCase();
+    return DRAMA_PRESETS_200.filter(p => {
+      const matchCat = modalCategory === 'ทั้งหมด' || p.category === modalCategory;
+      if (!matchCat) return false;
+      if (!q) return true;
+      return (
+        p.titleTh.toLowerCase().includes(q) ||
+        p.title.toLowerCase().includes(q) ||
+        p.synopsis.toLowerCase().includes(q) ||
+        p.hookLine.toLowerCase().includes(q) ||
+        p.code.toLowerCase().includes(q) ||
+        p.badge.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+    });
+  }, [modalSearch, modalCategory]);
 
   // Handle trope selection
   const handleSelectTrope = (trope: TropePreset) => {
@@ -284,19 +167,55 @@ export default function DramaPromptsPage() {
     } catch {}
   };
 
-  // AI Randomizer for Micro-Drama
+  // Zero-duplicate Fisher-Yates Randomizer across 200 Presets
   const handleRandomizeDrama = () => {
     setIsRandomizing(true);
-    const randomIndex = Math.floor(Math.random() * A9_TROPE_PRESETS.length);
-    const trope = A9_TROPE_PRESETS[randomIndex];
+    try {
+      let deck: number[] = [];
+      let history: number[] = [];
+      try {
+        deck = JSON.parse(localStorage.getItem(DECK_KEY) || '[]');
+        history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      } catch {}
 
-    setTimeout(() => {
-      handleSelectTrope(trope);
+      if (!Array.isArray(deck) || deck.length === 0) {
+        deck = getShuffledDeck();
+        history = [];
+      }
+
+      const nextIndex = deck.pop()!;
+      history.push(nextIndex);
+
+      try {
+        localStorage.setItem(DECK_KEY, JSON.stringify(deck));
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+      } catch {}
+
+      const trope = DRAMA_PRESETS_200[nextIndex] || DRAMA_PRESETS_200[0];
+      setRandomCount(history.length);
+
+      setTimeout(() => {
+        handleSelectTrope(trope);
+        setIsRandomizing(false);
+        triggerConfetti();
+        const remaining = 200 - history.length;
+        setToastMessage(`🎲 สุ่มแบบที่ ${history.length}/200: "${trope.titleTh}" (${trope.category}) — เหลืออีก ${remaining} แบบไม่ซ้ำ`);
+        setTimeout(() => setToastMessage(null), 3500);
+      }, 250);
+    } catch {
       setIsRandomizing(false);
-      triggerConfetti();
-      setToastMessage(`🎲 สุ่มไอเดีย "${trope.titleTh}" สำเร็จ!`);
-      setTimeout(() => setToastMessage(null), 3000);
-    }, 350);
+    }
+  };
+
+  const handleResetDeck = () => {
+    const newDeck = getShuffledDeck();
+    try {
+      localStorage.setItem(DECK_KEY, JSON.stringify(newDeck));
+      localStorage.setItem(HISTORY_KEY, JSON.stringify([]));
+    } catch {}
+    setRandomCount(0);
+    setToastMessage('🔄 รีเซ็ตคลังสุ่ม 200 แบบเรียบร้อย (เริ่มนับ 0/200 ใหม่)');
+    setTimeout(() => setToastMessage(null), 3000);
   };
 
   // GENERATED OUTPUT 1: EXACT GOOGLE FLOW & KLING VIDEO PROMPT JSON (Section 10.11 spec)
@@ -708,14 +627,27 @@ VOICE LOCKS:
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 w-full sm:w-auto">
+            <div className="flex items-center gap-2.5 w-full sm:w-auto flex-wrap">
               <button
                 onClick={handleRandomizeDrama}
                 disabled={isRandomizing}
                 className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black shadow-md shadow-amber-400/20 transition-all flex items-center justify-center gap-1.5"
+                title="สุ่มทีละแบบจาก 200 ไอเดียละครสั้นโดยไม่ซ้ำกันเลย"
               >
                 <Dices className={`w-4 h-4 ${isRandomizing ? 'animate-spin' : ''}`} />
-                <span>🎲 สุ่มไอเดียหนังสั้น</span>
+                <span>🎲 สุ่ม 200 แบบ (ไม่ซ้ำ)</span>
+              </button>
+
+              <span className="px-2.5 py-1.5 rounded-xl bg-amber-400/15 text-amber-300 border border-amber-400/30 font-mono text-xs font-bold" title="สุ่มไปแล้ว / จากทั้งหมด 200 แบบ">
+                {randomCount}/200
+              </span>
+
+              <button
+                onClick={() => setIsBrowseModalOpen(true)}
+                className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold border border-amber-400/30 transition-all flex items-center gap-1.5"
+              >
+                <Layers className="w-3.5 h-3.5 text-amber-400" />
+                <span>📋 คลัง 200 ไอเดีย</span>
               </button>
 
               <a
@@ -730,22 +662,63 @@ VOICE LOCKS:
             </div>
           </div>
 
-          {/* 1. SELECT TROPE PRESET (10 PRESETS FROM A9 STUDIO) */}
+          {/* 1. SELECT TROPE PRESET (200 PRESETS IN 10 CATEGORIES) */}
           <div>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <div>
                 <h2 className="text-lg font-bold text-white flex items-center gap-2">
                   <Layers className="w-5 h-5 text-amber-400" />
-                  <span>1. เลือกพล็อต & Trope ละครสั้น (10 A9 Studio Presets)</span>
+                  <span>1. เลือกพล็อต &amp; Trope ละครสั้น (200 คลังไอเดียระดับโปร ไม่ซ้ำกัน)</span>
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                    200 PRESETS
+                  </span>
                 </h2>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  เลือกแนวเรื่องเพื่อโหลดโครงสร้างความขัดแย้ง, จังหวะตัดต่อ, และเสียงตัวละคร
+                  เลือกแนวเรื่องจาก 10 หมวดหลัก หรือเปิดคลัง 200 ไอเดียเพื่อค้นหาและเลือกใช้งานทันที
                 </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsBrowseModalOpen(true)}
+                  className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 text-amber-300 border border-amber-400/40 text-xs font-bold transition flex items-center gap-1.5 shadow-md"
+                >
+                  <Layers className="w-3.5 h-3.5 text-amber-400" />
+                  <span>ดูครบ 200 แบบ</span>
+                </button>
+                <button
+                  onClick={handleRandomizeDrama}
+                  disabled={isRandomizing}
+                  className="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black transition flex items-center gap-1.5 shadow-md shadow-amber-400/20"
+                >
+                  <Dices className={`w-3.5 h-3.5 ${isRandomizing ? 'animate-spin' : ''}`} />
+                  <span>สุ่ม ({randomCount}/200)</span>
+                </button>
               </div>
             </div>
 
+            {/* Category Filter Chips */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none mb-3">
+              {DRAMA_CATEGORIES_10.map((cat) => {
+                const isCatActive = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all border ${
+                      isCatActive
+                        ? 'bg-amber-400 text-slate-950 font-bold border-amber-400 shadow-md shadow-amber-400/20'
+                        : 'bg-slate-900/80 text-slate-300 hover:text-white border-white/10 hover:border-white/20'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-              {A9_TROPE_PRESETS.map((trope) => {
+              {section1Presets.map((trope) => {
                 const isSelected = selectedTrope.id === trope.id;
                 return (
                   <button
@@ -784,6 +757,18 @@ VOICE LOCKS:
                 );
               })}
             </div>
+            
+            {selectedCategory === 'ทั้งหมด' && (
+              <div className="mt-3 text-center">
+                <button
+                  onClick={() => setIsBrowseModalOpen(true)}
+                  className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-400/30 text-xs font-bold transition inline-flex items-center gap-1.5"
+                >
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>แสดง 20 รายการแรก · คลิกเพื่อเปิดดูคลังเต็ม 200 รายการ →</span>
+                </button>
+              </div>
+            )}
           </div>
 
           {/* 2. PRODUCER WORKSPACE: CONFIGURATION + LIVE GENERATED MASTER PROMPT */}
@@ -1264,6 +1249,169 @@ VOICE LOCKS:
           </div>
         </div>
       </footer>
+
+      {/* 200 PRESETS BROWSE MODAL */}
+      {isBrowseModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="absolute inset-0" onClick={() => setIsBrowseModalOpen(false)} />
+
+          <div className="relative w-full max-w-5xl max-h-[92vh] bg-[#0c1524] border border-amber-400/30 rounded-3xl shadow-2xl shadow-black overflow-hidden flex flex-col z-10 animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-4 bg-slate-900/80">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="p-1.5 rounded-xl bg-amber-400/20 text-amber-400">
+                    <Layers className="w-4 h-4" />
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <span>📋 คลังไอเดียละครสั้น 200 แบบ (ไม่ซ้ำ)</span>
+                    <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                      200 PRESETS
+                    </span>
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-400 mt-1">
+                  คลิกเพื่อโหลดแนวเรื่อง, บทพูดตัวละคร, จังหวะตัดต่อ, และคำสั่ง Master Prompt เข้าสู่ Producer Workspace ทันที
+                </p>
+              </div>
+
+              <button
+                onClick={() => setIsBrowseModalOpen(false)}
+                className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Search & Category Filter */}
+            <div className="p-4 border-b border-white/10 bg-slate-950/60 space-y-3">
+              <div className="relative">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={modalSearch}
+                  onChange={(e) => setModalSearch(e.target.value)}
+                  placeholder="ค้นหาชื่อเรื่อง, บทพูด, ตอกกลับ, ประธานบริษัท, แม่ผัว, ย้อนเวลา, ไสยศาสตร์, บัตรดำ..."
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                {DRAMA_CATEGORIES_10.map((cat) => {
+                  const isCatActive = modalCategory === cat;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setModalCategory(cat)}
+                      className={`px-3 py-1.5 rounded-lg text-xs whitespace-nowrap transition-all border ${
+                        isCatActive
+                          ? 'bg-amber-400 text-slate-950 font-bold border-amber-400 shadow-sm'
+                          : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border-white/5'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Modal Presets Grid */}
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 scrollbar-thin scrollbar-thumb-slate-800">
+              {modalFilteredPresets.length > 0 ? (
+                modalFilteredPresets.map((trope) => {
+                  const isSelected = selectedTrope.id === trope.id;
+                  return (
+                    <div
+                      key={trope.id}
+                      onClick={() => {
+                        handleSelectTrope(trope);
+                        setIsBrowseModalOpen(false);
+                        triggerConfetti();
+                        setToastMessage(`✓ เลือกไอเดีย "${trope.titleTh}" เข้าสู่หน้า Producer เรียบร้อย!`);
+                        setTimeout(() => setToastMessage(null), 3000);
+                      }}
+                      className={`p-4 rounded-2xl border text-left cursor-pointer transition-all flex flex-col justify-between group ${
+                        isSelected
+                          ? 'bg-[#15233c] border-amber-400 shadow-lg shadow-amber-400/10 ring-2 ring-amber-400/30'
+                          : 'bg-slate-900/70 border-white/10 hover:border-amber-400/60 hover:bg-slate-900'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-1.5 mb-2">
+                          <span className="text-[10px] font-mono font-bold text-amber-400">
+                            {trope.code}
+                          </span>
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-white/5 text-slate-300">
+                            {trope.badge}
+                          </span>
+                        </div>
+
+                        <div className="text-[10px] text-amber-400/90 font-semibold mb-1">
+                          {trope.category}
+                        </div>
+
+                        <h4 className="text-sm font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-1 mb-1">
+                          {trope.titleTh}
+                        </h4>
+
+                        <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mb-3">
+                          {trope.synopsis}
+                        </p>
+
+                        <div className="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 text-[11px] text-slate-300 italic line-clamp-2 mb-2">
+                          &ldquo;{trope.hookLine}&rdquo;
+                        </div>
+                      </div>
+
+                      <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs">
+                        <span className={`text-[11px] font-bold ${isSelected ? 'text-amber-400' : 'text-slate-400 group-hover:text-amber-400'}`}>
+                          {isSelected ? 'กำลังเลือกใช้อยู่' : 'คลิกเพื่อเลือกใช้ →'}
+                        </span>
+                        <ArrowRight className={`w-3.5 h-3.5 transition-transform group-hover:translate-x-1 ${isSelected ? 'text-amber-400' : 'text-slate-500 group-hover:text-amber-400'}`} />
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="col-span-full py-16 text-center text-slate-400">
+                  <p className="text-sm">ไม่พบไอเดียที่ตรงกับคำค้นหา &ldquo;{modalSearch}&rdquo;</p>
+                  <button
+                    onClick={() => { setModalSearch(''); setModalCategory('ทั้งหมด'); }}
+                    className="mt-2 text-xs text-amber-400 hover:underline font-bold"
+                  >
+                    ล้างการค้นหา
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-3.5 px-6 border-t border-white/10 bg-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+              <div>
+                แสดง <b>{modalFilteredPresets.length}</b> จาก 200 รายการไอเดียทั้งหมด
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleResetDeck}
+                  className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition text-xs font-semibold"
+                >
+                  รีเซ็ตคิวสุ่ม (0/200)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsBrowseModalOpen(false)}
+                  className="px-4 py-1.5 rounded-xl bg-amber-400 text-slate-950 font-bold hover:bg-amber-300 transition text-xs"
+                >
+                  ปิดหน้าต่าง
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
