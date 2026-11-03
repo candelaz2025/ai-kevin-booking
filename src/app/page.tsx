@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { 
   Sparkles, Calendar, Clock, MapPin, Video, ArrowRight, 
-  CheckCircle2, Users, Bot, Layers, ArrowUpRight, ShieldCheck, Mail, BookOpen, Gift, GraduationCap, ShoppingCart
+  CheckCircle2, Users, Bot, Layers, ArrowUpRight, ShieldCheck, Mail, BookOpen, Gift, GraduationCap, ShoppingCart,
+  ChevronDown, Briefcase, Award, ExternalLink
 } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import { ClassItem, SiteSettings, Article, formatClassDuration, isClassFree, CourseLevel, COURSE_LEVELS, getCourseLevelConfig } from '@/lib/types';
@@ -19,6 +20,7 @@ export default function HomePage() {
   const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
   const [articles, setArticles] = useState<Article[]>([]);
   const [selectedLevelFilter, setSelectedLevelFilter] = useState<'all' | CourseLevel>('all');
+  const [openBioTab, setOpenBioTab] = useState<'timeline' | 'skills' | 'philosophy' | 'portfolio'>('timeline');
 
   useEffect(() => {
     fetch('/api/classes')
@@ -690,114 +692,361 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* About Instructor & Learning Studio Section */}
+      {/* About Instructor Profile (Full from LinkedIn & Dropdown Details) */}
       <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-[#101c2d] border border-amber-400/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
           
-          <div className="bg-[#101c2d] border border-amber-400/30 rounded-3xl p-8 space-y-5 shadow-2xl relative overflow-hidden">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-amber-400 tracking-wider uppercase">
-                {siteSettings?.instructorTitle || 'INSTRUCTOR PROFILE · ABOUT ME'}
-              </span>
-              <a
-                href="https://www.linkedin.com/in/sorachetn/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A66C2]/15 text-[#0A66C2] border border-[#0A66C2]/30 hover:bg-[#0A66C2]/25 text-xs font-semibold transition"
-              >
-                <span>LinkedIn Profile</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-            <div className="space-y-1">
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                {siteSettings?.instructorName || 'อ. Kevin (Sorachet Ngamwilaidee)'}
-              </h3>
-              <p className="text-xs text-amber-400/90 font-medium">
-                Founder & Lead AI System Architect @ kevinaiagent.tech
-              </p>
-            </div>
-
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
-              {siteSettings?.instructorBio || `ผู้เชี่ยวชาญด้าน UX/UI Design, Generative AI & Autonomous Agent System Architect ประสบการณ์กว่า 15+ ปีในวงการดิจิทัลและเทคโนโลยีการออกแบบ
-
-ศิษย์เก่า Swinburne University of Technology ประเทศออสเตรเลีย และผู้เชี่ยวชาญการพัฒนาระบบ AI Workflow, Prompt Engineering และ Multi-Agent Orchestration สำหรับธุรกิจและนักสร้างสรรค์ยุคใหม่
-
-พร้อมถ่ายทอดองค์ความรู้และเทคนิคจริงแบบจับมือทำ เพื่อยกระดับการทำงานและการสร้างรายได้ด้วย AI Agents อย่างเต็มศักยภาพ`}
-            </p>
-
-            <div className="pt-2 flex flex-wrap gap-2 text-xs text-slate-300">
-              {(siteSettings?.instructorTags || [
-                '15+ Years UX/UI & Product Design',
-                'Generative AI & Autonomous Agent Architecture',
-                'Swinburne University of Technology Alumnus',
-                'Prompt Engineering & Workflow Automation',
-                '1-on-1 Mentoring & Corporate Training'
-              ]).map((t, idx) => (
-                <span key={idx} className="px-3 py-1 bg-slate-900 rounded-lg border border-white/5 text-amber-300/90 font-medium">
-                  ✓ {t}
-                </span>
-              ))}
-            </div>
-
-            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
-              <span>🔗 ติดต่อและดูผลงานเพิ่มเติมได้ที่:</span>
-              <a
-                href="https://www.linkedin.com/in/sorachetn/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-amber-400 hover:text-amber-300 font-mono font-medium hover:underline inline-flex items-center gap-1"
-              >
-                <span>linkedin.com/in/sorachetn</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-
-          <div className="bg-[#101c2d] border border-white/10 rounded-3xl p-8 space-y-5 shadow-2xl flex flex-col justify-between">
-            <div className="space-y-4">
-              <span className="text-xs font-bold text-amber-400 tracking-wider uppercase">
-                {siteSettings?.venueTitle || 'LEARNING FORMAT & STUDIO'}
-              </span>
-              <h3 className="text-2xl font-bold text-white">
-                {siteSettings?.venueName || 'kevinaiagent.tech Studio & Online'}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
-                {siteSettings?.venueAddress || 'เรียนสดออนไลน์คุณภาพสูงผ่าน Google Meet / Zoom พร้อมบันทึกวิดีโอย้อนหลัง หรือ On-site Studio ตามที่นัดหมาย'}
-              </p>
-              
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/5 space-y-2">
-                <div className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>รูปแบบการเรียนการสอน (Interactive Studio)</span>
+          {/* Top Header & Overview */}
+          <div className="flex flex-col lg:flex-row gap-8 items-start justify-between pb-8 border-b border-white/10">
+            {/* Instructor Photo & Badges */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-amber-400/40 shadow-xl bg-slate-900 shrink-0">
+                <Image
+                  src="/assets/instructor-kevin.webp"
+                  alt="อ. Kevin (Sorachet Ngamwilaidee)"
+                  fill
+                  sizes="160px"
+                  priority
+                  className="object-cover object-top"
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-1.5 text-center">
+                  <span className="text-[10px] font-bold text-amber-300">15+ Years Exp</span>
                 </div>
-                <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-                  <li>เรียนสดแบบถาม-ตอบและแก้ปัญหาเฉพาะจุด (1-on-1 หรือกลุ่มเล็ก)</li>
-                  <li>แจกฟรี Prompt Templates & Automation Workflows พร้อมใช้</li>
-                  <li>มีใบประกาศนียบัตรรับรอง (Certificate of Completion) หลังเรียนจบ</li>
-                  <li>เข้าถึงเอกสารประกอบการเรียนและวิดีโอบันทึกย้อนหลังได้ตลอดชีพ</li>
-                </ul>
+              </div>
+
+              <div className="space-y-3 text-center sm:text-left">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                  <span className="text-[11px] font-bold text-amber-400 tracking-wider uppercase bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+                    INSTRUCTOR PROFILE & AI ARCHITECT
+                  </span>
+                  <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-full border border-emerald-400/20">
+                    ✓ Verified Instructor
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    {siteSettings?.instructorName || 'อ. Kevin (Sorachet Ngamwilaidee)'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-amber-300/90 font-medium mt-1">
+                    Freelance AI Workshop Trainer & AI Consultant · Senior UX/UI & System Architect
+                  </p>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Master of Design (UX) — Swinburne University of Technology, Australia (2020)
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+                  <a
+                    href="https://www.linkedin.com/in/sorachetn/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#0A66C2] hover:bg-[#084e96] text-white text-xs font-semibold shadow-md transition"
+                  >
+                    <span>LinkedIn Profile</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href="https://www.behance.net/candelaz2024"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-white/5 transition"
+                  >
+                    <span>Behance Portfolio</span>
+                    <ExternalLink className="w-3 h-3 text-slate-400" />
+                  </a>
+                  <Link
+                    href="/booking"
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition shadow-md shadow-amber-400/20"
+                  >
+                    <span>จองคอร์สเรียน</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center gap-3">
-              <Link
-                href="/booking"
-                className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-400/20 transition"
-              >
-                <span>เลือกคอร์สและจองรอบเรียน</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-              <a
-                href="https://www.linkedin.com/in/sorachetn/"
-                target="_blank"
-                rel="noreferrer"
-                className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition"
-              >
-                <span>เกี่ยวกับ อ. Kevin</span>
-              </a>
+            {/* Quick Stats Banner */}
+            <div className="w-full lg:w-72 grid grid-cols-2 gap-2.5 p-4 rounded-2xl bg-slate-900/80 border border-white/10 shrink-0">
+              <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
+                <span className="block text-xl font-black text-amber-400">15+ ปี</span>
+                <span className="text-[11px] text-slate-400">ประสบการณ์สาย UX/UI</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
+                <span className="block text-xl font-black text-emerald-400">M.Des</span>
+                <span className="text-[11px] text-slate-400">Swinburne Australia</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
+                <span className="block text-xl font-black text-blue-400">100%</span>
+                <span className="text-[11px] text-slate-400">สอนสด & Hands-on</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-slate-800/50 border border-white/5 text-center">
+                <span className="block text-xl font-black text-purple-400">Agentic</span>
+                <span className="text-[11px] text-slate-400">AI Automation Spec</span>
+              </div>
             </div>
+          </div>
+
+          {/* Interactive Dropdown Section (เส้นทางแต่ละปี, ทักษะและความเชี่ยวชาญ, วิสัยทัศน์ AI & Design, ผลงานและวุฒิบัตร) */}
+          <div className="pt-8 space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4 text-amber-400" />
+                <h4 className="text-base font-bold text-white">รายละเอียดประวัติ ความเชี่ยวชาญ และเส้นทางการทำงาน (เจาะลึก)</h4>
+              </div>
+              <span className="text-xs text-slate-400 hidden sm:inline">คลิกเลือกหัวข้อแบบ Dropdown เพื่อดูข้อมูล</span>
+            </div>
+
+            {/* Dropdown 1: ประวัติการทำงานในแต่ละปี (Career Timeline) */}
+            <div className="rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden transition-all">
+              <button
+                type="button"
+                onClick={() => setOpenBioTab(openBioTab === 'timeline' ? ('' as any) : 'timeline')}
+                className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-800/40 transition cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400">
+                    <Briefcase className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-bold text-white block">1. เส้นทางการทำงานในแต่ละปี (Career & Experience Timeline)</span>
+                    <span className="text-xs text-slate-400">ตั้งแต่จุดเริ่มต้นปี 2010 สู่ Swinburne Australia, Startup, Mobile Game, MarTech จนถึง AI Consultant</span>
+                  </div>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openBioTab === 'timeline' ? 'rotate-180 text-amber-400' : ''}`} />
+              </button>
+
+              {openBioTab === 'timeline' && (
+                <div className="p-5 sm:p-6 pt-2 border-t border-white/5 space-y-6 text-xs sm:text-sm text-slate-300">
+                  <div className="relative border-l-2 border-amber-400/30 pl-5 ml-2 space-y-6">
+                    {/* Item 2010 */}
+                    <div className="relative">
+                      <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-slate-900"></div>
+                      <span className="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">2010 - 2018</span>
+                      <h5 className="text-sm font-bold text-white mt-1">จุดเริ่มต้นสาย Web & Graphic Designer</h5>
+                      <p className="text-slate-300 mt-1 leading-relaxed">
+                        เริ่มทำงานสาย Web Designer และ Graphic Designer สร้างสรรค์งานกราฟิก สื่อสิ่งพิมพ์ และเว็บไซต์ อยู่กับงานออกแบบมาอย่างต่อเนื่อง ฝึกฝนความเชี่ยวชาญด้านภาพ การจัดวาง Layout และความงามทางสุนทรียะ
+                      </p>
+                    </div>
+
+                    {/* Item 2018-2020 */}
+                    <div className="relative">
+                      <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-slate-900"></div>
+                      <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded">2018 - 2020</span>
+                      <h5 className="text-sm font-bold text-white mt-1">ศึกษาต่อ Master of Design (UX) — Swinburne University of Technology (ออสเตรเลีย)</h5>
+                      <p className="text-slate-300 mt-1 leading-relaxed">
+                        ตัดสินใจไปเรียนต่อระดับปริญญาโท Master of Design ที่เมลเบิร์น ประเทศออสเตรเลีย เพื่อยกระดับจาก "คนทำภาพ" ให้เป็น "คนคิดเชิงระบบ" ผ่านกระบวนการ User Experience, Design Thinking, Human-Centered Design และการวิจัยผู้ใช้งานจริง
+                      </p>
+                    </div>
+
+                    {/* Item 2020-2021 */}
+                    <div className="relative">
+                      <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-blue-400 border-2 border-slate-900"></div>
+                      <span className="text-xs font-mono font-bold text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded">2020 - 2021</span>
+                      <h5 className="text-sm font-bold text-white mt-1">อาจารย์พิเศษ & ร่วมสร้าง Startup</h5>
+                      <p className="text-slate-300 mt-1 leading-relaxed">
+                        กลับมาประเทศไทย รับงานฟรีแลนซ์ UX/UI และร่วมทีมสร้าง Startup ตั้งแต่ศูนย์ในทีมขนาดเล็กที่ต้องรับผิดชอบหลายบทบาทพร้อมกัน ควบคู่กับการได้รับเชิญเป็น <strong>อาจารย์พิเศษสอนวิชา UX/UI Design ที่มหาวิทยาลัยหอการค้าไทย</strong> ฝึกฝนทักษะการถ่ายทอดเรื่องยากให้ผู้เรียนที่ไม่มีพื้นฐานเข้าใจและลงมือทำได้จริง
+                      </p>
+                    </div>
+
+                    {/* Item 2021-2023 */}
+                    <div className="relative">
+                      <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-purple-400 border-2 border-slate-900"></div>
+                      <span className="text-xs font-mono font-bold text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded">2021 - 2023</span>
+                      <h5 className="text-sm font-bold text-white mt-1">Mobile Game Studio & Engagement Loops</h5>
+                      <p className="text-slate-300 mt-1 leading-relaxed">
+                        ร่วมงานในบริษัทเกม Mobile พัฒนางานออกแบบที่ต้องคำนึงถึง <em>User Retention, Gamification และ Engagement Loop</em> ศึกษาพฤติกรรมผู้เล่นอย่างลึกซึ้งว่าทำอย่างไรให้ผู้ใช้งานอยากกลับมาใช้งานซ้ำอย่างต่อเนื่อง
+                      </p>
+                    </div>
+
+                    {/* Item 2023-2025 */}
+                    <div className="relative">
+                      <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-cyan-400 border-2 border-slate-900"></div>
+                      <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded">2023 - 2025</span>
+                      <h5 className="text-sm font-bold text-white mt-1">Senior UX/UI Designer ในบริษัท MarTech ชั้นนำ</h5>
+                      <p className="text-slate-300 mt-1 leading-relaxed">
+                        รับผิดชอบโปรดักต์ระดับองค์กรสาย Hospitality Customer Data Platform (CDP) และระบบบริหารความสัมพันธ์ลูกค้า (CRM) ให้กับแบรนด์ชั้นนำระดับประเทศ เช่น Enfa และองค์กรธุรกิจขนาดใหญ่ วางสถาปัตยกรรม User Flow ข้อมูลที่ซับซ้อนให้ใช้งานง่าย
+                      </p>
+                    </div>
+
+                    {/* Item 2025-Present */}
+                    <div className="relative">
+                      <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-slate-900 animate-pulse"></div>
+                      <span className="text-xs font-mono font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">2025 - ปัจจุบัน</span>
+                      <h5 className="text-sm font-bold text-white mt-1">Freelance AI Workshop Trainer & AI Consultant · kevinaiagent.tech</h5>
+                      <p className="text-slate-300 mt-1 leading-relaxed">
+                        ผันตัวออกมาทำงานเต็มเวลาด้านการสอน AI Workshop และเป็นที่ปรึกษา AI Consulting เชี่ยวชาญการสร้าง Autonomous AI Agents, Workflow Automation, Agentic Coding, งาน Video AI และการผสาน AI เข้ากับระบบธุรกิจจริง
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Dropdown 2: ตารางความเชี่ยวชาญหลัก (Core Competencies & Skills) */}
+            <div className="rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden transition-all">
+              <button
+                type="button"
+                onClick={() => setOpenBioTab(openBioTab === 'skills' ? ('' as any) : 'skills')}
+                className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-800/40 transition cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400">
+                    <Layers className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-bold text-white block">2. ความเชี่ยวชาญและเครื่องมือที่ใช้งาน (Core Skills & Tools)</span>
+                    <span className="text-xs text-slate-400">Product Design, AI-Assisted Workflow, Automation, Growth & Visual Storytelling</span>
+                  </div>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openBioTab === 'skills' ? 'rotate-180 text-emerald-400' : ''}`} />
+              </button>
+
+              {openBioTab === 'skills' && (
+                <div className="p-5 sm:p-6 pt-2 border-t border-white/5 space-y-4">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs sm:text-sm text-slate-300">
+                      <thead>
+                        <tr className="border-b border-white/10 text-amber-400 uppercase text-[11px] tracking-wider font-bold">
+                          <th className="py-2.5 px-3">หมวดหมู่ทักษะ</th>
+                          <th className="py-2.5 px-3">รายละเอียดและเครื่องมือที่เชี่ยวชาญ</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        <tr>
+                          <td className="py-3 px-3 font-semibold text-white whitespace-nowrap">Product Design & UX/UI</td>
+                          <td className="py-3 px-3 text-slate-300">
+                            UX/UI Design, Digital Product Design, Interactive Design, Design System, User Flow, Wireframing, Rapid Prototyping, Figma, Design Thinking, User Research
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 px-3 font-semibold text-white whitespace-nowrap">AI Agents & Architecture</td>
+                          <td className="py-3 px-3 text-slate-300">
+                            Hermes Agent, OpenClaw, Grokbot, Agentic Coding (Claude Code, OpenAI Codex), Multi-Agent Orchestration, Prompt Engineering
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 px-3 font-semibold text-white whitespace-nowrap">Workflow Automation</td>
+                          <td className="py-3 px-3 text-slate-300">
+                            n8n, Make, REST API, Webhooks, Model Context Protocol (MCP), Facebook & LINE OA Automation, No-Code/Low-Code Integration
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 px-3 font-semibold text-white whitespace-nowrap">Visual, AI Video & 3D</td>
+                          <td className="py-3 px-3 text-slate-300">
+                            Seedance 2.5, ComfyUI, Meta AI, Dream Render, Midjourney, AI Short Video Ads, 3D Design, Social Media Storytelling
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 px-3 font-semibold text-white whitespace-nowrap">Data, CRM & Growth</td>
+                          <td className="py-3 px-3 text-slate-300">
+                            Customer Data Platform (CDP), CRM Management, Customer Journey Mapping, Lead Generation Funnels, Conversion Optimization
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Dropdown 3: ปรัชญาและมุมมองต่อการออกแบบ & AI (Philosophy) */}
+            <div className="rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden transition-all">
+              <button
+                type="button"
+                onClick={() => setOpenBioTab(openBioTab === 'philosophy' ? ('' as any) : 'philosophy')}
+                className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-800/40 transition cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-400/10 border border-blue-400/20 flex items-center justify-center text-blue-400">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-bold text-white block">3. มุมมองต่อการออกแบบและระบบ AI (Design & AI Philosophy)</span>
+                    <span className="text-xs text-slate-400">แนวคิด Human-Centric, การเชื่อมโยงเป้าหมายธุรกิจ และระบบการทำงานร่วมกับ AI</span>
+                  </div>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openBioTab === 'philosophy' ? 'rotate-180 text-blue-400' : ''}`} />
+              </button>
+
+              {openBioTab === 'philosophy' && (
+                <div className="p-5 sm:p-6 pt-2 border-t border-white/5 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  <div className="p-4 rounded-xl bg-slate-800/40 border border-white/5 space-y-2">
+                    <h5 className="font-bold text-amber-300 text-sm">การออกแบบที่ยืนอยู่ตรงกลางระหว่าง 3 มิติ</h5>
+                    <p>
+                      "ผมมองว่างานออกแบบที่ดีต้องยืนอยู่ตรงกลางระหว่างสามสิ่ง คือ <strong>เป้าหมายทางธุรกิจ (Business Goals)</strong>, <strong>ความต้องการของผู้ใช้ (User Needs)</strong> และ <strong>สิ่งที่เทคโนโลยีทำได้จริง (Feasibility)</strong> กระบวนการทำงานจึงเริ่มจากทำความเข้าใจปัญหา วางโครงสร้างข้อมูล ออกแบบ user flow และ wireframe พัฒนา UI system แล้วจบด้วยการทำ prototype ทดสอบไอเดียให้เร็วที่สุด"
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-slate-800/40 border border-white/5 space-y-2">
+                    <h5 className="font-bold text-emerald-300 text-sm">AI คือการออกแบบ "ระบบการทำงาน (Work System)"</h5>
+                    <p>
+                      "ผมไม่ได้มอง AI เป็นเพียงเครื่องมือแยกชิ้น แต่มองเป็นการออกแบบระบบที่ทำให้ <em>คน ข้อมูล และ AI เดินไปด้วยกันได้</em> ตั้งแต่การรับข้อมูลลูกค้า วิเคราะห์และจัดกลุ่ม lead สร้างคอนเทนต์เฉพาะกลุ่ม ไปจนถึงติดตามผลและปรับปรุงกระบวนการต่อเนื่องอย่างยั่งยืน"
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Dropdown 4: ผลงานที่ผ่านมาและหลักฐานวุฒิการศึกษา (Portfolio & Credentials) */}
+            <div className="rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden transition-all">
+              <button
+                type="button"
+                onClick={() => setOpenBioTab(openBioTab === 'portfolio' ? ('' as any) : 'portfolio')}
+                className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-800/40 transition cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-400/10 border border-purple-400/20 flex items-center justify-center text-purple-400">
+                    <GraduationCap className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-bold text-white block">4. ผลงานและหลักฐานวุฒิการศึกษา (Portfolio & Credentials)</span>
+                    <span className="text-xs text-slate-400">Behance Portfolio, เอกสารปริญญาบัตร Swinburne University และช่องทางติดต่อ</span>
+                  </div>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openBioTab === 'portfolio' ? 'rotate-180 text-purple-400' : ''}`} />
+              </button>
+
+              {openBioTab === 'portfolio' && (
+                <div className="p-5 sm:p-6 pt-2 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-2xl bg-slate-800/50 border border-white/5 flex flex-col justify-between">
+                    <div>
+                      <h5 className="font-bold text-white text-sm">🎨 ผลงาน Portfolio UX/UI Design</h5>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                        รวบรวมโปรเจกต์งานออกแบบ UX/UI, Web & Mobile App Application ตลอด 15 ปีบน Behance
+                      </p>
+                    </div>
+                    <a
+                      href="https://www.behance.net/candelaz2024"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 transition"
+                    >
+                      <span>เปิดดู Behance Portfolio</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-slate-800/50 border border-white/5 flex flex-col justify-between">
+                    <div>
+                      <h5 className="font-bold text-white text-sm">🎓 ปริญญาบัตร Master of Design</h5>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                        Master of Design (UX) จาก Swinburne University of Technology, Melbourne Australia
+                      </p>
+                    </div>
+                    <a
+                      href="https://drive.google.com/file/d/16uEXHJUyFV_aM6FOsZg7Q3m-n5vrNkD4/view?usp=sharing"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition"
+                    >
+                      <span>ตรวจสอบวุฒิการศึกษา</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
+
           </div>
 
         </div>
