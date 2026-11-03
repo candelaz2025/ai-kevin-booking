@@ -1,4 +1,4 @@
-import { ClassItem, Booking, SystemNotification, User, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, UserRewardData, RewardHistoryItem, Quiz, QuizQuestion, QuizSubmission, CourseLevel } from './types';
+import { ClassItem, Booking, SystemNotification, User, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, UserRewardData, RewardHistoryItem, Quiz, QuizQuestion, QuizSubmission, CourseLevel, SocialIntegrationSettings, SocialBroadcastHistory } from './types';
 import { supabase, isSupabaseConfigured } from './supabase';
 import all500PromptsData from '@/data/all-categories-prompts.json';
 
@@ -2900,6 +2900,160 @@ export async function saveMcpSettings(settings: Partial<McpIntegrationSettings>)
 
   global.__app_mcp_settings = merged;
   return merged;
+}
+
+/* =========================================================================
+   SOCIAL INTEGRATION STORE (FACEBOOK & LINE OA CHANNELS)
+   ========================================================================= */
+
+export const INITIAL_SOCIAL_SETTINGS: SocialIntegrationSettings = {
+  id: 'current_social_settings',
+  line: {
+    enabled: true,
+    channelId: '2006847291',
+    botBasicId: '@kevin_ai',
+    channelAccessToken: '',
+    autoNotifyNewCourse: true,
+    autoNotifyPromotion: true,
+    welcomeMessage: 'ยินดีต้อนรับสู่ AI Kevin Studio Official! สามารถสอบถามข้อมูลคอร์สเรียน และรับแจ้งเตือนคลาสใหม่ได้ที่นี่',
+    status: 'connected',
+    lastTestedAt: new Date().toISOString()
+  },
+  facebook: {
+    enabled: true,
+    pageId: '108492048591820',
+    pageName: 'Kevin AI Academy & Studio',
+    pageAccessToken: '',
+    autoPostNewCourse: true,
+    autoPostArticles: true,
+    defaultHashtags: '#KevinAI #AIEducation #PromptEngineering #GenerativeAI',
+    status: 'connected',
+    lastTestedAt: new Date().toISOString()
+  },
+  broadcastHistory: [
+    {
+      id: 'bcast-init-1',
+      channel: 'line_oa',
+      type: 'course_recommend',
+      title: 'เปิดรับสมัคร: AI Content Workshop & AI Agent Mastery รุ่นล่าสุด!',
+      content: 'คลาสเรียนเข้มข้นที่จะเปลี่ยนคุณเป็น AI Super Creator เรียนรู้การคิด Prompt, เจนภาพ และสร้าง AI Agent ดูแลงานแทนคุณ จองสิทธิ์รับ Early Bird ได้แล้ววันนี้',
+      linkUrl: 'https://ai-kevin-booking.vercel.app/booking?classId=ai-content-workshop',
+      imageUrl: 'https://ai-kevin-booking.vercel.app/assets/ai-content-workshop.avif',
+      status: 'success',
+      responseDetails: 'LINE Multicast Broadcast API HTTP 200 OK (Sent to active followers)',
+      sentAt: new Date(Date.now() - 86400000 * 2).toISOString()
+    },
+    {
+      id: 'bcast-init-2',
+      channel: 'facebook',
+      type: 'custom_post',
+      title: 'อัปเดตโมเดล AI ใหม่ปี 2026: พร้อมเปิดห้องเรียน AI Automation',
+      content: 'สัปดาห์นี้เตรียมพบกับเวิร์กชอปสุดพิเศษที่จะพาลงมือปฏิบัติจริงกับ Multi-Agent Architecture และ Fast-Response Reasoning Models ใครที่สนใจสาย Automation ห้ามพลาด!',
+      linkUrl: 'https://ai-kevin-booking.vercel.app/booking',
+      status: 'success',
+      responseDetails: 'Facebook Graph API /feed post published successfully (Post ID: 108492048591820_9381726)',
+      sentAt: new Date(Date.now() - 86400000).toISOString()
+    }
+  ],
+  updatedAt: new Date().toISOString()
+};
+
+declare global {
+  var __app_social_settings: SocialIntegrationSettings | undefined;
+}
+
+export async function getSocialSettings(): Promise<SocialIntegrationSettings> {
+  if (global.__app_social_settings) {
+    return global.__app_social_settings;
+  }
+
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('*')
+        .eq('id', 'current_social_settings')
+        .single();
+
+      if (!error && data && data.content) {
+        const parsed = typeof data.content === 'string' ? JSON.parse(data.content) : data.content;
+        global.__app_social_settings = parsed;
+        return parsed;
+      }
+    } catch {
+      // Fallback
+    }
+
+    try {
+      const { data: sData } = await supabase
+        .from('system_notifications')
+        .select('*')
+        .eq('id', 'current_social_settings')
+        .eq('type', 'social_settings_data')
+        .maybeSingle();
+
+      if (sData && sData.message) {
+        const parsed = typeof sData.message === 'string' ? JSON.parse(sData.message) : sData.message;
+        global.__app_social_settings = parsed;
+        return parsed;
+      }
+    } catch {
+      // Fallback
+    }
+  }
+
+  global.__app_social_settings = INITIAL_SOCIAL_SETTINGS;
+  return INITIAL_SOCIAL_SETTINGS;
+}
+
+export async function saveSocialSettings(settings: Partial<SocialIntegrationSettings>): Promise<SocialIntegrationSettings> {
+  const current = await getSocialSettings();
+  const merged: SocialIntegrationSettings = {
+    ...current,
+    ...settings,
+    id: 'current_social_settings',
+    updatedAt: new Date().toISOString()
+  };
+
+  if (isSupabaseConfigured && supabase) {
+    try {
+      await supabase.from('site_settings').upsert({
+        id: 'current_social_settings',
+        content: JSON.stringify(merged),
+        updated_at: merged.updatedAt
+      });
+    } catch {
+      // Fallback
+    }
+
+    try {
+      await supabase.from('system_notifications').upsert({
+        id: 'current_social_settings',
+        type: 'social_settings_data',
+        title: 'Social Channels Settings',
+        message: JSON.stringify(merged),
+        created_at: new Date().toISOString()
+      });
+    } catch {
+      // Fallback
+    }
+  }
+
+  global.__app_social_settings = merged;
+  return merged;
+}
+
+export async function addSocialBroadcastHistory(item: Omit<SocialBroadcastHistory, 'id' | 'sentAt'>): Promise<SocialBroadcastHistory> {
+  const current = await getSocialSettings();
+  const newItem: SocialBroadcastHistory = {
+    ...item,
+    id: `bcast-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    sentAt: new Date().toISOString()
+  };
+
+  const updatedHistory = [newItem, ...(current.broadcastHistory || [])].slice(0, 50);
+  await saveSocialSettings({ broadcastHistory: updatedHistory });
+  return newItem;
 }
 
 /* =========================================================================

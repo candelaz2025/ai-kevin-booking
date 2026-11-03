@@ -434,6 +434,64 @@ export interface McpIntegrationSettings {
 }
 
 /* =========================================================================
+   SOCIAL CHANNELS & BROADCAST INTEGRATION INTERFACES
+   (Facebook Page & LINE Official Account via Token / OAuth)
+   ========================================================================= */
+
+export interface LineOaConfig {
+  enabled: boolean;
+  channelId?: string;
+  channelSecret?: string;
+  channelAccessToken?: string; // Long-lived Channel Access Token (v2.1)
+  botBasicId?: string;        // e.g. @kevin_ai
+  autoNotifyNewCourse?: boolean;
+  autoNotifyPromotion?: boolean;
+  welcomeMessage?: string;
+  status: 'connected' | 'disconnected' | 'error';
+  lastTestedAt?: string;
+  errorMessage?: string;
+}
+
+export interface FacebookPageConfig {
+  enabled: boolean;
+  appId?: string;
+  appSecret?: string;
+  pageId?: string;
+  pageName?: string;
+  pageAccessToken?: string;  // Page Access Token for Graph API (/feed)
+  userAccessToken?: string;  // Short/Long-lived User OAuth Token
+  autoPostNewCourse?: boolean;
+  autoPostArticles?: boolean;
+  defaultHashtags?: string;
+  status: 'connected' | 'disconnected' | 'error';
+  lastTestedAt?: string;
+  errorMessage?: string;
+}
+
+export interface SocialBroadcastHistory {
+  id: string;
+  channel: 'line_oa' | 'facebook' | 'both';
+  type: 'course_recommend' | 'custom_post' | 'article_share';
+  title: string;
+  content: string;
+  targetCourseId?: string;
+  targetArticleId?: string;
+  linkUrl?: string;
+  imageUrl?: string;
+  status: 'success' | 'failed' | 'simulated';
+  responseDetails?: string;
+  sentAt: string;
+}
+
+export interface SocialIntegrationSettings {
+  id: string; // 'current_social_settings'
+  line: LineOaConfig;
+  facebook: FacebookPageConfig;
+  broadcastHistory: SocialBroadcastHistory[];
+  updatedAt?: string;
+}
+
+/* =========================================================================
    QUIZ & POST-CLASS ASSESSMENT INTERFACES
    ========================================================================= */
 

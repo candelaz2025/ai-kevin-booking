@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
-import { ClassItem, Booking, SystemNotification, User, ClassAttachment, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, Quiz, QuizQuestion, QuizSubmission, DurationUnit, formatClassDuration, isClassFree, CourseLevel, COURSE_LEVELS, getCourseLevelConfig, LessonModule, getYouTubeEmbedUrl } from '@/lib/types';
+import { ClassItem, Booking, SystemNotification, User, ClassAttachment, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, Quiz, QuizQuestion, QuizSubmission, DurationUnit, formatClassDuration, isClassFree, CourseLevel, COURSE_LEVELS, getCourseLevelConfig, LessonModule, getYouTubeEmbedUrl, SocialIntegrationSettings, SocialBroadcastHistory } from '@/lib/types';
 import { formatGoogleDriveImageUrl, getSafeCourseImageUrl, compressImageFile } from '@/lib/image-utils';
 import { 
   Shield, BookOpen, Calendar, Clock, CheckCircle, XCircle, 
@@ -14,13 +14,13 @@ import {
   Newspaper, AlignLeft, Bold, Italic, Globe, Save, Sliders, Terminal, Copy, Check,
   Layout, Palette, Compass, PhoneCall, Info, CalendarDays, ChevronLeft, ChevronRight, ChevronDown,
   Bot, Cpu, Network, Server, Settings, Zap, KeyRound, CheckCircle2, X, QrCode, RotateCcw,
-  Award, GraduationCap, CheckSquare, HelpCircle, ListFilter, Gift
+  Award, GraduationCap, CheckSquare, HelpCircle, ListFilter, Gift, Share2, MessageCircle, Radio, Megaphone
 } from 'lucide-react';
 
 export default function AdminPage() {
   const { user, isAdmin, loading: authLoading } = useAuth();
 
-  const [activeTab, setActiveTab] = useState<'bookings' | 'calendar' | 'classes' | 'quizzes' | 'articles' | 'prompts' | 'site_cms' | 'mcp' | 'students' | 'notifications' | 'emails'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'calendar' | 'classes' | 'quizzes' | 'articles' | 'prompts' | 'site_cms' | 'mcp' | 'social' | 'students' | 'notifications' | 'emails'>('bookings');
   
   // Data states
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -36,6 +36,20 @@ export default function AdminPage() {
   const [testingMcpServerId, setTestingMcpServerId] = useState<string | null>(null);
   const [testingConnectorId, setTestingConnectorId] = useState<string | null>(null);
   const [mcpFeedback, setMcpFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  // Social Integration (Facebook & LINE OA) states
+  const [socialSettings, setSocialSettings] = useState<SocialIntegrationSettings | null>(null);
+  const [isSavingSocial, setIsSavingSocial] = useState(false);
+  const [isTestingLine, setIsTestingLine] = useState(false);
+  const [isTestingFacebook, setIsTestingFacebook] = useState(false);
+  const [isBroadcastingSocial, setIsBroadcastingSocial] = useState(false);
+  const [socialBroadcastChannel, setSocialBroadcastChannel] = useState<'line_oa' | 'facebook' | 'both'>('both');
+  const [selectedBroadcastCourseId, setSelectedBroadcastCourseId] = useState<string>('');
+  const [broadcastCustomTitle, setBroadcastCustomTitle] = useState('');
+  const [broadcastCustomMessage, setBroadcastCustomMessage] = useState('');
+  const [broadcastCustomImageUrl, setBroadcastCustomImageUrl] = useState('');
+  const [broadcastCustomLinkUrl, setBroadcastCustomLinkUrl] = useState('');
+  const [socialActiveSubtab, setSocialActiveSubtab] = useState<'broadcast' | 'line_config' | 'facebook_config' | 'history'>('broadcast');
 
   // MCP Server Modal states
   const [isMcpServerModalOpen, setIsMcpServerModalOpen] = useState(false);
@@ -182,7 +196,7 @@ export default function AdminPage() {
     if (!isAdmin) return;
     setLoading(true);
     try {
-      const [resB, resC, resN, resE, resU, resA, resP, resS, resM, resQ] = await Promise.all([
+      const [resB, resC, resN, resE, resU, resA, resP, resS, resM, resQ, resSoc] = await Promise.all([
         fetch('/api/bookings').then(r => r.json()),
         fetch('/api/classes').then(r => r.json()),
         fetch('/api/admin/notifications').then(r => r.json()),
@@ -192,7 +206,8 @@ export default function AdminPage() {
         fetch('/api/prompts').then(r => r.json()).catch(() => ({ success: true, data: [] })),
         fetch('/api/site-settings').then(r => r.json()).catch(() => ({ success: true, data: null })),
         fetch('/api/admin/mcp').then(r => r.json()).catch(() => ({ success: true, data: null })),
-        fetch('/api/admin/quizzes').then(r => r.json()).catch(() => ({ success: true, quizzes: [], submissions: [] }))
+        fetch('/api/admin/quizzes').then(r => r.json()).catch(() => ({ success: true, quizzes: [], submissions: [] })),
+        fetch('/api/admin/social').then(r => r.json()).catch(() => ({ success: true, data: null }))
       ]);
 
       if (resB.success) setBookings(resB.data);
@@ -215,6 +230,9 @@ export default function AdminPage() {
       if (resQ.success) {
         setQuizzes(resQ.quizzes || []);
         setQuizSubmissions(resQ.submissions || []);
+      }
+      if (resSoc && resSoc.success && resSoc.data) {
+        setSocialSettings(resSoc.data);
       }
     } catch (err) {
       console.error(err);
@@ -1631,6 +1649,7 @@ export default function AdminPage() {
     { id: 'prompts', label: 'Prompts', icon: Sliders, count: prompts.length, color: 'bg-emerald-400 text-slate-950' },
     { id: 'site_cms', label: 'Site CMS', icon: Layout, color: 'bg-purple-400 text-slate-950' },
     { id: 'mcp', label: 'เชื่อมต่อ MCP Server', icon: Network, count: mcpSettings?.servers?.length || 3, color: 'bg-cyan-400 text-slate-950' },
+    { id: 'social', label: 'LINE OA & Facebook', icon: Share2, count: socialSettings?.broadcastHistory?.length || 0, color: 'bg-emerald-500 text-white' },
     { id: 'students', label: 'Students', icon: Users, count: students.length, color: 'bg-amber-400 text-slate-950' },
     { id: 'notifications', label: 'Alerts', icon: Bell, count: notifications.length, color: 'bg-amber-400 text-slate-950' },
     { id: 'emails', label: 'Emails', icon: Mail, count: emails.length, color: 'bg-amber-400 text-slate-950' },
@@ -1873,7 +1892,7 @@ export default function AdminPage() {
       <div className="block sm:hidden mb-4">
         <label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center justify-between">
           <span>เลือกเมนูจัดการ (Menu)</span>
-          <span className="text-amber-400 font-mono">10 เมนู</span>
+          <span className="text-amber-400 font-mono">{adminTabs.length} เมนู</span>
         </label>
         <div className="relative">
           <select
@@ -5202,6 +5221,885 @@ export default function AdminPage() {
               })}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Tab: Social Channels (Facebook Page & LINE Official Account) */}
+      {activeTab === 'social' && (
+        <div className="space-y-6">
+          {/* Top Header Banner */}
+          <div className="bg-[#101c2d] border border-emerald-500/30 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
+                    <Share2 className="w-5 h-5" />
+                  </span>
+                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                    เชื่อมต่อ Facebook Page & LINE Official Account (OA)
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                      Channel Token & OAuth
+                    </span>
+                  </h2>
+                </div>
+                <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+                  ส่งข้อความ Broadcast แนะนำคอร์สเรียน แจ้งเตือนโปรโมชั่นรอบใหม่ หรือโพสต์คอนเทนต์ความรู้ AI ไปยังผู้ติดตามบน LINE OA และแฟนเพจ Facebook ได้อัตโนมัติในคลิกเดียว ผ่าน LINE Messaging API (Long-lived Token) และ Facebook Graph API
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => fetchData()}
+                  className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition"
+                >
+                  <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
+                  <span>รีเฟรชข้อมูล</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Status Bar */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5 pt-5 border-t border-white/5">
+              {/* LINE Status */}
+              <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-xl border border-white/5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#06C755]/15 text-[#06C755] flex items-center justify-center font-bold text-sm">
+                    L
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-white">LINE Official Account</span>
+                      <span className="text-[10px] text-slate-400 font-mono">
+                        {socialSettings?.line?.botBasicId || '@kevin_ai'}
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-slate-400">
+                      Channel ID: {socialSettings?.line?.channelId || '2006847291'}
+                    </span>
+                  </div>
+                </div>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                  socialSettings?.line?.status === 'connected'
+                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                    : 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
+                }`}>
+                  {socialSettings?.line?.status === 'connected' ? '● เชื่อมต่อแล้ว' : '○ ยังไม่เชื่อมต่อ'}
+                </span>
+              </div>
+
+              {/* Facebook Status */}
+              <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-xl border border-white/5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#1877F2]/15 text-[#1877F2] flex items-center justify-center font-bold text-sm">
+                    f
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-white">Facebook Page</span>
+                      <span className="text-[10px] text-slate-400 font-medium">
+                        {socialSettings?.facebook?.pageName || 'Kevin AI Academy'}
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-slate-400">
+                      Page ID: {socialSettings?.facebook?.pageId || '108492048591820'}
+                    </span>
+                  </div>
+                </div>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                  socialSettings?.facebook?.status === 'connected'
+                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                    : 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
+                }`}>
+                  {socialSettings?.facebook?.status === 'connected' ? '● เชื่อมต่อแล้ว' : '○ ยังไม่เชื่อมต่อ'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sub Navigation Bar */}
+          <div className="flex items-center gap-2 border-b border-white/10 pb-3">
+            <button
+              type="button"
+              onClick={() => setSocialActiveSubtab('broadcast')}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                socialActiveSubtab === 'broadcast'
+                  ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20'
+                  : 'bg-slate-900 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Megaphone className="w-3.5 h-3.5" />
+              <span>ส่งบรอดแคสต์ / แนะนำคอร์ส</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSocialActiveSubtab('line_config')}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                socialActiveSubtab === 'line_config'
+                  ? 'bg-[#06C755] text-white shadow-md shadow-[#06C755]/20'
+                  : 'bg-slate-900 text-slate-400 hover:text-white'
+              }`}
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>ตั้งค่า LINE Official Account</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSocialActiveSubtab('facebook_config')}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                socialActiveSubtab === 'facebook_config'
+                  ? 'bg-[#1877F2] text-white shadow-md shadow-[#1877F2]/20'
+                  : 'bg-slate-900 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span>ตั้งค่า Facebook Page & Graph API</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setSocialActiveSubtab('history')}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                socialActiveSubtab === 'history'
+                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
+                  : 'bg-slate-900 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Clock className="w-3.5 h-3.5" />
+              <span>ประวัติการส่ง ({socialSettings?.broadcastHistory?.length || 0})</span>
+            </button>
+          </div>
+
+          {/* Subtab 1: Broadcast & Recommend Courses */}
+          {socialActiveSubtab === 'broadcast' && (
+            <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 shadow-xl space-y-5">
+              <div>
+                <h3 className="text-base font-bold text-white flex items-center gap-2">
+                  <Megaphone className="w-4.5 h-4.5 text-emerald-400" />
+                  <span>ฟอร์มส่งบรอดแคสต์แนะนำคอร์ส & คอนเทนต์ (Push to Socials)</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  เลือกคอร์สที่ต้องการโปรโมท หรือพิมพ์ข้อความใหม่ เพื่อยิงตรงเข้า LINE OA ของผู้เรียนและโพสต์ลงบนหน้าเพจ Facebook ทันที
+                </p>
+              </div>
+
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!broadcastCustomTitle || !broadcastCustomMessage) {
+                    showModal('error', 'กรุณากรอกข้อมูล', 'กรุณาระบุหัวข้อและเนื้อหาสำหรับส่งแจ้งเตือน');
+                    return;
+                  }
+
+                  setIsBroadcastingSocial(true);
+                  try {
+                    const res = await fetch('/api/admin/social', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        action: 'broadcast',
+                        channel: socialBroadcastChannel,
+                        courseId: selectedBroadcastCourseId || undefined,
+                        customTitle: broadcastCustomTitle,
+                        customMessage: broadcastCustomMessage,
+                        customImageUrl: broadcastCustomImageUrl || undefined,
+                        customLinkUrl: broadcastCustomLinkUrl || undefined
+                      })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                      await fetchData();
+                      showModal('success', 'ส่งบรอดแคสต์สำเร็จ!', data.message || 'ส่งแจ้งเตือน/โพสต์ไปยังช่องทางที่เลือกเรียบร้อยแล้ว');
+                      // Clear form
+                      setBroadcastCustomTitle('');
+                      setBroadcastCustomMessage('');
+                      setBroadcastCustomImageUrl('');
+                      setBroadcastCustomLinkUrl('');
+                      setSelectedBroadcastCourseId('');
+                    } else {
+                      showModal('error', 'ส่งไม่สำเร็จ', data.error || 'เกิดข้อผิดพลาดในการส่ง');
+                    }
+                  } catch (err: any) {
+                    showModal('error', 'ข้อผิดพลาดระบบ', err?.message || 'ไม่สามารถติดต่อเซิร์ฟเวอร์ได้');
+                  } finally {
+                    setIsBroadcastingSocial(false);
+                  }
+                }}
+                className="space-y-4"
+              >
+                {/* Channel Selector */}
+                <div>
+                  <label className="text-xs text-slate-300 block mb-1.5 font-semibold">
+                    เลือกช่องทางที่จะเผยแพร่ (Broadcast Channel) *
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setSocialBroadcastChannel('both')}
+                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition cursor-pointer ${
+                        socialBroadcastChannel === 'both'
+                          ? 'bg-emerald-500/20 border-emerald-500 text-white shadow-md'
+                          : 'bg-slate-900 border-white/10 text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Radio className="w-4 h-4 text-emerald-400" />
+                        <div>
+                          <div className="text-xs font-bold">ทั้งสองช่องทาง (พร้อมกัน)</div>
+                          <div className="text-[10px] text-slate-400">LINE OA + Facebook Page</div>
+                        </div>
+                      </div>
+                      {socialBroadcastChannel === 'both' && <Check className="w-4 h-4 text-emerald-400" />}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSocialBroadcastChannel('line_oa')}
+                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition cursor-pointer ${
+                        socialBroadcastChannel === 'line_oa'
+                          ? 'bg-[#06C755]/20 border-[#06C755] text-white shadow-md'
+                          : 'bg-slate-900 border-white/10 text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <MessageCircle className="w-4 h-4 text-[#06C755]" />
+                        <div>
+                          <div className="text-xs font-bold">เฉพาะ LINE OA</div>
+                          <div className="text-[10px] text-slate-400">ยิง Broadcast ตรงเข้ามือถือ</div>
+                        </div>
+                      </div>
+                      {socialBroadcastChannel === 'line_oa' && <Check className="w-4 h-4 text-[#06C755]" />}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSocialBroadcastChannel('facebook')}
+                      className={`p-3 rounded-xl border text-left flex items-center justify-between transition cursor-pointer ${
+                        socialBroadcastChannel === 'facebook'
+                          ? 'bg-[#1877F2]/20 border-[#1877F2] text-white shadow-md'
+                          : 'bg-slate-900 border-white/10 text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Globe className="w-4 h-4 text-[#1877F2]" />
+                        <div>
+                          <div className="text-xs font-bold">เฉพาะ Facebook Page</div>
+                          <div className="text-[10px] text-slate-400">โพสต์ลงไทม์ไลน์แฟนเพจ</div>
+                        </div>
+                      </div>
+                      {socialBroadcastChannel === 'facebook' && <Check className="w-4 h-4 text-[#1877F2]" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Fast Course Preset Picker */}
+                <div className="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs text-amber-300 font-semibold flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>เลือกคอร์สเรียนเพื่อดึงข้อมูลอัตโนมัติ (Course Auto-Fill)</span>
+                    </label>
+                    {selectedBroadcastCourseId && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedBroadcastCourseId('');
+                          setBroadcastCustomTitle('');
+                          setBroadcastCustomMessage('');
+                          setBroadcastCustomImageUrl('');
+                          setBroadcastCustomLinkUrl('');
+                        }}
+                        className="text-[11px] text-slate-400 hover:text-white"
+                      >
+                        ล้างข้อมูล
+                      </button>
+                    )}
+                  </div>
+
+                  <select
+                    value={selectedBroadcastCourseId}
+                    onChange={(e) => {
+                      const cId = e.target.value;
+                      setSelectedBroadcastCourseId(cId);
+                      const found = classes.find(c => c.id === cId);
+                      if (found) {
+                        const dateStr = found.availableDates?.join(', ') || 'รอบเรียนตลอดปี';
+                        setBroadcastCustomTitle(`🎓 แนะนำคอร์สเรียนมาใหม่: ${found.title}`);
+                        setBroadcastCustomMessage(`${found.subtitle || found.description}\n\n🗓️ ตารางเรียน: ${dateStr}\n💰 ค่าลงทะเบียน: ฿${found.price.toLocaleString()}\n📍 รูปแบบ: ${found.type === 'online' ? 'เรียนสด Online (Google Meet)' : 'เรียนสด On-site'}`);
+                        setBroadcastCustomImageUrl(found.image || '');
+                        setBroadcastCustomLinkUrl(`https://ai-kevin-booking.vercel.app/booking?classId=${found.id}`);
+                      }
+                    }}
+                    className="w-full bg-slate-950 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
+                  >
+                    <option value="">-- หรือพิมพ์หัวข้อและเนื้อหาเองตามต้องการ --</option>
+                    {classes.map(c => (
+                      <option key={c.id} value={c.id}>
+                        {c.title} (฿{c.price.toLocaleString()} | {c.type === 'online' ? 'Online' : 'Onsite'})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Title */}
+                <div>
+                  <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                    หัวข้อข้อความแจ้งเตือน / โพสต์ *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="เช่น เปิดรับสมัครรอบใหม่: AI Agent Mastery 2026 เข้มข้น 2 วันเต็ม!"
+                    value={broadcastCustomTitle}
+                    onChange={(e) => setBroadcastCustomTitle(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+
+                {/* Message Body */}
+                <div>
+                  <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                    เนื้อหารายละเอียด (Message Body / Caption) *
+                  </label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="พิมพ์รายละเอียดที่ต้องการสื่อสาร แนะนำสิทธิพิเศษ หรือเนื้อหาคอร์ส..."
+                    value={broadcastCustomMessage}
+                    onChange={(e) => setBroadcastCustomMessage(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+
+                {/* Link URL & Image URL */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      ลิงก์ปลายทาง (Action Link URL)
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://ai-kevin-booking.vercel.app/booking"
+                      value={broadcastCustomLinkUrl}
+                      onChange={(e) => setBroadcastCustomLinkUrl(e.target.value)}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      URL รูปภาพแนบ (Photo / Banner URL)
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://.../banner.png หรือเลือกจากคอร์ส"
+                      value={broadcastCustomImageUrl}
+                      onChange={(e) => setBroadcastCustomImageUrl(e.target.value)}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400"
+                    />
+                  </div>
+                </div>
+
+                {/* Submit button */}
+                <div className="pt-2 flex items-center justify-end gap-3">
+                  <button
+                    type="submit"
+                    disabled={isBroadcastingSocial}
+                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 font-bold text-white text-xs flex items-center gap-2 shadow-lg shadow-emerald-600/30 transition disabled:opacity-50 cursor-pointer"
+                  >
+                    {isBroadcastingSocial ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>กำลังส่งบรอดแคสต์ไปยัง Socials...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>กดยืนยันส่งบรอดแคสต์ / โพสต์ทันที</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* Subtab 2: LINE Official Account Configuration */}
+          {socialActiveSubtab === 'line_config' && (
+            <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 shadow-xl space-y-5">
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div>
+                  <h3 className="text-base font-bold text-white flex items-center gap-2">
+                    <MessageCircle className="w-5 h-5 text-[#06C755]" />
+                    <span>การตั้งค่า LINE Official Account & Messaging API</span>
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    เชื่อมต่อผ่าน <strong>Channel Access Token (Long-lived)</strong> หรือ Channel Secret เพื่อให้ระบบส่งข้อความ Push/Multicast แนะนำคอร์ส
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  disabled={isTestingLine}
+                  onClick={async () => {
+                    setIsTestingLine(true);
+                    try {
+                      const res = await fetch('/api/admin/social', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          action: 'test_line',
+                          channelAccessToken: socialSettings?.line?.channelAccessToken,
+                          channelId: socialSettings?.line?.channelId
+                        })
+                      });
+                      const data = await res.json();
+                      if (data.success) {
+                        await fetchData();
+                        showModal('success', 'ทดสอบเชื่อมต่อ LINE สำเร็จ!', data.message);
+                      } else {
+                        showModal('error', 'เชื่อมต่อไม่สำเร็จ', data.error);
+                      }
+                    } catch (err: any) {
+                      showModal('error', 'เกิดข้อผิดพลาด', err?.message);
+                    } finally {
+                      setIsTestingLine(false);
+                    }
+                  }}
+                  className="px-3.5 py-2 rounded-xl bg-[#06C755]/15 hover:bg-[#06C755]/25 text-[#06C755] border border-[#06C755]/30 text-xs font-bold flex items-center gap-1.5 transition disabled:opacity-50"
+                >
+                  {isTestingLine ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
+                  <span>ทดสอบเชื่อมต่อ LINE API</span>
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      LINE Bot Basic ID (@...)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="เช่น @kevin_ai"
+                      value={socialSettings?.line?.botBasicId || ''}
+                      onChange={(e) => {
+                        if (!socialSettings) return;
+                        setSocialSettings({
+                          ...socialSettings,
+                          line: { ...socialSettings.line, botBasicId: e.target.value }
+                        });
+                      }}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      Channel ID (LINE Developers Console)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="เช่น 2006847291"
+                      value={socialSettings?.line?.channelId || ''}
+                      onChange={(e) => {
+                        if (!socialSettings) return;
+                        setSocialSettings({
+                          ...socialSettings,
+                          line: { ...socialSettings.line, channelId: e.target.value }
+                        });
+                      }}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                    Channel Access Token (Long-lived v2.1) *
+                  </label>
+                  <textarea
+                    rows={3}
+                    placeholder="วาง Channel Access Token ที่ได้จาก LINE Developers Console > Messaging API Tab..."
+                    value={socialSettings?.line?.channelAccessToken || ''}
+                    onChange={(e) => {
+                      if (!socialSettings) return;
+                      setSocialSettings({
+                        ...socialSettings,
+                        line: { ...socialSettings.line, channelAccessToken: e.target.value }
+                      });
+                    }}
+                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2 text-xs font-mono text-white focus:outline-none focus:border-[#06C755]"
+                  />
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    * โทเคนนี้ใช้ในการเรียก Push Message & Multicast API เพื่อแนะนำคอร์สเรียนไปยังสมาชิกทุกคน
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      Channel Secret
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Channel Secret สำหรับ Verify Webhook Signature"
+                      value={socialSettings?.line?.channelSecret || ''}
+                      onChange={(e) => {
+                        if (!socialSettings) return;
+                        setSocialSettings({
+                          ...socialSettings,
+                          line: { ...socialSettings.line, channelSecret: e.target.value }
+                        });
+                      }}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
+
+                  <div className="flex flex-col justify-center space-y-2 pt-2 sm:pt-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={socialSettings?.line?.autoNotifyNewCourse ?? true}
+                        onChange={(e) => {
+                          if (!socialSettings) return;
+                          setSocialSettings({
+                            ...socialSettings,
+                            line: { ...socialSettings.line, autoNotifyNewCourse: e.target.checked }
+                          });
+                        }}
+                        className="rounded border-white/10 text-[#06C755] focus:ring-[#06C755]"
+                      />
+                      <span className="text-xs text-slate-300">แจ้งเตือนอัตโนมัติเมื่อสร้างคอร์สใหม่ในระบบ</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={socialSettings?.line?.autoNotifyPromotion ?? true}
+                        onChange={(e) => {
+                          if (!socialSettings) return;
+                          setSocialSettings({
+                            ...socialSettings,
+                            line: { ...socialSettings.line, autoNotifyPromotion: e.target.checked }
+                          });
+                        }}
+                        className="rounded border-white/10 text-[#06C755] focus:ring-[#06C755]"
+                      />
+                      <span className="text-xs text-slate-300">ส่งแจ้งเตือนโปรโมชันราคาพิเศษ (Early Bird)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="pt-3 flex justify-end">
+                  <button
+                    type="button"
+                    disabled={isSavingSocial}
+                    onClick={async () => {
+                      if (!socialSettings) return;
+                      setIsSavingSocial(true);
+                      try {
+                        const res = await fetch('/api/admin/social', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            action: 'save_settings',
+                            line: socialSettings.line
+                          })
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                          await fetchData();
+                          showModal('success', 'บันทึกสำเร็จ!', 'บันทึกการตั้งค่า LINE Official Account เรียบร้อยแล้ว');
+                        } else {
+                          showModal('error', 'บันทึกไม่สำเร็จ', data.error);
+                        }
+                      } catch (err: any) {
+                        showModal('error', 'เกิดข้อผิดพลาด', err?.message);
+                      } finally {
+                        setIsSavingSocial(false);
+                      }
+                    }}
+                    className="px-5 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-[#06C755]/20 transition disabled:opacity-50"
+                  >
+                    {isSavingSocial ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                    <span>บันทึกการตั้งค่า LINE OA</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Subtab 3: Facebook Page Configuration */}
+          {socialActiveSubtab === 'facebook_config' && (
+            <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 shadow-xl space-y-5">
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div>
+                  <h3 className="text-base font-bold text-white flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-[#1877F2]" />
+                    <span>การตั้งค่า Facebook Page & Graph API (OAuth & Token)</span>
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    เชื่อมต่อผ่าน <strong>Facebook Page Access Token (Graph API v19+)</strong> เพื่อโพสต์อัปเดตคอร์สเรียนและบทความลงหน้าเพจ
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  disabled={isTestingFacebook}
+                  onClick={async () => {
+                    setIsTestingFacebook(true);
+                    try {
+                      const res = await fetch('/api/admin/social', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          action: 'test_facebook',
+                          pageAccessToken: socialSettings?.facebook?.pageAccessToken,
+                          pageId: socialSettings?.facebook?.pageId
+                        })
+                      });
+                      const data = await res.json();
+                      if (data.success) {
+                        await fetchData();
+                        showModal('success', 'ทดสอบเชื่อมต่อ Facebook สำเร็จ!', data.message);
+                      } else {
+                        showModal('error', 'เชื่อมต่อไม่สำเร็จ', data.error);
+                      }
+                    } catch (err: any) {
+                      showModal('error', 'เกิดข้อผิดพลาด', err?.message);
+                    } finally {
+                      setIsTestingFacebook(false);
+                    }
+                  }}
+                  className="px-3.5 py-2 rounded-xl bg-[#1877F2]/15 hover:bg-[#1877F2]/25 text-[#1877F2] border border-[#1877F2]/30 text-xs font-bold flex items-center gap-1.5 transition disabled:opacity-50"
+                >
+                  {isTestingFacebook ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
+                  <span>ทดสอบเชื่อมต่อ Facebook API</span>
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      ชื่อ Facebook Page
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="เช่น Kevin AI Academy & Studio"
+                      value={socialSettings?.facebook?.pageName || ''}
+                      onChange={(e) => {
+                        if (!socialSettings) return;
+                        setSocialSettings({
+                          ...socialSettings,
+                          facebook: { ...socialSettings.facebook, pageName: e.target.value }
+                        });
+                      }}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#1877F2]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      Facebook Page ID *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="เช่น 108492048591820"
+                      value={socialSettings?.facebook?.pageId || ''}
+                      onChange={(e) => {
+                        if (!socialSettings) return;
+                        setSocialSettings({
+                          ...socialSettings,
+                          facebook: { ...socialSettings.facebook, pageId: e.target.value }
+                        });
+                      }}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#1877F2]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                    Page Access Token (Graph API / Feed Permission) *
+                  </label>
+                  <textarea
+                    rows={3}
+                    placeholder="วาง Page Access Token (EAAG...) ที่ได้รับจากการขอสิทธิ์ pages_manage_posts, pages_read_engagement..."
+                    value={socialSettings?.facebook?.pageAccessToken || ''}
+                    onChange={(e) => {
+                      if (!socialSettings) return;
+                      setSocialSettings({
+                        ...socialSettings,
+                        facebook: { ...socialSettings.facebook, pageAccessToken: e.target.value }
+                      });
+                    }}
+                    className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2 text-xs font-mono text-white focus:outline-none focus:border-[#1877F2]"
+                  />
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    * ระบบจะใช้โทเคนนี้ในการยิง Graph API Endpoint <code>/{'{page-id}'}/feed</code> เพื่อโพสต์แนะนำคอร์ส
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-slate-300 block mb-1 font-semibold">
+                      แฮชแท็กเริ่มต้น (Default Hashtags)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="#KevinAI #AIEducation #PromptEngineering"
+                      value={socialSettings?.facebook?.defaultHashtags || ''}
+                      onChange={(e) => {
+                        if (!socialSettings) return;
+                        setSocialSettings({
+                          ...socialSettings,
+                          facebook: { ...socialSettings.facebook, defaultHashtags: e.target.value }
+                        });
+                      }}
+                      className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#1877F2]"
+                    />
+                  </div>
+
+                  <div className="flex flex-col justify-center space-y-2 pt-2 sm:pt-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={socialSettings?.facebook?.autoPostNewCourse ?? true}
+                        onChange={(e) => {
+                          if (!socialSettings) return;
+                          setSocialSettings({
+                            ...socialSettings,
+                            facebook: { ...socialSettings.facebook, autoPostNewCourse: e.target.checked }
+                          });
+                        }}
+                        className="rounded border-white/10 text-[#1877F2] focus:ring-[#1877F2]"
+                      />
+                      <span className="text-xs text-slate-300">โพสต์ลงแฟนเพจอัตโนมัติเมื่อเปิดรับสมัครคอร์สใหม่</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={socialSettings?.facebook?.autoPostArticles ?? true}
+                        onChange={(e) => {
+                          if (!socialSettings) return;
+                          setSocialSettings({
+                            ...socialSettings,
+                            facebook: { ...socialSettings.facebook, autoPostArticles: e.target.checked }
+                          });
+                        }}
+                        className="rounded border-white/10 text-[#1877F2] focus:ring-[#1877F2]"
+                      />
+                      <span className="text-xs text-slate-300">แชร์บทความ AI รายวันลง Facebook Page อัตโนมัติ</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="pt-3 flex justify-end">
+                  <button
+                    type="button"
+                    disabled={isSavingSocial}
+                    onClick={async () => {
+                      if (!socialSettings) return;
+                      setIsSavingSocial(true);
+                      try {
+                        const res = await fetch('/api/admin/social', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            action: 'save_settings',
+                            facebook: socialSettings.facebook
+                          })
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                          await fetchData();
+                          showModal('success', 'บันทึกสำเร็จ!', 'บันทึกการตั้งค่า Facebook Page เรียบร้อยแล้ว');
+                        } else {
+                          showModal('error', 'บันทึกไม่สำเร็จ', data.error);
+                        }
+                      } catch (err: any) {
+                        showModal('error', 'เกิดข้อผิดพลาด', err?.message);
+                      } finally {
+                        setIsSavingSocial(false);
+                      }
+                    }}
+                    className="px-5 py-2.5 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-[#1877F2]/20 transition disabled:opacity-50"
+                  >
+                    {isSavingSocial ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                    <span>บันทึกการตั้งค่า Facebook Page</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Subtab 4: Broadcast History */}
+          {socialActiveSubtab === 'history' && (
+            <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                <div>
+                  <h3 className="text-base font-bold text-white flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-purple-400" />
+                    <span>ประวัติการส่งบรอดแคสต์ & โพสต์ย้อนหลัง (Broadcast Logs)</span>
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    บันทึกรายการส่งข้อความแนะนำคอร์สเรียนและโปรโมชั่นไปยัง LINE OA และ Facebook Page
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-purple-400 bg-purple-500/10 px-3 py-1.5 rounded-xl border border-purple-500/20 font-mono">
+                  {socialSettings?.broadcastHistory?.length || 0} รายการ
+                </span>
+              </div>
+
+              {(!socialSettings?.broadcastHistory || socialSettings.broadcastHistory.length === 0) ? (
+                <div className="text-center py-12 text-slate-500 text-xs">
+                  ยังไม่มีประวัติการส่งบรอดแคสต์ สามารถเริ่มส่งข้อความแรกได้ที่แท็บ "ส่งบรอดแคสต์ / แนะนำคอร์ส"
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {socialSettings.broadcastHistory.map((item) => (
+                    <div
+                      key={item.id}
+                      className="p-4 rounded-xl bg-slate-900/60 border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-white/10 transition"
+                    >
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            item.channel === 'both'
+                              ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                              : item.channel === 'line_oa'
+                              ? 'bg-[#06C755]/15 text-[#06C755] border border-[#06C755]/30'
+                              : 'bg-[#1877F2]/15 text-[#1877F2] border border-[#1877F2]/30'
+                          }`}>
+                            {item.channel === 'both' ? 'LINE OA + Facebook' : item.channel === 'line_oa' ? 'LINE OA' : 'Facebook Page'}
+                          </span>
+                          <span className="text-xs font-bold text-white">{item.title}</span>
+                        </div>
+                        <p className="text-xs text-slate-400 line-clamp-2">{item.content}</p>
+                        {item.linkUrl && (
+                          <div className="text-[11px] text-amber-400 flex items-center gap-1">
+                            <LinkIcon className="w-3 h-3" />
+                            <a href={item.linkUrl} target="_blank" rel="noreferrer" className="underline truncate max-w-md">
+                              {item.linkUrl}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex md:flex-col items-center md:items-end justify-between text-right shrink-0">
+                        <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                          ✓ ส่งสำเร็จ
+                        </span>
+                        <span className="text-[10px] text-slate-500 mt-1">
+                          {new Date(item.sentAt).toLocaleString('th-TH')}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 
