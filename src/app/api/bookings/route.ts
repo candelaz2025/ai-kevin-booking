@@ -3,6 +3,7 @@ import { getBookings, saveBooking, addNotification, getClasses, processReferralP
 import { 
   sendAdminNewBookingEmail, 
   sendUserBookingReceivedEmail,
+  sendUserPayLater7DaysEmail,
   sendUserBookingConfirmationEmail,
   sendAdminPaymentReceivedEmail 
 } from '@/lib/email';
@@ -88,6 +89,11 @@ export async function POST(req: Request) {
     const isFreeCourse = (classItem && (classItem.isFree || classItem.price === 0)) || Number(body.amount) === 0 || body.slipUrl === 'FREE_ENROLLMENT';
     const bookingAmount = isFreeCourse ? 0 : (classItem ? classItem.price : Number(body.amount) || 499);
 
+    const isPayLater = !isFreeCourse && (body.paymentMethod === 'pay_later_7days' || body.isPayLater7Days);
+    const paymentDueAt = isPayLater 
+      ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+      : undefined;
+
     const newBooking: Booking = {
       id: bookingId,
       classId: body.classId,
@@ -102,11 +108,13 @@ export async function POST(req: Request) {
       lineId: body.lineId || '',
       notes: body.notes || '',
       amount: bookingAmount,
-      paymentMethod: 'promptpay_qr',
+      paymentMethod: isPayLater ? 'pay_later_7days' : (body.paymentMethod || 'promptpay_qr'),
       paymentStatus: isFreeCourse ? 'verified' : 'pending',
-      slipUrl: isFreeCourse ? 'FREE_ENROLLMENT' : finalSlipUrl,
+      slipUrl: isFreeCourse ? 'FREE_ENROLLMENT' : (isPayLater ? (finalSlipUrl || '') : finalSlipUrl),
       bookingStatus: isFreeCourse ? 'confirmed' : 'pending_payment',
       onlineMeetingUrl: classItem?.onlineMeetingUrl || '',
+      paymentDueAt,
+      isPayLater7Days: isPayLater,
       createdAt: new Date().toISOString(),
       confirmedAt: isFreeCourse ? new Date().toISOString() : undefined
     };
@@ -125,8 +133,8 @@ export async function POST(req: Request) {
     // Fire in-app alert asynchronously so user doesn't wait for extra roundtrip
     addNotification({
       type: 'new_booking',
-      title: `จองคลาสใหม่: ${newBooking.id}`,
-      message: `คุณ ${newBooking.userName} ได้ทำการจอง ${newBooking.classTitle} (${newBooking.amount.toLocaleString()} บาท)`,
+      title: isPayLater ? `จองสิทธิ์ใน 7 วัน: ${newBooking.id}` : `จองคลาสใหม่: ${newBooking.id}`,
+      message: `คุณ ${newBooking.userName} ได้ทำการจอง ${newBooking.classTitle} (${newBooking.amount.toLocaleString()} บาท) ${isPayLater ? '• กำหนดชำระเงินภายใน 7 วัน' : ''}`,
       read: false,
       bookingId: newBooking.id
     }).catch(console.error);
@@ -134,7 +142,10 @@ export async function POST(req: Request) {
     // Dispatch emails (awaited via Promise.allSettled so Vercel lambda doesn't terminate before socket completes)
     const emailTasks: Promise<any>[] = [
       sendAdminNewBookingEmail(newBooking).catch(console.error),
-      sendUserBookingReceivedEmail(newBooking).catch(console.error)
+      (isPayLater 
+        ? sendUserPayLater7DaysEmail(newBooking) 
+        : sendUserBookingReceivedEmail(newBooking)
+      ).catch(console.error)
     ];
 
     if (newBooking.bookingStatus === 'confirmed') {

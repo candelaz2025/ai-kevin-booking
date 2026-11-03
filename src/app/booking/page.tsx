@@ -61,6 +61,8 @@ interface CreatedBookingSummary {
   userEmail: string;
   userName: string;
   bookingStatus: string;
+  paymentMethod?: string;
+  paymentDueAt?: string;
   onlineMeetingUrl?: string;
 }
 
@@ -119,6 +121,11 @@ function BookingContent() {
   // Step 5 & 6: Booking submission results
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [createdBookings, setCreatedBookings] = useState<CreatedBookingSummary[]>([]);
+  const isAnyPayLater = createdBookings.some(b => b.paymentMethod === 'pay_later_7days');
+  const sampleDue = createdBookings.find(b => b.paymentDueAt)?.paymentDueAt;
+  const payLaterDueDateStr = sampleDue 
+    ? new Date(sampleDue).toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' })
+    : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString('th-TH', { day: 'numeric', month: 'long', year: 'numeric' });
 
   // Feedback Toast
   const [toastMsg, setToastMsg] = useState<string | null>(null);
@@ -450,6 +457,8 @@ function BookingContent() {
             userEmail: data.data.userEmail || userEmail,
             userName: data.data.userName || userName,
             bookingStatus: data.data.bookingStatus || 'pending_payment',
+            paymentMethod: data.data.paymentMethod,
+            paymentDueAt: data.data.paymentDueAt,
             onlineMeetingUrl: data.data.onlineMeetingUrl
           });
         }
@@ -1624,21 +1633,37 @@ function BookingContent() {
           <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-300 text-center">
             
             {/* Success Icon */}
-            <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mx-auto border border-emerald-500/30 shadow-2xl shadow-emerald-500/10">
-              <CheckCircle2 className="w-10 h-10" />
+            <div className={`w-20 h-20 ${isAnyPayLater ? 'bg-blue-500/20 text-blue-400 border-blue-500/30 shadow-blue-500/10' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-emerald-500/10'} rounded-3xl flex items-center justify-center mx-auto border shadow-2xl`}>
+              {isAnyPayLater ? <Clock className="w-10 h-10" /> : <CheckCircle2 className="w-10 h-10" />}
             </div>
 
             <div>
-              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                ขั้นตอนที่ 6 / 6: บันทึกข้อมูลและส่งแจ้งเตือนเรียบร้อย
+              <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full ${isAnyPayLater ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'} border`}>
+                ขั้นตอนที่ 6 / 6: {isAnyPayLater ? 'บันทึกการจองสิทธิ์ใน 7 วันเรียบร้อย' : 'บันทึกข้อมูลและส่งแจ้งเตือนเรียบร้อย'}
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-white mt-3 tracking-tight">
-                🎉 บันทึกการจองสำเร็จแล้ว!
+                {isAnyPayLater ? '🎉 จองสิทธิ์สำเร็จ! รอการชำระเงินภายใน 7 วัน' : '🎉 บันทึกการจองสำเร็จแล้ว!'}
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-lg mx-auto leading-relaxed">
-                ระบบได้ส่งอีเมลสรุปคำขอไปยัง <strong className="text-amber-300">{createdBookings[0]?.userEmail}</strong> และแจ้งเตือนแอดมินเรียบร้อยแล้ว
+                ระบบได้ส่งอีเมลสรุปข้อมูลไปยัง <strong className="text-amber-300">{createdBookings[0]?.userEmail}</strong> และแจ้งเตือนแอดมินเรียบร้อยแล้ว
               </p>
             </div>
+
+            {/* 7-Day Pay Later Alert Box */}
+            {isAnyPayLater && (
+              <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-950/70 via-slate-900 to-rose-950/40 border border-blue-400/40 text-left space-y-2.5 shadow-2xl">
+                <div className="flex items-center gap-2 text-blue-300 font-bold text-sm">
+                  <Clock className="w-4 h-4 text-blue-400" />
+                  <span>สิทธิ์ที่นั่งของคุณถูกล็อคไว้ 7 วัน (ถึงวันที่ {payLaterDueDateStr})</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  ระบบได้ส่งข้อมูลการโอนเงิน (พร้อมเพย์ & เลขบัญชี) ไปยังอีเมลของคุณเรียบร้อยแล้ว คุณสามารถเข้าสู่ระบบและแนบสลิปผ่านหน้า <strong>Dashboard</strong> ได้ตลอดเวลาภายใน 7 วัน
+                </p>
+                <div className="p-3 bg-rose-950/40 border border-rose-500/30 rounded-xl text-xs text-rose-300 font-medium">
+                  ⚠️ <strong>เงื่อนไขสำคัญ:</strong> หากไม่ชำระเงินและแนบสลิปภายใน 7 วัน (ก่อนวันที่ {payLaterDueDateStr}) ระบบจะตัดชื่อและยกเลิกสิทธิ์อัตโนมัติ เพื่อเปิดรับผู้เรียนท่านถัดไป
+                </div>
+              </div>
+            )}
 
             {/* 4-Stage Visual Status Timeline Tracker (Admin Email Response Flow) */}
             <div className="bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 text-left shadow-2xl space-y-6">
@@ -1673,15 +1698,19 @@ function BookingContent() {
 
                 {/* Stage 2 */}
                 <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-md">
-                    ✓
+                  <div className={`w-8 h-8 rounded-full ${isAnyPayLater ? 'bg-blue-500 text-white' : 'bg-emerald-500 text-slate-950'} font-black flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-md`}>
+                    {isAnyPayLater ? '⏰' : '✓'}
                   </div>
                   <div className="flex-1">
                     <strong className="text-xs sm:text-sm font-bold text-white block">
-                      2. แนบหลักฐานการชำระเงินเรียบร้อย (Payment Submitted)
+                      {isAnyPayLater 
+                        ? '2. จองสิทธิ์ไว้ก่อน 7 วัน (Seat Reserved for 7 Days)' 
+                        : '2. แนบหลักฐานการชำระเงินเรียบร้อย (Payment Submitted)'}
                     </strong>
                     <span className="text-[11px] text-slate-400 block mt-0.5">
-                      {totalAmount === 0 ? 'สิทธิ์ลงทะเบียนฟรี 100% (ไม่ต้องชำระเงิน)' : 'สลิปโอนเงิน PromptPay ถูกส่งเข้าสู่ระบบการตรวจสอบ'}
+                      {isAnyPayLater 
+                        ? `สำรองที่นั่งเรียบร้อย กรุณาชำระเงินและแนบสลิปก่อนวันที่ ${payLaterDueDateStr}`
+                        : (totalAmount === 0 ? 'สิทธิ์ลงทะเบียนฟรี 100% (ไม่ต้องชำระเงิน)' : 'สลิปโอนเงิน PromptPay ถูกส่งเข้าสู่ระบบการตรวจสอบ')}
                     </span>
                   </div>
                 </div>
@@ -1693,11 +1722,13 @@ function BookingContent() {
                   </div>
                   <div className="flex-1">
                     <strong className="text-xs sm:text-sm font-bold text-amber-300 block flex items-center gap-1.5">
-                      <span>3. กำลังดำเนินการ: แอดมินกำลังตรวจสอบความถูกต้อง & ยอดเงิน</span>
+                      <span>{isAnyPayLater ? '3. รอการแนบสลิป & การตรวจสอบจากแอดมิน' : '3. กำลังดำเนินการ: แอดมินกำลังตรวจสอบความถูกต้อง & ยอดเงิน'}</span>
                       <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                     </strong>
                     <span className="text-[11px] text-slate-300 block mt-0.5 leading-relaxed">
-                      แอดมินได้รับแจ้งเตือนทางอีเมลและระบบจัดการหลังบ้านแล้ว (ปกติใช้เวลาประมาณ 15–30 นาที ในเวลาทำการ)
+                      {isAnyPayLater 
+                        ? 'เมื่อคุณชำระเงินและแนบสลิปผ่าน Dashboard หรือส่งให้แอดมิน แอดมินจะดำเนินการอนุมัติสิทธิ์ทันที' 
+                        : 'แอดมินได้รับแจ้งเตือนทางอีเมลและระบบจัดการหลังบ้านแล้ว (ปกติใช้เวลาประมาณ 15–30 นาที ในเวลาทำการ)'}
                     </span>
                   </div>
                 </div>

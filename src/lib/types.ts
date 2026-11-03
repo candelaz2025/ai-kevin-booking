@@ -142,7 +142,7 @@ export function isClassFree(cls: { isFree?: boolean; price?: number } | null | u
   return cls.isFree === true || cls.price === 0;
 }
 
-export type PaymentMethod = 'promptpay_qr' | 'stripe';
+export type PaymentMethod = 'promptpay_qr' | 'stripe' | 'pay_later_7days';
 export type PaymentStatus = 'pending' | 'verified' | 'failed' | 'refunded';
 export type BookingStatus = 'pending_payment' | 'confirmed' | 'rejected' | 'cancelled' | 'completed' | 'rescheduled';
 
@@ -173,6 +173,38 @@ export interface Booking {
   approvalMessage?: string;
   createdAt: string;
   confirmedAt?: string;
+  // 7-day payment window & auto-expiry fields
+  paymentDueAt?: string; // ISO date string (7 days after registration)
+  isPayLater7Days?: boolean;
+}
+
+/**
+ * ตรวจสอบว่าการจองเกินกำหนดชำระเงิน 7 วันหรือไม่
+ */
+export function isBookingPaymentExpired(booking: {
+  paymentStatus?: string;
+  bookingStatus?: string;
+  paymentDueAt?: string;
+  createdAt?: string;
+  paymentMethod?: string;
+  isPayLater7Days?: boolean;
+}): boolean {
+  if (booking.paymentStatus === 'verified' || booking.bookingStatus === 'confirmed' || booking.bookingStatus === 'completed') {
+    return false;
+  }
+  if (booking.bookingStatus === 'cancelled' || booking.bookingStatus === 'rejected') {
+    return false;
+  }
+  if (booking.paymentDueAt) {
+    return new Date(booking.paymentDueAt).getTime() < Date.now();
+  }
+  if (booking.paymentMethod === 'pay_later_7days' || booking.isPayLater7Days) {
+    if (booking.createdAt) {
+      const createdTime = new Date(booking.createdAt).getTime();
+      return (Date.now() - createdTime) > (7 * 24 * 60 * 60 * 1000);
+    }
+  }
+  return false;
 }
 
 export interface RewardHistoryItem {

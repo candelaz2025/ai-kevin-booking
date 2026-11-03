@@ -235,11 +235,20 @@ export async function testSendEmail(to: string) {
 export async function sendAdminNewBookingEmail(booking: Booking) {
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@ai-kevin-workshop.com';
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://ai-kevin-booking.vercel.app';
-  const subject = `🔔 [แจ้งเตือนการจองใหม่] รหัส ${booking.id} - ${booking.classTitle} (รอการอนุมัติ)`;
+  const isPayLater = Boolean(booking.isPayLater7Days || booking.paymentMethod === 'pay_later_7days');
+  const subject = isPayLater
+    ? `⏰ [จองสิทธิ์ใน 7 วัน] รหัส ${booking.id} - ${booking.classTitle} (รอการชำระเงิน)`
+    : `🔔 [แจ้งเตือนการจองใหม่] รหัส ${booking.id} - ${booking.classTitle} (รอการอนุมัติ)`;
+  const dueDateStr = booking.paymentDueAt ? new Date(booking.paymentDueAt).toLocaleDateString('th-TH') : '';
+
   const html = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
-      <h2 style="color: #0f172a; margin-top: 0;">🔔 มีการจองคลาสใหม่เข้ามาในระบบ</h2>
-      <p style="color: #475569;">คุณ <strong>${booking.userName}</strong> ได้ทำการจองคลาสเรียนและรอการอนุมัติการชำระเงินจากคุณ:</p>
+      <h2 style="color: #0f172a; margin-top: 0;">
+        ${isPayLater ? '⏰ มีการจองสิทธิ์คลาสใหม่ (ชำระเงินใน 7 วัน)' : '🔔 มีการจองคลาสใหม่เข้ามาในระบบ'}
+      </h2>
+      <p style="color: #475569;">
+        คุณ <strong>${booking.userName}</strong> ได้ทำการจองคลาสเรียน ${isPayLater ? 'และเลือกชำระเงินภายใน 7 วัน' : 'และรอการอนุมัติการชำระเงินจากคุณ'}:
+      </p>
       
       <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 8px; margin: 20px 0;">
         <p style="margin: 4px 0;"><strong>รหัสการจอง:</strong> <span style="font-family: monospace; font-weight: bold; color: #2563eb;">${booking.id}</span></p>
@@ -249,13 +258,17 @@ export async function sendAdminNewBookingEmail(booking: Booking) {
         <p style="margin: 4px 0;"><strong>อีเมล:</strong> ${booking.userEmail}</p>
         <p style="margin: 4px 0;"><strong>เบอร์โทร:</strong> ${booking.userPhone}</p>
         <p style="margin: 4px 0;"><strong>ยอดเงินที่ต้องชำระ:</strong> <strong style="color: #d97706; font-size: 16px;">${booking.amount.toLocaleString()} บาท</strong></p>
-        <p style="margin: 4px 0;"><strong>ช่องทางชำระ:</strong> ${booking.paymentMethod === 'stripe' ? 'บัตรเครดิต (Stripe)' : 'PromptPay QR Code'}</p>
+        <p style="margin: 4px 0;"><strong>รูปแบบการชำระ:</strong> ${
+          isPayLater 
+            ? `<span style="color: #b45309; font-weight: bold;">⏰ จองสิทธิ์ไว้ก่อน (ชำระภายใน 7 วัน ${dueDateStr ? `• กำหนดก่อน ${dueDateStr}` : ''})</span>`
+            : (booking.paymentMethod === 'stripe' ? 'บัตรเครดิต (Stripe)' : 'PromptPay QR Code')
+        }</p>
         ${booking.slipUrl ? `<p style="margin: 6px 0;"><strong>หลักฐานการโอนเงิน (สลิป):</strong> แนบสลิปเรียบร้อยแล้ว</p>` : ''}
       </div>
 
       <p style="margin-top: 24px; text-align: center;">
         <a href="${appUrl}/admin" style="background-color: #f59e0b; color: #0f172a; font-weight: bold; padding: 12px 28px; text-decoration: none; border-radius: 8px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-          👉 เข้าสู่ระบบ Admin เพื่อ Approve หรือ Reject
+          👉 เข้าสู่ระบบ Admin เพื่อจัดการรายการนี้
         </a>
       </p>
       <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">
@@ -785,4 +798,209 @@ export async function sendQuizResultEmail(params: {
     type: 'user_confirmation'
   });
 }
+
+/**
+ * 7-Day Pay Later Notification Email
+ * Sent when student registers with "จองสิทธิ์ไว้ก่อน (ชำระภายใน 7 วัน)"
+ */
+export async function sendUserPayLater7DaysEmail(booking: Booking) {
+  const isOnline = booking.classType === 'online';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://ai-kevin-booking.vercel.app';
+  
+  // Calculate or format due date (default 7 days from creation)
+  const dueDate = booking.paymentDueAt ? new Date(booking.paymentDueAt) : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const formattedDueDate = dueDate.toLocaleDateString('th-TH', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  const subject = `⏰ [จองสิทธิ์สำเร็จ] รหัส ${booking.id} - ${booking.classTitle} (กรุณาชำระเงินภายใน 7 วัน)`;
+
+  const html = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff; color: #1e293b;">
+      <div style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9;">
+        <span style="background-color: #fef3c7; color: #b45309; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: bold; border: 1px solid #fde68a;">
+          ⏰ จองสิทธิ์ที่นั่งไว้ก่อน · รอการชำระเงินภายใน 7 วัน
+        </span>
+        <h2 style="color: #0f172a; margin-top: 14px; margin-bottom: 4px; font-size: 20px; font-weight: 800;">
+          ยืนยันการจองสิทธิ์คลาสเรียนเรียบร้อยแล้ว
+        </h2>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">
+          สิทธิ์ที่นั่งของคุณถูกล็อคไว้เรียบร้อยแล้ว กรุณาดำเนินการชำระเงินภายในระยะเวลาที่กำหนด
+        </p>
+      </div>
+
+      <div style="padding: 20px 0;">
+        <p style="margin: 0 0 16px 0; font-size: 15px;">
+          เรียนคุณ <strong>${booking.userName}</strong>,
+        </p>
+        <p style="margin: 0 0 16px 0; font-size: 14px; color: #475569; line-height: 1.6;">
+          ระบบได้รับข้อมูลการจองคอร์สเรียนของคุณเรียบร้อยแล้ว โดยคุณได้เลือกช่องทาง <strong>จองสิทธิ์ไว้ก่อน / ชำระเงินภายใน 7 วัน</strong> ที่นั่งของคุณได้รับการสำรองไว้ชั่วคราวแล้วครับ
+        </p>
+
+        <!-- Due Date Warning Notice Box -->
+        <div style="background-color: #fff1f2; border: 1.5px solid #f43f5e; border-radius: 12px; padding: 16px 18px; margin: 18px 0;">
+          <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <strong style="color: #be123c; font-size: 15px;">⚠️ เงื่อนไขการชำระเงินและกำหนดเส้นตาย (Deadline):</strong>
+          </div>
+          <p style="margin: 0 0 6px 0; font-size: 14px; color: #9f1239; font-weight: bold;">
+            กรุณาชำระเงินและแนบสลิปก่อน: <span style="background-color: #ffe4e6; padding: 2px 8px; border-radius: 6px; font-size: 15px;">${formattedDueDate} น.</span>
+          </p>
+          <p style="margin: 0; font-size: 12px; color: #be123c; line-height: 1.5;">
+            * หากพ้นกำหนด 7 วันแล้วระบบยังไม่ได้รับยอดชำระและหลักฐานการโอนเงิน <strong>ระบบจะทำการตัดชื่อและยกเลิกสิทธิ์การจองอัตโนมัติ</strong> เพื่อเปิดโอกาสให้ผู้เรียนท่านอื่นในลำดับถัดไปทันที
+          </p>
+        </div>
+
+        <!-- Booking Details Card -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; margin: 16px 0;">
+          <h4 style="margin: 0 0 12px 0; color: #0f172a; font-size: 15px;">สรุปรายการจองของคุณ:</h4>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 38%;">รหัสการจอง:</td>
+              <td style="padding: 6px 0; font-weight: bold; font-family: monospace; color: #2563eb;">${booking.id}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">คลาสเรียน:</td>
+              <td style="padding: 6px 0; font-weight: bold; color: #0f172a;">${booking.classTitle}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">รูปแบบ:</td>
+              <td style="padding: 6px 0; font-weight: 600;">${isOnline ? '🌐 คลาสออนไลน์สด (Live Session)' : '🏢 Onsite Workshop'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">วันและเวลาเรียน:</td>
+              <td style="padding: 6px 0; font-weight: 600; color: #0f172a;">${booking.date} เวลา ${booking.timeSlot}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">ยอดที่ต้องชำระ:</td>
+              <td style="padding: 6px 0; font-weight: 900; color: #d97706; font-size: 17px;">${booking.amount.toLocaleString()} บาท</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">สถานะปัจจุบัน:</td>
+              <td style="padding: 6px 0;"><span style="color: #b45309; font-weight: 700; background-color: #fef3c7; padding: 2px 8px; border-radius: 4px;">รอการชำระเงินใน 7 วัน</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Payment Instructions -->
+        <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px; margin: 16px 0;">
+          <h4 style="margin: 0 0 10px 0; color: #166534; font-size: 14px; font-weight: bold;">
+            💳 ข้อมูลช่องทางการชำระเงิน (PromptPay & โอนผ่านธนาคาร):
+          </h4>
+          <p style="margin: 0 0 8px 0; font-size: 13px; color: #15803d;">
+            • <strong>พร้อมเพย์ (PromptPay):</strong> 091-746-2444<br>
+            • <strong>ชื่อบัญชี:</strong> นาย สรเชษฐ์ (อ. เควิน)<br>
+            • <strong>ธนาคาร:</strong> กสิกรไทย (KBANK)
+          </p>
+          <p style="margin: 0; font-size: 12px; color: #166534;">
+            เมื่อชำระเงินเรียบร้อยแล้ว สามารถกดเข้าสู่ระบบผ่านลิงก์ด้านล่างเพื่ออัปโหลดภาพสลิปได้ทันที
+          </p>
+        </div>
+
+        <!-- Action Button -->
+        <div style="text-align: center; margin-top: 26px;">
+          <a href="${appUrl}/dashboard" style="background-color: #2563eb; color: #ffffff; padding: 12px 28px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);">
+            💳 เข้าสู่ Dashboard เพื่อชำระเงินและแนบสลิป
+          </a>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 20px; text-align: center; font-size: 12px; color: #94a3b8;">
+        <p style="margin: 0 0 4px 0;">อ. Kevin AI Studio & Academy</p>
+        <p style="margin: 0;">หากมีข้อสงสัยหรือต้องการสอบถามเพิ่มเติม ติดต่อ: kevinenjoy2025@gmail.com หรือโทร 091-746-2444</p>
+      </div>
+    </div>
+  `;
+
+  return await logEmail({
+    to: booking.userEmail,
+    subject,
+    html,
+    type: 'payment_reminder'
+  });
+}
+
+/**
+ * Auto-Cancellation Notice Email
+ * Sent when 7-day payment window expires without payment
+ */
+export async function sendUserBookingAutoCancelledEmail(booking: Booking) {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://ai-kevin-booking.vercel.app';
+  const subject = `❌ [แจ้งยกเลิกสิทธิ์การจองอัตโนมัติ] รหัส ${booking.id} - ${booking.classTitle} (เกินกำหนดชำระ 7 วัน)`;
+
+  const html = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff; color: #1e293b;">
+      <div style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9;">
+        <span style="background-color: #fee2e2; color: #991b1b; padding: 4px 14px; border-radius: 9999px; font-size: 12px; font-weight: bold; border: 1px solid #fecaca;">
+          ❌ ยกเลิกสิทธิ์อัตโนมัติ · เกินกำหนดชำระเงิน 7 วัน
+        </span>
+        <h2 style="color: #0f172a; margin-top: 14px; margin-bottom: 4px; font-size: 20px; font-weight: 800;">
+          แจ้งยกเลิกสิทธิ์การจองคอร์สเรียน
+        </h2>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">
+          ระบบได้ทำการตัดชื่อและปล่อยสิทธิ์ที่นั่งคืนสู่ระบบเรียบร้อยแล้ว
+        </p>
+      </div>
+
+      <div style="padding: 20px 0;">
+        <p style="margin: 0 0 16px 0; font-size: 15px;">
+          เรียนคุณ <strong>${booking.userName}</strong>,
+        </p>
+        <p style="margin: 0 0 16px 0; font-size: 14px; color: #475569; line-height: 1.6;">
+          เนื่องจากรายการจองคอร์สเรียนรหัส <strong>${booking.id} (${booking.classTitle})</strong> ได้ครบกำหนดระยะเวลาการจอง 7 วัน โดยระบบยังไม่ได้รับการแจ้งชำระเงินหรือแนบหลักฐานการโอนเงิน ระบบจึงได้ดำเนินการ <strong>ยกเลิกสิทธิ์การจองและตัดชื่อออกจากระบบอัตโนมัติ</strong> เพื่อเปิดโอกาสให้ผู้เรียนท่านอื่นในลำดับถัดไปตามนโยบายของ Academy ครับ
+        </p>
+
+        <!-- Booking Details Card -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; margin: 16px 0;">
+          <h4 style="margin: 0 0 12px 0; color: #0f172a; font-size: 15px;">ข้อมูลการจองที่ถูกยกเลิก:</h4>
+          <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 38%;">รหัสการจอง:</td>
+              <td style="padding: 6px 0; font-weight: bold; font-family: monospace; color: #64748b;">${booking.id}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">คลาสเรียน:</td>
+              <td style="padding: 6px 0; font-weight: bold; color: #0f172a;">${booking.classTitle}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">ยอดค้างชำระเดิม:</td>
+              <td style="padding: 6px 0; font-weight: bold; color: #64748b;">${booking.amount.toLocaleString()} บาท</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">สถานะ:</td>
+              <td style="padding: 6px 0;"><span style="color: #991b1b; font-weight: 700; background-color: #fee2e2; padding: 2px 8px; border-radius: 4px;">ยกเลิกอัตโนมัติ (Expired)</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <p style="margin: 16px 0 0 0; font-size: 13px; color: #475569; line-height: 1.6;">
+          หากคุณยังคงสนใจเข้าร่วมคลาสเรียน สามารถเข้าไปตรวจสอบรอบเรียนและทำการลงทะเบียนใหม่ได้ตลอดเวลาผ่านหน้าเว็บไซต์ครับ
+        </p>
+
+        <!-- Action Button -->
+        <div style="text-align: center; margin-top: 26px;">
+          <a href="${appUrl}/booking" style="background-color: #0f172a; color: #ffffff; padding: 12px 28px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 14px; display: inline-block;">
+            🔍 ตรวจสอบรอบเรียนและสมัครใหม่
+          </a>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 20px; text-align: center; font-size: 12px; color: #94a3b8;">
+        <p style="margin: 0 0 4px 0;">อ. Kevin AI Studio & Academy</p>
+        <p style="margin: 0;">หากมีข้อสงสัยหรือต้องการสอบถามเพิ่มเติม ติดต่อ: kevinenjoy2025@gmail.com หรือโทร 091-746-2444</p>
+      </div>
+    </div>
+  `;
+
+  return await logEmail({
+    to: booking.userEmail,
+    subject,
+    html,
+    type: 'payment_reminder'
+  });
+}
+
 

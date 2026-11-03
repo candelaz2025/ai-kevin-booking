@@ -402,6 +402,29 @@ function mapDbClass(row: any): ClassItem {
 
 // Convert DB snake_case to Booking camelCase
 function mapDbBooking(row: any): Booking {
+  const rawNotes = row.notes || '';
+  const dueMatch = rawNotes.match(/<!--paymentDueAt:(.*?)-->/);
+  const paymentDueAt = dueMatch ? dueMatch[1] : (row.payment_due_at || undefined);
+  const payLaterMatch = rawNotes.match(/<!--isPayLater7Days:(true|false)-->/);
+  const isPayLater7Days = payLaterMatch ? payLaterMatch[1] === 'true' : (row.is_pay_later || row.payment_method === 'pay_later_7days');
+  const cleanNotes = rawNotes.replace(/<!--paymentDueAt:.*?-->/g, '').replace(/<!--isPayLater7Days:.*?-->/g, '').trim();
+
+  let bookingStatus = row.booking_status;
+  let rescheduledReason = row.rescheduled_reason || '';
+
+  // Auto-cancellation check: If unpaid within 7 days and payment is still pending, automatically cancel
+  if (
+    paymentDueAt &&
+    (row.payment_status === 'pending' || !row.payment_status) &&
+    bookingStatus === 'pending_payment'
+  ) {
+    const dueTime = new Date(paymentDueAt).getTime();
+    if (Date.now() > dueTime) {
+      bookingStatus = 'cancelled';
+      rescheduledReason = 'ระบบยกเลิกการจองอัตโนมัติเนื่องจากไม่ได้รับการชำระเงินภายใน 7 วันตามกำหนด';
+    }
+  }
+
   return {
     id: row.id,
     classId: row.class_id,
@@ -414,17 +437,19 @@ function mapDbBooking(row: any): Booking {
     userEmail: row.user_email,
     userPhone: row.user_phone,
     lineId: row.line_id || '',
-    notes: row.notes || '',
+    notes: cleanNotes,
     amount: Number(row.amount),
     paymentMethod: row.payment_method,
     paymentStatus: row.payment_status,
     slipUrl: row.slip_url || '',
     stripePaymentIntentId: row.stripe_payment_intent_id || '',
-    bookingStatus: row.booking_status,
+    bookingStatus,
     onlineMeetingUrl: row.online_meeting_url || '',
-    rescheduledReason: row.rescheduled_reason || '',
+    rescheduledReason,
     originalDate: row.original_date || '',
     originalTimeSlot: row.original_time_slot || '',
+    paymentDueAt,
+    isPayLater7Days,
     createdAt: row.created_at,
     confirmedAt: row.confirmed_at || undefined
   };
@@ -596,7 +621,30 @@ export async function getBookings(filters?: { userEmail?: string; userId?: strin
       }
       const { data, error } = await query;
       if (!error && data) {
-        return data.filter(r => r.notes !== '__DELETED__').map(mapDbBooking);
+        const bookingsList = data.filter(r => r.notes !== '__DELETED__').map(mapDbBooking);
+
+        // Auto-cancellation sync: if any booking has exceeded the 7-day payment window
+        const sb = supabase;
+        if (sb) {
+          data.forEach(async (r) => {
+            if (r.booking_status === 'pending_payment' && (r.payment_status === 'pending' || !r.payment_status)) {
+              const raw = r.notes || '';
+              const dueMatch = raw.match(/<!--paymentDueAt:(.*?)-->/);
+              if (dueMatch && Date.now() > new Date(dueMatch[1]).getTime()) {
+                try {
+                  await sb.from('bookings').update({ booking_status: 'cancelled' }).eq('id', r.id);
+                  // Asynchronously dispatch cancellation email
+                  import('./email').then(m => {
+                    const mapped = mapDbBooking(r);
+                    m.sendUserBookingAutoCancelledEmail(mapped).catch(() => {});
+                  }).catch(() => {});
+                } catch (_) {}
+              }
+            }
+          });
+        }
+
+        return bookingsList;
       }
     } catch (e) {
       console.error('Supabase query bookings error:', e);
@@ -649,11 +697,26 @@ export async function getBookings(filters?: { userEmail?: string; userId?: strin
         confirmedAt: '2026-10-12T14:22:00Z'
       }
     ];
+  } else {
+    // Check in-memory bookings for 7-day expiration
+    global.__app_bookings.forEach(b => {
+      if (b.paymentDueAt && b.bookingStatus === 'pending_payment' && (b.paymentStatus === 'pending' || !b.paymentStatus)) {
+        if (Date.now() > new Date(b.paymentDueAt).getTime()) {
+          b.bookingStatus = 'cancelled';
+          b.rescheduledReason = 'ระบบยกเลิกการจองอัตโนมัติเนื่องจากไม่ได้รับการชำระเงินภายใน 7 วันตามกำหนด';
+        }
+      }
+    });
   }
   return global.__app_bookings;
 }
 
 export async function saveBooking(booking: Booking): Promise<Booking> {
+  const rawNotes = (booking.notes || '').replace(/<!--paymentDueAt:.*?-->/g, '').replace(/<!--isPayLater7Days:.*?-->/g, '').trim();
+  const duePart = booking.paymentDueAt ? `<!--paymentDueAt:${booking.paymentDueAt}-->` : '';
+  const payLaterPart = booking.isPayLater7Days !== undefined ? `<!--isPayLater7Days:${booking.isPayLater7Days}-->` : '';
+  const encodedNotes = `${rawNotes}${duePart}${payLaterPart}`;
+
   if (isSupabaseConfigured && supabase) {
     try {
       let validClassId: string | null = booking.classId;
@@ -682,7 +745,7 @@ export async function saveBooking(booking: Booking): Promise<Booking> {
         user_email: booking.userEmail,
         user_phone: booking.userPhone,
         line_id: booking.lineId,
-        notes: booking.notes,
+        notes: encodedNotes,
         amount: booking.amount,
         payment_method: booking.paymentMethod,
         payment_status: booking.paymentStatus,

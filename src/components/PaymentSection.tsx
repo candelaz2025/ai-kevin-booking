@@ -19,7 +19,10 @@ import {
   Trash2,
   Info,
   ExternalLink,
-  Gift
+  Gift,
+  Clock,
+  AlertTriangle,
+  Calendar
 } from 'lucide-react';
 import { PaymentMethod } from '@/lib/types';
 import { formatGoogleDriveImageUrl } from '@/lib/image-utils';
@@ -300,6 +303,8 @@ export default function PaymentSection({
 
   const isSubmittingPromptPay = isSubmitting;
   const [hasPromptPayClicked, setHasPromptPayClicked] = useState(false);
+  const [paymentChoice, setPaymentChoice] = useState<'pay_now' | 'pay_later_7days'>('pay_now');
+  const [hasPayLaterClicked, setHasPayLaterClicked] = useState(false);
 
   const handleConfirmPromptPay = () => {
     if (isSubmitting || hasPromptPayClicked) return;
@@ -316,6 +321,13 @@ export default function PaymentSection({
     setHasPromptPayClicked(true);
     onPaymentSuccess('promptpay_qr', slipPreview || undefined);
     setTimeout(() => setHasPromptPayClicked(false), 3000);
+  };
+
+  const handleConfirmPayLater = () => {
+    if (isSubmitting || hasPayLaterClicked) return;
+    setHasPayLaterClicked(true);
+    onPaymentSuccess('pay_later_7days');
+    setTimeout(() => setHasPayLaterClicked(false), 3000);
   };
 
   return (
@@ -336,10 +348,10 @@ export default function PaymentSection({
             </div>
           </div>
           <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
-            <span>ชำระเงินผ่าน PromptPay / Thai QR Payment</span>
+            <span>ช่องทางการชำระเงินและสำรองที่นั่ง</span>
           </h3>
           <p className="text-xs text-slate-400 mt-1">
-            สแกนชำระเงินผ่าน Mobile Banking ทุกธนาคาร ไม่มีค่าธรรมเนียม
+            เลือกชำระเงินทันทีเพื่อรับการอนุมัติทันที หรือเลือกจองสิทธิ์ไว้ก่อนและชำระภายใน 7 วัน
           </p>
         </div>
 
@@ -355,7 +367,209 @@ export default function PaymentSection({
         </div>
       </div>
 
-      {/* Standard 2-Column Balanced Grid */}
+      {/* Payment Option Selector Tabs (Pay Now vs Pay Later 7 Days) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        <button
+          type="button"
+          onClick={() => setPaymentChoice('pay_now')}
+          className={`p-4 rounded-2xl border text-left transition-all flex items-start gap-3 cursor-pointer ${
+            paymentChoice === 'pay_now'
+              ? 'bg-amber-400/15 border-amber-400 text-white shadow-lg shadow-amber-400/10 ring-1 ring-amber-400/40'
+              : 'bg-slate-900/60 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200'
+          }`}
+        >
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+            paymentChoice === 'pay_now' ? 'bg-amber-400 text-slate-950 font-bold' : 'bg-slate-800 text-slate-400'
+          }`}>
+            <QrCode className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-sm text-white">💳 ชำระเงินทันที (PromptPay QR)</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                แนะนำ
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              สแกน QR Code พร้อมแนบรูปสลิปทันที แอดมินตรวจสอบและเปิดสิทธิ์ห้องเรียนเร็วที่สุด
+            </p>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setPaymentChoice('pay_later_7days')}
+          className={`p-4 rounded-2xl border text-left transition-all flex items-start gap-3 cursor-pointer ${
+            paymentChoice === 'pay_later_7days'
+              ? 'bg-blue-500/15 border-blue-400 text-white shadow-lg shadow-blue-500/10 ring-1 ring-blue-400/40'
+              : 'bg-slate-900/60 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200'
+          }`}
+        >
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+            paymentChoice === 'pay_later_7days' ? 'bg-blue-500 text-white font-bold' : 'bg-slate-800 text-slate-400'
+          }`}>
+            <Clock className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-sm text-white">⏰ จองสิทธิ์ไว้ก่อน (ชำระใน 7 วัน)</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                ยืดหยุ่น
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              ล็อคที่นั่งไว้ก่อน แล้วชำระเงินและแนบสลิปภายใน 7 วัน (มีอีเมลแจ้งเตือน หากเกินจะตัดสิทธิ์)
+            </p>
+          </div>
+        </button>
+      </div>
+
+      {paymentChoice === 'pay_later_7days' ? (
+        <div className="space-y-6 mb-6">
+          {/* Important Deadline Warning Banner */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-rose-950/50 via-slate-900 to-amber-950/40 border border-rose-500/40 text-slate-200 shadow-xl">
+            <div className="flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div className="space-y-1.5 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-extrabold text-white text-base">
+                    เงื่อนไขการจองสิทธิ์: กำหนดชำระเงินภายใน 7 วัน
+                  </span>
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-bold border border-rose-500/30">
+                    ครบกำหนดใน 7 วัน
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  ระบบจะทำการสำรองที่นั่งคลาสเรียนนี้ให้คุณเป็นเวลา <strong>7 วันเต็ม</strong> โดยจะส่งอีเมลแจ้งเตือนพร้อมข้อมูลบัญชีและลิงก์สำหรับแนบสลิปไปยังอีเมลของคุณทันที
+                </p>
+                <div className="pt-2 text-xs font-semibold text-rose-300 flex items-center gap-1.5">
+                  <span>⚠️</span>
+                  <span>หากพ้นกำหนด 7 วันโดยไม่มีการชำระเงินและแนบสลิป ระบบจะตัดชื่อและยกเลิกสิทธิ์การจองอัตโนมัติ เพื่อเปิดรับผู้เรียนท่านถัดไป</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* Left: Summary & Due Date Card */}
+            <div className="bg-slate-900/90 border border-white/10 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col justify-between">
+              <div>
+                <h4 className="text-sm font-bold text-white flex items-center gap-2 mb-3">
+                  <Calendar className="w-4 h-4 text-blue-400" />
+                  <span>สรุปข้อมูลการจองสิทธิ์และกำหนดชำระ:</span>
+                </h4>
+                
+                <div className="space-y-2.5 text-xs">
+                  <div className="flex justify-between py-1.5 border-b border-white/5">
+                    <span className="text-slate-400">คลาสเรียน</span>
+                    <span className="text-white font-semibold text-right max-w-[65%] line-clamp-1">{bookingSummary.className}</span>
+                  </div>
+                  <div className="flex justify-between py-1.5 border-b border-white/5">
+                    <span className="text-slate-400">ผู้จอง</span>
+                    <span className="text-white font-medium">{bookingSummary.userName}</span>
+                  </div>
+                  <div className="flex justify-between py-1.5 border-b border-white/5">
+                    <span className="text-slate-400">วัน/รอบเวลาเรียน</span>
+                    <span className="text-amber-300 font-medium">{bookingSummary.date} ({bookingSummary.timeSlot})</span>
+                  </div>
+                  <div className="flex justify-between py-1.5 border-b border-white/5">
+                    <span className="text-slate-400">ยอดที่ต้องชำระ</span>
+                    <span className="text-amber-400 font-black text-sm">฿{amount.toLocaleString()} บาท</span>
+                  </div>
+                  <div className="flex justify-between py-2 bg-blue-500/10 px-3 rounded-xl border border-blue-500/20">
+                    <span className="text-blue-300 font-medium flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      กำหนดชำระภายใน
+                    </span>
+                    <span className="text-blue-200 font-bold font-mono">
+                      {new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString('th-TH', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                      })} (7 วัน)
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-3 bg-slate-950/80 rounded-xl border border-white/5 text-[11px] text-slate-400 space-y-1 mt-4">
+                <span className="text-emerald-400 font-bold block">✓ ไม่ต้องแนบสลิปตอนนี้</span>
+                <span>คุณสามารถกดยืนยันเพื่อรับรหัสการจองได้ทันที และกลับมาแนบสลิปผ่าน Dashboard หรืออีเมลได้ตลอด 7 วัน</span>
+              </div>
+            </div>
+
+            {/* Right: Payment Destination Details */}
+            <div className="bg-slate-900/90 border border-white/10 rounded-2xl p-5 sm:p-6 space-y-4">
+              <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-amber-400" />
+                <span>ข้อมูลบัญชีสำหรับการโอนเงิน (บันทึกไว้ชำระ):</span>
+              </h4>
+
+              <div className="space-y-2.5">
+                {showPromptpayNumber && promptpayNumber && (
+                  <div className="p-3 rounded-xl bg-slate-950 border border-white/5 flex items-center justify-between text-xs">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block">PromptPay (พร้อมเพย์)</span>
+                      <strong className="text-white font-mono text-sm">{promptpayNumber}</strong>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleCopyPromptpay}
+                      className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold flex items-center gap-1 transition cursor-pointer"
+                    >
+                      {copiedPromptpay ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      <span>{copiedPromptpay ? 'คัดลอกแล้ว' : 'คัดลอก'}</span>
+                    </button>
+                  </div>
+                )}
+
+                {showAccountName && accountName && (
+                  <div className="p-3 rounded-xl bg-slate-950 border border-white/5 flex items-center justify-between text-xs">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block">ชื่อบัญชี</span>
+                      <strong className="text-white">{accountName}</strong>
+                    </div>
+                    <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">ยืนยันตัวตน</span>
+                  </div>
+                )}
+
+                {showBankTransferDetails && (
+                  <div className="p-3 rounded-xl bg-slate-950 border border-white/5 flex items-center justify-between text-xs">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block">{bankName || 'ธนาคารกสิกรไทย (KBANK)'}</span>
+                      <strong className="text-white font-mono">{bankAccountNumber || 'โอนผ่านพร้อมเพย์ข้างต้น'}</strong>
+                    </div>
+                    {bankAccountNumber && (
+                      <button
+                        type="button"
+                        onClick={handleCopyBank}
+                        className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold flex items-center gap-1 transition cursor-pointer"
+                      >
+                        {copiedBank ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedBank ? 'คัดลอกแล้ว' : 'คัดลอก'}</span>
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-2 text-center">
+                <button
+                  type="button"
+                  onClick={handleDownloadQR}
+                  className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 underline font-semibold transition cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>บันทึกภาพ QR Code ไว้สแกนชำระเงิน</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+      /* Standard 2-Column Balanced Grid */
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch mb-6">
         
         {/* Left Column: Official Thai QR & PromptPay Card */}
@@ -623,27 +837,49 @@ export default function PaymentSection({
         </div>
 
       </div>
+      )}
 
       {/* Confirmation & Submission CTA Button */}
       <div className="pt-2">
-        <button
-          type="button"
-          disabled={isSubmittingPromptPay}
-          onClick={handleConfirmPromptPay}
-          className="w-full py-4 px-6 rounded-2xl font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-200 shadow-xl shadow-amber-400/20 hover:scale-[1.005] active:scale-[0.995] transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50"
-        >
-          {isSubmittingPromptPay ? (
-            <>
-              <Loader2 className="w-5 h-5 animate-spin" />
-              <span>กำลังตรวจสอบและบันทึกการจอง...</span>
-            </>
-          ) : (
-            <>
-              <CheckCircle className="w-5 h-5 text-slate-950" />
-              <span className="text-base">ยืนยันการจองและส่งหลักฐานการชำระเงิน</span>
-            </>
-          )}
-        </button>
+        {paymentChoice === 'pay_later_7days' ? (
+          <button
+            type="button"
+            disabled={isSubmitting || hasPayLaterClicked}
+            onClick={handleConfirmPayLater}
+            className="w-full py-4 px-6 rounded-2xl font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-blue-600/25 hover:scale-[1.005] active:scale-[0.995] transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50"
+          >
+            {isSubmitting || hasPayLaterClicked ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>กำลังบันทึกการจองสิทธิ์และส่งอีเมลแจ้งเตือน...</span>
+              </>
+            ) : (
+              <>
+                <Clock className="w-5 h-5 text-blue-200" />
+                <span className="text-base">⏰ ยืนยันการจองสิทธิ์ (ชำระเงินภายใน 7 วัน)</span>
+              </>
+            )}
+          </button>
+        ) : (
+          <button
+            type="button"
+            disabled={isSubmittingPromptPay}
+            onClick={handleConfirmPromptPay}
+            className="w-full py-4 px-6 rounded-2xl font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-200 shadow-xl shadow-amber-400/20 hover:scale-[1.005] active:scale-[0.995] transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50"
+          >
+            {isSubmittingPromptPay ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>กำลังตรวจสอบและบันทึกการจอง...</span>
+              </>
+            ) : (
+              <>
+                <CheckCircle className="w-5 h-5 text-slate-950" />
+                <span className="text-base">💳 ยืนยันการจองและส่งหลักฐานการชำระเงิน</span>
+              </>
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

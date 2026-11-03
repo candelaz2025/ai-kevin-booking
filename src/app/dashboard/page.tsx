@@ -12,7 +12,7 @@ import {
   Copy, Check, RotateCcw, Share2, Award, Zap, Users, UserPlus, CheckCircle,
   X, Flame, ChevronRight, ShieldCheck, HeartHandshake, Link as LinkIcon,
   Book, Layers, Wrench, Info, FileCheck, HelpCircle, Send, XCircle, CheckSquare,
-  Play, GraduationCap, Printer
+  Play, GraduationCap, Printer, Upload, AlertTriangle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { getSafeCourseImageUrl, getAttachmentDownloadInfo } from '@/lib/image-utils';
@@ -24,6 +24,9 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'all' | 'quizzes' | 'ebooks' | 'rewards' | 'online' | 'history' | 'profile'>('all');
   const [viewingSlipBooking, setViewingSlipBooking] = useState<Booking | null>(null);
+  const [bookingForSlipUpload, setBookingForSlipUpload] = useState<Booking | null>(null);
+  const [uploadedSlipPreview, setUploadedSlipPreview] = useState<string>('');
+  const [isSubmittingSlip, setIsSubmittingSlip] = useState<boolean>(false);
   const [selectedClassForDetails, setSelectedClassForDetails] = useState<{ booking: Booking; classItem?: ClassItem } | null>(null);
 
   // Quizzes & Assessments States
@@ -310,6 +313,35 @@ export default function DashboardPage() {
       fetchQuizzes();
     }
   }, [user, authLoading]);
+
+  // Handle Submit Pay Later Slip
+  const handleSubmitPayLaterSlip = async () => {
+    if (!bookingForSlipUpload || !uploadedSlipPreview || isSubmittingSlip) return;
+    setIsSubmittingSlip(true);
+    try {
+      const res = await fetch(`/api/bookings/${bookingForSlipUpload.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slipUrl: uploadedSlipPreview,
+          paymentStatus: 'pending'
+        })
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setBookings(prev => prev.map(b => b.id === bookingForSlipUpload.id ? { ...b, slipUrl: uploadedSlipPreview, paymentStatus: 'pending' } : b));
+        showRewardToast('success', 'แนบสลิปเรียบร้อยแล้ว แอดมินกำลังตรวจสอบความถูกต้องครับ');
+        setBookingForSlipUpload(null);
+        setUploadedSlipPreview('');
+      } else {
+        alert(data.error || 'เกิดข้อผิดพลาดในการแนบสลิป');
+      }
+    } catch {
+      alert('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+    } finally {
+      setIsSubmittingSlip(false);
+    }
+  };
 
   // Handle Save Profile
   const handleSaveProfile = async (e: React.FormEvent) => {
@@ -1559,6 +1591,12 @@ export default function DashboardPage() {
               const isOnline = b.classType === 'online';
               const isConfirmed = b.bookingStatus === 'confirmed';
               const isPending = b.bookingStatus === 'pending_payment';
+              const isPayLater = Boolean(b.isPayLater7Days || b.paymentMethod === 'pay_later_7days');
+              const isCancelled = b.bookingStatus === 'cancelled';
+              const isPaymentExpired = isCancelled && (b.rescheduledReason?.includes('7 วัน') || (b.paymentDueAt && Date.now() > new Date(b.paymentDueAt).getTime()));
+              const dueTime = b.paymentDueAt ? new Date(b.paymentDueAt).getTime() : 0;
+              const msLeft = dueTime ? dueTime - Date.now() : 0;
+              const daysLeft = Math.max(0, Math.ceil(msLeft / (1000 * 60 * 60 * 24)));
 
               const classInfo = findMatchingClass(b);
               const attachments = classInfo?.attachments || [];
@@ -1594,15 +1632,26 @@ export default function DashboardPage() {
                           {isOnline ? '🌐 คลาสออนไลน์สด' : '🏢 Onsite Workshop'}
                         </span>
                         
-                        <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
-                          isConfirmed 
-                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' 
-                            : isPending 
-                              ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30'
-                              : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
-                        }`}>
-                          {isConfirmed ? 'ยืนยันเรียบร้อยแล้ว' : isPending ? 'รอตรวจสอบการชำระเงิน' : b.bookingStatus}
-                        </span>
+                        {isPaymentExpired ? (
+                          <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">
+                            ❌ ถูกตัดสิทธิ์อัตโนมัติ (เกิน 7 วัน)
+                          </span>
+                        ) : (isPayLater && isPending) ? (
+                          <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1">
+                            <Clock className="w-3 h-3 text-blue-400" />
+                            <span>จองสิทธิ์ใน 7 วัน (เหลืออีก {daysLeft} วัน)</span>
+                          </span>
+                        ) : (
+                          <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                            isConfirmed 
+                              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' 
+                              : isPending 
+                                ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30'
+                                : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                          }`}>
+                            {isConfirmed ? 'ยืนยันเรียบร้อยแล้ว' : isPending ? 'รอตรวจสอบการชำระเงิน' : b.bookingStatus}
+                          </span>
+                        )}
 
                         {isConfirmed && (
                           <span className="bg-amber-400/15 border border-amber-400/30 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
@@ -1721,6 +1770,46 @@ export default function DashboardPage() {
                           </div>
                         </div>
                       )}
+
+                      {/* 7-Day Reserve Alert Banner */}
+                      {isPayLater && isPending && (
+                        <div className="mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/60 to-slate-900 border border-blue-500/30 text-xs text-blue-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
+                          <div className="flex items-start gap-2.5">
+                            <div className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 border border-blue-500/30">
+                              <Clock className="w-4 h-4" />
+                            </div>
+                            <div>
+                              <p className="font-bold text-white text-xs sm:text-sm">
+                                ⏰ สำรองที่นั่งไว้ถึง: {b.paymentDueAt ? new Date(b.paymentDueAt).toLocaleDateString('th-TH') : 'ภายใน 7 วัน'} (เหลืออีก {daysLeft} วัน)
+                              </p>
+                              <p className="text-[11px] text-slate-300 mt-0.5">
+                                {b.slipUrl 
+                                  ? 'แนบสลิปเรียบร้อยแล้ว แอดมินกำลังตรวจสอบความถูกต้อง' 
+                                  : `กรุณาชำระเงิน ฿${b.amount.toLocaleString()} บาท และแนบสลิปก่อนครบกำหนด เพื่อป้องกันการถูกตัดสิทธิ์อัตโนมัติ`}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setBookingForSlipUpload(b);
+                              setUploadedSlipPreview(b.slipUrl || '');
+                            }}
+                            className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-xs shrink-0 flex items-center justify-center gap-1.5 shadow-md shadow-amber-400/20 transition cursor-pointer"
+                          >
+                            <Upload className="w-3.5 h-3.5" />
+                            <span>{b.slipUrl ? 'เปลี่ยนรูปสลิป' : '💳 แนบสลิปชำระเงิน'}</span>
+                          </button>
+                        </div>
+                      )}
+
+                      {/* 7-Day Expired Notice */}
+                      {isPaymentExpired && (
+                        <div className="mt-3 p-3 rounded-2xl bg-rose-950/40 border border-rose-500/30 text-xs text-rose-300 flex items-center gap-2">
+                          <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                          <span>รายการจองนี้ถูกยกเลิกและตัดชื่อออกจากระบบอัตโนมัติ เนื่องจากไม่ได้รับการชำระเงินภายใน 7 วันตามที่กำหนด</span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -1732,6 +1821,21 @@ export default function DashboardPage() {
                         {b.amount.toLocaleString()} <span className="text-xs font-normal text-slate-300">บาท</span>
                       </span>
                     </div>
+
+                    {/* Pay Later CTA Button */}
+                    {isPayLater && isPending && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setBookingForSlipUpload(b);
+                          setUploadedSlipPreview(b.slipUrl || '');
+                        }}
+                        className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-105 active:scale-98 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-blue-600/20 transition cursor-pointer"
+                      >
+                        <Upload className="w-4 h-4" />
+                        <span>{b.slipUrl ? 'แก้ไขสลิปชำระเงิน' : '💳 แนบสลิปชำระเงิน'}</span>
+                      </button>
+                    )}
 
                     {/* View Details Button */}
                     <button
@@ -2403,6 +2507,156 @@ export default function DashboardPage() {
                 <Download className="w-3.5 h-3.5 text-amber-400" />
                 <span>ดาวน์โหลดรูป</span>
               </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Upload / Update Slip for 7-Day Pay Later Booking */}
+      {bookingForSlipUpload && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-[#101c2d] border border-blue-500/30 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative my-8 max-h-[90vh] overflow-y-auto space-y-5 animate-in fade-in zoom-in-95 duration-200">
+            {/* Header */}
+            <div className="flex items-start justify-between pb-4 border-b border-white/10">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2.5 py-0.5 rounded-full">
+                  ชำระเงินภายใน 7 วัน
+                </span>
+                <h3 className="text-lg font-bold text-white mt-1.5 flex items-center gap-2">
+                  <Upload className="w-5 h-5 text-amber-400" />
+                  <span>แนบสลิปชำระเงิน</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  รหัสการจอง: <span className="font-mono text-amber-400 font-bold">{bookingForSlipUpload.id}</span>
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setBookingForSlipUpload(null);
+                  setUploadedSlipPreview('');
+                }}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Course Summary & Deadline Notice */}
+            <div className="p-3.5 rounded-2xl bg-slate-950 border border-white/5 space-y-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-slate-400">คลาสเรียน:</span>
+                <span className="text-white font-semibold text-right max-w-[65%] line-clamp-1">{bookingForSlipUpload.classTitle}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-400">ยอดที่ต้องชำระ:</span>
+                <span className="text-amber-400 font-extrabold text-sm">฿{bookingForSlipUpload.amount.toLocaleString()} บาท</span>
+              </div>
+              {bookingForSlipUpload.paymentDueAt && (
+                <div className="flex justify-between pt-1 border-t border-white/5 text-blue-300">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5 text-blue-400" />
+                    กำหนดชำระก่อน:
+                  </span>
+                  <span className="font-mono font-bold">
+                    {new Date(bookingForSlipUpload.paymentDueAt).toLocaleDateString('th-TH')}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Quick PromptPay / Bank Info */}
+            <div className="p-3 rounded-xl bg-slate-900/90 border border-white/5 text-xs space-y-1.5">
+              <span className="text-[11px] text-slate-400 block font-medium">บัญชีสำหรับการโอน:</span>
+              <div className="flex items-center justify-between text-slate-200">
+                <span>พร้อมเพย์: <strong className="font-mono text-white">091-746-2444</strong></span>
+                <span className="text-[11px] text-slate-400">นาย สรเชษฐ์ (อ. เควิน)</span>
+              </div>
+            </div>
+
+            {/* Slip Upload Zone */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-slate-200 block">
+                เลือกรูปภาพสลิปการโอนเงิน (JPG, PNG, WEBP):
+              </label>
+
+              {uploadedSlipPreview ? (
+                <div className="space-y-3 flex flex-col items-center">
+                  <div className="relative max-w-[220px] max-h-[220px] rounded-2xl overflow-hidden border-2 border-emerald-500/60 shadow-lg bg-slate-950">
+                    <img
+                      src={uploadedSlipPreview}
+                      alt="Slip preview"
+                      className="max-h-[200px] w-full object-contain"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setUploadedSlipPreview('')}
+                    className="text-xs text-rose-400 hover:text-rose-300 underline font-medium cursor-pointer"
+                  >
+                    เปลี่ยนรูปภาพสลิปใหม่
+                  </button>
+                </div>
+              ) : (
+                <label className="border-2 border-dashed border-slate-700 hover:border-amber-400/60 rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition bg-slate-950/50 hover:bg-slate-950/80">
+                  <Upload className="w-8 h-8 text-amber-400 mb-2" />
+                  <span className="text-xs font-bold text-slate-200 block">
+                    คลิกเพื่ออัปโหลดรูปภาพสลิป
+                  </span>
+                  <span className="text-[11px] text-slate-400 mt-1 block">
+                    ไฟล์ JPG, PNG หรือ WEBP สูงสุด 10MB
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                          if (ev.target?.result) {
+                            setUploadedSlipPreview(ev.target.result as string);
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                  />
+                </label>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-2 flex items-center justify-end gap-3 border-t border-white/10">
+              <button
+                type="button"
+                onClick={() => {
+                  setBookingForSlipUpload(null);
+                  setUploadedSlipPreview('');
+                }}
+                className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition cursor-pointer"
+              >
+                ยกเลิก
+              </button>
+              <button
+                type="button"
+                disabled={!uploadedSlipPreview || isSubmittingSlip}
+                onClick={handleSubmitPayLaterSlip}
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-105 active:scale-98 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-amber-400/20 transition cursor-pointer disabled:opacity-50"
+              >
+                {isSubmittingSlip ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>กำลังบันทึกสลิป...</span>
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span>ยืนยันการส่งสลิป</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>

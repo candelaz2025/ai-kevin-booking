@@ -1943,17 +1943,37 @@ export default function AdminPage() {
                     }`}>
                       {isOnline ? '🌐 คลาสออนไลน์' : '🏢 Onsite Workshop'}
                     </span>
-                    <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                      isConfirmed 
-                        ? 'bg-emerald-500/20 text-emerald-400' 
-                        : isRescheduled 
-                        ? 'bg-purple-500/20 text-purple-400'
-                        : 'bg-amber-500/20 text-amber-400'
-                    }`}>
-                      {isConfirmed ? '✓ ยืนยันแล้ว' : isRescheduled ? '⚠️ เลื่อนรอบเรียนแล้ว' : '⏳ รอตรวจสอบชำระเงิน'}
-                    </span>
+                    {b.isPayLater7Days || b.paymentMethod === 'pay_later_7days' ? (
+                      <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
+                        isConfirmed 
+                          ? 'bg-emerald-500/20 text-emerald-400' 
+                          : b.bookingStatus === 'cancelled'
+                          ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                          : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                      }`}>
+                        {isConfirmed 
+                          ? '✓ ยืนยันแล้ว' 
+                          : b.bookingStatus === 'cancelled' 
+                          ? '❌ ยกเลิกอัตโนมัติ (เกิน 7 วัน)' 
+                          : `⏰ รอชำระใน 7 วัน ${b.paymentDueAt ? `(เหลือ ${Math.max(0, Math.ceil((new Date(b.paymentDueAt).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))} วัน)` : ''}`}
+                      </span>
+                    ) : (
+                      <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
+                        isConfirmed 
+                          ? 'bg-emerald-500/20 text-emerald-400' 
+                          : isRescheduled 
+                          ? 'bg-purple-500/20 text-purple-400'
+                          : 'bg-amber-500/20 text-amber-400'
+                      }`}>
+                        {isConfirmed ? '✓ ยืนยันแล้ว' : isRescheduled ? '⚠️ เลื่อนรอบเรียนแล้ว' : '⏳ รอตรวจสอบชำระเงิน'}
+                      </span>
+                    )}
                     <span className="text-xs text-slate-400">
-                      ชำระผ่าน: {b.paymentMethod === 'stripe' ? 'Stripe (บัตรเครดิต)' : 'PromptPay QR'}
+                      ชำระผ่าน: {
+                        b.paymentMethod === 'pay_later_7days' || b.isPayLater7Days
+                          ? `⏰ จองสิทธิ์ใน 7 วัน ${b.paymentDueAt ? `(ครบกำหนด ${new Date(b.paymentDueAt).toLocaleDateString('th-TH')})` : ''}`
+                          : (b.paymentMethod === 'stripe' ? 'Stripe (บัตรเครดิต)' : 'PromptPay QR')
+                      }
                     </span>
                   </div>
 
