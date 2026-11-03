@@ -198,10 +198,16 @@ export default function ArticlesPage() {
                       unoptimized
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                       <span className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-slate-950/80 text-amber-300 backdrop-blur-md border border-white/10">
                         {article.category}
                       </span>
+                      {article.authorName?.includes('Routine') && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-purple-600/90 text-white backdrop-blur-md border border-purple-400/30 flex items-center gap-1">
+                          <Sparkles className="w-2.5 h-2.5 text-amber-300" />
+                          <span>AI Routine</span>
+                        </span>
+                      )}
                     </div>
                   </div>
 

@@ -242,7 +242,7 @@ export interface User {
 
 export interface SystemNotification {
   id: string;
-  type: 'new_booking' | 'payment_slip_uploaded' | 'booking_confirmed' | 'meeting_link_sent';
+  type: 'new_booking' | 'payment_slip_uploaded' | 'booking_confirmed' | 'meeting_link_sent' | 'general';
   title: string;
   message: string;
   read: boolean;

@@ -82,6 +82,8 @@ export default function AdminPage() {
   const [isUploadingInlineImage, setIsUploadingInlineImage] = useState(false);
   const [articleEditorTab, setArticleEditorTab] = useState<'edit' | 'preview'>('edit');
   const [isDeletingArticleId, setIsDeletingArticleId] = useState<string | null>(null);
+  const [isGeneratingAiArticle, setIsGeneratingAiArticle] = useState(false);
+  const [aiGenType, setAiGenType] = useState<'both' | 'ai_techniques' | 'ai_news'>('both');
 
   // Modal / Form state for Class Edit & Create
   const [isClassModalOpen, setIsClassModalOpen] = useState(false);
@@ -3349,7 +3351,60 @@ export default function AdminPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <button
+                disabled={isGeneratingAiArticle}
+                onClick={async () => {
+                  setIsGeneratingAiArticle(true);
+                  try {
+                    const res = await fetch('/api/cron/daily-articles', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ target: aiGenType })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                      await fetchData();
+                      showModal(
+                        'success',
+                        'สร้างบทความอัตโนมัติสำเร็จ!',
+                        `ระบบ AI ได้ค้นคว้า เรียบเรียง และสร้างภาพหน้าปกพร้อมเผยแพร่เรียบร้อยแล้ว`
+                      );
+                    } else {
+                      showModal('error', 'สร้างไม่สำเร็จ', data.error || 'เกิดข้อผิดพลาดในการสร้างบทความ');
+                    }
+                  } catch (e: any) {
+                    showModal('error', 'ระบบขัดข้อง', e?.message || 'ไม่สามารถติดต่อ AI Service ได้');
+                  } finally {
+                    setIsGeneratingAiArticle(false);
+                  }
+                }}
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-indigo-600/30 transition cursor-pointer disabled:opacity-50"
+              >
+                {isGeneratingAiArticle ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>AI กำลังเขียนบทความ & วาดภาพ...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                    <span>⚡ สั่ง AI สร้างบทความทันที</span>
+                  </>
+                )}
+              </button>
+
+              <select
+                aria-label="เลือกประเภทบทความสำหรับ AI Generator"
+                value={aiGenType}
+                onChange={(e) => setAiGenType(e.target.value as any)}
+                className="bg-slate-900 border border-white/10 text-slate-300 text-xs rounded-xl px-2.5 py-2 focus:outline-none focus:border-amber-400"
+              >
+                <option value="both">สร้างทั้ง 2 หมวด (เทคนิค + ข่าว AI)</option>
+                <option value="ai_techniques">เฉพาะ: เทคนิคการใช้งาน AI</option>
+                <option value="ai_news">เฉพาะ: AI News ประจำวัน</option>
+              </select>
+
               <Link
                 href="/articles"
                 target="_blank"
@@ -3382,6 +3437,31 @@ export default function AdminPage() {
             </div>
           </div>
 
+          {/* AI Automation Routine Status Banner */}
+          <div className="bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-500/20 rounded-2xl p-4.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-400/20 flex items-center justify-center shrink-0 mt-0.5">
+                <Clock className="w-4.5 h-4.5 text-indigo-400" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h4 className="text-xs font-bold text-white">ระบบ AI Automation Routine ประจำวัน</h4>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Active 09:00 น. ทุกวัน</span>
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  ระบบจะสืบค้นประเด็นร้อน ค้นหาหัวข้อเทคนิคการใช้งาน AI และข่าวสาร AI ประจำวัน สังเคราะห์บทความพร้อมรูปภาพ AI คุณภาพสูง และเผยแพร่อัตโนมัติทุกเช้าเวลา 09:00 น. (Bangkok Time)
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-[11px] text-indigo-300 bg-indigo-950/80 border border-indigo-500/30 px-3 py-1.5 rounded-xl shrink-0">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>Cron: <code>0 2 * * *</code> (09:00 AM ICT)</span>
+            </div>
+          </div>
+
           {/* Articles list */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.map((art) => (
@@ -3400,10 +3480,16 @@ export default function AdminPage() {
                           (e.target as HTMLElement).style.display = 'none';
                         }}
                       />
-                      <div className="absolute top-2.5 left-2.5 flex gap-1.5">
+                      <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">
                         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-amber-300 border border-white/10">
                           {art.category}
                         </span>
+                        {art.authorName?.includes('Routine') && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/80 text-white border border-purple-400/30 flex items-center gap-1">
+                            <Sparkles className="w-2.5 h-2.5" />
+                            <span>AI Auto</span>
+                          </span>
+                        )}
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                           art.status === 'published' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-400'
                         }`}>
