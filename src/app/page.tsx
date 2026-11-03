@@ -5,13 +5,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { 
   Sparkles, Calendar, Clock, MapPin, Video, ArrowRight, 
-  CheckCircle2, Users, Bot, Layers, ArrowUpRight, ShieldCheck, Mail, BookOpen, Gift, GraduationCap
+  CheckCircle2, Users, Bot, Layers, ArrowUpRight, ShieldCheck, Mail, BookOpen, Gift, GraduationCap, ShoppingCart
 } from 'lucide-react';
+import { useCart } from '@/lib/cart-context';
 import { ClassItem, SiteSettings, Article, formatClassDuration, isClassFree, CourseLevel, COURSE_LEVELS, getCourseLevelConfig } from '@/lib/types';
 import CalendarPicker from '@/components/CalendarPicker';
 import { getSafeCourseImageUrl } from '@/lib/image-utils';
 
 export default function HomePage() {
+  const { addItem, isInCart } = useCart();
   const [classes, setClasses] = useState<ClassItem[]>([]);
   const [selectedClassForCalendar, setSelectedClassForCalendar] = useState<ClassItem | null>(null);
   const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
@@ -440,18 +442,50 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0">
+                <div className="p-6 pt-0 grid grid-cols-1 sm:grid-cols-12 gap-2">
                   <Link
                     href={`/booking?classId=${c.id}`}
-                    className={`w-full py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5 ${
+                    className={`sm:col-span-8 py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5 ${
                       isClassFree(c)
                         ? 'bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 shadow-emerald-500/20'
                         : 'bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-amber-400/20'
                     }`}
                   >
-                    <span>{isClassFree(c) ? 'ลงทะเบียนเรียนฟรี' : 'จองคลาสนี้'}</span>
+                    <span>{isClassFree(c) ? 'ลงทะเบียนเรียนฟรี' : 'เลือกรอบเรียน'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const defaultDate = c.availableDates?.length > 0 ? c.availableDates[0] : new Date().toISOString().slice(0, 10);
+                      const defaultSlot = c.timeSlots?.length > 0 ? c.timeSlots[0] : '13:00 - 16:00';
+                      addItem({
+                        classId: c.id,
+                        classTitle: c.title,
+                        subtitle: c.subtitle,
+                        classType: c.type,
+                        price: isClassFree(c) ? 0 : c.price,
+                        isFree: isClassFree(c),
+                        rewardPoints: c.rewardPoints ?? Math.round((c.price || 0) / 10),
+                        image: c.image,
+                        date: defaultDate,
+                        timeSlot: defaultSlot,
+                        durationText: formatClassDuration(c),
+                        level: c.level || 'beginner'
+                      });
+                      alert(`🛒 เพิ่ม "${c.title}" ลงในตะกร้าเรียบร้อย!`);
+                    }}
+                    className={`sm:col-span-4 py-3 rounded-xl border text-xs font-bold transition flex items-center justify-center gap-1 ${
+                      isInCart(c.id)
+                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                        : 'bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border-white/10 hover:border-amber-400/30'
+                    }`}
+                    title="เพิ่มคอร์สนี้ลงในตะกร้า"
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5 text-amber-400" />
+                    <span>{isInCart(c.id) ? 'ในตะกร้า' : '+ ตะกร้า'}</span>
+                  </button>
                 </div>
               </div>
             );

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { IBM_Plex_Sans_Thai, Manrope } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
+import { CartProvider } from '@/lib/cart-context';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -56,11 +57,13 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-[#09111e] text-[#f6f7fb] font-sans antialiased flex flex-col selection:bg-amber-400 selection:text-slate-950">
         <AuthProvider>
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
+          <CartProvider>
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

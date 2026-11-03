@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
-import { User, LogOut, Menu, X, Sparkles, ChevronDown } from 'lucide-react';
+import { useCart } from '@/lib/cart-context';
+import { User, LogOut, Menu, X, Sparkles, ChevronDown, ShoppingCart } from 'lucide-react';
 
 export default function Navbar() {
   const { user, logout, isAdmin } = useAuth();
+  const { totalItems } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [promptsDropdownOpen, setPromptsDropdownOpen] = useState(false);
   const [mobilePromptsOpen, setMobilePromptsOpen] = useState(true);
@@ -170,7 +172,22 @@ export default function Navbar() {
           </nav>
 
           {/* User Auth & Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            {/* Cart Button */}
+            <Link
+              href="/booking?step=cart"
+              className="relative p-2 rounded-xl text-slate-300 hover:text-amber-400 hover:bg-white/5 border border-white/5 hover:border-amber-400/30 transition-all flex items-center gap-1.5"
+              title="ดูตะกร้าคอร์สเรียน"
+            >
+              <ShoppingCart className="w-4 h-4 text-amber-400" />
+              <span className="hidden lg:inline text-xs font-semibold">ตะกร้า</span>
+              {totalItems > 0 && (
+                <span className="min-w-5 h-5 px-1.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-mono text-[10px] font-black flex items-center justify-center shadow-md shadow-amber-400/30 animate-in zoom-in">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
+
             {user ? (
               <div className="flex items-center gap-3">
                 <Link
@@ -211,8 +228,20 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile menu button & Mobile Cart */}
+          <div className="md:hidden flex items-center gap-2">
+            <Link
+              href="/booking?step=cart"
+              className="relative p-2 rounded-xl text-slate-300 hover:text-amber-400 hover:bg-white/5 border border-white/5"
+              title="ตะกร้าคอร์ส"
+            >
+              <ShoppingCart className="w-5 h-5 text-amber-400" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-amber-400 text-slate-950 font-mono text-[9px] font-black flex items-center justify-center shadow-md">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none"
@@ -226,6 +255,19 @@ export default function Navbar() {
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#09111e]/95 border-b border-white/10 px-4 pt-2 pb-6 space-y-3">
+          <Link
+            href="/booking?step=cart"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center justify-between px-3 py-2 rounded-xl text-base font-bold text-amber-300 bg-amber-400/10 border border-amber-400/20"
+          >
+            <span className="flex items-center gap-2">
+              <ShoppingCart className="w-5 h-5 text-amber-400" />
+              <span>ตะกร้าคอร์สเรียน</span>
+            </span>
+            <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-xs font-mono font-black">
+              {totalItems} คอร์ส
+            </span>
+          </Link>
           <Link
             href="/#classes"
             onClick={() => setMobileMenuOpen(false)}

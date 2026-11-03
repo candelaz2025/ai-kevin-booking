@@ -1,17 +1,26 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
+import { useCart, CartItem } from '@/lib/cart-context';
 import CalendarPicker from '@/components/CalendarPicker';
 import PaymentSection from '@/components/PaymentSection';
-import { ClassItem, PaymentMethod, formatClassDuration, isClassFree, getCourseLevelConfig } from '@/lib/types';
+import { 
+  ClassItem, 
+  PaymentMethod, 
+  formatClassDuration, 
+  isClassFree, 
+  getCourseLevelConfig, 
+  COURSE_LEVELS 
+} from '@/lib/types';
 import { getSafeCourseImageUrl } from '@/lib/image-utils';
 import { checkSpamEmail } from '@/lib/anti-spam';
 import { 
   ArrowLeft, 
+  ArrowRight,
   Clock, 
   MapPin, 
   Video, 
@@ -21,51 +30,110 @@ import {
   UserCheck,
   Pencil,
   Check,
-  RotateCcw,
-  Gift
+  Gift,
+  Search,
+  ShoppingCart,
+  Trash2,
+  Calendar,
+  CreditCard,
+  Mail,
+  Hourglass,
+  Layers,
+  ShieldCheck,
+  ChevronRight,
+  ExternalLink,
+  BookOpen,
+  Info,
+  HelpCircle,
+  AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
+// 6 Core Steps as explicitly requested by user
+type FlowStep = 'find' | 'select' | 'cart' | 'confirm' | 'payment' | 'waiting';
+
+interface CreatedBookingSummary {
+  id: string;
+  classTitle: string;
+  date: string;
+  timeSlot: string;
+  amount: number;
+  userEmail: string;
+  userName: string;
+  bookingStatus: string;
+  onlineMeetingUrl?: string;
+}
 
 function BookingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const classIdParam = searchParams.get('classId') || 'ai-content-workshop';
+  const initialClassId = searchParams.get('classId');
+  const initialStepParam = searchParams.get('step') as FlowStep | null;
   const dateParam = searchParams.get('date');
   const slotParam = searchParams.get('slot');
 
   const { user } = useAuth();
+  const { 
+    items: cartItems, 
+    addItem, 
+    removeItem, 
+    updateItemSlot, 
+    clearCart, 
+    totalAmount, 
+    totalPoints, 
+    totalItems,
+    isInCart 
+  } = useCart();
+
+  // Active step in the 6-step flow
+  const [currentStep, setCurrentStep] = useState<FlowStep>('find');
+
+  // Master classes catalog
   const [classes, setClasses] = useState<ClassItem[]>([]);
-  const [selectedClass, setSelectedClass] = useState<ClassItem | null>(null);
   const [loadingClasses, setLoadingClasses] = useState(true);
 
-  // Form states
+  // Step 1: Find courses filters
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedLevelFilter, setSelectedLevelFilter] = useState<string>('all');
+  const [selectedTypeFilter, setSelectedTypeFilter] = useState<'all' | 'online' | 'onsite'>('all');
+  const [selectedPriceFilter, setSelectedPriceFilter] = useState<'all' | 'free' | 'paid'>('all');
+
+  // Step 2: Selected class details & schedule selection
+  const [selectedClass, setSelectedClass] = useState<ClassItem | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
+
+  // Step 4: Student info
   const [userName, setUserName] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
   const [userPhone, setUserPhone] = useState<string>('');
   const [lineId, setLineId] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
 
-  // Returning Student States (สำหรับผู้เรียนที่เคยจองแล้ว รอบ 2 ขึ้นไป)
+  // Returning student detection
   const [isReturningStudent, setIsReturningStudent] = useState<boolean>(false);
   const [previousBookingsCount, setPreviousBookingsCount] = useState<number>(0);
   const [isEditingInfo, setIsEditingInfo] = useState<boolean>(false);
   const [isLoadingPreviousData, setIsLoadingPreviousData] = useState<boolean>(false);
 
-  // Booking result state
-  const [bookingSuccess, setBookingSuccess] = useState<boolean>(false);
-  const [createdBooking, setCreatedBooking] = useState<any>(null);
+  // Step 5 & 6: Booking submission results
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [createdBookings, setCreatedBookings] = useState<CreatedBookingSummary[]>([]);
 
-  // Function to look up returning student data from previous bookings and profile
+  // Feedback Toast
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3000);
+  };
+
+  // Lookup returning student data
   const lookupPreviousStudentData = useCallback(async (targetEmail: string) => {
     if (!targetEmail || !targetEmail.includes('@')) return;
     const clean = targetEmail.trim().toLowerCase();
     setIsLoadingPreviousData(true);
 
     try {
-      // 1. Fetch previous bookings for this student
       const bookingsRes = await fetch(`/api/bookings?userEmail=${encodeURIComponent(clean)}`);
       const bookingsData = await bookingsRes.json();
 
@@ -76,13 +144,11 @@ function BookingContent() {
         if (profileData.success && profileData.user?.phone) {
           profilePhone = profileData.user.phone;
         }
-      } catch {
-        // ignore profile error
-      }
+      } catch {}
 
       if (bookingsData.success && Array.isArray(bookingsData.data) && bookingsData.data.length > 0) {
         const list = bookingsData.data;
-        const latest = list[0]; // Most recent booking
+        const latest = list[0];
 
         setIsReturningStudent(true);
         setPreviousBookingsCount(list.length);
@@ -93,7 +159,6 @@ function BookingContent() {
         if (latest.userPhone || profilePhone) setUserPhone(latest.userPhone || profilePhone);
         if (latest.lineId) setLineId(latest.lineId);
 
-        // Cache for quick load in localStorage
         try {
           localStorage.setItem('ai_kevin_last_student_info', JSON.stringify({
             userName: latest.userName,
@@ -110,37 +175,43 @@ function BookingContent() {
     }
   }, []);
 
-  // Fetch classes
+  // Fetch classes on mount
   useEffect(() => {
     fetch('/api/classes')
       .then(res => res.json())
       .then(data => {
         if (data.success && data.data.length > 0) {
-          setClasses(data.data);
-          const found = data.data.find((c: ClassItem) => c.id === classIdParam) || data.data[0];
-          setSelectedClass(found);
-          const initialDate = dateParam || (found.availableDates?.length > 0 ? found.availableDates[0] : new Date().toISOString().slice(0, 10));
-          setSelectedDate(initialDate);
-          const initialSlot = slotParam || (found.timeSlots?.length > 0 ? found.timeSlots[0] : '13:00 - 16:00');
-          setSelectedTimeSlot(initialSlot);
+          const list: ClassItem[] = data.data;
+          setClasses(list);
+
+          // Route initial step based on query params
+          if (initialStepParam === 'cart') {
+            setCurrentStep('cart');
+          } else if (initialClassId) {
+            const found = list.find(c => c.id === initialClassId);
+            if (found) {
+              setSelectedClass(found);
+              const initDate = dateParam || (found.availableDates?.length > 0 ? found.availableDates[0] : new Date().toISOString().slice(0, 10));
+              setSelectedDate(initDate);
+              const initSlot = slotParam || (found.timeSlots?.length > 0 ? found.timeSlots[0] : '13:00 - 16:00');
+              setSelectedTimeSlot(initSlot);
+              setCurrentStep('select');
+            } else {
+              setCurrentStep('find');
+            }
+          } else {
+            setCurrentStep('find');
+          }
         }
       })
+      .catch(err => {
+        console.error('Failed to load classes:', err);
+      })
       .finally(() => setLoadingClasses(false));
-  }, [classIdParam, dateParam, slotParam]);
+  }, [initialClassId, initialStepParam, dateParam, slotParam]);
 
-  // Capture referral code from URL if present
+  // Load cached student contact info or auth session
   useEffect(() => {
-    const refParam = searchParams.get('ref');
-    if (refParam) {
-      try {
-        localStorage.setItem('kevin_ai_referrer', refParam.trim());
-      } catch {}
-    }
-  }, [searchParams]);
-
-  // Sync user info from auth & detect returning student
-  useEffect(() => {
-    // 1. Try local storage cache first for instant pre-fill
     try {
       const cached = localStorage.getItem('ai_kevin_last_student_info');
       if (cached) {
@@ -154,7 +225,6 @@ function BookingContent() {
       }
     } catch {}
 
-    // 2. If logged in, fetch live bookings to check for 2nd round booking
     if (user?.email) {
       setUserEmail(user.email);
       if (user.name) setUserName(prev => prev || user.name);
@@ -162,87 +232,241 @@ function BookingContent() {
     }
   }, [user, lookupPreviousStudentData]);
 
-  // Check email when user finishes typing email (for non-logged in users)
+  // Check email on blur for returning student auto-fill
   const handleEmailBlur = () => {
     if (userEmail && userEmail.includes('@') && !isReturningStudent) {
       lookupPreviousStudentData(userEmail);
     }
   };
 
-  const handleSelectSlot = (date: string, timeSlot: string) => {
-    setSelectedDate(date);
-    setSelectedTimeSlot(timeSlot);
+  // Filter courses for Step 1
+  const filteredClasses = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return classes.filter(c => {
+      // Level filter
+      if (selectedLevelFilter !== 'all' && (c.level || 'beginner') !== selectedLevelFilter) {
+        return false;
+      }
+      // Type filter
+      if (selectedTypeFilter !== 'all' && c.type !== selectedTypeFilter) {
+        return false;
+      }
+      // Price filter
+      if (selectedPriceFilter === 'free' && !isClassFree(c)) return false;
+      if (selectedPriceFilter === 'paid' && isClassFree(c)) return false;
+
+      // Text search query
+      if (q) {
+        const titleMatch = (c.title || '').toLowerCase().includes(q);
+        const subtitleMatch = (c.subtitle || '').toLowerCase().includes(q);
+        const descMatch = (c.description || '').toLowerCase().includes(q);
+        const toolsMatch = (c.toolsUsed || []).some(t => t.toLowerCase().includes(q));
+        const topicsMatch = (c.topics || []).some(t => t.toLowerCase().includes(q));
+        return titleMatch || subtitleMatch || descMatch || toolsMatch || topicsMatch;
+      }
+      return true;
+    });
+  }, [classes, searchQuery, selectedLevelFilter, selectedTypeFilter, selectedPriceFilter]);
+
+  // Action: Choose class to inspect and configure schedule (Step 1 -> Step 2)
+  const handleChooseClass = (cls: ClassItem) => {
+    setSelectedClass(cls);
+    const initDate = cls.availableDates?.length > 0 ? cls.availableDates[0] : new Date().toISOString().slice(0, 10);
+    setSelectedDate(initDate);
+    const initSlot = cls.timeSlots?.length > 0 ? cls.timeSlots[0] : '13:00 - 16:00';
+    setSelectedTimeSlot(initSlot);
+    setCurrentStep('select');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handlePayment = async (method: PaymentMethod, slipUrl?: string, stripeId?: string) => {
-    // Prevent double submissions / multiple clicks
-    if (isSubmitting) return;
+  // Action: Quick Add to Cart with default slot
+  const handleQuickAddToCart = (cls: ClassItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const defaultDate = cls.availableDates?.length > 0 ? cls.availableDates[0] : new Date().toISOString().slice(0, 10);
+    const defaultSlot = cls.timeSlots?.length > 0 ? cls.timeSlots[0] : '13:00 - 16:00';
 
-    if (!selectedClass || !selectedDate || !selectedTimeSlot) {
-      alert('กรุณาเลือกวันและเวลาที่ต้องการเรียนก่อนดำเนินการ');
+    addItem({
+      classId: cls.id,
+      classTitle: cls.title,
+      subtitle: cls.subtitle,
+      classType: cls.type,
+      price: isClassFree(cls) ? 0 : cls.price,
+      isFree: isClassFree(cls),
+      rewardPoints: cls.rewardPoints ?? Math.round((cls.price || 0) / 10),
+      image: cls.image,
+      date: defaultDate,
+      timeSlot: defaultSlot,
+      durationText: formatClassDuration(cls),
+      level: cls.level || 'beginner'
+    });
+
+    confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
+    showToast(`🛒 เพิ่ม "${cls.title}" ลงในตะกร้าแล้ว!`);
+  };
+
+  // Action: Add current selected class & slot to Cart (Step 2 -> Step 3)
+  const handleAddSelectedToCart = () => {
+    if (!selectedClass) return;
+    const finalDate = selectedDate || (selectedClass.availableDates?.[0] || new Date().toISOString().slice(0, 10));
+    const finalSlot = selectedTimeSlot || (selectedClass.timeSlots?.[0] || '13:00 - 16:00');
+
+    addItem({
+      classId: selectedClass.id,
+      classTitle: selectedClass.title,
+      subtitle: selectedClass.subtitle,
+      classType: selectedClass.type,
+      price: isClassFree(selectedClass) ? 0 : selectedClass.price,
+      isFree: isClassFree(selectedClass),
+      rewardPoints: selectedClass.rewardPoints ?? Math.round((selectedClass.price || 0) / 10),
+      image: selectedClass.image,
+      date: finalDate,
+      timeSlot: finalSlot,
+      durationText: formatClassDuration(selectedClass),
+      level: selectedClass.level || 'beginner'
+    });
+
+    confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+    showToast(`🛒 เพิ่ม "${selectedClass.title}" ลงในตะกร้าเรียบร้อย`);
+    setCurrentStep('cart');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Action: Instant Buy / Checkout (Step 2 -> Step 4 directly)
+  const handleInstantCheckout = () => {
+    if (!selectedClass) return;
+    const finalDate = selectedDate || (selectedClass.availableDates?.[0] || new Date().toISOString().slice(0, 10));
+    const finalSlot = selectedTimeSlot || (selectedClass.timeSlots?.[0] || '13:00 - 16:00');
+
+    addItem({
+      classId: selectedClass.id,
+      classTitle: selectedClass.title,
+      subtitle: selectedClass.subtitle,
+      classType: selectedClass.type,
+      price: isClassFree(selectedClass) ? 0 : selectedClass.price,
+      isFree: isClassFree(selectedClass),
+      rewardPoints: selectedClass.rewardPoints ?? Math.round((selectedClass.price || 0) / 10),
+      image: selectedClass.image,
+      date: finalDate,
+      timeSlot: finalSlot,
+      durationText: formatClassDuration(selectedClass),
+      level: selectedClass.level || 'beginner'
+    });
+
+    setCurrentStep('confirm');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Action: Step 4 Confirm Information -> Step 5 Payment
+  const handleProceedToPayment = () => {
+    if (cartItems.length === 0) {
+      alert('ตะกร้าของคุณว่างเปล่า กรุณาเลือกคอร์สเรียนก่อน');
+      setCurrentStep('find');
       return;
     }
-    if (!userName.trim() || !userEmail.trim() || !userPhone.trim()) {
-      alert('กรุณากรอกชื่อ-นามสกุล, อีเมล และเบอร์โทรศัพท์');
+
+    if (!userName.trim()) {
+      alert('กรุณากรอกชื่อ-นามสกุลของผู้เรียน');
+      return;
+    }
+    if (!userEmail.trim() || !userEmail.includes('@')) {
+      alert('กรุณากรอกอีเมลที่ถูกต้องสำหรับรับลิงก์เรียนและอีเมลยืนยัน');
+      return;
+    }
+    if (!userPhone.trim()) {
+      alert('กรุณากรอกเบอร์โทรศัพท์สำหรับติดต่อ');
       return;
     }
 
-    // Anti-Spam protection: Check email format and block @example.com or disposable emails
     const spamCheck = checkSpamEmail(userEmail);
     if (spamCheck.isBlocked) {
-      alert(spamCheck.reason || 'ไม่อนุญาตให้ใช้อีเมล @example.com หรืออีเมลชั่วคราวในการจอง กรุณาใช้อีเมลจริง');
+      alert(spamCheck.reason || 'ไม่อนุญาตให้ใช้อีเมลชั่วคราวในการจอง กรุณาใช้อีเมลจริง');
+      return;
+    }
+
+    // Save info in cache
+    try {
+      localStorage.setItem('ai_kevin_last_student_info', JSON.stringify({
+        userName,
+        userEmail,
+        userPhone,
+        lineId
+      }));
+    } catch {}
+
+    setCurrentStep('payment');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Action: Step 5 Payment Submission -> Step 6 Waiting Confirmation
+  const handleExecutePayment = async (method: PaymentMethod, slipUrl?: string, stripeId?: string) => {
+    if (isSubmitting) return;
+    if (cartItems.length === 0) {
+      alert('ไม่มีคอร์สในตะกร้า');
+      setCurrentStep('find');
       return;
     }
 
     setIsSubmitting(true);
+    const storedRef = typeof window !== 'undefined' ? (localStorage.getItem('kevin_ai_referrer') || searchParams.get('ref')) : null;
+
     try {
-      const storedRef = typeof window !== 'undefined' ? (localStorage.getItem('kevin_ai_referrer') || searchParams.get('ref')) : null;
-      const payload = {
-        classId: selectedClass.id,
-        classTitle: selectedClass.title,
-        classType: selectedClass.type,
-        date: selectedDate,
-        timeSlot: selectedTimeSlot,
-        userId: user?.id || 'guest',
-        userName,
-        userEmail,
-        userPhone,
-        lineId,
-        notes,
-        amount: isClassFree(selectedClass) ? 0 : selectedClass.price,
-        paymentMethod: method,
-        slipUrl: isClassFree(selectedClass) ? 'FREE_ENROLLMENT' : slipUrl,
-        stripePaymentIntentId: stripeId,
-        referredBy: storedRef || undefined
-      };
+      const results: CreatedBookingSummary[] = [];
 
-      const res = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
+      // Process each course in the cart
+      for (const item of cartItems) {
+        const payload = {
+          classId: item.classId,
+          classTitle: item.classTitle,
+          classType: item.classType,
+          date: item.date,
+          timeSlot: item.timeSlot,
+          userId: user?.id || 'guest',
+          userName,
+          userEmail,
+          userPhone,
+          lineId,
+          notes: notes ? `${notes} (คอร์ส: ${item.classTitle})` : '',
+          amount: item.isFree ? 0 : item.price,
+          paymentMethod: method,
+          slipUrl: item.isFree ? 'FREE_ENROLLMENT' : slipUrl,
+          stripePaymentIntentId: stripeId,
+          referredBy: storedRef || undefined
+        };
 
-      if (data.success) {
-        setCreatedBooking(data.data);
-        setBookingSuccess(true);
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
+        const data = await res.json();
 
-        // Save contact info in localStorage for instant retrieval on next booking
-        try {
-          localStorage.setItem('ai_kevin_last_student_info', JSON.stringify({
-            userName,
-            userEmail,
-            userPhone,
-            lineId
-          }));
-        } catch {}
+        if (data.success && data.data) {
+          results.push({
+            id: data.data.id,
+            classTitle: data.data.classTitle || item.classTitle,
+            date: data.data.date || item.date,
+            timeSlot: data.data.timeSlot || item.timeSlot,
+            amount: data.data.amount ?? (item.isFree ? 0 : item.price),
+            userEmail: data.data.userEmail || userEmail,
+            userName: data.data.userName || userName,
+            bookingStatus: data.data.bookingStatus || 'pending_payment',
+            onlineMeetingUrl: data.data.onlineMeetingUrl
+          });
+        }
+      }
 
-        // If student is logged in, sync phone to their user profile
+      if (results.length > 0) {
+        setCreatedBookings(results);
+        clearCart(); // clear cart on success
+        setCurrentStep('waiting');
+        confetti({
+          particleCount: 90,
+          spread: 70,
+          origin: { y: 0.5 }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Sync phone to profile if user is logged in
         if (user?.email && userPhone) {
           fetch('/api/user/profile', {
             method: 'PATCH',
@@ -255,7 +479,7 @@ function BookingContent() {
           }).catch(() => {});
         }
       } else {
-        alert(`เกิดข้อผิดพลาด: ${data.error}`);
+        alert('เกิดข้อผิดพลาดในการบันทึกการจอง กรุณาลองใหม่อีกครั้ง');
       }
     } catch (err: any) {
       alert(`ไม่สามารถทำรายการได้: ${err.message}`);
@@ -264,415 +488,1329 @@ function BookingContent() {
     }
   };
 
+  // Stepper Header Configuration
+  const STEPS_NAV: { key: FlowStep; stepNum: number; title: string; subtitle: string }[] = [
+    { key: 'find', stepNum: 1, title: 'หาคอร์ส', subtitle: 'ค้นหา & กรอง' },
+    { key: 'select', stepNum: 2, title: 'เลือกคอร์ส', subtitle: 'รอบวัน & เวลา' },
+    { key: 'cart', stepNum: 3, title: 'ตะกร้าคอร์ส', subtitle: `${totalItems} รายการ` },
+    { key: 'confirm', stepNum: 4, title: 'ยืนยันคอร์ส', subtitle: 'ข้อมูลผู้เรียน' },
+    { key: 'payment', stepNum: 5, title: 'ชำระเงิน', subtitle: totalAmount === 0 ? 'ฟรี 0.-' : 'สแกน QR / บัตร' },
+    { key: 'waiting', stepNum: 6, title: 'รอผลยืนยัน', subtitle: 'อีเมลตอบกลับ' }
+  ];
+
+  const currentStepIndex = STEPS_NAV.findIndex(s => s.key === currentStep);
+
   if (loadingClasses) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-amber-400 animate-spin" />
-      </div>
-    );
-  }
-
-  if (bookingSuccess && createdBooking) {
-    return (
-      <div className="max-w-3xl mx-auto px-4 py-16 text-center animate-fadeIn">
-        <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
-          <CheckCircle2 className="w-10 h-10" />
-        </div>
-        <h1 className="text-3xl font-extrabold text-white mb-2">
-          {createdBooking.bookingStatus === 'confirmed' ? '🎉 ยืนยันการจองและชำระเงินสำเร็จแล้ว!' : '📋 บันทึกการจองเรียบร้อยแล้ว!'}
-        </h1>
-        <p className="text-slate-300 max-w-md mx-auto mb-8 text-sm">
-          รหัสการจอง: <span className="font-mono font-bold text-amber-400">{createdBooking.id}</span>
-          <br />
-          ระบบได้ส่งอีเมลแจ้งเตือนไปยังแอดมิน และส่งรายละเอียดไปยังอีเมล <span className="text-white font-medium">{createdBooking.userEmail}</span> แล้ว
-        </p>
-
-        {/* Info card */}
-        <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 text-left max-w-xl mx-auto space-y-4 mb-8">
-          <div className="flex justify-between items-center pb-3 border-b border-white/10">
-            <span className="text-xs text-slate-400">คลาสเรียน</span>
-            <span className="text-sm font-bold text-white">{createdBooking.classTitle}</span>
-          </div>
-          <div className="flex justify-between items-center pb-3 border-b border-white/10">
-            <span className="text-xs text-slate-400">วันและเวลานัดหมาย</span>
-            <span className="text-sm font-semibold text-amber-400">{createdBooking.date} ({createdBooking.timeSlot})</span>
-          </div>
-          <div className="flex justify-between items-center pb-3 border-b border-white/10">
-            <span className="text-xs text-slate-400">วิธีชำระเงิน</span>
-            <span className="text-sm text-slate-200">
-              {createdBooking.paymentMethod === 'stripe' ? 'บัตรเครดิต (Stripe)' : 'PromptPay QR Code'}
-            </span>
-          </div>
-          <div className="flex justify-between items-center pb-3 border-b border-white/10">
-            <span className="text-xs text-slate-400">สถานะ</span>
-            <span className={`text-xs px-2.5 py-1 rounded-full font-bold ${
-              createdBooking.bookingStatus === 'confirmed' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
-            }`}>
-              {createdBooking.bookingStatus === 'confirmed' ? 'ยืนยันแล้ว' : 'รอตรวจสอบการชำระเงิน'}
-            </span>
-          </div>
-
-          <div className="flex justify-between items-center pb-3 border-b border-white/10">
-            <span className="text-xs text-slate-400">แต้มสะสมที่จะได้รับจากคลาสนี้</span>
-            <span className="text-sm font-bold text-amber-400 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              +{selectedClass?.rewardPoints ?? Math.round((createdBooking.amount || 0) / 10)} แต้ม
-            </span>
-          </div>
-
-          {createdBooking.onlineMeetingUrl && (
-            <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl mt-4">
-              <span className="text-xs text-emerald-400 font-bold block mb-1">🔗 ลิงก์ห้องเรียนออนไลน์ (Google Meet / Zoom):</span>
-              <a 
-                href={createdBooking.onlineMeetingUrl} 
-                target="_blank" 
-                rel="noreferrer"
-                className="text-xs text-emerald-300 underline font-mono break-all"
-              >
-                {createdBooking.onlineMeetingUrl}
-              </a>
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/dashboard"
-            className="px-6 py-3.5 rounded-xl font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-amber-400/20 transition-all text-sm"
-          >
-            ดูประวัติการจองใน Dashboard
-          </Link>
-          <Link
-            href="/"
-            className="px-6 py-3.5 rounded-xl font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 transition-all text-sm"
-          >
-            กลับสู่หน้าหลัก
-          </Link>
-        </div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#070d18] text-slate-300">
+        <Loader2 className="w-10 h-10 text-amber-400 animate-spin mb-4" />
+        <p className="text-sm font-medium">กำลังเตรียมระบบจองคลาสเรียน...</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-6">
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-amber-400 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          กลับหน้ารวมคลาส
-        </Link>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-2">
-          จองคลาสเรียน AI กับ อ. Kevin
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          เลือกคลาส วันที่ว่างในปฏิทิน กรอกข้อมูลผู้เรียน และเลือกวิธีชำระเงิน
-        </p>
+    <div className="min-h-screen bg-[#070d18] text-slate-100 flex flex-col selection:bg-amber-400 selection:text-slate-950 pb-24">
+      
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-amber-400/40 text-amber-300 shadow-2xl shadow-black/80 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+          <span className="text-xs font-semibold">{toastMsg}</span>
+        </div>
+      )}
+
+      {/* Top Banner & 6-Step Visual Stepper */}
+      <div className="border-b border-white/10 bg-[#0c1524]/90 backdrop-blur-xl sticky top-20 z-30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
+          
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
+            <div>
+              <div className="flex items-center gap-2">
+                <Link 
+                  href="/" 
+                  className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1 transition-colors"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>กลับสู่หน้าหลัก</span>
+                </Link>
+                <span className="text-slate-600">•</span>
+                <span className="text-xs font-bold text-amber-400 tracking-wide uppercase">
+                  Kevin AI Booking Flow
+                </span>
+              </div>
+              <h1 className="text-lg sm:text-xl font-black text-white mt-0.5 tracking-tight flex items-center gap-2">
+                <span>จองคลาสเรียน AI กับ อ. Kevin</span>
+                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                  Step {currentStepIndex + 1}/6
+                </span>
+              </h1>
+            </div>
+
+            {/* Quick Cart Button */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentStep('cart')}
+                className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-2 transition-all ${
+                  currentStep === 'cart'
+                    ? 'bg-amber-400 text-slate-950 border-amber-400 shadow-lg shadow-amber-400/20'
+                    : 'bg-slate-900 text-slate-300 hover:text-white border-white/10 hover:border-amber-400/40'
+                }`}
+              >
+                <ShoppingCart className="w-4 h-4 text-amber-400" />
+                <span>ตะกร้าคอร์ส</span>
+                <span className="px-1.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[11px] font-mono font-bold">
+                  {totalItems}
+                </span>
+                {totalAmount > 0 && (
+                  <span className="text-[11px] font-bold text-emerald-400 border-l border-white/10 pl-2">
+                    ฿{totalAmount.toLocaleString()}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Stepper Progress Bar */}
+          <div className="grid grid-cols-6 gap-1 sm:gap-2 pt-1 overflow-x-auto scrollbar-none">
+            {STEPS_NAV.map((s, idx) => {
+              const isActive = s.key === currentStep;
+              const isPast = idx < currentStepIndex;
+              const canClick = isPast || (s.key === 'cart' && totalItems > 0) || (s.key === 'find');
+
+              return (
+                <button
+                  key={s.key}
+                  disabled={!canClick && !isActive}
+                  onClick={() => {
+                    if (canClick) setCurrentStep(s.key);
+                  }}
+                  className={`text-left p-2 sm:p-2.5 rounded-xl border transition-all relative flex flex-col justify-between ${
+                    isActive
+                      ? 'bg-[#15233c] border-amber-400 shadow-lg shadow-amber-400/10 ring-1 ring-amber-400/30'
+                      : isPast
+                        ? 'bg-emerald-950/20 border-emerald-500/30 text-emerald-300 hover:bg-emerald-950/30 cursor-pointer'
+                        : 'bg-slate-900/30 border-white/5 opacity-60 cursor-not-allowed'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center shrink-0 ${
+                      isActive
+                        ? 'bg-amber-400 text-slate-950'
+                        : isPast
+                          ? 'bg-emerald-500 text-slate-950 font-black'
+                          : 'bg-white/10 text-slate-400'
+                    }`}>
+                      {isPast ? '✓' : s.stepNum}
+                    </span>
+                    <span className="text-[9px] font-mono text-slate-500 hidden sm:inline">
+                      {s.stepNum}/6
+                    </span>
+                  </div>
+                  <div className="truncate">
+                    <div className={`text-xs font-bold truncate ${isActive ? 'text-amber-300' : isPast ? 'text-white' : 'text-slate-400'}`}>
+                      {s.title}
+                    </div>
+                    <div className="text-[10px] text-slate-500 truncate hidden md:block">
+                      {s.subtitle}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      {/* Main Flow Content Container */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
         
-        {/* Left Column: Class Selection & Calendar (7 Cols) */}
-        <div className="lg:col-span-7 space-y-6">
-          
-          {/* Class Select dropdown / radio */}
-          <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 shadow-xl">
-            <label className="block text-xs font-semibold text-slate-300 mb-3">
-              1. เลือกหลักสูตร / คลาสเรียนที่ต้องการ
-            </label>
-            <div className="space-y-3">
-              {classes.map(c => {
-                const isSelected = selectedClass?.id === c.id;
+        {/* ==================================================================== */}
+        {/* STEP 1: หาคอร์ส (SEARCH & BROWSE COURSES)                           */}
+        {/* ==================================================================== */}
+        {currentStep === 'find' && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            
+            {/* Header + Search Bar */}
+            <div className="bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+                    ขั้นตอนที่ 1 · ค้นหาคอร์สเรียน AI
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                    เลือกหลักสูตรที่ตรงกับเป้าหมายของคุณ
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                    ครอบคลุมทั้งคลาสเรียนฟรี, การสร้างคอนเทนต์ด้วย AI, วิดีโอสั้น, AI Agent และเวิร์กช็อปตัวต่อตัว
+                  </p>
+                </div>
+
+                {totalItems > 0 && (
+                  <button
+                    onClick={() => setCurrentStep('cart')}
+                    className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-amber-400/20 shrink-0 self-start md:self-auto transition"
+                  >
+                    <ShoppingCart className="w-4 h-4" />
+                    <span>ไปดูตะกร้า ({totalItems} คอร์ส) →</span>
+                  </button>
+                )}
+              </div>
+
+              {/* Live Search Input */}
+              <div className="relative">
+                <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="ค้นหาชื่อคอร์ส, เครื่องมือ AI เช่น ChatGPT, Midjourney, Kling, Veo, ComfyUI, หรือหัวข้อที่สนใจ..."
+                  className="w-full pl-12 pr-4 py-3 rounded-2xl bg-slate-900 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 shadow-inner"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white"
+                  >
+                    ล้างการค้นหา
+                  </button>
+                )}
+              </div>
+
+              {/* Filter Chips */}
+              <div className="space-y-3 pt-1">
+                {/* Level Filters */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs">
+                  <span className="text-slate-400 font-semibold shrink-0">ระดับ:</span>
+                  <button
+                    onClick={() => setSelectedLevelFilter('all')}
+                    className={`px-3 py-1.5 rounded-xl transition font-medium whitespace-nowrap ${
+                      selectedLevelFilter === 'all'
+                        ? 'bg-amber-400 text-slate-950 font-bold'
+                        : 'bg-slate-900 text-slate-400 hover:text-white border border-white/5'
+                    }`}
+                  >
+                    ทั้งหมด
+                  </button>
+                  {Object.entries(COURSE_LEVELS).map(([lvlKey, config]) => (
+                    <button
+                      key={lvlKey}
+                      onClick={() => setSelectedLevelFilter(lvlKey)}
+                      className={`px-3 py-1.5 rounded-xl transition font-medium whitespace-nowrap border ${
+                        selectedLevelFilter === lvlKey
+                          ? 'bg-amber-400 text-slate-950 font-bold border-amber-400'
+                          : 'bg-slate-900 text-slate-400 hover:text-white border-white/5'
+                      }`}
+                    >
+                      {config.label} ({config.enLabel})
+                    </button>
+                  ))}
+                </div>
+
+                {/* Format & Price Quick Toggles */}
+                <div className="flex flex-wrap items-center gap-2 text-xs pt-1 border-t border-white/5">
+                  <span className="text-slate-400 font-semibold shrink-0">รูปแบบ:</span>
+                  <button
+                    onClick={() => setSelectedTypeFilter('all')}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      selectedTypeFilter === 'all' ? 'bg-white/15 text-white font-bold' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    ทั้งหมด
+                  </button>
+                  <button
+                    onClick={() => setSelectedTypeFilter('online')}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      selectedTypeFilter === 'online' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    🌐 คลาสออนไลน์
+                  </button>
+                  <button
+                    onClick={() => setSelectedTypeFilter('onsite')}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      selectedTypeFilter === 'onsite' ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    🏢 Onsite Workshop
+                  </button>
+
+                  <span className="text-slate-600 mx-1">•</span>
+
+                  <span className="text-slate-400 font-semibold shrink-0">ราคา:</span>
+                  <button
+                    onClick={() => setSelectedPriceFilter('all')}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      selectedPriceFilter === 'all' ? 'bg-white/15 text-white font-bold' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    ทั้งหมด
+                  </button>
+                  <button
+                    onClick={() => setSelectedPriceFilter('free')}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      selectedPriceFilter === 'free' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    🎁 คอร์สเรียนฟรี (0 บาท)
+                  </button>
+                  <button
+                    onClick={() => setSelectedPriceFilter('paid')}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      selectedPriceFilter === 'paid' ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    💎 คอร์สพรีเมียม
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Courses Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredClasses.map(c => {
+                const inCart = isInCart(c.id);
+                const isFree = isClassFree(c);
+                const lvl = getCourseLevelConfig(c.level);
+
                 return (
                   <div
                     key={c.id}
-                    onClick={() => {
-                      setSelectedClass(c);
-                      const nextDate = c.availableDates?.length > 0 ? c.availableDates[0] : (selectedDate || new Date().toISOString().slice(0, 10));
-                      setSelectedDate(nextDate);
-                      if (c.timeSlots?.length > 0) setSelectedTimeSlot(c.timeSlots[0]);
-                    }}
-                    className={`p-4 rounded-xl border cursor-pointer transition-all flex items-start gap-4 ${
-                      isSelected
-                        ? 'bg-amber-400/10 border-amber-400 shadow-md shadow-amber-400/10'
-                        : 'bg-slate-900/40 border-white/5 hover:border-white/20 hover:bg-slate-900/80'
-                    }`}
+                    className="bg-[#0e1828] border border-white/10 rounded-3xl overflow-hidden hover:border-amber-400/50 shadow-xl transition-all duration-300 flex flex-col justify-between group"
                   >
-                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden shrink-0 bg-slate-800">
-                      {(() => {
-                        const imgSrc = getSafeCourseImageUrl(c.image);
-                        const isDataUrl = imgSrc.startsWith('data:');
-                        return (
-                          <Image
-                            src={imgSrc}
-                            alt={c.title}
-                            fill
-                            unoptimized={isDataUrl}
-                            className="object-cover"
-                          />
-                        );
-                      })()}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                          c.type === 'online' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
-                        }`}>
-                          {c.type === 'online' ? '🌐 คลาสออนไลน์' : '🏢 Onsite Workshop'}
-                        </span>
-                        <span className="text-xs text-slate-400 flex items-center gap-1 font-medium">
-                          • <Clock className="w-3 h-3 text-amber-400" /> {formatClassDuration(c)}
-                        </span>
-                        {(() => {
-                          const lvl = getCourseLevelConfig(c.level);
-                          return (
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${lvl.badgeClass}`}>
-                              <span className={`w-1.5 h-1.5 rounded-full ${lvl.dotColor}`} />
-                              <span>ระดับ{lvl.label}</span>
-                            </span>
-                          );
-                        })()}
-                        {isClassFree(c) && (
-                          <span className="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                            <Gift className="w-3 h-3 text-emerald-400" />
-                            เรียนฟรี (FREE)
+                    <div>
+                      {/* Course Image */}
+                      <div className="relative aspect-video w-full bg-slate-900 overflow-hidden">
+                        <Image
+                          src={getSafeCourseImageUrl(c.image)}
+                          alt={c.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1828] via-transparent to-black/30 pointer-events-none" />
+
+                        {/* Top Badges */}
+                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                          <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md backdrop-blur-md ${
+                            c.type === 'online'
+                              ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/40'
+                              : 'bg-amber-950/80 text-amber-300 border border-amber-500/40'
+                          }`}>
+                            {c.type === 'online' ? '🌐 คลาสออนไลน์' : '🏢 Onsite Workshop'}
                           </span>
+
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md backdrop-blur-md ${lvl.badgeClass}`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${lvl.dotColor}`} />
+                            <span>{lvl.label}</span>
+                          </span>
+                        </div>
+
+                        {/* Free badge */}
+                        {isFree && (
+                          <div className="absolute bottom-3 left-3">
+                            <span className="bg-emerald-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-lg">
+                              <Gift className="w-3.5 h-3.5" />
+                              เรียนฟรี (FREE 0.-)
+                            </span>
+                          </div>
                         )}
                       </div>
-                      <h4 className="text-sm font-bold text-white truncate">{c.title}</h4>
-                      {c.subtitle && (
-                        <p className="text-xs text-slate-300 line-clamp-1 mt-0.5">{c.subtitle}</p>
-                      )}
-                      {isSelected && c.description && (
-                        <div className="mt-2 pt-2 border-t border-white/10 text-[11px] text-slate-300 whitespace-pre-line leading-relaxed max-h-40 overflow-y-auto pr-1">
-                          {c.description}
+
+                      {/* Course Info */}
+                      <div className="p-5 sm:p-6 space-y-3">
+                        <div className="flex items-center gap-2 text-xs text-slate-400">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5 text-amber-400" />
+                            {formatClassDuration(c)}
+                          </span>
+                          <span>•</span>
+                          <span className="text-amber-300 font-semibold flex items-center gap-1">
+                            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                            +{c.rewardPoints ?? Math.round(c.price / 10)} แต้ม
+                          </span>
                         </div>
-                      )}
-                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
-                        <div className="font-extrabold text-sm">
-                          {isClassFree(c) ? (
-                            <span className="text-emerald-400 text-base font-extrabold">
-                              ฟรี 0 <span className="text-xs font-normal text-slate-300">บาท</span>
-                            </span>
+
+                        <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                          {c.title}
+                        </h3>
+
+                        <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                          {c.subtitle || c.description}
+                        </p>
+
+                        {/* Tools tags */}
+                        {c.toolsUsed && c.toolsUsed.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {c.toolsUsed.slice(0, 4).map((tool, i) => (
+                              <span key={i} className="text-[10px] font-mono bg-slate-900 border border-white/5 px-2 py-0.5 rounded-md text-slate-300">
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bottom Action Footer */}
+                    <div className="p-5 sm:p-6 pt-0 border-t border-white/5 mt-2 flex flex-col gap-3">
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-xs text-slate-400">ราคาค่าลงทะเบียน</span>
+                        <div className="text-right">
+                          {isFree ? (
+                            <span className="text-lg font-black text-emerald-400">ฟรี 0 <span className="text-xs font-normal text-slate-400">บาท</span></span>
                           ) : (
-                            <span className="text-amber-400">
-                              {c.price.toLocaleString()} <span className="text-xs font-normal text-slate-300">บาท</span>
-                            </span>
+                            <span className="text-lg font-black text-amber-400">{c.price.toLocaleString()} <span className="text-xs font-normal text-slate-400">บาท</span></span>
                           )}
                         </div>
-                        <span className="bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[11px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                          <Sparkles className="w-3 h-3 text-amber-400" />
-                          รับ +{c.rewardPoints ?? Math.round(c.price / 10)} แต้ม
-                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          onClick={() => handleChooseClass(c)}
+                          className="py-2.5 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md shadow-amber-400/20 transition flex items-center justify-center gap-1"
+                        >
+                          <span>เลือกรอบเรียน</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+
+                        <button
+                          onClick={e => handleQuickAddToCart(c, e)}
+                          className={`py-2.5 px-3 rounded-xl border text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                            inCart
+                              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                              : 'bg-slate-900 hover:bg-slate-800 text-slate-200 border-white/10 hover:border-amber-400/30'
+                          }`}
+                        >
+                          <ShoppingCart className="w-3.5 h-3.5 text-amber-400" />
+                          <span>{inCart ? 'ในตะกร้าแล้ว' : '+ ตะกร้า'}</span>
+                        </button>
                       </div>
                     </div>
                   </div>
                 );
               })}
             </div>
-          </div>
 
-          {/* Calendar picker */}
-          <div>
-            <CalendarPicker
-              selectedClass={selectedClass}
-              selectedDate={selectedDate}
-              selectedTimeSlot={selectedTimeSlot}
-              onSelectSlot={handleSelectSlot}
-            />
-          </div>
-
-        </div>
-
-        {/* Right Column: User Details & Payment (5 Cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          
-          {/* Student Info Form */}
-          <div className="bg-[#101c2d] border border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <span>👤</span> ข้อมูลผู้เรียน
-              </h3>
-              {isReturningStudent && (
-                <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-amber-400" />
-                  <span>นักเรียนเดิม (จองรอบที่ {previousBookingsCount + 1})</span>
-                </span>
-              )}
-            </div>
-
-            {isLoadingPreviousData && (
-              <div className="flex items-center gap-2 text-xs text-amber-400 py-1">
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                <span>กำลังดึงข้อมูลผู้เรียนจากการจองครั้งก่อน...</span>
+            {filteredClasses.length === 0 && (
+              <div className="py-20 text-center bg-[#0e1828] border border-white/10 rounded-3xl p-8 text-slate-400 space-y-3">
+                <Search className="w-12 h-12 mx-auto text-slate-600" />
+                <h4 className="text-base font-bold text-white">ไม่พบคอร์สเรียนที่ตรงกับคำค้นหา &ldquo;{searchQuery}&rdquo;</h4>
+                <p className="text-xs text-slate-400">ลองล้างตัวกรอง หรือค้นหาด้วยคีย์เวิร์ดอื่น</p>
+                <button
+                  onClick={() => { setSearchQuery(''); setSelectedLevelFilter('all'); setSelectedTypeFilter('all'); setSelectedPriceFilter('all'); }}
+                  className="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs"
+                >
+                  ล้างตัวกรองทั้งหมด
+                </button>
               </div>
             )}
 
-            {/* Case 1: Returning Student Display Card (ไม่ต้องกรอกซ้ำ ดึงข้อมูลเดิมมาโชว์ทันที) */}
-            {isReturningStudent && !isEditingInfo ? (
-              <div className="space-y-4">
-                <div className="p-3.5 rounded-xl bg-gradient-to-r from-emerald-500/10 to-amber-500/10 border border-emerald-500/25 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                      <UserCheck className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-white flex items-center gap-1.5">
-                        ยินดีต้อนรับกลับคุณ {userName} 👋
-                      </p>
-                      <p className="text-[11px] text-slate-300">
-                        ดึงข้อมูลจากการจองครั้งก่อนให้อัตโนมัติ สามารถเลือกวันและชำระเงินได้ทันที
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setIsEditingInfo(true)}
-                    className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition shrink-0 cursor-pointer"
-                    title="ต้องการเปลี่ยนเบอร์ หรือ Line ID"
-                  >
-                    <Pencil className="w-3 h-3 text-amber-400" />
-                    <span>แก้ไข</span>
-                  </button>
-                </div>
+          </div>
+        )}
 
-                {/* Info Grid */}
-                <div className="bg-slate-900/70 border border-white/5 rounded-xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-                  <div>
-                    <span className="text-slate-400 block mb-0.5 text-[11px]">ชื่อ - นามสกุล:</span>
-                    <strong className="text-white text-sm block font-medium">{userName}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block mb-0.5 text-[11px]">อีเมล (รับลิงก์เรียน):</span>
-                    <strong className="text-amber-300 font-mono text-xs block">{userEmail}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block mb-0.5 text-[11px]">เบอร์โทรศัพท์:</span>
-                    <strong className="text-white font-mono text-xs block">{userPhone}</strong>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block mb-0.5 text-[11px]">Line ID:</span>
-                    <strong className="text-slate-200 text-xs block">{lineId || '-'}</strong>
-                  </div>
-                </div>
+        {/* ==================================================================== */}
+        {/* STEP 2: เลือกคอร์ส & รอบวันเวลา (SELECT COURSE & SCHEDULE)           */}
+        {/* ==================================================================== */}
+        {currentStep === 'select' && selectedClass && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            
+            {/* Top Navigation Bar */}
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setCurrentStep('find')}
+                className="text-xs font-semibold text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>← กลับไปเลือกคอร์สอื่น (ขั้นตอนที่ 1)</span>
+              </button>
 
-                {/* Notes for this booking */}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    หัวข้อหรือโจทย์ AI ที่สนใจเพิ่มเติมในรอบนี้ (ถ้ามี)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={notes}
-                    onChange={e => setNotes(e.target.value)}
-                    placeholder="เช่น สอบถามเรื่องต่อ API จากรอบที่แล้ว หรือปรึกษาโปรเจกต์งานส่วนตัว"
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-amber-400"
+              <span className="text-xs font-mono text-slate-500">
+                ขั้นตอนที่ 2: เลือกรอบวันและเวลาเรียน
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column: Full Course Summary & Details (6 Cols) */}
+              <div className="lg:col-span-6 bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                
+                {/* Header Image */}
+                <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-white/10">
+                  <Image
+                    src={getSafeCourseImageUrl(selectedClass.image)}
+                    alt={selectedClass.title}
+                    fill
+                    className="object-cover"
                   />
+                  <div className="absolute top-3 left-3">
+                    <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-md shadow-md ${
+                      selectedClass.type === 'online'
+                        ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/40'
+                        : 'bg-amber-950/80 text-amber-300 border border-amber-500/40'
+                    }`}>
+                      {selectedClass.type === 'online' ? '🌐 คลาสออนไลน์ (Google Meet / Zoom)' : '🏢 Onsite Workshop (เรียนสดในห้อง)'}
+                    </span>
+                  </div>
+
+                  {isClassFree(selectedClass) && (
+                    <div className="absolute bottom-3 left-3">
+                      <span className="bg-emerald-500 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-lg">
+                        <Gift className="w-3.5 h-3.5" />
+                        สิทธิ์เรียนฟรี (0 บาท)
+                      </span>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ) : (
-              /* Case 2: Form Inputs (สำหรับผู้เรียนใหม่ หรือกดปุ่มแก้ไขข้อมูล) */
-              <div className="space-y-3">
-                {isReturningStudent && (
-                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5">
-                    <span className="text-xs text-amber-400 font-semibold">แก้ไขข้อมูลผู้เรียนสำหรับรอบนี้:</span>
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingInfo(false)}
-                      className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
-                    >
-                      ยกเลิก / ใช้ข้อมูลเดิม
-                    </button>
+
+                {/* Course Metadata */}
+                <div>
+                  <div className="flex items-center gap-2 text-xs text-slate-400 mb-2">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-amber-400" />
+                      {formatClassDuration(selectedClass)}
+                    </span>
+                    <span>•</span>
+                    <span className="text-amber-300 font-semibold flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      +{selectedClass.rewardPoints ?? Math.round(selectedClass.price / 10)} แต้มสะสม
+                    </span>
+                    <span>•</span>
+                    <span>{getCourseLevelConfig(selectedClass.level).label}</span>
+                  </div>
+
+                  <h2 className="text-2xl font-black text-white">
+                    {selectedClass.title}
+                  </h2>
+                  {selectedClass.subtitle && (
+                    <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">
+                      {selectedClass.subtitle}
+                    </p>
+                  )}
+                </div>
+
+                {/* Topics Covered */}
+                {selectedClass.topics && selectedClass.topics.length > 0 && (
+                  <div className="space-y-2 pt-2 border-t border-white/5">
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block">
+                      หัวข้อที่คุณจะได้เรียนรู้ (What You Will Learn):
+                    </span>
+                    <ul className="grid grid-cols-1 gap-2 text-xs text-slate-300">
+                      {selectedClass.topics.map((t, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <span>{t}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">ชื่อ - นามสกุล *</label>
-                  <input
-                    type="text"
-                    required
-                    value={userName}
-                    onChange={e => setUserName(e.target.value)}
-                    placeholder="เช่น สมชาย ใจดี"
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">อีเมล (รับลิงก์เรียน) *</label>
-                    <input
-                      type="email"
-                      required
-                      value={userEmail}
-                      onBlur={handleEmailBlur}
-                      onChange={e => setUserEmail(e.target.value)}
-                      placeholder="name@gmail.com"
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                    />
+                {/* Tools Used */}
+                {selectedClass.toolsUsed && selectedClass.toolsUsed.length > 0 && (
+                  <div className="space-y-2 pt-2 border-t border-white/5">
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block">
+                      เครื่องมือ AI ที่ใช้ในคลาส:
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedClass.toolsUsed.map((tool, idx) => (
+                        <span key={idx} className="px-2.5 py-1 rounded-lg bg-slate-900 border border-white/10 text-xs font-mono text-slate-200">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                )}
+
+                {/* Full Description */}
+                {selectedClass.description && (
+                  <div className="pt-2 border-t border-white/5 space-y-1">
+                    <span className="text-xs font-bold text-slate-400 block">
+                      รายละเอียดคอร์สเพิ่มเติม:
+                    </span>
+                    <p className="text-xs text-slate-300 whitespace-pre-line leading-relaxed">
+                      {selectedClass.description}
+                    </p>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Right Column: Calendar & Time Slots Picker (6 Cols) */}
+              <div className="lg:col-span-6 space-y-6">
+                
+                {/* Calendar Picker Card */}
+                <div className="bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">เบอร์โทรศัพท์ *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={userPhone}
-                      onChange={e => setUserPhone(e.target.value)}
-                      placeholder="08X-XXX-XXXX"
-                      className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                    />
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+                      เลือกรอบวันและเวลาเรียน
+                    </span>
+                    <h3 className="text-xl font-bold text-white">
+                      กำหนดตารางเรียนที่สะดวก
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1">
+                      สามารถเลือกวันในปฏิทิน และรอบเวลาที่เปิดสอน (Online / Onsite)
+                    </p>
+                  </div>
+
+                  <CalendarPicker
+                    selectedClass={selectedClass}
+                    selectedDate={selectedDate}
+                    selectedTimeSlot={selectedTimeSlot}
+                    onSelectSlot={(d, s) => {
+                      setSelectedDate(d);
+                      setSelectedTimeSlot(s);
+                    }}
+                  />
+
+                  {/* Selected Slot Recap */}
+                  <div className="p-4 rounded-2xl bg-slate-900/90 border border-amber-400/30 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
+                        <Calendar className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="text-[11px] text-slate-400 block">รอบเรียนที่คุณเลือก:</span>
+                        <strong className="text-xs sm:text-sm text-white font-bold block">
+                          {selectedDate || 'กรุณาเลือกวัน'} ({selectedTimeSlot || 'กรุณาเลือกรอบเวลา'})
+                        </strong>
+                      </div>
+                    </div>
+
+                    <div className="text-right">
+                      <span className="text-[11px] text-slate-400 block">ราคา</span>
+                      <strong className={`text-base font-extrabold ${isClassFree(selectedClass) ? 'text-emerald-400' : 'text-amber-400'}`}>
+                        {isClassFree(selectedClass) ? 'ฟรี 0.-' : `฿${selectedClass.price.toLocaleString()}`}
+                      </strong>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons for Step 2 */}
+                  <div className="space-y-2.5 pt-2">
+                    <button
+                      onClick={handleAddSelectedToCart}
+                      className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-300 hover:to-amber-200 text-slate-950 font-black text-sm shadow-xl shadow-amber-400/25 transition flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <ShoppingCart className="w-4 h-4 text-slate-950" />
+                      <span>เพิ่มลงตะกร้า (Add to Cart) →</span>
+                    </button>
+
+                    <button
+                      onClick={handleInstantCheckout}
+                      className="w-full py-3 px-5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-400/40 text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <span>⚡ จองและไปยืนยันข้อมูลทันที (Buy Now)</span>
+                    </button>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Line ID (ถ้ามี)</label>
-                  <input
-                    type="text"
-                    value={lineId}
-                    onChange={e => setLineId(e.target.value)}
-                    placeholder="ID Line สำหรับประสานงานด่วน"
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                  />
-                </div>
+              </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">หัวข้อหรือโจทย์ AI ที่สนใจเป็นพิเศษ</label>
-                  <textarea
-                    rows={2}
-                    value={notes}
-                    onChange={e => setNotes(e.target.value)}
-                    placeholder="เช่น ต้องการสร้าง AI ช่วยตอบแชท หรือทำภาพโฆษณาสินค้า"
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
-                  />
+            </div>
+
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* STEP 3: แอดคอร์สในตะกร้า (CART REVIEW & MANAGEMENT)                   */}
+        {/* ==================================================================== */}
+        {currentStep === 'cart' && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+                  ขั้นตอนที่ 3 · ตรวจสอบตะกร้าคอร์สเรียน
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2">
+                  <span>ตะกร้าคอร์สของคุณ ({totalItems} รายการ)</span>
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                  ตรวจสอบคอร์สที่ต้องการเรียน รอบวันเวลา หรือเพิ่มคอร์สอื่นในคำสั่งซื้อเดียวกัน
+                </p>
+              </div>
+
+              <button
+                onClick={() => setCurrentStep('find')}
+                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-400/30 text-xs font-bold flex items-center gap-1.5 transition self-start sm:self-auto"
+              >
+                <span>＋ ค้นหาคอร์สอื่นเพิ่ม (ขั้นตอนที่ 1)</span>
+              </button>
+            </div>
+
+            {/* If Cart is empty */}
+            {cartItems.length === 0 ? (
+              <div className="bg-[#0e1828] border border-white/10 rounded-3xl p-12 text-center text-slate-400 space-y-4 shadow-2xl">
+                <div className="w-16 h-16 rounded-3xl bg-amber-400/10 text-amber-400 border border-amber-400/20 flex items-center justify-center mx-auto">
+                  <ShoppingCart className="w-8 h-8" />
+                </div>
+                <h3 className="text-lg font-bold text-white">ตะกร้าของคุณยังว่างเปล่า</h3>
+                <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
+                  คุณยังไม่ได้เพิ่มคอร์สเรียนลงในตะกร้า สามารถเริ่มจากขั้นตอนที่ 1 เพื่อค้นหาคอร์สที่ต้องการ
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setCurrentStep('find')}
+                    className="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-lg shadow-amber-400/20 transition"
+                  >
+                    🔍 ไปค้นหาคอร์สเรียน (เริ่มขั้นตอนที่ 1) →
+                  </button>
                 </div>
               </div>
+            ) : (
+              /* Cart Items List + Order Summary */
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Left: Cart Items List (7 Cols) */}
+                <div className="lg:col-span-7 space-y-4">
+                  {cartItems.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      className="bg-[#0e1828] border border-white/10 rounded-2xl p-5 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                    >
+                      <div className="flex items-center gap-4 min-w-0 flex-1">
+                        <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-slate-900 shrink-0 border border-white/10">
+                          <Image
+                            src={getSafeCourseImageUrl(item.image)}
+                            alt={item.classTitle}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+
+                        <div className="min-w-0 flex-1 space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                              item.classType === 'online'
+                                ? 'bg-emerald-500/20 text-emerald-300'
+                                : 'bg-amber-500/20 text-amber-300'
+                            }`}>
+                              {item.classType === 'online' ? '🌐 ออนไลน์' : '🏢 Onsite'}
+                            </span>
+                            <span className="text-[11px] text-amber-300 font-semibold flex items-center gap-1">
+                              <Sparkles className="w-3 h-3 text-amber-400" />
+                              +{item.rewardPoints} แต้ม
+                            </span>
+                          </div>
+
+                          <h4 className="text-sm font-bold text-white truncate">
+                            {item.classTitle}
+                          </h4>
+
+                          <div className="text-xs text-slate-300 flex items-center gap-1.5 font-medium">
+                            <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                            <span>รอบ: <strong>{item.date}</strong> ({item.timeSlot})</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Item Price & Remove */}
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-white/5 shrink-0 gap-2">
+                        <div className="text-right">
+                          <span className="text-xs text-slate-400 block sm:hidden">ราคา</span>
+                          <strong className={`text-base font-black ${item.isFree ? 'text-emerald-400' : 'text-amber-400'}`}>
+                            {item.isFree ? 'ฟรี 0 บาท' : `฿${item.price.toLocaleString()}`}
+                          </strong>
+                        </div>
+
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          title="ลบออกจากตะกร้า"
+                          className="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition text-xs flex items-center gap-1"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span className="sm:hidden">ลบ</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Add more button */}
+                  <div className="text-center pt-2">
+                    <button
+                      onClick={() => setCurrentStep('find')}
+                      className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 text-xs font-semibold inline-flex items-center gap-2 transition"
+                    >
+                      <span>＋ ต้องการเลือกคอร์สอื่นเพิ่มเติม</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right: Order Summary (5 Cols) */}
+                <div className="lg:col-span-5 bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+                  <div className="pb-4 border-b border-white/10">
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-0.5">
+                      สรุปยอดคำสั่งซื้อ (Order Summary)
+                    </span>
+                    <h3 className="text-lg font-black text-white">
+                      รวมทั้งสิ้น {totalItems} คอร์ส
+                    </h3>
+                  </div>
+
+                  <div className="space-y-3 text-xs">
+                    <div className="flex justify-between items-center text-slate-300">
+                      <span>รวมราคาคอร์สเรียน</span>
+                      <span className="font-semibold text-white">฿{totalAmount.toLocaleString()}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-slate-300">
+                      <span>แต้มสะสมที่จะได้รับรวม</span>
+                      <span className="font-bold text-amber-400 flex items-center gap-1">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        +{totalPoints} แต้ม
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-slate-300">
+                      <span>ส่วนลด / คูปอง</span>
+                      <span className="text-emerald-400 font-medium">0 บาท</span>
+                    </div>
+
+                    <div className="pt-3 border-t border-white/10 flex justify-between items-baseline">
+                      <span className="text-sm font-bold text-white">ยอดชำระสุทธิ</span>
+                      <strong className={`text-2xl font-black ${totalAmount === 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                        {totalAmount === 0 ? 'ฟรี 0 บาท' : `฿${totalAmount.toLocaleString()}`}
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-amber-400/10 border border-amber-400/20 text-xs text-amber-200/90 leading-relaxed">
+                    💡 <strong>คำแนะนำ:</strong> เมื่อกดไปขั้นตอนถัดไป คุณจะได้กรอกข้อมูลผู้เรียนเพื่อรับลิงก์ห้องเรียน และเลือกวิธีชำระเงิน
+                  </div>
+
+                  {/* Proceed to Step 4 */}
+                  <button
+                    onClick={() => {
+                      setCurrentStep('confirm');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-300 hover:to-amber-200 text-slate-950 font-black text-sm shadow-xl shadow-amber-400/25 transition flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <span>ยืนยันคอร์ส & กรอกข้อมูลผู้เรียน (ขั้นตอนที่ 4)</span>
+                    <ArrowRight className="w-4 h-4 text-slate-950" />
+                  </button>
+                </div>
+
+              </div>
             )}
+
           </div>
+        )}
 
-          {/* Payment Section */}
-          {selectedClass && (
-            <PaymentSection
-              amount={isClassFree(selectedClass) ? 0 : selectedClass.price}
-              isFree={isClassFree(selectedClass)}
-              isSubmitting={isSubmitting}
-              onPaymentSuccess={handlePayment}
-              bookingSummary={{
-                className: selectedClass.title,
-                date: selectedDate,
-                timeSlot: selectedTimeSlot,
-                userName
-              }}
-            />
-          )}
+        {/* ==================================================================== */}
+        {/* STEP 4: ยืนยันคอร์ส & ข้อมูลผู้เรียน (CONFIRM & STUDENT FORM)         */}
+        {/* ==================================================================== */}
+        {currentStep === 'confirm' && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setCurrentStep('cart')}
+                className="text-xs font-semibold text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>← กลับไปแก้ไขตะกร้าคอร์ส (ขั้นตอนที่ 3)</span>
+              </button>
 
-        </div>
+              <span className="text-xs font-mono text-slate-500">
+                ขั้นตอนที่ 4: ยืนยันข้อมูลผู้เรียน
+              </span>
+            </div>
 
-      </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column: Student Contact Form (7 Cols) */}
+              <div className="lg:col-span-7 bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <div>
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-0.5">
+                      ข้อมูลสำหรับลงทะเบียน
+                    </span>
+                    <h3 className="text-xl font-black text-white flex items-center gap-2">
+                      <span>👤 ข้อมูลผู้เรียน (Student Information)</span>
+                    </h3>
+                  </div>
+
+                  {isReturningStudent && (
+                    <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/15 px-3 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1 shadow-sm">
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      <span>นักเรียนเดิม (รอบที่ {previousBookingsCount + 1})</span>
+                    </span>
+                  )}
+                </div>
+
+                {isLoadingPreviousData && (
+                  <div className="flex items-center gap-2 text-xs text-amber-400 py-1">
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>กำลังค้นหาข้อมูลนักเรียนจากการจองรอบก่อน...</span>
+                  </div>
+                )}
+
+                {/* Returning Student Auto-fill Banner */}
+                {isReturningStudent && !isEditingInfo ? (
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-500/15 to-amber-500/10 border border-emerald-500/30 flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                          <UserCheck className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-white">
+                            ยินดีต้อนรับกลับ คุณ {userName} 👋
+                          </p>
+                          <p className="text-[11px] text-slate-300">
+                            ดึงข้อมูลจากการจองครั้งก่อนให้อัตโนมัติ สามารถไปขั้นตอนชำระเงินได้ทันที
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsEditingInfo(true)}
+                        className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1 transition shrink-0"
+                      >
+                        <Pencil className="w-3 h-3 text-amber-400" />
+                        <span>แก้ไข</span>
+                      </button>
+                    </div>
+
+                    <div className="bg-slate-900/80 border border-white/5 rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <span className="text-slate-400 block text-[11px]">ชื่อ - นามสกุล:</span>
+                        <strong className="text-white text-sm font-semibold">{userName}</strong>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[11px]">อีเมล (รับลิงก์เรียน):</span>
+                        <strong className="text-amber-300 font-mono text-xs">{userEmail}</strong>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[11px]">เบอร์โทรศัพท์:</span>
+                        <strong className="text-white font-mono text-xs">{userPhone}</strong>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 block text-[11px]">Line ID:</span>
+                        <strong className="text-slate-200 text-xs">{lineId || '-'}</strong>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        หัวข้อหรือโจทย์ AI ที่สนใจเพิ่มเติมในรอบนี้ (ถ้ามี)
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={notes}
+                        onChange={e => setNotes(e.target.value)}
+                        placeholder="เช่น ปรึกษาเรื่องสร้างโมเดล LoRA หรือทำ Workflow วิดีโอ AI ในธุรกิจ"
+                        className="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  /* Standard Input Form */
+                  <div className="space-y-4">
+                    {isReturningStudent && (
+                      <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                        <span className="text-xs text-amber-400 font-semibold">แก้ไขข้อมูลผู้เรียนสำหรับรอบนี้:</span>
+                        <button
+                          type="button"
+                          onClick={() => setIsEditingInfo(false)}
+                          className="text-xs text-slate-400 hover:text-white underline"
+                        >
+                          ยกเลิก / ใช้ข้อมูลเดิม
+                        </button>
+                      </div>
+                    )}
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        ชื่อ - นามสกุลผู้เรียน <span className="text-rose-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={userName}
+                        onChange={e => setUserName(e.target.value)}
+                        placeholder="เช่น นาย สมชาย ใจดี"
+                        className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1">
+                          อีเมล (สำหรับรับลิงก์เรียนและเมลยืนยัน) <span className="text-rose-400">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={userEmail}
+                          onBlur={handleEmailBlur}
+                          onChange={e => setUserEmail(e.target.value)}
+                          placeholder="student@gmail.com"
+                          className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-300 mb-1">
+                          เบอร์โทรศัพท์ <span className="text-rose-400">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          value={userPhone}
+                          onChange={e => setUserPhone(e.target.value)}
+                          placeholder="08X-XXX-XXXX"
+                          className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Line ID (สำหรับส่งลิงก์เรียนสำรองและประสานงานด่วน)
+                      </label>
+                      <input
+                        type="text"
+                        value={lineId}
+                        onChange={e => setLineId(e.target.value)}
+                        placeholder="ID Line ของผู้เรียน"
+                        className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        โจทย์ AI หรือเป้าหมายที่ต้องการโฟกัสเป็นพิเศษ
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={notes}
+                        onChange={e => setNotes(e.target.value)}
+                        placeholder="เช่น อยากเรียนเพื่อนำไปใช้ในงานโปรดักชัน หรือทำโมเดลตัวละคร 9:16"
+                        className="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Right Column: Order Confirmation Summary (5 Cols) */}
+              <div className="lg:col-span-5 bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                <div className="pb-4 border-b border-white/10">
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-0.5">
+                    ตรวจสอบรายการคอร์ส
+                  </span>
+                  <h3 className="text-lg font-black text-white">
+                    ยืนยันรายการในคำสั่งซื้อ
+                  </h3>
+                </div>
+
+                {/* Courses Mini List */}
+                <div className="space-y-3 max-h-60 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-800">
+                  {cartItems.map(item => (
+                    <div key={item.id} className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/5 space-y-1">
+                      <div className="flex items-center justify-between text-xs font-bold text-white">
+                        <span className="truncate pr-2">{item.classTitle}</span>
+                        <span className={item.isFree ? 'text-emerald-400 shrink-0' : 'text-amber-400 shrink-0'}>
+                          {item.isFree ? 'ฟรี' : `฿${item.price.toLocaleString()}`}
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
+                        <Calendar className="w-3 h-3 text-amber-400" />
+                        <span>{item.date} ({item.timeSlot})</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Totals */}
+                <div className="pt-2 border-t border-white/10 space-y-2 text-xs">
+                  <div className="flex justify-between text-slate-300">
+                    <span>จำนวนคอร์สทั้งหมด</span>
+                    <span className="font-bold text-white">{totalItems} คอร์ส</span>
+                  </div>
+                  <div className="flex justify-between text-slate-300">
+                    <span>แต้มสะสมที่จะได้รับ</span>
+                    <span className="font-bold text-amber-400">+{totalPoints} แต้ม</span>
+                  </div>
+                  <div className="pt-2 border-t border-white/10 flex justify-between items-baseline">
+                    <span className="text-sm font-bold text-white">ยอดชำระสุทธิ</span>
+                    <strong className={`text-2xl font-black ${totalAmount === 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                      {totalAmount === 0 ? 'ฟรี 0 บาท' : `฿${totalAmount.toLocaleString()}`}
+                    </strong>
+                  </div>
+                </div>
+
+                {/* Submit to Step 5 */}
+                <button
+                  onClick={handleProceedToPayment}
+                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-300 hover:to-amber-200 text-slate-950 font-black text-sm shadow-xl shadow-amber-400/25 transition flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>{totalAmount === 0 ? 'ยืนยันลงทะเบียนฟรี (ขั้นตอนที่ 5) →' : 'ไปขั้นตอนชำระเงิน (ขั้นตอนที่ 5) →'}</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* STEP 5: ชำระเงิน (PAYMENT: PROMPTPAY QR / STRIPE / FREE)              */}
+        {/* ==================================================================== */}
+        {currentStep === 'payment' && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setCurrentStep('confirm')}
+                className="text-xs font-semibold text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>← กลับไปแก้ไขข้อมูลผู้เรียน (ขั้นตอนที่ 4)</span>
+              </button>
+
+              <span className="text-xs font-mono text-slate-500">
+                ขั้นตอนที่ 5: ชำระเงิน & แจ้งโอนเงิน
+              </span>
+            </div>
+
+            <div className="max-w-4xl mx-auto space-y-6">
+              
+              {/* Order Recap Banner */}
+              <div className="p-4 sm:p-5 rounded-3xl bg-[#0e1828] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+                <div>
+                  <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider block">
+                    ยอดชำระคำสั่งซื้อ #{cartItems.length} คอร์ส
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-white mt-0.5">
+                    ผู้ลงทะเบียน: <span className="text-amber-300">{userName}</span> ({userEmail})
+                  </h3>
+                </div>
+
+                <div className="text-left sm:text-right">
+                  <span className="text-xs text-slate-400 block">ยอดรวมทั้งสิ้น</span>
+                  <strong className={`text-2xl font-black ${totalAmount === 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                    {totalAmount === 0 ? 'ฟรี 0 บาท' : `฿${totalAmount.toLocaleString()}`}
+                  </strong>
+                </div>
+              </div>
+
+              {/* Payment Section Component */}
+              <PaymentSection
+                amount={totalAmount}
+                isFree={totalAmount === 0}
+                isSubmitting={isSubmitting}
+                onPaymentSuccess={handleExecutePayment}
+                bookingSummary={{
+                  className: cartItems.map(i => i.classTitle).join(', '),
+                  date: cartItems[0]?.date || '',
+                  timeSlot: cartItems[0]?.timeSlot || '',
+                  userName
+                }}
+              />
+
+            </div>
+
+          </div>
+        )}
+
+        {/* ==================================================================== */}
+        {/* STEP 6: รอการยืนยันแล้วเมลตอบกลับจาก ADMIN (WAITING & TIMELINE)      */}
+        {/* ==================================================================== */}
+        {currentStep === 'waiting' && createdBookings.length > 0 && (
+          <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-300 text-center">
+            
+            {/* Success Icon */}
+            <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mx-auto border border-emerald-500/30 shadow-2xl shadow-emerald-500/10">
+              <CheckCircle2 className="w-10 h-10" />
+            </div>
+
+            <div>
+              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                ขั้นตอนที่ 6 / 6: บันทึกข้อมูลและส่งแจ้งเตือนเรียบร้อย
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-black text-white mt-3 tracking-tight">
+                🎉 บันทึกการจองสำเร็จแล้ว!
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-lg mx-auto leading-relaxed">
+                ระบบได้ส่งอีเมลสรุปคำขอไปยัง <strong className="text-amber-300">{createdBookings[0]?.userEmail}</strong> และแจ้งเตือนแอดมินเรียบร้อยแล้ว
+              </p>
+            </div>
+
+            {/* 4-Stage Visual Status Timeline Tracker (Admin Email Response Flow) */}
+            <div className="bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 text-left shadow-2xl space-y-6">
+              
+              <div className="border-b border-white/10 pb-4">
+                <h3 className="text-base font-bold text-white flex items-center gap-2">
+                  <Hourglass className="w-4 h-4 text-amber-400 animate-spin" />
+                  <span>ไทม์ไลน์การยืนยันและรับลิงก์ห้องเรียน (Status Timeline)</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  ระบบส่งอีเมลยืนยันผลจากแอดมินโดยตรง เมื่อตรวจสอบสลิปและความถูกต้องแล้ว
+                </p>
+              </div>
+
+              {/* Timeline Steps */}
+              <div className="space-y-4">
+                
+                {/* Stage 1 */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-md">
+                    ✓
+                  </div>
+                  <div className="flex-1">
+                    <strong className="text-xs sm:text-sm font-bold text-white block">
+                      1. บันทึกคำขอจองคอร์สสำเร็จ (Booking Recorded)
+                    </strong>
+                    <span className="text-[11px] text-slate-400 block mt-0.5">
+                      ระบบสร้างรหัสการจอง: {createdBookings.map(b => b.id).join(', ')} และเก็บข้อมูลลงฐานข้อมูลแล้ว
+                    </span>
+                  </div>
+                </div>
+
+                {/* Stage 2 */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-md">
+                    ✓
+                  </div>
+                  <div className="flex-1">
+                    <strong className="text-xs sm:text-sm font-bold text-white block">
+                      2. แนบหลักฐานการชำระเงินเรียบร้อย (Payment Submitted)
+                    </strong>
+                    <span className="text-[11px] text-slate-400 block mt-0.5">
+                      {totalAmount === 0 ? 'สิทธิ์ลงทะเบียนฟรี 100% (ไม่ต้องชำระเงิน)' : 'สลิปโอนเงิน PromptPay ถูกส่งเข้าสู่ระบบการตรวจสอบ'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Stage 3 (Active) */}
+                <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-amber-400/10 border border-amber-400/30">
+                  <div className="w-8 h-8 rounded-full bg-amber-400 text-slate-950 font-black flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-md shadow-amber-400/20">
+                    ⏳
+                  </div>
+                  <div className="flex-1">
+                    <strong className="text-xs sm:text-sm font-bold text-amber-300 block flex items-center gap-1.5">
+                      <span>3. กำลังดำเนินการ: แอดมินกำลังตรวจสอบความถูกต้อง & ยอดเงิน</span>
+                      <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                    </strong>
+                    <span className="text-[11px] text-slate-300 block mt-0.5 leading-relaxed">
+                      แอดมินได้รับแจ้งเตือนทางอีเมลและระบบจัดการหลังบ้านแล้ว (ปกติใช้เวลาประมาณ 15–30 นาที ในเวลาทำการ)
+                    </span>
+                  </div>
+                </div>
+
+                {/* Stage 4 (Next) */}
+                <div className="flex items-start gap-3.5 opacity-80">
+                  <div className="w-8 h-8 rounded-full bg-slate-800 border border-white/10 text-slate-400 font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">
+                    ✉️
+                  </div>
+                  <div className="flex-1">
+                    <strong className="text-xs sm:text-sm font-bold text-slate-300 block">
+                      4. แอดมินส่งอีเมลตอบกลับยืนยันคอร์ส พร้อมลิงก์ห้องเรียนเข้า Inbox ของคุณ
+                    </strong>
+                    <span className="text-[11px] text-slate-400 block mt-0.5">
+                      เมื่อแอดมินกดยืนยัน ระบบจะส่งอีเมลฉบับทางการพร้อมลิงก์ Google Meet / รายละเอียดการเดินทาง และเอกสารเรียน
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Bookings Summary Cards */}
+            <div className="bg-[#0e1828] border border-white/10 rounded-3xl p-6 sm:p-8 text-left shadow-2xl space-y-4">
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider text-amber-400">
+                รายละเอียดคอร์สที่คุณลงทะเบียนไว้:
+              </h3>
+
+              <div className="space-y-3">
+                {createdBookings.map((b, idx) => (
+                  <div key={b.id} className="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-2">
+                      <div>
+                        <span className="text-[10px] font-mono text-amber-400 font-bold">
+                          รหัสการจอง: {b.id}
+                        </span>
+                        <h4 className="text-sm font-bold text-white">
+                          {b.classTitle}
+                        </h4>
+                      </div>
+                      <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/30 self-start sm:self-auto">
+                        {b.amount === 0 ? 'ฟรี 0.-' : `฿${b.amount.toLocaleString()}`}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+                      <div>
+                        <span className="text-slate-500 text-[11px] block">รอบวันเวลา:</span>
+                        <span>{b.date} ({b.timeSlot})</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 text-[11px] block">สถานะปัจจุบัน:</span>
+                        <span className="text-amber-400 font-semibold">
+                          {b.bookingStatus === 'confirmed' ? '✓ ยืนยันแล้ว' : '⏳ รอแอดมินตรวจสอบ'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/5 text-xs text-slate-300 flex items-start gap-3">
+                <Mail className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <p className="leading-relaxed">
+                  หากไม่พบอีเมลในกล่องข้อความหลัก โปรดตรวจสอบในโฟลเดอร์ <strong>Junk / Spam</strong> หรือสามารถดูอัปเดตสถานะแบบเรียลไทม์ได้ที่หน้า <strong>Dashboard</strong> ของคุณตลอดเวลา
+                </p>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+              <Link
+                href="/dashboard"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-lg shadow-amber-400/20 transition text-center"
+              >
+                ดูประวัติการจองใน Dashboard
+              </Link>
+
+              <Link
+                href="/"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs border border-white/10 transition text-center"
+              >
+                กลับสู่หน้าหลัก
+              </Link>
+
+              <a
+                href="https://line.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 font-bold text-xs transition text-center flex items-center justify-center gap-1.5"
+              >
+                <span>สอบถามแอดมินทาง LINE</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+          </div>
+        )}
+
+      </main>
+
     </div>
   );
 }
 
 export default function BookingPage() {
   return (
-    <React.Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 text-amber-400 animate-spin" /></div>}>
+    <React.Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#070d18] text-amber-400">
+        <Loader2 className="w-8 h-8 animate-spin" />
+      </div>
+    }>
       <BookingContent />
     </React.Suspense>
   );
