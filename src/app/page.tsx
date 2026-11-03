@@ -327,6 +327,16 @@ export default function HomePage() {
                               รับ +{c.rewardPoints ?? Math.round(c.price / 10)} แต้ม
                             </span>
                           )}
+                          {(c.videoUrl || (c.lessons && c.lessons.length > 0)) && (
+                            <span className="bg-cyan-500/90 text-slate-950 text-[10px] font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                              🎬 วิดีโอ E-Learning
+                            </span>
+                          )}
+                          {c.certificateEnabled !== false && (
+                            <span className="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-lg">
+                              📜 มีใบประกาศฯ
+                            </span>
+                          )}
                         </div>
                       </div>
 

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
-import { ClassItem, Booking, SystemNotification, User, ClassAttachment, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, Quiz, QuizQuestion, QuizSubmission, DurationUnit, formatClassDuration, isClassFree, CourseLevel, COURSE_LEVELS, getCourseLevelConfig } from '@/lib/types';
+import { ClassItem, Booking, SystemNotification, User, ClassAttachment, Article, PromptTemplate, SiteSettings, McpIntegrationSettings, McpServerConfig, AiConnectorConfig, Quiz, QuizQuestion, QuizSubmission, DurationUnit, formatClassDuration, isClassFree, CourseLevel, COURSE_LEVELS, getCourseLevelConfig, LessonModule, getYouTubeEmbedUrl } from '@/lib/types';
 import { formatGoogleDriveImageUrl, getSafeCourseImageUrl, compressImageFile } from '@/lib/image-utils';
 import { 
   Shield, BookOpen, Calendar, Clock, CheckCircle, XCircle, 
@@ -962,7 +962,14 @@ export default function AdminPage() {
         topics: parsedTopics,
         toolsUsed: parsedTools,
         prerequisites: coursePrereqText.trim(),
-        image: formatGoogleDriveImageUrl(editingClass.image)
+        image: formatGoogleDriveImageUrl(editingClass.image),
+        videoUrl: (editingClass.videoUrl || '').trim(),
+        lessons: Array.isArray(editingClass.lessons) ? editingClass.lessons : [],
+        instructorName: (editingClass.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)').trim(),
+        instructorTitle: (editingClass.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy').trim(),
+        instructorSignature: (editingClass.instructorSignature || '').trim(),
+        certificateEnabled: editingClass.certificateEnabled !== undefined ? Boolean(editingClass.certificateEnabled) : true,
+        passingScorePercent: editingClass.passingScorePercent ? Number(editingClass.passingScorePercent) : 70
       };
 
       const res = await fetch(url, {
@@ -1050,7 +1057,14 @@ export default function AdminPage() {
       isFree: isClassFree(c),
       durationValue: dVal,
       durationUnit: dUnit,
-      rewardPoints: c.rewardPoints ?? Math.round(c.price / 10)
+      rewardPoints: c.rewardPoints ?? Math.round(c.price / 10),
+      videoUrl: c.videoUrl || '',
+      lessons: c.lessons || [],
+      instructorName: c.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+      instructorTitle: c.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy',
+      instructorSignature: c.instructorSignature || '',
+      certificateEnabled: c.certificateEnabled !== undefined ? c.certificateEnabled : true,
+      passingScorePercent: c.passingScorePercent || 70
     });
     setIsClassModalOpen(true);
   };
@@ -1399,11 +1413,11 @@ export default function AdminPage() {
     }
   };
 
-  // Attachments helper (Max 4)
+  // Attachments helper (Up to 12 files)
   const handleAddAttachment = () => {
     const cur = editingClass?.attachments || [];
-    if (cur.length >= 4) {
-      showModal('warning', 'ถึงขีดจำกัด', 'คุณสามารถเพิ่มไฟล์/ลิงก์เอกสารได้สูงสุด 4 รายการ');
+    if (cur.length >= 12) {
+      showModal('warning', 'ถึงขีดจำกัด', 'คุณสามารถเพิ่มไฟล์/ลิงก์เอกสารได้สูงสุด 12 รายการ');
       return;
     }
     const newAtt: ClassAttachment = {
@@ -1429,6 +1443,80 @@ export default function AdminPage() {
       ...editingClass,
       attachments: cur.map(a => a.id === attId ? { ...a, [field]: val } : a)
     });
+  };
+
+  // Lesson Modules helper
+  const handleAddLesson = () => {
+    const cur = editingClass?.lessons || [];
+    const newLesson: LessonModule = {
+      id: `lesson-${Date.now()}`,
+      title: `บทที่ ${cur.length + 1}: `,
+      duration: '15 นาที',
+      videoUrl: '',
+      summary: ''
+    };
+    setEditingClass({ ...editingClass, lessons: [...cur, newLesson] });
+  };
+
+  const handleRemoveLesson = (lessonId: string) => {
+    const cur = editingClass?.lessons || [];
+    setEditingClass({
+      ...editingClass,
+      lessons: cur.filter(l => l.id !== lessonId)
+    });
+  };
+
+  const handleUpdateLesson = (lessonId: string, field: keyof LessonModule, val: string) => {
+    const cur = editingClass?.lessons || [];
+    setEditingClass({
+      ...editingClass,
+      lessons: cur.map(l => l.id === lessonId ? { ...l, [field]: val } : l)
+    });
+  };
+
+  // Instructor Signature Upload
+  const [isUploadingSignature, setIsUploadingSignature] = useState(false);
+
+  const handleUploadSignature = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawFile = e.target.files?.[0];
+    if (!rawFile) return;
+
+    if (!rawFile.type.startsWith('image/')) {
+      showModal('warning', 'ชนิดไฟล์ไม่ถูกต้อง', 'กรุณาเลือกไฟล์รูปภาพลายเซ็นเท่านั้น (PNG, JPG, WebP)');
+      return;
+    }
+
+    setIsUploadingSignature(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = async (uploadEvent) => {
+        const base64 = uploadEvent.target?.result as string;
+        try {
+          const compressed = await compressImageFile(rawFile, 800, 400, 0.9);
+          const formData = new FormData();
+          formData.append('file', compressed);
+          formData.append('folderType', 'course');
+          const res = await fetch('/api/upload', { method: 'POST', body: formData });
+          const data = await res.json();
+          if (data.success && data.data?.directDownloadUrl) {
+            setEditingClass(prev => prev ? ({ ...prev, instructorSignature: data.data.directDownloadUrl }) : prev);
+            showModal('success', 'อัปโหลดรูปลายเซ็นสำเร็จ!', 'บันทึกรูปลายเซ็นสำหรับออกใบประกาศนียบัตรเรียบร้อยแล้ว');
+          } else {
+            setEditingClass(prev => prev ? ({ ...prev, instructorSignature: base64 }) : prev);
+          }
+        } catch {
+          setEditingClass(prev => prev ? ({ ...prev, instructorSignature: base64 }) : prev);
+        } finally {
+          setIsUploadingSignature(false);
+        }
+      };
+      reader.readAsDataURL(rawFile);
+    } catch (err: any) {
+      setIsUploadingSignature(false);
+      showModal('error', 'อัปโหลดไม่สำเร็จ', err.message);
+    } finally {
+      e.target.value = '';
+    }
   };
 
   // Send Direct Email with link
@@ -1700,7 +1788,14 @@ export default function AdminPage() {
                   toolsUsed: ['ChatGPT', 'Grok Bot'],
                   prerequisites: 'แล็ปท็อปพร้อมใช้อินเทอร์เน็ต',
                   image: '/assets/creator-workshop.webp',
-                  attachments: []
+                  attachments: [],
+                  videoUrl: '',
+                  lessons: [],
+                  instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+                  instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+                  instructorSignature: '',
+                  certificateEnabled: true,
+                  passingScorePercent: 70
                 });
                 setCourseTopicsText('');
                 setCourseToolsText('ChatGPT, Grok Bot');
@@ -6867,76 +6962,267 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Attachments Section: Up to 4 files */}
-              <div className="pt-3 border-t border-white/10">
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <FileText className="w-4 h-4 text-amber-400" />
-                    เอกสารประกอบการเรียน / ลิงก์ (PDF, Ebook, Doc, YouTube) สูงสุด 4 ไฟล์
+              {/* ========================================================================= */}
+              {/* SECTION: E-LEARNING วิดีโอหลัก & ลิงก์ YOUTUBE */}
+              {/* ========================================================================= */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-emerald-500/30 space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
+                      <Play className="w-4 h-4 text-emerald-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white">🎬 ระบบ E-Learning: วิดีโอบทเรียน & YouTube</h4>
+                      <p className="text-[11px] text-slate-400">ใส่ลิงก์ YouTube หรือวิดีโอ MP4 ให้ผู้เรียนเปิดรับชมเรียนรู้ได้ทันที</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    E-Learning Enabled
+                  </span>
+                </div>
+
+                {/* Main Course Video URL */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-semibold text-emerald-300">
+                    ▶️ ลิงก์วิดีโอหลัก (Main YouTube / Video URL)
                   </label>
-                  {(editingClass.attachments?.length || 0) < 4 && (
+                  <input
+                    type="url"
+                    value={editingClass.videoUrl || ''}
+                    onChange={e => setEditingClass({ ...editingClass, videoUrl: e.target.value })}
+                    placeholder="https://www.youtube.com/watch?v=... หรือ https://youtu.be/... หรือ https://...mp4"
+                    className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-400 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono"
+                  />
+                  <p className="text-[10px] text-slate-400">
+                    💡 รองรับ YouTube ทุกรูปแบบ (youtube.com/watch, youtu.be, embed) และวิดีโอ MP4 ตรง
+                  </p>
+
+                  {/* Video Live Preview */}
+                  {editingClass.videoUrl && (
+                    <div className="mt-3 p-3 rounded-2xl bg-slate-950/80 border border-emerald-500/20 space-y-2">
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="font-bold text-emerald-400 flex items-center gap-1.5">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>ตัวอย่างวิดีโอที่ผู้เรียนจะเห็น (Live Player Preview):</span>
+                        </span>
+                        <a
+                          href={editingClass.videoUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-slate-400 hover:text-white flex items-center gap-1 underline"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          <span>เปิดลิงก์</span>
+                        </a>
+                      </div>
+
+                      {(() => {
+                        const embedUrl = getYouTubeEmbedUrl(editingClass.videoUrl);
+                        if (embedUrl) {
+                          return (
+                            <div className="aspect-video w-full rounded-xl overflow-hidden bg-black border border-white/10 shadow-lg">
+                              <iframe
+                                src={embedUrl}
+                                title="YouTube Course Preview"
+                                className="w-full h-full border-0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              />
+                            </div>
+                          );
+                        }
+                        return (
+                          <div className="aspect-video w-full rounded-xl overflow-hidden bg-black border border-white/10 flex items-center justify-center">
+                            <video
+                              src={editingClass.videoUrl}
+                              controls
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                </div>
+
+                {/* Sub-Lessons / Modules List */}
+                <div className="pt-3 border-t border-white/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-xs font-bold text-white block">
+                        📑 บทเรียนย่อยตามตอน (Lesson Modules)
+                      </span>
+                      <span className="text-[10px] text-slate-400">
+                        แยกบทเรียนเป็นตอนๆ พร้อมระบุความยาวและคลิปย่อย (มี {(editingClass.lessons || []).length} บทเรียน)
+                      </span>
+                    </div>
                     <button
                       type="button"
-                      onClick={handleAddAttachment}
-                      className="px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-400 hover:bg-amber-400/30 text-[11px] font-semibold flex items-center gap-1"
+                      onClick={handleAddLesson}
+                      className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold flex items-center gap-1.5 transition cursor-pointer"
                     >
-                      <Plus className="w-3 h-3" />
-                      เพิ่มไฟล์ / ลิงก์
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>เพิ่มบทเรียนย่อย</span>
                     </button>
-                  )}
+                  </div>
+
+                  <div className="space-y-3">
+                    {(editingClass.lessons || []).map((les, idx) => (
+                      <div key={les.id} className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5">
+                            <span className="w-5 h-5 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-[10px] font-black">
+                              {idx + 1}
+                            </span>
+                            <span>บทเรียนที่ {idx + 1}</span>
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveLesson(les.id)}
+                            className="text-rose-400 hover:text-rose-300 text-[11px] transition cursor-pointer"
+                          >
+                            ลบบทนี้
+                          </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+                          <div className="sm:col-span-2">
+                            <label className="block text-[10px] text-slate-400 mb-0.5">ชื่อบทเรียน *</label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="เช่น บทที่ 1: ติดตั้งและตั้งค่าเริ่มต้น AI Tool"
+                              value={les.title}
+                              onChange={e => handleUpdateLesson(les.id, 'title', e.target.value)}
+                              className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-[10px] text-slate-400 mb-0.5">ระยะเวลา</label>
+                            <input
+                              type="text"
+                              placeholder="เช่น 15 นาที หรือ 12:30"
+                              value={les.duration || ''}
+                              onChange={e => handleUpdateLesson(les.id, 'duration', e.target.value)}
+                              className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                            />
+                          </div>
+
+                          <div className="sm:col-span-3">
+                            <label className="block text-[10px] text-slate-400 mb-0.5">ลิงก์คลิปวิดีโอ / YouTube ของบทนี้</label>
+                            <input
+                              type="url"
+                              placeholder="https://youtu.be/... หรือ https://youtube.com/watch?v=..."
+                              value={les.videoUrl}
+                              onChange={e => handleUpdateLesson(les.id, 'videoUrl', e.target.value)}
+                              className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                            />
+                          </div>
+
+                          <div className="sm:col-span-3">
+                            <label className="block text-[10px] text-slate-400 mb-0.5">สรุปเนื้อหาสำคัญของบทนี้ (Summary)</label>
+                            <input
+                              type="text"
+                              placeholder="เช่น เรียนรู้การเขียน Prompt โครงสร้างหลัก และข้อควรระวัง"
+                              value={les.summary || ''}
+                              onChange={e => handleUpdateLesson(les.id, 'summary', e.target.value)}
+                              className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                    {(!editingClass.lessons || editingClass.lessons.length === 0) && (
+                      <div className="p-3.5 rounded-xl border border-dashed border-slate-800 text-center text-xs text-slate-500">
+                        ยังไม่มีบทเรียนย่อย สามารถกด "เพิ่มบทเรียนย่อย" เพื่อแบ่งหัวข้อการเรียนเป็นตอนๆ ได้
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* ========================================================================= */}
+              {/* SECTION: เอกสารประกอบการเรียน / ลิงก์ดาวน์โหลด */}
+              {/* ========================================================================= */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-amber-500/30 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
+                      <FileText className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white">📁 เอกสารประกอบการเรียน / สไลด์ / ไฟล์แนบ</h4>
+                      <p className="text-[11px] text-slate-400">แนบไฟล์ PDF, E-Book, Doc, สไลด์บรรยาย หรือลิงก์ Google Drive ให้ผู้เรียนดาวน์โหลด</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleAddAttachment}
+                    className="px-3 py-1.5 rounded-xl bg-amber-400/20 text-amber-400 hover:bg-amber-400/30 border border-amber-400/30 text-[11px] font-bold flex items-center gap-1 transition cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>เพิ่มเอกสาร</span>
+                  </button>
                 </div>
 
                 <div className="space-y-2.5">
                   {(editingClass.attachments || []).map((att, idx) => (
-                    <div key={att.id} className="p-3 rounded-xl bg-slate-900 border border-slate-700 space-y-2">
+                    <div key={att.id} className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-semibold text-amber-400">ไฟล์ #{idx + 1}</span>
+                        <span className="font-bold text-amber-400 flex items-center gap-1.5">
+                          <span className="w-5 h-5 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center text-[10px] font-black">
+                            {idx + 1}
+                          </span>
+                          <span>เอกสาร #{idx + 1}</span>
+                        </span>
                         <button
                           type="button"
                           onClick={() => handleRemoveAttachment(att.id)}
-                          className="text-rose-400 hover:text-rose-300 text-[10px]"
+                          className="text-rose-400 hover:text-rose-300 text-[11px] transition cursor-pointer"
                         >
                           ลบรายการนี้
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         <div>
-                          <label className="block text-[10px] text-slate-400 mb-0.5">ประเภทไฟล์ / สื่อ</label>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">ประเภทเอกสาร</label>
                           <select
                             value={att.type}
                             onChange={e => handleUpdateAttachment(att.id, 'type', e.target.value as any)}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white"
                           >
                             <option value="pdf">📄 เอกสาร PDF</option>
-                            <option value="doc">📝 เอกสาร Word / Doc</option>
-                            <option value="ebook">📚 Ebook / สไลด์</option>
-                            <option value="youtube">▶️ ลิงก์ YouTube</option>
+                            <option value="doc">📝 เอกสาร Word / Docs</option>
+                            <option value="ebook">📚 Ebook / สไลด์ประกอบ</option>
+                            <option value="youtube">▶️ ลิงก์ YouTube เสริม</option>
                             <option value="link">🔗 ลิงก์ดาวน์โหลดทั่วไป</option>
                           </select>
                         </div>
 
                         <div>
-                          <label className="block text-[10px] text-slate-400 mb-0.5">ชื่อเอกสาร / วิดีโอ</label>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">ชื่อเอกสาร *</label>
                           <input
                             type="text"
                             required
-                            placeholder="เช่น คู่มือ Prompt Engineering PDF"
+                            placeholder="เช่น คู่มือ Master Prompt PDF หรือ สไลด์คลาสเรียน"
                             value={att.name}
                             onChange={e => handleUpdateAttachment(att.id, 'name', e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-[10px] text-slate-400 mb-0.5">URL ไฟล์ / ลิงก์ YouTube</label>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">URL ไฟล์ / ลิงก์ดาวน์โหลด *</label>
                           <input
                             type="url"
                             required
-                            placeholder="https://... หรือ https://youtube.com/..."
+                            placeholder="https://drive.google.com/... หรือ https://..."
                             value={att.url}
                             onChange={e => handleUpdateAttachment(att.id, 'url', e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
                           />
                         </div>
                       </div>
@@ -6944,10 +7230,245 @@ export default function AdminPage() {
                   ))}
 
                   {(!editingClass.attachments || editingClass.attachments.length === 0) && (
-                    <div className="p-4 rounded-xl border border-dashed border-slate-700 text-center text-xs text-slate-400">
-                      ยังไม่มีไฟล์หรือสื่อประกอบคลาส กด "เพิ่มไฟล์ / ลิงก์" เพื่อแนบเอกสาร (PDF, Ebook, Doc, หรือ YouTube)
+                    <div className="p-3.5 rounded-xl border border-dashed border-slate-800 text-center text-xs text-slate-500">
+                      ยังไม่มีไฟล์เอกสารประกอบ กด "เพิ่มเอกสาร" เพื่อแนบเอกสาร PDF, สไลด์, หรือลิงก์ Drive
                     </div>
                   )}
+                </div>
+              </div>
+
+              {/* ========================================================================= */}
+              {/* SECTION: เกณฑ์คะแนนและแต้มสะสมเมื่อเรียนจบ */}
+              {/* ========================================================================= */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-purple-500/30 space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
+                      <Award className="w-4 h-4 text-purple-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white">🏆 คะแนนการเรียน & เกณฑ์สอบผ่าน (Passing Criteria)</h4>
+                      <p className="text-[11px] text-slate-400">กำหนดแต้มสะสมและเกณฑ์คะแนนสอบสำหรับผู้เรียนเมื่อจบคอร์ส</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                    Grading & Points
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-1.5">
+                    <label className="block text-xs font-semibold text-purple-300 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                      <span>แต้มสะสมเมื่อเรียนจบ (Reward Points):</span>
+                    </label>
+                    <input
+                      type="number"
+                      min={0}
+                      value={editingClass.rewardPoints !== undefined ? editingClass.rewardPoints : 50}
+                      onChange={e => setEditingClass({ ...editingClass, rewardPoints: Number(e.target.value) })}
+                      placeholder="50"
+                      className="w-full bg-slate-900 border border-slate-700 focus:border-purple-400 rounded-xl px-3.5 py-2 text-xs text-white font-mono font-bold"
+                    />
+                    <p className="text-[10px] text-slate-400">
+                      ผู้เรียนจะได้รับแต้มนี้เข้าบัญชีสมาชิกทันทีเมื่อเรียนจบหรือทำแบบทดสอบผ่าน
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-1.5">
+                    <label className="block text-xs font-semibold text-purple-300 flex items-center gap-1.5">
+                      <GraduationCap className="w-3.5 h-3.5 text-purple-400" />
+                      <span>เกณฑ์คะแนนสอบผ่าน (Passing Score %):</span>
+                    </label>
+                    <input
+                      type="number"
+                      min={0}
+                      max={100}
+                      value={editingClass.passingScorePercent !== undefined ? editingClass.passingScorePercent : 70}
+                      onChange={e => setEditingClass({ ...editingClass, passingScorePercent: Number(e.target.value) })}
+                      placeholder="70"
+                      className="w-full bg-slate-900 border border-slate-700 focus:border-purple-400 rounded-xl px-3.5 py-2 text-xs text-white font-mono font-bold"
+                    />
+                    <p className="text-[10px] text-slate-400">
+                      เกณฑ์ขั้นต่ำในการผ่านเพื่อรับใบประกาศนียบัตร (ค่าแนะนำ 70% ขึ้นไป)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ========================================================================= */}
+              {/* SECTION: ผู้สอน และ ใบประกาศนียบัตร (Certificate of Completion) */}
+              {/* ========================================================================= */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-amber-500/40 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
+                      <GraduationCap className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white">📜 ผู้ออกใบประกาศนียบัตร & ลายเซ็นผู้สอน</h4>
+                      <p className="text-[11px] text-slate-400">ระบุชื่อ นามสกุล ตำแหน่ง และรูปลายเซ็นผู้สอนที่จะประทับลงบนใบประกาศนียบัตร</p>
+                    </div>
+                  </div>
+
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={editingClass.certificateEnabled !== false}
+                      onChange={e => setEditingClass({ ...editingClass, certificateEnabled: e.target.checked })}
+                      className="w-4 h-4 rounded text-amber-400 focus:ring-amber-400 bg-slate-950 border-slate-700"
+                    />
+                    <span className="text-xs font-bold text-amber-300">เปิดออกใบประกาศฯ</span>
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      ชื่อ-นามสกุล ผู้สอน / ผู้ออกใบประกาศ *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={editingClass.instructorName || ''}
+                      onChange={e => setEditingClass({ ...editingClass, instructorName: e.target.value })}
+                      placeholder="เช่น อาจารย์ สรเชษฐ์ (อ. เควิน)"
+                      className="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white font-medium"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      ตำแหน่งทางวิชาการ / ตำแหน่งสถาบัน
+                    </label>
+                    <input
+                      type="text"
+                      value={editingClass.instructorTitle || ''}
+                      onChange={e => setEditingClass({ ...editingClass, instructorTitle: e.target.value })}
+                      placeholder="เช่น Founder & Lead AI Instructor, Kevin AI Academy"
+                      className="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                {/* Signature Image Section */}
+                <div className="bg-slate-950 p-4 rounded-2xl border border-white/10 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                      <Edit3 className="w-3.5 h-3.5 text-amber-400" />
+                      <span>รูปลายเซ็นผู้สอน (Instructor Signature Image)</span>
+                    </span>
+                    <span className="text-[10px] text-slate-400">แนะนำไฟล์ PNG พื้นหลังโปร่งใส (Transparent)</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
+                    <div className="sm:col-span-2 space-y-2">
+                      <input
+                        type="url"
+                        value={editingClass.instructorSignature || ''}
+                        onChange={e => setEditingClass({ ...editingClass, instructorSignature: e.target.value })}
+                        placeholder="https://... ลิงก์รูปลายเซ็น หรือกดอัปโหลดไฟล์จากเครื่อง"
+                        className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white font-mono"
+                      />
+
+                      <div className="flex items-center gap-2">
+                        <label className="px-3 py-1.5 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/30 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition">
+                          <Upload className="w-3.5 h-3.5 text-amber-400" />
+                          <span>{isUploadingSignature ? 'กำลังอัปโหลด...' : 'อัปโหลดรูปลายเซ็น (PNG/JPG)'}</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            disabled={isUploadingSignature}
+                            onChange={handleUploadSignature}
+                            className="hidden"
+                          />
+                        </label>
+                        {editingClass.instructorSignature && (
+                          <button
+                            type="button"
+                            onClick={() => setEditingClass({ ...editingClass, instructorSignature: '' })}
+                            className="text-rose-400 hover:text-rose-300 text-xs transition cursor-pointer"
+                          >
+                            ลบลายเซ็น
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Signature Preview */}
+                    <div className="h-20 rounded-xl bg-slate-900/90 border border-dashed border-slate-700 flex items-center justify-center p-2 relative overflow-hidden">
+                      {editingClass.instructorSignature ? (
+                        <img
+                          src={editingClass.instructorSignature}
+                          alt="Signature Preview"
+                          className="max-h-full max-w-full object-contain filter invert drop-shadow"
+                        />
+                      ) : (
+                        <span className="text-[11px] text-slate-500 italic">ยังไม่มีรูปลายเซ็น</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Live Certificate Preview Mockup */}
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-950/20 via-slate-950 to-slate-950 border border-amber-500/30 space-y-3">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-amber-300 flex items-center gap-1.5">
+                      <Award className="w-3.5 h-3.5 text-amber-400" />
+                      <span>ตัวอย่างใบประกาศนียบัตรเมื่อผู้เรียนสำเร็จการศึกษา (Certificate Preview):</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-amber-400/80 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                      CERT-KEVIN-AI-2026
+                    </span>
+                  </div>
+
+                  <div className="p-5 sm:p-6 rounded-2xl bg-[#0d131f] border-2 border-amber-400/40 shadow-xl text-center space-y-3 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl" />
+                    <div className="text-[10px] tracking-widest uppercase font-mono text-amber-400/80 font-bold">
+                      KEVIN AI ACADEMY · BANGKOK, THAILAND
+                    </div>
+                    <h3 className="text-base sm:text-lg font-black text-white tracking-wide">
+                      CERTIFICATE OF COMPLETION
+                    </h3>
+                    <p className="text-[11px] text-slate-400">
+                      ใบประกาศนียบัตรฉบับนี้รับรองว่า
+                    </p>
+                    <div className="text-base sm:text-xl font-bold text-amber-300 border-b border-amber-400/30 pb-1.5 inline-block min-w-[200px]">
+                      คุณสมชาย นักเรียนตัวอย่าง AI
+                    </div>
+                    <p className="text-[11px] text-slate-300">
+                      ได้สำเร็จหลักสูตรการอบรมและการทดสอบประเมินผลระดับมืออาชีพ
+                    </p>
+                    <div className="text-xs sm:text-sm font-bold text-white bg-slate-900/80 py-1 px-3 rounded-lg border border-white/10 inline-block">
+                      {editingClass.title || 'ชื่อคลาสเรียน'}
+                    </div>
+
+                    {/* Bottom Signature Row */}
+                    <div className="pt-4 flex items-end justify-between border-t border-white/10 mt-3 text-[11px]">
+                      <div className="text-left text-slate-400 text-[10px]">
+                        <div>วันที่ออกใบประกาศฯ: {new Date().toLocaleDateString('th-TH')}</div>
+                        <div className="font-mono text-amber-400/80">เกณฑ์คะแนน: ผ่านการประเมิน {editingClass.passingScorePercent || 70}%+</div>
+                      </div>
+
+                      <div className="text-right flex flex-col items-end">
+                        <div className="h-10 mb-1 flex items-end justify-end">
+                          {editingClass.instructorSignature ? (
+                            <img
+                              src={editingClass.instructorSignature}
+                              alt="Instructor Signature"
+                              className="max-h-10 object-contain filter invert"
+                            />
+                          ) : (
+                            <span className="font-serif italic text-amber-300 text-sm border-b border-amber-400/40 px-3">
+                              {editingClass.instructorName || 'อ. เควิน'}
+                            </span>
+                          )}
+                        </div>
+                        <div className="font-bold text-white text-xs">{editingClass.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)'}</div>
+                        <div className="text-[10px] text-slate-400">{editingClass.instructorTitle || 'Founder & Lead AI Instructor'}</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 

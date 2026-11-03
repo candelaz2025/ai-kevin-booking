@@ -39,7 +39,29 @@ export const INITIAL_CLASSES: ClassItem[] = [
     toolsUsed: ['ChatGPT', 'Meta AI', 'Grok AI', 'Grok Bot', 'Notion'],
     prerequisites: 'นำแล็ปท็อป (Notebook) มาใช้ฝึกปฏิบัติจริงตลอดคลาส',
     image: '/assets/ai-content-workshop.avif',
-    featured: true
+    featured: true,
+    videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+    lessons: [
+      {
+        id: 'les-1',
+        title: 'บทที่ 1: วางโครงสร้าง AI Content Machine ด้วย ChatGPT & Notion',
+        duration: '18 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ปูพื้นฐานการเขียน Prompt สั่ง AI ออกแบบสคริปต์วิดีโอสั้น'
+      },
+      {
+        id: 'les-2',
+        title: 'บทที่ 2: สร้างวิดีโอ Storyboard และพากย์เสียงด้วย Grok & AI Voice',
+        duration: '22 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=aircAruvnKk',
+        summary: 'ต่อยอดสคริปต์ให้กลายเป็นคลิปจริงพร้อมมุมกล้องระดับมืออาชีพ'
+      }
+    ],
+    instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+    instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorSignature: '',
+    certificateEnabled: true,
+    passingScorePercent: 70
   },
   {
     id: 'ai-private-1on1-online',
@@ -78,7 +100,22 @@ export const INITIAL_CLASSES: ClassItem[] = [
     toolsUsed: ['Claude 3.7', 'GPT-4o', 'n8n', 'Notion API', 'Grok Bot'],
     prerequisites: 'คอมพิวเตอร์พร้อมอินเทอร์เน็ต และบัญชี AI Tools พื้นฐาน',
     image: '/assets/creator-workshop.webp',
-    featured: true
+    featured: true,
+    videoUrl: 'https://www.youtube.com/watch?v=aircAruvnKk',
+    lessons: [
+      {
+        id: 'les-p1',
+        title: 'Session 1: Architecture Design for Autonomous AI Agents',
+        duration: '35 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=aircAruvnKk',
+        summary: 'ออกแบบสถาปัตยกรรม AI Agent ให้ทำงานอัตโนมัติแบบ Multi-Agent'
+      }
+    ],
+    instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+    instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorSignature: '',
+    certificateEnabled: true,
+    passingScorePercent: 80
   },
   {
     id: 'ai-creator-intensive-online',
@@ -112,7 +149,22 @@ export const INITIAL_CLASSES: ClassItem[] = [
     toolsUsed: ['ChatGPT', 'Midjourney / Flux', 'ElevenLabs', 'CapCut AI'],
     prerequisites: 'คอมพิวเตอร์หรือแท็บเล็ตสำหรับเข้าร่วมห้องเรียนออนไลน์',
     image: '/assets/creator-workshop.webp',
-    featured: false
+    featured: false,
+    videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+    lessons: [
+      {
+        id: 'les-c1',
+        title: 'Masterclass: Fast Content Production with AI',
+        duration: '20 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ขั้นตอนการผลิตสื่อไวรัลด้วย AI ตั้งแต่ไอเดียจนถึงวิดีโอสมบูรณ์'
+      }
+    ],
+    instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+    instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorSignature: '',
+    certificateEnabled: true,
+    passingScorePercent: 70
   }
 ];
 
@@ -221,6 +273,97 @@ function mapDbClass(row: any): ClassItem {
     } catch {}
   }
 
+  // Parse videoUrl tag: <!--videoUrl:...-->
+  let videoUrl: string | undefined = row.video_url || undefined;
+  if (cleanPrerequisites.includes('<!--videoUrl:')) {
+    const vParts = cleanPrerequisites.split('<!--videoUrl:');
+    cleanPrerequisites = vParts[0];
+    try {
+      videoUrl = decodeURIComponent(vParts[1].split('-->')[0].trim());
+    } catch {
+      videoUrl = vParts[1].split('-->')[0].trim();
+    }
+  }
+
+  // Parse lessons tag: <!--lessons:...-->
+  let lessons: any[] = Array.isArray(row.lessons) ? row.lessons : [];
+  if (cleanPrerequisites.includes('<!--lessons:')) {
+    const lesParts = cleanPrerequisites.split('<!--lessons:');
+    cleanPrerequisites = lesParts[0];
+    try {
+      const lesRaw = lesParts[1].split('-->')[0].trim();
+      const decodedLes = decodeURIComponent(lesRaw);
+      lessons = JSON.parse(decodedLes);
+    } catch {
+      try {
+        lessons = JSON.parse(lesParts[1].split('-->')[0].trim());
+      } catch {}
+    }
+  }
+
+  // Parse instructorName tag: <!--instName:...-->
+  let instructorName: string | undefined = row.instructor_name || undefined;
+  if (cleanPrerequisites.includes('<!--instName:')) {
+    const inParts = cleanPrerequisites.split('<!--instName:');
+    cleanPrerequisites = inParts[0];
+    try {
+      instructorName = decodeURIComponent(inParts[1].split('-->')[0].trim());
+    } catch {
+      instructorName = inParts[1].split('-->')[0].trim();
+    }
+  }
+  if (!instructorName) {
+    instructorName = 'อาจารย์ สรเชษฐ์ (อ. เควิน)';
+  }
+
+  // Parse instructorTitle tag: <!--instTitle:...-->
+  let instructorTitle: string | undefined = row.instructor_title || undefined;
+  if (cleanPrerequisites.includes('<!--instTitle:')) {
+    const itParts = cleanPrerequisites.split('<!--instTitle:');
+    cleanPrerequisites = itParts[0];
+    try {
+      instructorTitle = decodeURIComponent(itParts[1].split('-->')[0].trim());
+    } catch {
+      instructorTitle = itParts[1].split('-->')[0].trim();
+    }
+  }
+  if (!instructorTitle) {
+    instructorTitle = 'Founder & Lead AI Instructor, Kevin AI Academy';
+  }
+
+  // Parse instructorSignature tag: <!--instSig:...-->
+  let instructorSignature: string | undefined = row.instructor_signature || undefined;
+  if (cleanPrerequisites.includes('<!--instSig:')) {
+    const isParts = cleanPrerequisites.split('<!--instSig:');
+    cleanPrerequisites = isParts[0];
+    try {
+      instructorSignature = decodeURIComponent(isParts[1].split('-->')[0].trim());
+    } catch {
+      instructorSignature = isParts[1].split('-->')[0].trim();
+    }
+  }
+
+  // Parse certificateEnabled tag: <!--certEnabled:...-->
+  let certificateEnabled: boolean = row.certificate_enabled !== undefined ? Boolean(row.certificate_enabled) : true;
+  if (cleanPrerequisites.includes('<!--certEnabled:')) {
+    const ceParts = cleanPrerequisites.split('<!--certEnabled:');
+    cleanPrerequisites = ceParts[0];
+    try {
+      certificateEnabled = ceParts[1].split('-->')[0].trim() !== 'false';
+    } catch {}
+  }
+
+  // Parse passingScore tag: <!--passScore:...-->
+  let passingScorePercent: number = row.passing_score_percent ? Number(row.passing_score_percent) : 70;
+  if (cleanPrerequisites.includes('<!--passScore:')) {
+    const psParts = cleanPrerequisites.split('<!--passScore:');
+    cleanPrerequisites = psParts[0];
+    try {
+      const parsedScore = Number(psParts[1].split('-->')[0].trim());
+      if (!isNaN(parsedScore) && parsedScore > 0) passingScorePercent = parsedScore;
+    } catch {}
+  }
+
   return {
     id: row.id,
     title: row.title,
@@ -246,7 +389,14 @@ function mapDbClass(row: any): ClassItem {
     featured: Boolean(row.featured),
     attachments: Array.isArray(row.attachments) && row.attachments.length > 0
       ? row.attachments
-      : parsedAttachments
+      : parsedAttachments,
+    videoUrl,
+    lessons,
+    instructorName,
+    instructorTitle,
+    instructorSignature,
+    certificateEnabled,
+    passingScorePercent
   };
 }
 
@@ -342,7 +492,14 @@ export async function saveClass(item: ClassItem): Promise<ClassItem> {
   const attPart = item.attachments && item.attachments.length > 0
     ? `<!--attachments:${JSON.stringify(item.attachments)}-->`
     : '';
-  const encodedPrereq = `${rawPrereq}${pointsPart}${durationPart}${isFreePart}${levelPart}${attPart}`;
+  const videoPart = item.videoUrl ? `<!--videoUrl:${encodeURIComponent(item.videoUrl)}-->` : '';
+  const lessonsPart = item.lessons && item.lessons.length > 0 ? `<!--lessons:${encodeURIComponent(JSON.stringify(item.lessons))}-->` : '';
+  const instNamePart = item.instructorName ? `<!--instName:${encodeURIComponent(item.instructorName)}-->` : '';
+  const instTitlePart = item.instructorTitle ? `<!--instTitle:${encodeURIComponent(item.instructorTitle)}-->` : '';
+  const instSigPart = item.instructorSignature ? `<!--instSig:${encodeURIComponent(item.instructorSignature)}-->` : '';
+  const certPart = item.certificateEnabled !== undefined ? `<!--certEnabled:${item.certificateEnabled}-->` : '';
+  const passPart = item.passingScorePercent !== undefined ? `<!--passScore:${item.passingScorePercent}-->` : '';
+  const encodedPrereq = `${rawPrereq}${pointsPart}${durationPart}${isFreePart}${levelPart}${attPart}${videoPart}${lessonsPart}${instNamePart}${instTitlePart}${instSigPart}${certPart}${passPart}`;
 
   if (isSupabaseConfigured && supabase) {
     try {
@@ -383,7 +540,14 @@ export async function saveClass(item: ClassItem): Promise<ClassItem> {
     durationMinutes,
     durationValue,
     durationUnit,
-    rewardPoints: item.rewardPoints !== undefined ? Number(item.rewardPoints) : Math.round(price / 10)
+    rewardPoints: item.rewardPoints !== undefined ? Number(item.rewardPoints) : Math.round(price / 10),
+    videoUrl: item.videoUrl,
+    lessons: item.lessons || [],
+    instructorName: item.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+    instructorTitle: item.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorSignature: item.instructorSignature,
+    certificateEnabled: item.certificateEnabled !== undefined ? item.certificateEnabled : true,
+    passingScorePercent: item.passingScorePercent || 70
   };
   const index = global.__app_classes.findIndex(c => c.id === item.id);
   if (index >= 0) {

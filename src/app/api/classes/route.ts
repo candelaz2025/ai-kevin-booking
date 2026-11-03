@@ -88,7 +88,14 @@ export async function POST(req: Request) {
       prerequisites: body.prerequisites ? String(body.prerequisites).trim() : '',
       image: classImage,
       featured: Boolean(body.featured),
-      attachments: Array.isArray(body.attachments) ? body.attachments : []
+      attachments: Array.isArray(body.attachments) ? body.attachments : [],
+      videoUrl: body.videoUrl ? String(body.videoUrl).trim() : '',
+      lessons: Array.isArray(body.lessons) ? body.lessons : [],
+      instructorName: body.instructorName ? String(body.instructorName).trim() : 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+      instructorTitle: body.instructorTitle ? String(body.instructorTitle).trim() : 'Founder & Lead AI Instructor, Kevin AI Academy',
+      instructorSignature: body.instructorSignature ? String(body.instructorSignature).trim() : '',
+      certificateEnabled: body.certificateEnabled !== undefined ? Boolean(body.certificateEnabled) : true,
+      passingScorePercent: body.passingScorePercent ? Number(body.passingScorePercent) : 70
     };
 
     const saved = await saveClass(newClass);

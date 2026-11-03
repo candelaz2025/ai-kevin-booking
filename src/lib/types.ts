@@ -58,6 +58,15 @@ export function getCourseLevelConfig(level?: string | CourseLevel | null): Cours
   return COURSE_LEVELS.beginner;
 }
 
+export interface LessonModule {
+  id: string;
+  title: string;
+  duration?: string; // e.g. "15 นาที", "25:00"
+  videoUrl: string; // YouTube link, Google Drive video, or direct MP4 link
+  summary?: string;
+  order?: number;
+}
+
 export interface ClassItem {
   id: string;
   title: string;
@@ -82,11 +91,29 @@ export interface ClassItem {
   image: string;
   featured?: boolean;
   attachments?: ClassAttachment[]; // Max 4 items (PDF, doc, ebook, link, youtube)
+  // E-Learning Video, Instructor & Certificate extensions
+  videoUrl?: string; // ลิงก์วิดีโอหลัก หรือ YouTube E-Learning ของคอร์ส
+  lessons?: LessonModule[]; // รายการบทเรียนวิดีโอย่อย (E-Learning Modules)
+  instructorName?: string; // ชื่อ-นามสกุล ผู้สอน / ผู้ออกใบประกาศนียบัตร (e.g. อาจารย์ สรเชษฐ์ (อ. เควิน))
+  instructorTitle?: string; // ตำแหน่งผู้สอน (e.g. Founder & Lead AI Instructor, Kevin AI Academy)
+  instructorSignature?: string; // รูปลายเซ็นผู้สอน (URL รูปภาพ หรือ Base64)
+  certificateEnabled?: boolean; // เปิดใช้งานระบบออกใบประกาศนียบัตรเมื่อเรียนจบ
+  passingScorePercent?: number; // คะแนนสอบผ่านขั้นต่ำ (เช่น 70%)
 }
 
 /**
  * ฟังก์ชันช่วยแปลงและจัดรูปแบบระยะเวลาเรียนให้สวยงาม รองรับ ชม. / นาที / วัน
  */
+export function getYouTubeEmbedUrl(url?: string): string | null {
+  if (!url) return null;
+  const trimmed = url.trim();
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = trimmed.match(regExp);
+  if (match && match[2].length === 11) {
+    return `https://www.youtube.com/embed/${match[2]}`;
+  }
+  return null;
+}
 export function formatClassDuration(cls: { durationMinutes?: number; durationValue?: number; durationUnit?: DurationUnit } | null | undefined): string {
   if (!cls) return '0 นาที';
   if (cls.durationValue && cls.durationUnit) {
@@ -416,5 +443,22 @@ export interface QuizSubmission {
   submittedAt: string;
   emailSent?: boolean;
 }
+
+export interface CourseCertificate {
+  id: string; // e.g. CERT-2026-XXXXX
+  userId: string;
+  userName: string;
+  userEmail: string;
+  classId: string;
+  classTitle: string;
+  instructorName: string;
+  instructorTitle?: string;
+  instructorSignature?: string;
+  score?: number;
+  scorePercent?: number;
+  rewardPointsEarned?: number;
+  issuedAt: string;
+}
+
 
 
