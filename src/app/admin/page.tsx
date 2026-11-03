@@ -986,7 +986,7 @@ export default function AdminPage() {
         videoUrl: (editingClass.videoUrl || '').trim(),
         lessons: Array.isArray(editingClass.lessons) ? editingClass.lessons : [],
         instructorName: (editingClass.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)').trim(),
-        instructorTitle: (editingClass.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy').trim(),
+        instructorTitle: (editingClass.instructorTitle || 'Founder & Lead AI Instructor, kevinaiagent.tech').trim(),
         instructorSignature: (editingClass.instructorSignature || '').trim(),
         certificateEnabled: editingClass.certificateEnabled !== undefined ? Boolean(editingClass.certificateEnabled) : true,
         passingScorePercent: editingClass.passingScorePercent ? Number(editingClass.passingScorePercent) : 70
@@ -1081,7 +1081,7 @@ export default function AdminPage() {
       videoUrl: c.videoUrl || '',
       lessons: c.lessons || [],
       instructorName: c.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-      instructorTitle: c.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy',
+      instructorTitle: c.instructorTitle || 'Founder & Lead AI Instructor, kevinaiagent.tech',
       instructorSignature: c.instructorSignature || '',
       certificateEnabled: c.certificateEnabled !== undefined ? c.certificateEnabled : true,
       passingScorePercent: c.passingScorePercent || 70
@@ -1665,7 +1665,7 @@ export default function AdminPage() {
             <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-lg shadow-amber-400/25 border border-amber-400/40 shrink-0 bg-amber-400/10">
               <img
                 src="/assets/logo.png"
-                alt="Kevin AI Academy Logo"
+                alt="kevinaiagent.tech Logo"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -1813,7 +1813,7 @@ export default function AdminPage() {
                   videoUrl: '',
                   lessons: [],
                   instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-                  instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+                  instructorTitle: 'Founder & Lead AI Instructor, kevinaiagent.tech',
                   instructorSignature: '',
                   certificateEnabled: true,
                   passingScorePercent: 70
@@ -4509,7 +4509,7 @@ export default function AdminPage() {
                   <span className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
                     <Server className="w-4 h-4" />
                   </span>
-                  <h3 className="text-base font-bold text-white">Kevin AI Academy Official MCP Server</h3>
+                  <h3 className="text-base font-bold text-white">kevinaiagent.tech Official MCP Server</h3>
                   <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                     Live Native Endpoint
@@ -4761,7 +4761,7 @@ export default function AdminPage() {
                 {
                   id: 'academy-live',
                   title: 'Kevin Academy Core (Live Server)',
-                  desc: 'SSE Transport เชื่อมต่อตรงกับระบบ Production ของ Kevin AI Academy',
+                  desc: 'SSE Transport เชื่อมต่อตรงกับระบบ Production ของ kevinaiagent.tech',
                   transport: 'sse' as const,
                   url: 'https://ai-kevin-booking.vercel.app/api/mcp',
                   command: '',
@@ -5300,7 +5300,7 @@ export default function AdminPage() {
                     <div className="flex items-center gap-1.5">
                       <span className="text-xs font-bold text-white">Facebook Page</span>
                       <span className="text-[10px] text-slate-400 font-medium">
-                        {socialSettings?.facebook?.pageName || 'Kevin AI Academy'}
+                        {socialSettings?.facebook?.pageName || 'kevinaiagent.tech'}
                       </span>
                     </div>
                     <span className="text-[11px] text-slate-400">
@@ -5885,7 +5885,7 @@ export default function AdminPage() {
                     </label>
                     <input
                       type="text"
-                      placeholder="เช่น Kevin AI Academy & Studio"
+                      placeholder="เช่น kevinaiagent.tech & Studio"
                       value={socialSettings?.facebook?.pageName || ''}
                       onChange={(e) => {
                         if (!socialSettings) return;
@@ -7628,7 +7628,7 @@ export default function AdminPage() {
                     type="text"
                     value={editingClass.location || ''}
                     onChange={e => setEditingClass({ ...editingClass, location: e.target.value })}
-                    placeholder="NEXUS Bangkok Downtown Campus"
+                    placeholder="kevinaiagent.tech Studio & Online"
                     className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
                   />
                 </div>
@@ -8349,7 +8349,7 @@ export default function AdminPage() {
                       type="text"
                       value={editingClass.instructorTitle || ''}
                       onChange={e => setEditingClass({ ...editingClass, instructorTitle: e.target.value })}
-                      placeholder="เช่น Founder & Lead AI Instructor, Kevin AI Academy"
+                      placeholder="เช่น Founder & Lead AI Instructor, kevinaiagent.tech"
                       className="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white"
                     />
                   </div>
@@ -8429,7 +8429,7 @@ export default function AdminPage() {
                   <div className="p-5 sm:p-6 rounded-2xl bg-[#0d131f] border-2 border-amber-400/40 shadow-xl text-center space-y-3 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl" />
                     <div className="text-[10px] tracking-widest uppercase font-mono text-amber-400/80 font-bold">
-                      KEVIN AI ACADEMY · BANGKOK, THAILAND
+                      kevinaiagent.tech · BANGKOK, THAILAND
                     </div>
                     <h3 className="text-base sm:text-lg font-black text-white tracking-wide">
                       CERTIFICATE OF COMPLETION
@@ -9609,7 +9609,7 @@ export default function AdminPage() {
                         ...editingQuiz,
                         title: 'แบบทดสอบประเมินผล: AI Content Workshop & AI Agent Mastery',
                         subtitle: 'แบบทดสอบ 10 ข้อ วัดความเข้าใจการใช้ AI คิดคอนเทนต์ สร้างสื่อ และรันระบบ Agent อัตโนมัติ',
-                        description: 'แบบทดสอบหลังเรียนเพื่อประเมินความรู้ความเข้าใจ ครอบคลุมขั้นตอน PLAN, WRITE, CREATE, AUTOMATE และ PUBLISH ตามมาตรฐานของ Kevin AI Academy',
+                        description: 'แบบทดสอบหลังเรียนเพื่อประเมินความรู้ความเข้าใจ ครอบคลุมขั้นตอน PLAN, WRITE, CREATE, AUTOMATE และ PUBLISH ตามมาตรฐานของ kevinaiagent.tech',
                         classId: 'ai-content-workshop',
                         classTitle: 'AI Content Workshop — ทำคอนเทนต์และ AI Agent ในคลาสเดียว',
                         passingScorePercent: 70,

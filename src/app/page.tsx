@@ -690,52 +690,112 @@ export default function HomePage() {
         )}
       </section>
 
-      {/* About Instructor & Venue Section */}
+      {/* About Instructor & Learning Studio Section */}
       <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          <div className="bg-[#101c2d] border border-white/10 rounded-3xl p-8 space-y-4">
-            <span className="text-xs font-bold text-amber-400 uppercase">
-              {siteSettings?.instructorTitle || 'INSTRUCTOR PROFILE'}
-            </span>
-            <h3 className="text-2xl font-bold text-white">
-              {siteSettings?.instructorName || 'สอนโดย อ. Kevin'}
-            </h3>
+          <div className="bg-[#101c2d] border border-amber-400/30 rounded-3xl p-8 space-y-5 shadow-2xl relative overflow-hidden">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-amber-400 tracking-wider uppercase">
+                {siteSettings?.instructorTitle || 'INSTRUCTOR PROFILE · ABOUT ME'}
+              </span>
+              <a
+                href="https://www.linkedin.com/in/sorachetn/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A66C2]/15 text-[#0A66C2] border border-[#0A66C2]/30 hover:bg-[#0A66C2]/25 text-xs font-semibold transition"
+              >
+                <span>LinkedIn Profile</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                {siteSettings?.instructorName || 'อ. Kevin (Sorachet Ngamwilaidee)'}
+              </h3>
+              <p className="text-xs text-amber-400/90 font-medium">
+                Founder & Lead AI System Architect @ kevinaiagent.tech
+              </p>
+            </div>
+
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
-              {siteSettings?.instructorBio || 'ผู้เชี่ยวชาญด้าน Generative AI, Automation Agent และ Digital Content Strategy ผู้ถ่ายทอดการนำ AI Tools (ChatGPT, Claude, Meta AI, Grok Bot) มาช่วยทุ่นแรงทำงานได้จริงและผลิตผลงานได้ทุกวันแบบจับมือทำ'}
+              {siteSettings?.instructorBio || `ผู้เชี่ยวชาญด้าน UX/UI Design, Generative AI & Autonomous Agent System Architect ประสบการณ์กว่า 15+ ปีในวงการดิจิทัลและเทคโนโลยีการออกแบบ
+
+ศิษย์เก่า Swinburne University of Technology ประเทศออสเตรเลีย และผู้เชี่ยวชาญการพัฒนาระบบ AI Workflow, Prompt Engineering และ Multi-Agent Orchestration สำหรับธุรกิจและนักสร้างสรรค์ยุคใหม่
+
+พร้อมถ่ายทอดองค์ความรู้และเทคนิคจริงแบบจับมือทำ เพื่อยกระดับการทำงานและการสร้างรายได้ด้วย AI Agents อย่างเต็มศักยภาพ`}
             </p>
-            <div className="pt-2 flex flex-wrap gap-2 text-xs text-slate-400">
+
+            <div className="pt-2 flex flex-wrap gap-2 text-xs text-slate-300">
               {(siteSettings?.instructorTags || [
-                'AI Content Workflow',
-                'AI Agent Architecture',
-                'Private Mentoring'
+                '15+ Years UX/UI & Product Design',
+                'Generative AI & Autonomous Agent Architecture',
+                'Swinburne University of Technology Alumnus',
+                'Prompt Engineering & Workflow Automation',
+                '1-on-1 Mentoring & Corporate Training'
               ]).map((t, idx) => (
-                <span key={idx} className="px-3 py-1 bg-slate-900 rounded-lg border border-white/5">
+                <span key={idx} className="px-3 py-1 bg-slate-900 rounded-lg border border-white/5 text-amber-300/90 font-medium">
                   ✓ {t}
                 </span>
               ))}
             </div>
-          </div>
 
-          <div className="bg-[#101c2d] border border-white/10 rounded-3xl p-8 space-y-4">
-            <span className="text-xs font-bold text-amber-400 uppercase">
-              {siteSettings?.venueTitle || 'VENUE & FACILITY'}
-            </span>
-            <h3 className="text-2xl font-bold text-white">
-              {siteSettings?.venueName || 'NEXUS Bangkok Downtown Campus'}
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
-              {siteSettings?.venueAddress || 'ชั้น 6 M Academy, อาคารบิ๊กซี ราชดำริ, 97/11 ถนนราชดำริ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330 เดินทางสะดวกใกล้ BTS ชิดลม และ BTS สยาม'}
-            </p>
-            <div className="pt-2">
+            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
+              <span>🔗 ติดต่อและดูผลงานเพิ่มเติมได้ที่:</span>
               <a
-                href={siteSettings?.venueMapUrl || 'https://maps.app.goo.gl/YDMbfMh7aRcPyvTb7?g_st=ic'}
+                href="https://www.linkedin.com/in/sorachetn/"
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs font-bold text-amber-400 hover:underline inline-flex items-center gap-1.5"
+                className="text-amber-400 hover:text-amber-300 font-mono font-medium hover:underline inline-flex items-center gap-1"
               >
-                <span>เปิดตำแหน่งใน Google Maps</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>linkedin.com/in/sorachetn</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
+          <div className="bg-[#101c2d] border border-white/10 rounded-3xl p-8 space-y-5 shadow-2xl flex flex-col justify-between">
+            <div className="space-y-4">
+              <span className="text-xs font-bold text-amber-400 tracking-wider uppercase">
+                {siteSettings?.venueTitle || 'LEARNING FORMAT & STUDIO'}
+              </span>
+              <h3 className="text-2xl font-bold text-white">
+                {siteSettings?.venueName || 'kevinaiagent.tech Studio & Online'}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+                {siteSettings?.venueAddress || 'เรียนสดออนไลน์คุณภาพสูงผ่าน Google Meet / Zoom พร้อมบันทึกวิดีโอย้อนหลัง หรือ On-site Studio ตามที่นัดหมาย'}
+              </p>
+              
+              <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/5 space-y-2">
+                <div className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>รูปแบบการเรียนการสอน (Interactive Studio)</span>
+                </div>
+                <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                  <li>เรียนสดแบบถาม-ตอบและแก้ปัญหาเฉพาะจุด (1-on-1 หรือกลุ่มเล็ก)</li>
+                  <li>แจกฟรี Prompt Templates & Automation Workflows พร้อมใช้</li>
+                  <li>มีใบประกาศนียบัตรรับรอง (Certificate of Completion) หลังเรียนจบ</li>
+                  <li>เข้าถึงเอกสารประกอบการเรียนและวิดีโอบันทึกย้อนหลังได้ตลอดชีพ</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="pt-2 flex items-center gap-3">
+              <Link
+                href="/booking"
+                className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-400/20 transition"
+              >
+                <span>เลือกคอร์สและจองรอบเรียน</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <a
+                href="https://www.linkedin.com/in/sorachetn/"
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition"
+              >
+                <span>เกี่ยวกับ อ. Kevin</span>
               </a>
             </div>
           </div>

@@ -19,8 +19,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'Kevin AI Academy — ศูนย์รวมคลาสเรียนและที่ปรึกษา AI',
-  description: 'Kevin AI Academy บริการที่ปรึกษา AI แบบส่วนตัวและกลุ่ม ทั้งออนไลน์และออนไซต์ จองคลาสเรียน 1-on-1 และเวิร์กช็อป AI Content & Automation',
+  title: 'kevinaiagent.tech — ศูนย์รวมคลาสเรียนและที่ปรึกษา AI',
+  description: 'kevinaiagent.tech บริการที่ปรึกษา AI แบบส่วนตัวและกลุ่ม ทั้งออนไลน์และออนไซต์ จองคลาสเรียน 1-on-1 และเวิร์กช็อป AI Content & Automation',
   icons: {
     icon: '/assets/logo.png',
     shortcut: '/assets/logo.png',

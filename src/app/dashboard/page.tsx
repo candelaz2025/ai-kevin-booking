@@ -458,7 +458,7 @@ export default function DashboardPage() {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ai-kevin-booking.vercel.app';
     const refCode = rewards?.refCode || '';
     const shareUrl = `${origin}/?ref=${encodeURIComponent(refCode)}#classes`;
-    const shareText = `แนะนำคลาสเรียน AI ยุคใหม่: ${classItem.title} โดย อ. Kevin AI Academy สมัครผ่านลิงก์นี้รับสิทธิ์เรียนฟรีและส่วนลดพิเศษ:`;
+    const shareText = `แนะนำคลาสเรียน AI ยุคใหม่: ${classItem.title} โดย อ. kevinaiagent.tech สมัครผ่านลิงก์นี้รับสิทธิ์เรียนฟรีและส่วนลดพิเศษ:`;
 
     if (platform === 'line') {
       window.open(`https://line.me/R/msg/text/?${encodeURIComponent(shareText + '\n' + shareUrl)}`, '_blank');
@@ -544,7 +544,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <h4 className="font-bold text-amber-300 flex items-center gap-1.5">
-                <span>Kevin AI Academy Rewards</span>
+                <span>kevinaiagent.tech Rewards</span>
                 {rewardToast.points && (
                   <span className="bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black">
                     +{rewardToast.points} PTS
@@ -2013,7 +2013,7 @@ export default function DashboardPage() {
                 <div>
                   <h4 className="text-xs font-bold text-white">สถานที่จัดการอบรม Onsite</h4>
                   <p className="text-xs text-slate-300 mt-0.5">
-                    {selectedClassForDetails.classItem?.location || 'NEXUS Bangkok Downtown Campus (ชั้น 6 M Academy)'}
+                    {selectedClassForDetails.classItem?.location || 'Online via Google Meet & Live Studio'}
                   </p>
                 </div>
               </div>
@@ -2363,7 +2363,7 @@ export default function DashboardPage() {
               const sub = modalQuiz ? getLatestSubmissionForQuiz(modalQuiz.id) : null;
               const isEligible = sub ? sub.passed : (selectedClassForDetails.booking.bookingStatus === 'confirmed');
               const instName = cls?.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)';
-              const instTitle = cls?.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy';
+              const instTitle = cls?.instructorTitle || 'Founder & Lead AI Instructor, kevinaiagent.tech';
               const instSig = cls?.instructorSignature;
 
               return (
@@ -2974,7 +2974,7 @@ export default function DashboardPage() {
                       totalQuestions: quizResultModal.totalQuestions,
                       scorePercent: quizResultModal.scorePercent,
                       instructorName: matchedClass?.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-                      instructorTitle: matchedClass?.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy',
+                      instructorTitle: matchedClass?.instructorTitle || 'Founder & Lead AI Instructor, kevinaiagent.tech',
                       instructorSignature: matchedClass?.instructorSignature,
                       certificateId: `CERT-AI-${Date.now().toString(36).toUpperCase()}`
                     });
@@ -3100,7 +3100,7 @@ export default function DashboardPage() {
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-amber-400 animate-pulse" />
                 <span className="text-xs font-mono text-amber-300 font-bold uppercase tracking-wider">
-                  Official Verified Certificate · Kevin AI Academy
+                  Official Verified Certificate · kevinaiagent.tech
                 </span>
               </div>
 
@@ -3138,7 +3138,7 @@ export default function DashboardPage() {
                   <GraduationCap className="w-7 h-7" />
                 </div>
                 <h4 className="text-xs sm:text-sm tracking-[0.25em] uppercase font-mono font-bold text-amber-400">
-                  KEVIN AI ACADEMY · BANGKOK, THAILAND
+                  kevinaiagent.tech · BANGKOK, THAILAND
                 </h4>
                 <h1 className="text-2xl sm:text-4xl font-serif font-black tracking-wider text-white">
                   CERTIFICATE OF COMPLETION
@@ -3221,7 +3221,7 @@ export default function DashboardPage() {
 
             {/* Print Footer Notice */}
             <div className="flex items-center justify-between text-xs text-slate-500 pt-2 print:hidden">
-              <span>* ใบประกาศนียบัตรนี้ได้รับการรับรองอย่างเป็นทางการจากสถาบัน Kevin AI Academy</span>
+              <span>* ใบประกาศนียบัตรนี้ได้รับการรับรองอย่างเป็นทางการจากสถาบัน kevinaiagent.tech</span>
               <button
                 type="button"
                 onClick={() => setViewingCertificate(null)}

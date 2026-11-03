@@ -414,7 +414,7 @@ export async function sendUserBookingConfirmationEmail(booking: Booking, customM
         ${!isOnline ? `
           <div style="margin-top: 15px; padding: 12px; background: #eff6ff; border: 1px solid #93c5fd; border-radius: 6px;">
             <p style="margin: 0; color: #1e40af; font-weight: bold;">📍 สถานที่จัดเวิร์กช็อป:</p>
-            <p style="margin: 6px 0 0 0; color: #1e3a8a;">NEXUS Bangkok Downtown Campus (ชั้น 6 M Academy, อาคารบิ๊กซี ราชดำริ เขตปทุมวัน กทม.)</p>
+            <p style="margin: 6px 0 0 0; color: #1e3a8a;">Online via Google Meet & Live Studio</p>
             <p style="margin: 4px 0 0 0; font-size: 13px; color: #64748b;">* กรุณาเตรียมแล็ปท็อป (Notebook) มาใช้ฝึกปฏิบัติตลอดคลาส</p>
           </div>
         ` : ''}
@@ -620,14 +620,14 @@ export async function sendAdminResetPasswordEmail(userEmail: string, userName: s
  * Send welcome email to new student upon registration
  */
 export async function sendUserWelcomeEmail(user: { email: string; name: string }) {
-  const subject = `🎉 [ยินดีต้อนรับสู่ Kevin AI Academy] บัญชีของคุณพร้อมใช้งานแล้ว`;
+  const subject = `🎉 [ยินดีต้อนรับสู่ kevinaiagent.tech] บัญชีของคุณพร้อมใช้งานแล้ว`;
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://ai-kevin-booking.vercel.app';
 
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff; color: #1e293b;">
       <div style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9;">
         <h2 style="color: #0f172a; margin-top: 8px; margin-bottom: 4px; font-size: 22px;">
-          ยินดีต้อนรับสู่ Kevin AI Academy! 🚀
+          ยินดีต้อนรับสู่ kevinaiagent.tech! 🚀
         </h2>
         <p style="color: #64748b; font-size: 14px; margin: 0;">
           สถาบันพัฒนาทักษะ AI ยุคใหม่เพื่อการใช้งานจริงในธุรกิจและชีวิตประจำวัน
@@ -714,7 +714,7 @@ export async function sendQuizResultEmail(params: {
           ผลการทดสอบ & ประเมินผลหลังเรียน
         </h2>
         <p style="color: #64748b; font-size: 14px; margin: 0;">
-          สถาบัน Kevin AI Academy • อ. Kevin AI Studio
+          สถาบัน kevinaiagent.tech • อ. Kevin AI Studio
         </p>
       </div>
 
@@ -766,7 +766,7 @@ export async function sendQuizResultEmail(params: {
         ${passed ? `
           <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 14px 18px; border-radius: 8px; margin: 20px 0;">
             <p style="margin: 0; font-size: 13px; color: #065f46; line-height: 1.5;">
-              🌟 <strong>ขอแสดงความยินดีด้วยครับ!</strong> คุณมีความรู้ความเข้าใจในเนื้อหาหลักสูตรตามมาตรฐานของ Kevin AI Academy สามารถนำทักษะและ AI Workflows ที่ได้เรียนรู้ไปประยุกต์ใช้งานได้ทันที
+              🌟 <strong>ขอแสดงความยินดีด้วยครับ!</strong> คุณมีความรู้ความเข้าใจในเนื้อหาหลักสูตรตามมาตรฐานของ kevinaiagent.tech สามารถนำทักษะและ AI Workflows ที่ได้เรียนรู้ไปประยุกต์ใช้งานได้ทันที
             </p>
           </div>
         ` : `

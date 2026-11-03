@@ -180,12 +180,12 @@ function LoginContent() {
             <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-amber-400/25 border border-amber-400/40 group-hover:scale-105 group-hover:border-amber-400/80 transition-all shrink-0 bg-amber-400/10">
               <img
                 src="/assets/logo.png"
-                alt="Kevin AI Academy Logo"
+                alt="kevinaiagent.tech Logo"
                 className="w-full h-full object-cover"
               />
             </div>
             <span className="font-extrabold text-white text-lg tracking-tight group-hover:text-amber-400 transition-colors">
-              Kevin AI Academy
+              kevinaiagent.tech
             </span>
           </Link>
           <h2 className="text-2xl font-bold text-white">

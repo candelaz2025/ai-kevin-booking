@@ -292,7 +292,7 @@ export default function CalendarPicker({
               <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-semibold text-amber-400">คลาสเรียน Onsite Workshop:</span>
-                <p className="text-slate-400 mt-0.5">{selectedClass.location || 'NEXUS Bangkok Downtown Campus'}</p>
+                <p className="text-slate-400 mt-0.5">{selectedClass.location || 'kevinaiagent.tech Studio & Online'}</p>
               </div>
             </>
           )}

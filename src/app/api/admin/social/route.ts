@@ -230,7 +230,7 @@ export async function POST(req: NextRequest) {
               messages: [
                 {
                   type: 'text',
-                  text: `📣 [Kevin AI Academy]\n\n${title}\n\n${message}\n\n👉 ดูรายละเอียดและจองคอร์ส: ${linkUrl}`
+                  text: `📣 [kevinaiagent.tech]\n\n${title}\n\n${message}\n\n👉 ดูรายละเอียดและจองคอร์ส: ${linkUrl}`
                 }
               ]
             };

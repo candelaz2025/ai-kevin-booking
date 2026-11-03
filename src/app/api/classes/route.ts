@@ -92,7 +92,7 @@ export async function POST(req: Request) {
       videoUrl: body.videoUrl ? String(body.videoUrl).trim() : '',
       lessons: Array.isArray(body.lessons) ? body.lessons : [],
       instructorName: body.instructorName ? String(body.instructorName).trim() : 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-      instructorTitle: body.instructorTitle ? String(body.instructorTitle).trim() : 'Founder & Lead AI Instructor, Kevin AI Academy',
+      instructorTitle: body.instructorTitle ? String(body.instructorTitle).trim() : 'Founder & Lead AI Instructor, kevinaiagent.tech',
       instructorSignature: body.instructorSignature ? String(body.instructorSignature).trim() : '',
       certificateEnabled: body.certificateEnabled !== undefined ? Boolean(body.certificateEnabled) : true,
       passingScorePercent: body.passingScorePercent ? Number(body.passingScorePercent) : 70

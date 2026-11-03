@@ -23,13 +23,13 @@ export default function Navbar() {
             <div className="relative w-10 h-10 rounded-2xl overflow-hidden shadow-lg shadow-amber-400/25 border border-amber-400/40 group-hover:scale-105 group-hover:border-amber-400/80 transition-all shrink-0 bg-amber-400/10">
               <img
                 src="/assets/logo.png"
-                alt="Kevin AI Academy Logo"
+                alt="kevinaiagent.tech Logo"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="leading-tight">
               <span className="block text-base sm:text-lg font-black text-white tracking-tight group-hover:text-amber-400 transition-colors">
-                Kevin AI Academy
+                kevinaiagent.tech
               </span>
             </div>
           </Link>

@@ -80,7 +80,7 @@ export interface ClassItem {
   durationMinutes: number; // เก็บเป็นจำนวนนาทีรวม (backward compatibility)
   durationValue?: number; // ตัวเลขจำนวน เช่น 2, 90, 3
   durationUnit?: DurationUnit; // หน่วย: 'minute' (นาที), 'hour' (ชม.), 'day' (วัน)
-  location?: string; // e.g. "NEXUS Bangkok Downtown Campus (ชั้น 6 M Academy)" or "Google Meet / Zoom"
+  location?: string; // e.g. "Online via Google Meet & Live Studio" or "Google Meet / Zoom"
   onlineMeetingUrl?: string; // Meeting link for online classes
   maxSeats: number;
   availableDates: string[]; // ISO Date strings 'YYYY-MM-DD'
@@ -95,7 +95,7 @@ export interface ClassItem {
   videoUrl?: string; // ลิงก์วิดีโอหลัก หรือ YouTube E-Learning ของคอร์ส
   lessons?: LessonModule[]; // รายการบทเรียนวิดีโอย่อย (E-Learning Modules)
   instructorName?: string; // ชื่อ-นามสกุล ผู้สอน / ผู้ออกใบประกาศนียบัตร (e.g. อาจารย์ สรเชษฐ์ (อ. เควิน))
-  instructorTitle?: string; // ตำแหน่งผู้สอน (e.g. Founder & Lead AI Instructor, Kevin AI Academy)
+  instructorTitle?: string; // ตำแหน่งผู้สอน (e.g. Founder & Lead AI Instructor, kevinaiagent.tech)
   instructorSignature?: string; // รูปลายเซ็นผู้สอน (URL รูปภาพ หรือ Base64)
   certificateEnabled?: boolean; // เปิดใช้งานระบบออกใบประกาศนียบัตรเมื่อเรียนจบ
   passingScorePercent?: number; // คะแนนสอบผ่านขั้นต่ำ (เช่น 70%)

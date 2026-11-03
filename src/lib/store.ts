@@ -17,7 +17,7 @@ export const INITIAL_CLASSES: ClassItem[] = [
     durationMinutes: 180,
     durationValue: 3,
     durationUnit: 'hour',
-    location: 'NEXUS Bangkok Downtown Campus (ชั้น 6 M Academy, อาคารบิ๊กซี ราชดำริ เขตปทุมวัน กทม.)',
+    location: 'Online via Google Meet & Live Studio',
     maxSeats: 20,
     availableDates: [
       '2026-11-01',
@@ -58,7 +58,7 @@ export const INITIAL_CLASSES: ClassItem[] = [
       }
     ],
     instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-    instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorTitle: 'Founder & Lead AI Instructor, kevinaiagent.tech',
     instructorSignature: '',
     certificateEnabled: true,
     passingScorePercent: 70
@@ -112,7 +112,7 @@ export const INITIAL_CLASSES: ClassItem[] = [
       }
     ],
     instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-    instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorTitle: 'Founder & Lead AI Instructor, kevinaiagent.tech',
     instructorSignature: '',
     certificateEnabled: true,
     passingScorePercent: 80
@@ -161,7 +161,7 @@ export const INITIAL_CLASSES: ClassItem[] = [
       }
     ],
     instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-    instructorTitle: 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorTitle: 'Founder & Lead AI Instructor, kevinaiagent.tech',
     instructorSignature: '',
     certificateEnabled: true,
     passingScorePercent: 70
@@ -328,7 +328,7 @@ function mapDbClass(row: any): ClassItem {
     }
   }
   if (!instructorTitle) {
-    instructorTitle = 'Founder & Lead AI Instructor, Kevin AI Academy';
+    instructorTitle = 'Founder & Lead AI Instructor, kevinaiagent.tech';
   }
 
   // Parse instructorSignature tag: <!--instSig:...-->
@@ -569,7 +569,7 @@ export async function saveClass(item: ClassItem): Promise<ClassItem> {
     videoUrl: item.videoUrl,
     lessons: item.lessons || [],
     instructorName: item.instructorName || 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
-    instructorTitle: item.instructorTitle || 'Founder & Lead AI Instructor, Kevin AI Academy',
+    instructorTitle: item.instructorTitle || 'Founder & Lead AI Instructor, kevinaiagent.tech',
     instructorSignature: item.instructorSignature,
     certificateEnabled: item.certificateEnabled !== undefined ? item.certificateEnabled : true,
     passingScorePercent: item.passingScorePercent || 70
@@ -1701,7 +1701,7 @@ Maintain an engaging, energetic, and authentic tone without generic filler words
       {
         key: 'BRAND_NAME',
         label: 'ชื่อแบรนด์หรือร้านค้า',
-        defaultValue: 'Kevin AI Academy',
+        defaultValue: 'kevinaiagent.tech',
         type: 'text'
       },
       {
@@ -2422,9 +2422,9 @@ export async function deletePromptTemplate(id: string): Promise<boolean> {
 export const INITIAL_SITE_SETTINGS: SiteSettings = {
   id: 'current_site_settings',
   // Layout & General
-  siteTitle: 'Kevin AI Academy — ศูนย์รวมคลาสเรียนและที่ปรึกษา AI',
-  siteSubtitle: 'Kevin AI Academy',
-  brandName: 'Kevin AI Academy',
+  siteTitle: 'kevinaiagent.tech — ศูนย์รวมคลาสเรียนและที่ปรึกษา AI Agents',
+  siteSubtitle: 'kevinaiagent.tech',
+  brandName: 'kevinaiagent.tech',
   brandBadge: 'ACADEMY',
   showAnnounceBanner: true,
   announceText: '🔥 เปิดรับลงทะเบียนรอบเรียนใหม่ประจำเดือนนี้ ทั้ง Onsite และ Private 1-on-1 Online',
@@ -2446,17 +2446,19 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
   ],
 
   // About Section (Instructor & Venue)
-  instructorTitle: 'INSTRUCTOR PROFILE',
-  instructorName: 'สอนโดย อ. Kevin',
-  instructorBio: 'ผู้เชี่ยวชาญด้าน Generative AI, Automation Agent และ Digital Content Strategy ผู้ถ่ายทอดการนำ AI Tools (ChatGPT, Claude, Meta AI, Grok Bot) มาช่วยทุ่นแรงทำงานได้จริงและผลิตผลงานได้ทุกวันแบบจับมือทำ',
+  instructorTitle: 'INSTRUCTOR PROFILE · ABOUT ME',
+  instructorName: 'อ. Kevin (Sorachet Ngamwilaidee)',
+  instructorBio: 'ผู้เชี่ยวชาญด้าน UX/UI Design, Generative AI & Autonomous Agent System Architect ประสบการณ์กว่า 15+ ปีในวงการดิจิทัลและเทคโนโลยีการออกแบบ\n\nศิษย์เก่า Swinburne University of Technology ประเทศออสเตรเลีย และผู้เชี่ยวชาญการพัฒนาระบบ AI Workflow, Prompt Engineering และ Multi-Agent Orchestration สำหรับธุรกิจและนักสร้างสรรค์ยุคใหม่\n\nพร้อมถ่ายทอดองค์ความรู้และเทคนิคจริงแบบจับมือทำ เพื่อยกระดับการทำงานและการสร้างรายได้ด้วย AI Agents อย่างเต็มศักยภาพ',
   instructorTags: [
-    'AI Content Workflow',
-    'AI Agent Architecture',
-    'Private Mentoring'
+    '15+ Years UX/UI & Product Design',
+    'Generative AI & Autonomous Agent Architecture',
+    'Swinburne University of Technology Alumnus',
+    'Prompt Engineering & Workflow Automation',
+    '1-on-1 Mentoring & Corporate Training'
   ],
-  venueTitle: 'VENUE & FACILITY',
-  venueName: 'NEXUS Bangkok Downtown Campus',
-  venueAddress: 'ชั้น 6 M Academy, อาคารบิ๊กซี ราชดำริ, 97/11 ถนนราชดำริ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330 เดินทางสะดวกใกล้ BTS ชิดลม และ BTS สยาม',
+  venueTitle: 'LEARNING FORMAT & STUDIO',
+  venueName: 'kevinaiagent.tech Studio & Online Interactive',
+  venueAddress: 'เรียนสดออนไลน์คุณภาพสูงผ่าน Google Meet / Zoom แบบอินเตอร์แอคทีฟ มีบันทึกวิดีโอย้อนหลังและเอกสารสรุป หรือเรียนแบบ On-site Studio ตามที่นัดหมาย',
   venueMapUrl: 'https://maps.app.goo.gl/YDMbfMh7aRcPyvTb7?g_st=ic',
 
   // Final CTA Section
@@ -2469,8 +2471,8 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
   footerDescription: 'ที่ปรึกษา AI แบบส่วนตัวและกลุ่ม ทั้งออนไลน์และออนไซต์',
   footerContactEmail: 'sorachetkevin@gmail.com',
   footerContactPhone: '091-746-2444',
-  footerLocationText: '📍 NEXUS Bangkok Downtown (อาคารบิ๊กซี ราชดำริ) • 🌐 Online via Google Meet / Zoom',
-  footerCopyrightText: '© 2026 Kevin AI Academy. All rights reserved.',
+  footerLocationText: '🌐 Online Live Interactive via Google Meet / Zoom & Live Studio Session',
+  footerCopyrightText: '© 2026 kevinaiagent.tech. All rights reserved.',
   footerLineId: 'Candelaz',
   footerFacebookUrl: 'candelaz kengza',
 
@@ -2922,7 +2924,7 @@ export const INITIAL_SOCIAL_SETTINGS: SocialIntegrationSettings = {
   facebook: {
     enabled: true,
     pageId: '108492048591820',
-    pageName: 'Kevin AI Academy & Studio',
+    pageName: 'kevinaiagent.tech & Studio',
     pageAccessToken: '',
     autoPostNewCourse: true,
     autoPostArticles: true,
@@ -3065,7 +3067,7 @@ export const INITIAL_QUIZZES: Quiz[] = [
     id: 'quiz-ai-content-workshop',
     title: 'แบบทดสอบประเมินผล: AI Content Workshop & AI Agent Mastery',
     subtitle: 'แบบทดสอบ 10 ข้อ วัดความเข้าใจการใช้ AI คิดคอนเทนต์ สร้างสื่อ และรันระบบ Agent อัตโนมัติ',
-    description: 'แบบทดสอบหลังเรียนเพื่อประเมินความรู้ความเข้าใจ ครอบคลุมขั้นตอน PLAN, WRITE, CREATE, AUTOMATE และ PUBLISH ตามมาตรฐานของ Kevin AI Academy',
+    description: 'แบบทดสอบหลังเรียนเพื่อประเมินความรู้ความเข้าใจ ครอบคลุมขั้นตอน PLAN, WRITE, CREATE, AUTOMATE และ PUBLISH ตามมาตรฐานของ kevinaiagent.tech',
     classId: 'ai-content-workshop',
     classTitle: 'AI Content Workshop — ทำคอนเทนต์และ AI Agent ในคลาสเดียว',
     passingScorePercent: 70,

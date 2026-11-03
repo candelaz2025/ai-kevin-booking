@@ -45,12 +45,12 @@ export default function Footer() {
               <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-amber-400/25 border border-amber-400/40 shrink-0 bg-amber-400/10">
                 <img
                   src="/assets/logo.png"
-                  alt="Kevin AI Academy Logo"
+                  alt="kevinaiagent.tech Logo"
                   className="w-full h-full object-cover"
                 />
               </div>
               <span className="font-bold text-white text-lg tracking-tight">
-                {settings?.brandName || 'Kevin AI Academy'}
+                {settings?.brandName || 'kevinaiagent.tech'}
               </span>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed max-w-md whitespace-pre-line">
@@ -163,7 +163,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>{settings?.footerCopyrightText || '© 2026 Kevin AI Academy. All rights reserved.'}</p>
+          <p>{settings?.footerCopyrightText || '© 2026 kevinaiagent.tech. All rights reserved.'}</p>
           <div className="flex items-center gap-6">
             <span>รองรับชำระผ่าน PromptPay QR และ Stripe</span>
             <span>ระบบแจ้งเตือนทาง Email อัตโนมัติ</span>

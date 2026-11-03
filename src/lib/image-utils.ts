@@ -1,5 +1,5 @@
 /**
- * Image Utilities for Kevin AI Academy
+ * Image Utilities for kevinaiagent.tech
  * Handles Google Drive CDN URL transformations, direct previews, and fallbacks
  */
 

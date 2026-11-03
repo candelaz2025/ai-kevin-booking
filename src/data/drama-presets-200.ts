@@ -1,5 +1,5 @@
 // 200 Curated Thai Micro-Drama Tropes & Storyboard Presets
-// Kevin AI Academy — Drama Beat Engine
+// kevinaiagent.tech — Drama Beat Engine
 // Zero-duplicate production presets across 10 core drama genres
 
 export interface TropePreset {

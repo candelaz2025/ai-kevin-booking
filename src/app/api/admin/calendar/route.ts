@@ -113,7 +113,7 @@ export async function GET(req: Request) {
             const { start, end } = formatToICSDate(date, ts);
             const enrolled = activeBookings.filter(b => b.classId === c.id && b.date === date && b.timeSlot === ts).length;
             const summary = `[เปิดสอน] ${c.title} (${enrolled}/${c.maxSeats || 20} คน)`;
-            const description = `กำหนดการสอนคลาส Kevin AI Academy\\nคอร์ส: ${c.title}\\nรูปแบบ: ${c.type === 'online' ? 'คลาสออนไลน์' : 'Onsite Workshop'}\\nรอบเวลา: ${ts}\\nจำนวนนักเรียนลงทะเบียน: ${enrolled}/${c.maxSeats || 20} คน\\nสถานที่/ลิงก์: ${c.onlineMeetingUrl || c.location || '-'}`;
+            const description = `กำหนดการสอนคลาส kevinaiagent.tech\\nคอร์ส: ${c.title}\\nรูปแบบ: ${c.type === 'online' ? 'คลาสออนไลน์' : 'Onsite Workshop'}\\nรอบเวลา: ${ts}\\nจำนวนนักเรียนลงทะเบียน: ${enrolled}/${c.maxSeats || 20} คน\\nสถานที่/ลิงก์: ${c.onlineMeetingUrl || c.location || '-'}`;
             const location = c.type === 'online' ? (c.onlineMeetingUrl || 'Google Meet') : (c.location || 'Onsite Classroom');
             const cleanTs = (ts || '').replace(/[^a-zA-Z0-9]/g, '');
 

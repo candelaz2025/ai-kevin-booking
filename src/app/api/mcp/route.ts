@@ -113,7 +113,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   },
   {
     name: 'delete_course',
-    description: 'ลบคอร์สเรียนออกจากระบบ Kevin AI Academy',
+    description: 'ลบคอร์สเรียนออกจากระบบ kevinaiagent.tech',
     inputSchema: {
       type: 'object',
       properties: {
@@ -189,7 +189,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
   },
   {
     name: 'create_prompt',
-    description: 'บันทึก Prompt Template ใหม่เข้าสู่คลัง Kevin AI Academy',
+    description: 'บันทึก Prompt Template ใหม่เข้าสู่คลัง kevinaiagent.tech',
     inputSchema: {
       type: 'object',
       properties: {
@@ -237,7 +237,7 @@ export const MCP_TOOLS: McpToolDefinition[] = [
 export const MCP_RESOURCES = [
   {
     uri: 'kevin://courses',
-    name: 'Kevin AI Academy Courses',
+    name: 'kevinaiagent.tech Courses',
     description: 'คอร์สเรียนและเวิร์กช็อปทั้งหมดที่เปิดสอนในปัจจุบัน',
     mimeType: 'application/json'
   },
@@ -307,7 +307,7 @@ export async function GET(req: Request) {
     jsonrpc: '2.0',
     server: {
       name: 'kevin-ai-academy-mcp',
-      title: 'Kevin AI Academy Official MCP Server',
+      title: 'kevinaiagent.tech Official MCP Server',
       version: '1.0.0',
       description: 'Model Context Protocol Server สำหรับจัดการคอร์สเรียน, อัปโหลดรูปภาพเข้า Google Drive, ตรวจสอบการจอง และควบคุม CMS หลังบ้าน',
       rfcCompatible: 'RFC 2026',
@@ -353,7 +353,7 @@ export async function POST(req: Request) {
           },
           serverInfo: {
             name: 'kevin-ai-academy-mcp',
-            title: 'Kevin AI Academy Official MCP Server',
+            title: 'kevinaiagent.tech Official MCP Server',
             version: '1.0.0'
           }
         }
@@ -467,7 +467,7 @@ export async function POST(req: Request) {
                 role: 'user',
                 content: {
                   type: 'text',
-                  text: `นี่คือรายชื่อคอร์สเรียนของ Kevin AI Academy:\n${JSON.stringify(classes.map(c => ({ title: c.title, price: c.price, type: c.type, desc: c.description })), null, 2)}\n\nผู้เรียนมีเป้าหมาย: "${args?.studentGoal}"\nโปรดแนะนำคอร์สที่เหมาะสมที่สุด พร้อมเหตุผลและขั้นตอนการสมัครเรียนอย่างสุภาพและเป็นมิตร`
+                  text: `นี่คือรายชื่อคอร์สเรียนของ kevinaiagent.tech:\n${JSON.stringify(classes.map(c => ({ title: c.title, price: c.price, type: c.type, desc: c.description })), null, 2)}\n\nผู้เรียนมีเป้าหมาย: "${args?.studentGoal}"\nโปรดแนะนำคอร์สที่เหมาะสมที่สุด พร้อมเหตุผลและขั้นตอนการสมัครเรียนอย่างสุภาพและเป็นมิตร`
                 }
               }
             ]
@@ -519,7 +519,7 @@ export async function POST(req: Request) {
                 type: 'text',
                 text: JSON.stringify({
                   total: filtered.length,
-                  academy: 'Kevin AI Academy',
+                  academy: 'kevinaiagent.tech',
                   courses: filtered.map(c => ({
                     id: c.id,
                     title: c.title,
@@ -959,12 +959,12 @@ export async function POST(req: Request) {
                   mcpVersion: '1.0.0',
                   protocolVersion: '2024-11-05',
                   rfcCompatible: 'RFC 2026',
-                  academy: 'Kevin AI Academy',
+                  academy: 'kevinaiagent.tech',
                   connectedEndpoints: {
                     activeCourses: classes.length,
                     totalBookings: bookings.length,
                     confirmedBookings: bookings.filter(b => b.bookingStatus === 'confirmed').length,
-                    siteName: (site as any)?.brandName || (site as any)?.siteTitle || 'Kevin AI Academy'
+                    siteName: (site as any)?.brandName || (site as any)?.siteTitle || 'kevinaiagent.tech'
                   },
                   timestamp: new Date().toISOString()
                 }, null, 2)
