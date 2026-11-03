@@ -1273,6 +1273,170 @@ export const INITIAL_ARTICLES: Article[] = [
     views: 890,
     featured: true,
     createdAt: '2026-10-12T14:30:00.000Z'
+  },
+  {
+    id: 'art-dreamrender-guide-2026',
+    slug: 'how-to-use-dreamrender-ai-product-video-guide',
+    title: 'เจาะลึกวิธีใช้ Dream Render (dreamrender.com): เสกวิดีโอโฆษณาสินค้าด้วย Agentic AI จาก Meta แบบ Step-by-Step',
+    excerpt: 'คู่มือการใช้งาน Dream Render แบบละเอียดทีละขั้นตอน พร้อมภาพประกอบจริง! เรียนรู้วิธีเปลี่ยนรูปสินค้าเพียงภาพเดียวให้กลายเป็นวิดีโอโฆษณาระดับสตูดิโอด้วยเทคโนโลยี Agentic AI Crew จาก Meta พร้อมแจก 100 เครดิตฟรีทุกสัปดาห์',
+    coverImage: '/blog/dreamrender/01-home.png',
+    authorName: 'อ. Kevin (AI Studio)',
+    category: 'เทคนิคการใช้งาน AI',
+    tags: ['Dream Render', 'Meta AI', 'AI Video', 'Product Ads', 'Video Marketing', 'Agentic AI'],
+    status: 'published',
+    views: 450,
+    featured: true,
+    createdAt: '2026-11-03T11:00:00.000Z',
+    content: `<p class="lead text-lg text-slate-200 leading-relaxed font-normal">
+ในยุคที่การตลาดดิจิทัลและคอนเทนต์วิดีโอสั้น (TikTok, Reels, Shorts) กำลังขับเคลื่อนยอดขาย การสร้างวิดีโอโฆษณาสินค้าให้สวยงามระดับสตูดิโอเคยเป็นเรื่องที่มีต้นทุนมหาศาล ทั้งค่าโปรดักชัน สตูดิโอ ตากล้อง และนักตัดต่อ แต่วันนี้ <strong>Dream Render (dreamrender.com)</strong> แพลตฟอร์ม AI Video Generation สายพันธุ์ใหม่ที่ขับเคลื่อนด้วยเทคโนโลยีจาก <strong>Meta</strong> ได้เข้ามาปฏิวัติวงการอย่างสิ้นเชิง!
+</p>
+
+<div class="my-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-sm">
+  <strong>💡 ไฮไลท์สำคัญ:</strong> Dream Render ไม่ได้ทำตัวเป็นเพียง AI Text-to-Video ทั่วไป แต่ใช้แนวคิด <em>Agentic AI Production Crew</em> ที่ทำงานร่วมกับคุณในฐานะ "ผู้กำกับ (Director)" ตั้งแต่การวางแผน Storyboard, จัดมุมกล้อง, ใส่เพลงประกอบ ไปจนถึงการเรนเดอร์ความละเอียดสูง พร้อมแจกฟรี <strong>100 เครดิตทุกสัปดาห์</strong> ในช่วง Public Beta!
+</div>
+
+<hr class="border-white/10 my-8" />
+
+<h2>1. รู้จักกับ Dream Render: แพลตฟอร์ม AI Director เพื่อวิดีโอสินค้า</h2>
+<p>
+หลายคนที่คุ้นเคยกับเครื่องมือสร้างวิดีโอ AI อย่าง Runway, Luma หรือ Kling มักจะพบปัญหาเดียวกันคือ <strong>"การสุ่มผลลัพธ์ (Randomness)"</strong> พิมพ์ Prompt ยาวเหยียดแต่ AI สร้างวิดีโอที่ไม่ตรงโจทย์ คุมมุมกล้องไม่ได้ และไม่เข้าใจจุดเด่นของผลิตภัณฑ์
+</p>
+<p>
+<strong>Dream Render</strong> แก้ปัญหานี้ด้วยสถาปัตยกรรม <strong>Agentic Video Planning</strong> โดยแบ่งบทบาทหน้าที่อย่างชัดเจน:
+</p>
+<ul>
+  <li><strong>คุณคือ Executive Director:</strong> กำหนดโจทย์ แนบรูปสินค้า และเลือกอารมณ์/สไตล์ที่ต้องการ</li>
+  <li><strong>AI Screenwriter & Storyboarder:</strong> คิดสคริปต์ ออกแบบแต่ละช็อต (Shot-by-Shot Plan) และอธิบายเหตุผลว่าทำไมถึงเลือกมุมกล้องนี้</li>
+  <li><strong>AI Sound Designer:</strong> เลือกเสียง Sound Effect และดนตรีประกอบที่เข้ากับจังหวะของแต่ละคัต</li>
+  <li><strong>AI Rendering Engine:</strong> เรนเดอร์วิดีโอความคมชัดสูงและรักษาหน้าตาสินค้าให้ตรงปก (Product Consistency)</li>
+</ul>
+
+<div class="my-8">
+  <img src="/blog/dreamrender/01-home.png" alt="หน้าแรกของ Dream Render พร้อมช่องใส่ Prompt และแนบภาพสินค้า" class="w-full rounded-2xl border border-white/10 shadow-2xl" />
+  <p class="text-xs text-center text-slate-400 mt-2">ภาพที่ 1: หน้าแรกของ Dream Render (dreamrender.com) ดีไซน์มินิมอล พร้อมตัวอย่าง Showcase ผลงาน</p>
+</div>
+
+<hr class="border-white/10 my-8" />
+
+<h2>2. เงื่อนไขการเข้าใช้งานและระบบเครดิตฟรี (Pricing & Access)</h2>
+<p>
+เนื่องจาก Dream Render พัฒนาบนโครงสร้างพื้นฐานของ Meta จึงมีเงื่อนไขและข้อกำหนดที่ผู้ใช้งานควรรู้ดังนี้:
+</p>
+
+<h3>2.1 การเข้าสู่ระบบด้วยบัญชี Meta Business</h3>
+<p>
+ในการล็อกอินเข้าใช้งานครั้งแรก ระบบจะให้คุณเชื่อมต่อผ่าน <strong>Facebook หรือ Instagram</strong> โดยจะต้องเป็นโปรไฟล์ธุรกิจ (Business / Professional Account) เพื่อยืนยันตัวตนและป้องกันการสร้างคอนเทนต์สแปม
+</p>
+
+<div class="my-8">
+  <img src="/blog/dreamrender/02-login-modal.png" alt="หน้าต่าง Login ผ่าน Facebook/Instagram และแจ้งรับ 100 ฟรีเครดิต" class="w-full rounded-2xl border border-white/10 shadow-2xl" />
+  <p class="text-xs text-center text-slate-400 mt-2">ภาพที่ 2: หน้าต่างล็อกอินผ่าน Meta Account พร้อมข้อความยินดีต้อนรับสู่ Public Beta รับ 100 ฟรีเครดิต/สัปดาห์</p>
+</div>
+
+<h3>2.2 ระบบเครดิต: ฟรี 100 เครดิตทุกสัปดาห์ & แพ็กเกจเติมเงินแบบไม่ผูกมัด</h3>
+<p>
+สิ่งที่ผู้ใช้หลายคนประทับใจมากใน Dream Render คือนโยบายราคาที่แฟร์และยืดหยุ่น:
+</p>
+<ul>
+  <li><strong>ฟรี 100 เครดิต/สัปดาห์:</strong> ได้รับทันทีทุกสัปดาห์ในช่วง Public Beta สำหรับทดลองใช้งานสร้างคลิปได้ฟรี</li>
+  <li><strong>ไม่มีระบบต่ออายุรายเดือนบังคับ (No Recurring Subscriptions):</strong> ไม่ต้องกังวลเรื่องลืมกดยกเลิกบัตรเครดิต</li>
+  <li><strong>Top-Up Credit Packs:</strong> หากต้องการใช้งานเยอะ สามารถซื้อเครดิตเสริมแบบ Pay-As-You-Go ได้ โดยเครดิตที่ซื้อมีอายุการใช้งานนานถึง 12 เดือน</li>
+  <li><strong>Referral Bonus:</strong> ชวนเพื่อนมาใช้งาน รับโบนัสเพิ่มฟรีอีก 50 เครดิตต่อคน</li>
+</ul>
+
+<div class="my-8">
+  <img src="/blog/dreamrender/04-pricing.png" alt="ระบบราคาและการซื้อเครดิตของ Dream Render" class="w-full rounded-2xl border border-white/10 shadow-2xl" />
+  <p class="text-xs text-center text-slate-400 mt-2">ภาพที่ 3: ตารางราคาและแพ็กเกจเครดิตของ Dream Render ซื้อแบบ One-Time คุ้มค่าและหมดอายุใน 12 เดือน</p>
+</div>
+
+<hr class="border-white/10 my-8" />
+
+<h2>3. ขั้นตอนการสร้างวิดีโอโฆษณาสินค้าแบบ Step-by-Step</h2>
+<p>
+มาเริ่มต้นสร้างคลิปวิดีโอตัวแรกกันเลย ทำตาม 5 ขั้นตอนนี้ได้ง่ายๆ:
+</p>
+
+<h3>ขั้นตอนที่ 1: เตรียมวัตถุดิบและตั้งค่าสัดส่วน (Aspect Ratio & Duration)</h3>
+<p>
+ก่อนอื่นให้เตรียม <strong>ภาพถ่ายสินค้าที่คมชัด แสงดี และพื้นหลังสะอาด (ถ้าเป็น PNG พื้นหลังโปร่งใสหรือฉากเรียบจะยิ่งดีมาก)</strong> จากนั้นกำหนดสัดส่วนที่ต้องการ:
+</p>
+<ul>
+  <li><strong>9:16 (Vertical):</strong> เหมาะสำหรับ TikTok, Instagram Reels, YouTube Shorts และ Facebook Reels (แนะนำที่สุดสำหรับแม่ค้าออนไลน์)</li>
+  <li><strong>1:1 (Square):</strong> เหมาะสำหรับโพสต์ Carousel ใน Facebook / IG Feed</li>
+  <li><strong>16:9 (Landscape):</strong> เหมาะสำหรับวิดีโอบน YouTube, เว็บไซต์ หรือจอดิจิทัล</li>
+  <li><strong>ความยาว (Duration):</strong> เลือกได้ตั้งแต่ 15 วินาที, 30 วินาที หรือปล่อยให้ AI เลือกระยะเวลาที่เหมาะสมตามสคริปต์ (Auto)</li>
+</ul>
+
+<h3>ขั้นตอนที่ 2: ป้อนโจทย์กำกับ (Creative Brief Prompt)</h3>
+<p>
+พิมพ์ไอเดียของคุณลงในกล่องข้อความ โดยแนะนำให้ใช้โครงสร้าง <strong>[ประเภทสินค้า] + [บรรยากาศ/ธีม] + [การเคลื่อนไหว] + [ความรู้สึกของผู้บริโภค]</strong> เช่น:
+</p>
+<pre class="bg-slate-900 text-amber-300 p-4 rounded-xl border border-white/10 text-sm overflow-x-auto">
+"A cinematic, high-energy product launch video for a luxury canned sparkling water.
+Start with macro water droplets on the matte can, dynamic camera spin, 
+fresh citrus slices splashing in crystal clear ice water, 
+and end with an elegant, thirst-quenching hero shot."
+</pre>
+
+<div class="my-8">
+  <img src="/blog/dreamrender/03-home-full.png" alt="สไตล์และเอฟเฟกต์วิดีโอตัวอย่างของ Dream Render เช่น Flavor burst, Dancing colors" class="w-full rounded-2xl border border-white/10 shadow-2xl" />
+  <p class="text-xs text-center text-slate-400 mt-2">ภาพที่ 4: ตัวอย่างรูปแบบงาน (Showcase Styles) เช่น Flavor burst, Dancing colors, Claw grab, Bloom Loop</p>
+</div>
+
+<h3>ขั้นตอนที่ 3: ตรวจสอบ Storyboard Plan จาก AI Director</h3>
+<p>
+หลังจากกด Generate ระบบจะไม่เรนเดอร์เป็นไฟล์วิดีโอทันที แต่จะแสดง <strong>Shot-by-Shot Storyboard</strong> ให้คุณดูก่อน เช่น:
+</p>
+<ul>
+  <li><strong>Shot 1 (0-3s):</strong> Extreme Close-Up — กล้องแพนรอบหยดน้ำบนผิวกระป๋อง เพื่อดึงดูดสายตาใน 3 วินาทีแรก (Hook)</li>
+  <li><strong>Shot 2 (3-8s):</strong> Motion Splash — ส้มเลมอนตกลงในน้ำกระจายในจังหวะ Slow Motion เพิ่มความรู้สึกสดชื่น</li>
+  <li><strong>Shot 3 (8-15s):</strong> Hero Call-to-Action — กระป๋องสินค้าตั้งตระหง่านพร้อมโลโก้คมชัด แสง Spotlight ส่องลงมา</li>
+</ul>
+
+<h3>ขั้นตอนที่ 4: ดูพรีวิวภาพนิ่ง ปรับแก้ และฟังเพลงประกอบ (Review & Iteration)</h3>
+<p>
+นี่คือข้อดีที่สุดของ Dream Render! คุณสามารถ:
+</p>
+<ul>
+  <li>ดูภาพพรีวิวก่อนเรนเดอร์ เพื่อให้แน่ใจว่า AI ไม่ได้ทำให้หน้าตาผลิตภัณฑ์ของคุณเบี้ยวผิดเพี้ยน</li>
+  <li>สั่งปรับแก้ง่ายๆ เช่น <em>"ขอเปลี่ยนแสงในช็อตที่ 2 ให้อุ่นขึ้น"</em> หรือ <em>"เปลี่ยนมุมกล้องช็อตแรกให้หมุนเร็วขึ้น"</em></li>
+  <li>ฟังดนตรีและจังหวะบีท (Scratch Audio) ว่าเข้ากับแบรนด์หรือไม่</li>
+</ul>
+
+<h3>ขั้นตอนที่ 5: สั่ง Final Render และส่งออก (Export)</h3>
+<p>
+เมื่อคุณพอใจกับทุกช็อตแล้ว กดปุ่ม <strong>"Render Video"</strong> ระบบจะประมวลผลประมาณ 2 ถึง 10 นาที (ขึ้นอยู่กับความยาวและความซับซ้อน) จากนั้นคุณสามารถดาวน์โหลดคลิป MP4 ความละเอียด Full HD / 4K นำไปยิงแอด หรือโพสต์ลง Social Media ได้ทันที!
+</p>
+
+<hr class="border-white/10 my-8" />
+
+<h2>4. คำถามที่พบบ่อย (Official FAQ & Content Guidelines)</h2>
+
+<div class="my-8">
+  <img src="/blog/dreamrender/05-faq.png" alt="ส่วน FAQ อย่างเป็นทางการของ Dream Render" class="w-full rounded-2xl border border-white/10 shadow-2xl" />
+  <p class="text-xs text-center text-slate-400 mt-2">ภาพที่ 5: หมวดคำถามที่พบบ่อย (FAQ) และข้อกำหนดลิขสิทธิ์เชิงพาณิชย์จาก Dream Render</p>
+</div>
+
+<h3>Q: วิดีโอที่สร้างขึ้นนำไปใช้ในเชิงพาณิชย์ (Commercial Use) ได้หรือไม่?</h3>
+<p>
+<strong>ได้ 100%:</strong> วิดีโอและเนื้อหาที่คุณสร้างขึ้นผ่าน Dream Render เป็นสิทธิ์ของคุณในการนำไปใช้ทำโฆษณา ยิงแอดบน Meta Ads, TikTok Ads หรือโปรโมตหน้าร้านได้โดยไม่มีลายน้ำ (Watermark)
+</p>
+
+<h3>Q: ความแตกต่างระหว่าง Dream Render กับ Runway Gen-3 / Kling คืออะไร?</h3>
+<ul>
+  <li><strong>Dream Render:</strong> เหมาะกับงานโฆษณาสินค้า, วิดีโอสั้นการตลาด, e-Commerce ที่ต้องการความแม่นยำของตัวสินค้า และมี Storyboard ชัดเจนพร้อมเสียง</li>
+  <li><strong>Runway / Kling:</strong> โดดเด่นด้านงานภาพยนตร์ (Cinematic Arts), งานแฟนตาซี หรือ Visual Effects กว้างๆ ที่ไม่เจาะจงแพ็กเกจสินค้า</li>
+</ul>
+
+<hr class="border-white/10 my-8" />
+
+<h2>5. สรุปคำแนะนำจาก อ. Kevin สำหรับผู้ประกอบการและ Content Creator</h2>
+<p>
+Dream Render คือเครื่องมือที่ช่วยลดช่องว่างระหว่าง <strong>"ผู้ประกอบการที่มีไอเดีย"</strong> กับ <strong>"การมีสื่อโฆษณาระดับโปร"</strong> คุณไม่จำเป็นต้องมีทักษะตัดต่อขั้นสูง ไม่ต้องเช่าไฟหรือกล้องราคาหลายแสน เพียงแค่มีภาพสินค้าที่มีคุณภาพและเข้าใจการเล่าเรื่อง (Storytelling)
+</p>
+<p>
+หากคุณต้องการเรียนรู้การผสานเครื่องมืออย่าง <strong>Dream Render, Meta AI, Grok Bot และการวางระบบ AI Agent อัตโนมัติ</strong> เพื่อสร้างยอดขายให้กับแบรนด์ของคุณ อย่าลืมติดตามคลาสเรียนและบทความเจาะลึกอื่นๆ ได้ที่ <a href="/" class="text-amber-400 font-bold underline">kevinaiagent.tech</a> สถาบันพัฒนาทักษะ AI เพื่อคนทำงานยุคใหม่!
+</p>`
   }
 ];
 
