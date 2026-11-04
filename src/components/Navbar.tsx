@@ -132,28 +132,25 @@ export default function Navbar() {
                     Character Lock Studio Prompt
                   </a>
 
-                  <a
-                    href="https://hongpak-voice-studio.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/drama"
                     onClick={() => setPromptsDropdownOpen(false)}
                     className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    ห้องน้องพากย์
-                  </a>
+                    สตูดิโอละครสั้น AI
+                  </Link>
                 </div>
               </div>
             </div>
 
-            {/* ห้องน้องพากย์ Top Nav Item */}
-            <a
-              href="https://hongpak-voice-studio.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
+            {/* สตูดิโอละครสั้น AI generator Top Nav Item (แทนที่ห้องน้องพากย์) */}
+            <Link
+              href="/drama"
+              className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors flex items-center gap-1.5"
             >
-              ห้องน้องพากย์
-            </a>
+              <span>สตูดิโอละครสั้น AI</span>
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30">NEW</span>
+            </Link>
 
             <Link href="/#schedule" className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors">
               Calendar
@@ -353,27 +350,23 @@ export default function Navbar() {
                 >
                   Character Lock Studio Prompt
                 </a>
-                <a
-                  href="https://hongpak-voice-studio.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/drama"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  ห้องน้องพากย์
-                </a>
+                  สตูดิโอละครสั้น AI
+                </Link>
               </div>
             )}
           </div>
-          <a
-            href="https://hongpak-voice-studio.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/drama"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+            className="block px-3 py-2 rounded-md text-base font-medium text-amber-300 hover:text-white hover:bg-slate-800"
           >
-            ห้องน้องพากย์
-          </a>
+            สตูดิโอละครสั้น AI
+          </Link>
           <Link
             href="/#schedule"
             onClick={() => setMobileMenuOpen(false)}

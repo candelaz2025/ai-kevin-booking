@@ -36,7 +36,12 @@ import {
   ShieldCheck,
   Users,
   Eye,
-  Sliders
+  Sliders,
+  PenTool,
+  Palette,
+  Camera,
+  Repeat,
+  Edit3
 } from 'lucide-react';
 import { dramaCatalog, getDramaMediaUrl, filterDramaItems } from '@/lib/drama-service';
 import { DramaItem, DRAMA_GROUP_NOTES } from '@/lib/drama-types';
@@ -73,7 +78,72 @@ export default function DramaPromptsPage() {
   const [aspectRatio, setAspectRatio] = useState<'9:16' | '16:9'>('9:16');
   const [softImpact, setSoftImpact] = useState(true);
   const [isRandomizing, setIsRandomizing] = useState(false);
-  const [outputTab, setOutputTab] = useState<'json' | 'storyboard' | 'bible'>('json');
+  const [outputTab, setOutputTab] = useState<'json' | 'storyboard' | 'bible' | 'editor'>('json');
+  const [studioTool, setStudioTool] = useState<'dreamscript' | 'anycook' | 'dreamshot' | 'editor'>('dreamscript');
+
+  // Interactive Live Storyboard Shots (Editable & Regenerable)
+  const [liveShots, setLiveShots] = useState([
+    {
+      shot: 1,
+      role: 'HOOK (0-2s)',
+      title: 'ระเบิดความขัดแย้ง 2 วินาทีแรก',
+      speaker: 'Antagonist',
+      dialogue: 'แค่แม่บ้านกระจอกอย่างเธอ... มีสิทธิ์อะไรมามองหน้าฉันแบบนี้!',
+      camera: 'Dramatic push-in on eyes with micro-drama intensity, 9:16 vertical look',
+      action: 'โคลสอัปหน้าตัวร้ายตวาดลั่นล็อบบี้ นางเอกยืนนิ่งส่งสายตาเยือกเย็น',
+      sfx: 'Sharp glass shatter, office silence, sub-bass riser'
+    },
+    {
+      shot: 2,
+      role: 'SETUP (2-6s)',
+      title: 'วางเดิมพัน & สเตตัสทางสังคม',
+      speaker: 'Protagonist',
+      dialogue: 'คิดว่ามีอำนาจแล้วจะทำอะไรกับใครก็ได้เหรอคะ?',
+      camera: 'Slow push-in tracking shot, low angle',
+      action: 'นางเอกหันกลับมาช้าๆ สง่างามท่ามกลางสายตาอึ้งของพนักงานทั้งบริษัท',
+      sfx: 'Whispers from crowd, ambient room silence'
+    },
+    {
+      shot: 3,
+      role: 'PRESSURE (6-10s)',
+      title: 'กดดันถึงขีดสุด & ไร้ทางถอย',
+      speaker: 'Antagonist',
+      dialogue: 'ฉันสั่งให้ก้มกราบขอโทษเดี๋ยวนี้! อย่าให้ต้องใช้กำลัง!',
+      camera: 'Handheld intense wobble push',
+      action: 'ตัวร้ายก้าวเข้ามาข่มขู่พร้อมทีมการ์ด บรรยากาศตึงเครียดถึงขีดสุด',
+      sfx: 'Heavy footsteps, dramatic heartbeat kick'
+    },
+    {
+      shot: 4,
+      role: 'TURN (10-14s)',
+      title: 'จุดพลิกกระดาน & พลิกอำนาจ',
+      speaker: 'Protagonist',
+      dialogue: 'เอกสารแต่งตั้งประธานคนใหม่... เพิ่งเซ็นเมื่อ 5 นาทีที่แล้ว',
+      camera: 'Whip pan to reveal gold folder / VIP phone call',
+      action: 'นางเอกเปิดซองทองคำ บอร์ดผู้บริหารระดับสูงวิ่งกรูเข้ามาก้มคำนับนางเอก',
+      sfx: 'Sharp sub-bass riser, orchestral sting'
+    },
+    {
+      shot: 5,
+      role: 'PAYOFF (14-18s)',
+      title: 'สะใจผู้ดู & ตัวร้ายหน้าซีด',
+      speaker: 'Antagonist',
+      dialogue: 'ทะ... ท่านประธานตัวจริง... เป็นไปไม่ได้!',
+      camera: 'Dramatic vertigo zoom-out on trembling antagonist',
+      action: 'ตัวร้ายทรุดเข่าลงกับพื้น โทรศัพท์หลุดมือ หน้าถอดสีจนถึงขีดสุด',
+      sfx: 'Deep silence 0.5s before line, followed by orchestral swell'
+    },
+    {
+      shot: 6,
+      role: 'CLIFFHANGER (18-22s)',
+      title: 'ทิ้งปมพีค บังคับกดดูตอนต่อไป',
+      speaker: 'Protagonist',
+      dialogue: 'และคนที่ต้องถูกไล่ออกและดำเนินคดีตั้งแต่วินาทีนี้... คือคุณ',
+      camera: 'Slow confident push-in to piercing eyes, cut to black',
+      action: 'นางเอกพูดคำตัดสิน ประตูปิดลง ตัดเข้าจอดำทันที',
+      sfx: 'Heavy cinematic braam, heartbeat pulse into abrupt silence'
+    }
+  ]);
 
   // Catalog states
   const [selectedGroup, setSelectedGroup] = useState<string>('all');
@@ -153,6 +223,73 @@ export default function DramaPromptsPage() {
     setProtagonistVoice(trope.protagonistVoice);
     setAntagonistVoice(trope.antagonistVoice);
     setSeriesTitle(`${trope.title}: ${trope.titleTh}`);
+    
+    // Update live shots with the newly selected trope's dialogue, camera and SFX
+    const protagName = trope.protagonistVoice.split(':')[0]?.trim() || 'Protagonist';
+    const antagName = trope.antagonistVoice.split(':')[0]?.trim() || 'Antagonist';
+
+    setLiveShots([
+      {
+        shot: 1,
+        role: 'HOOK (0-2s)',
+        title: 'ระเบิดความขัดแย้ง 2 วินาทีแรก',
+        speaker: antagName,
+        dialogue: trope.hookLine,
+        camera: trope.cameraMotion,
+        action: `โคลสอัปหน้า ${antagName} ตวาดข่มขู่ในบรรยากาศ ${trope.colorTone} โดยมี ${protagName} ยืนนิ่งสายตาเยือกเย็น`,
+        sfx: trope.sfx
+      },
+      {
+        shot: 2,
+        role: 'SETUP (2-6s)',
+        title: 'วางเดิมพัน & สเตตัสทางสังคม',
+        speaker: protagName,
+        dialogue: 'คิดว่ามีอำนาจแล้วจะทำอะไรกับใครก็ได้เหรอคะ?',
+        camera: 'Slow push-in tracking shot, low angle',
+        action: `${protagName} หันกลับมาช้าๆ ส่งสายตาสง่างามเหนือชั้น ท่ามกลางคนรอบข้าง`,
+        sfx: 'Whispers from crowd, ambient room silence'
+      },
+      {
+        shot: 3,
+        role: 'PRESSURE (6-10s)',
+        title: 'กดดันถึงขีดสุด & ไร้ทางถอย',
+        speaker: antagName,
+        dialogue: 'ฉันสั่งให้คุกเข่าขอโทษเดี๋ยวนี้! อย่าให้ต้องใช้กำลัง!',
+        camera: 'Handheld intense wobble push',
+        action: `${antagName} สั่งการ์ดล้อมข่มขู่ บรรยากาศตึงเครียดตามกฎ Soft Impact`,
+        sfx: 'Heavy footsteps, dramatic heartbeat kick'
+      },
+      {
+        shot: 4,
+        role: 'TURN (10-14s)',
+        title: 'จุดพลิกกระดาน & พลิกอำนาจ',
+        speaker: protagName,
+        dialogue: 'เอกสารแต่งตั้งประธานคนใหม่... เพิ่งเซ็นเมื่อ 5 นาทีที่แล้ว',
+        camera: 'Whip pan to reveal gold folder / VIP phone call',
+        action: `${protagName} เผยตราประทับหรือเอกสารลับ บอร์ดผู้บริหารระดับสูงวิ่งเข้ามาก้มคำนับ`,
+        sfx: 'Sharp sub-bass riser, orchestral sting'
+      },
+      {
+        shot: 5,
+        role: 'PAYOFF (14-18s)',
+        title: 'สะใจผู้ดู & ตัวร้ายหน้าซีด',
+        speaker: antagName,
+        dialogue: 'ทะ... ท่านประธานตัวจริง... เป็นไปไม่ได้!',
+        camera: 'Dramatic vertigo zoom-out on trembling antagonist',
+        action: `${antagName} ทรุดเข่าลงกับพื้น หน้าถอดสี แววตาหวาดผวาถึงขีดสุด`,
+        sfx: 'Deep silence 0.5s before line, followed by orchestral swell'
+      },
+      {
+        shot: 6,
+        role: 'CLIFFHANGER (18-22s)',
+        title: 'ทิ้งปมพีค บังคับกดดูตอนต่อไป',
+        speaker: protagName,
+        dialogue: 'และคนที่ต้องถูกไล่ออกและดำเนินคดีตั้งแต่วินาทีนี้... คือคุณ',
+        camera: 'Slow confident push-in to piercing eyes, cut to black',
+        action: `${protagName} ประกาศคำตัดสินขั้นเด็ดขาด ประตูลิฟต์ปิดลงตัดเข้าจอดำ`,
+        sfx: 'Heavy cinematic braam, heartbeat pulse into abrupt silence'
+      }
+    ]);
   };
 
   // Trigger celebration confetti
@@ -223,74 +360,17 @@ export default function DramaPromptsPage() {
     const protagName = protagonistVoice.split(':')[0] || 'Mali';
     const antagName = antagonistVoice.split(':')[0] || 'Krit';
 
-    const shots = [
-      {
-        shot: 1,
-        role: 'HOOK (0-2s)',
-        dialogue: selectedTrope.hookLine,
-        speaker: antagName,
-        timing: 'speech starts at 0.3s and ends before 3.8s',
-        camera_movement: selectedTrope.cameraMotion,
-        acting_energy: 'aggressive condescending outburst',
-        scene_action: `Extreme close-up on ${antagName}'s face shouting angrily in modern Bangkok setting. In the foreground, ${protagName} stands motionless with cold calm eyes.`,
-        sfx: selectedTrope.sfx
-      },
-      {
-        shot: 2,
-        role: 'SETUP',
-        dialogue: 'คิดว่ามีอำนาจแล้วจะทำอะไรกับใครก็ได้เหรอคะ?',
-        speaker: protagName,
-        timing: 'speech starts at 0.3s and ends before 4.2s',
-        camera_movement: 'slow push-in tracking shot, low angle',
-        acting_energy: 'quiet restrained power, sharp gaze',
-        scene_action: `${protagName} slowly turns around, looking directly into the camera with regal composure amidst shocked onlookers.`,
-        sfx: 'whispers from crowd, ambient room silence'
-      },
-      {
-        shot: 3,
-        role: 'PRESSURE',
-        dialogue: 'ฉันสั่งให้ก้มกราบขอโทษเดี๋ยวนี้! อย่าให้ต้องใช้กำลัง!',
-        speaker: antagName,
-        timing: 'speech starts at 0.3s and ends before 4.5s',
-        camera_movement: 'handheld intense wobble push',
-        acting_energy: 'furious intimidating gesture',
-        scene_action: `${antagName} raises hand threateningly, security guards approach.`,
-        sfx: 'heavy footsteps, dramatic heartbeat kick'
-      },
-      {
-        shot: 4,
-        role: 'TURN',
-        dialogue: 'เอกสารแต่งตั้งประธานคนใหม่... เพิ่งเซ็นเมื่อ 5 นาทีที่แล้ว',
-        speaker: protagName,
-        timing: 'speech starts at 0.3s and ends before 5.0s',
-        camera_movement: 'whip pan to reveal gold folder / VIP phone call',
-        acting_energy: 'unshakable authority and triumph',
-        scene_action: `${protagName} pulls out a stamped gold folder as executive VIPs rush into the lobby bowing respectfully to her.`,
-        sfx: 'sharp sub-bass riser, orchestral sting'
-      },
-      {
-        shot: 5,
-        role: 'PAYOFF',
-        dialogue: 'ทะ... ท่านประธานตัวจริง... เป็นไปไม่ได้!',
-        speaker: antagName,
-        timing: 'speech starts at 0.3s and ends before 4.1s',
-        camera_movement: 'dramatic vertigo zoom-out on trembling antagonist',
-        acting_energy: 'pure terror and jaw-dropping shock',
-        scene_action: `${antagName} collapses to his knees, dropping his phone, staring up in utter disbelief and fear.`,
-        sfx: 'deep silence 0.5s before line, followed by orchestral swell'
-      },
-      {
-        shot: 6,
-        role: 'CLIFFHANGER',
-        dialogue: 'และคนที่ต้องถูกไล่ออกและดำเนินคดีตั้งแต่วินาทีนี้... คือคุณ',
-        speaker: protagName,
-        timing: 'speech starts at 0.3s and ends before 4.8s',
-        camera_movement: 'slow confident push-in to piercing eyes, cut to black',
-        acting_energy: 'chilling absolute verdict',
-        scene_action: `${protagName} speaks the final verdict as the doors close behind her. Cut immediately on the climax reaction.`,
-        sfx: 'heavy cinematic braam, heartbeat pulse into abrupt silence'
-      }
-    ];
+    const shots = liveShots.map((ls, idx) => ({
+      shot: idx + 1,
+      role: ls.role,
+      dialogue: ls.dialogue,
+      speaker: ls.speaker,
+      timing: `speech starts at 0.3s and ends before ${(idx === 0 ? 3.8 : 4.5).toFixed(1)}s`,
+      camera_movement: ls.camera,
+      acting_energy: idx === 0 ? 'aggressive condescending outburst' : idx === 4 ? 'pure terror and shock' : 'high dramatic retention',
+      scene_action: ls.action,
+      sfx: ls.sfx
+    }));
 
     const output = {
       project: seriesTitle,
@@ -324,66 +404,40 @@ export default function DramaPromptsPage() {
     };
 
     return JSON.stringify(output, null, 2);
-  }, [selectedTrope, seriesTitle, protagonistVoice, antagonistVoice, aspectRatio, softImpact]);
+  }, [selectedTrope, seriesTitle, protagonistVoice, antagonistVoice, aspectRatio, softImpact, liveShots]);
 
   // GENERATED OUTPUT 2: FULL STORYBOARD & SCREENPLAY
   const generatedStoryboardText = useMemo(() => {
-    return `# A9 DRAMA BEAT ENGINE: SCREENPLAY & SHOT STORYBOARD
+    return `# สตูดิโอละครสั้น AI GENERATOR: SCREENPLAY & SHOT STORYBOARD
 TITLE: ${seriesTitle}
-TROPE: ${selectedTrope.title} (${selectedTrope.titleTh})
-ASPECT RATIO: ${aspectRatio} | SOFT IMPACT: ${softImpact ? 'ENABLED' : 'DISABLED'}
+TROPE: ${selectedTrope.title} (${selectedTrope.titleTh}) [${selectedTrope.code}]
+ASPECT RATIO: ${aspectRatio} | SOFT IMPACT RULE: ${softImpact ? 'ENABLED' : 'DISABLED'}
 
 ==================================================
-## 0. PREMISE & CHARACTERS
+## 0. PREMISE, CHARACTERS & ANYCOOK VISUAL ASSETS
 ==================================================
 SYNOPSIS:
 ${synopsis}
 
-VOICE LOCKS:
+VOICE LOCKS & CAST:
 - PROTAGONIST: ${protagonistVoice}
 - ANTAGONIST: ${antagonistVoice}
 
+COLOR TONE & LIGHTING:
+${selectedTrope.colorTone}
+
 ==================================================
-## 1. 6-BEAT EPISODIC BREAKDOWN
+## 1. DREAMSHOT 6-BEAT EPISODIC BREAKDOWN
 ==================================================
 
-### SHOT 1 [HOOK] · 0:00 - 0:04 (Conflict explodes in first 2 seconds)
-- Beat: ${selectedTrope.hookStyle}
-- Speaker: Antagonist
-- Dialogue (Thai): "${selectedTrope.hookLine}"
-- Visual Action: Extreme close-up on antagonist face with aggressive sneer. Push-in on protagonist standing still.
-- SFX: ${selectedTrope.sfx}
-
-### SHOT 2 [SETUP] · 0:04 - 0:08 (Stakes & Power Dynamic)
-- Speaker: Protagonist
-- Dialogue (Thai): "คิดว่ามีอำนาจแล้วจะทำอะไรกับใครก็ได้เหรอคะ?"
-- Visual Action: Protagonist turns around slowly, showing calm confidence. Contrast between low-status attire and elite posture.
-- Camera: Low-angle tracking push-in.
-
-### SHOT 3 [PRESSURE] · 0:08 - 0:12 (Escalation & Danger)
-- Speaker: Antagonist
-- Dialogue (Thai): "ฉันสั่งให้ก้มกราบขอโทษเดี๋ยวนี้! อย่าให้ต้องใช้กำลัง!"
-- Visual Action: Antagonist steps forward with security. Tension peaks, onlookers hold breath.
-- Soft Impact Rule: Raised hand, no physical contact shown. Cut on reaction.
-
-### SHOT 4 [TURN] · 0:12 - 0:16 (The Table Flips)
-- Speaker: Protagonist
-- Dialogue (Thai): "เอกสารแต่งตั้งประธานคนใหม่... เพิ่งเซ็นเมื่อ 5 นาทีที่แล้ว"
-- Visual Action: Reveal gold envelope / Executive team bursts in bowing to protagonist. Game permanently inverted.
-- SFX: Sub-bass riser, sharp sting.
-
-### SHOT 5 [PAYOFF] · 0:16 - 0:20 (The Vindication Face)
-- Speaker: Antagonist
-- Dialogue (Thai): "ทะ... ท่านประธานตัวจริง... เป็นไปไม่ได้!"
-- Visual Action: Antagonist drops to knees in terror. Color drains from face. Crowd gasps.
-- Camera: Vertigo zoom-out.
-
-### SHOT 6 [CLIFFHANGER] · 0:20 - 0:24 (The Hook for Next Episode)
-- Speaker: Protagonist
-- Dialogue (Thai): "และคนที่ต้องถูกไล่ออกและดำเนินคดีตั้งแต่วินาทีนี้... คือคุณ"
-- Visual Action: Final icy sentence. Cut right on gasp before hard black screen.
-- Audio: Heartbeat fade into abrupt stop.`;
-  }, [selectedTrope, seriesTitle, synopsis, protagonistVoice, antagonistVoice, aspectRatio, softImpact]);
+${liveShots.map(ls => `### SHOT ${ls.shot} [${ls.role}] · ${ls.title}
+- Speaker: ${ls.speaker}
+- Dialogue (Thai): "${ls.dialogue}"
+- Visual Action: ${ls.action}
+- Camera Movement: ${ls.camera}
+- SFX Stem: ${ls.sfx}
+`).join('\n')}`;
+  }, [selectedTrope, seriesTitle, synopsis, protagonistVoice, antagonistVoice, aspectRatio, softImpact, liveShots]);
 
   // GENERATED OUTPUT 3: SERIES BIBLE JSON (Section 11 spec)
   const generatedBibleJson = useMemo(() => {
@@ -522,7 +576,7 @@ VOICE LOCKS:
             <div className="h-4 w-px bg-white/10 hidden sm:block" />
             <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 bg-amber-400/10 px-3 py-1.5 rounded-lg border border-amber-400/30">
               <Clapperboard className="w-3.5 h-3.5" />
-              <span>A9 Micro-Drama & Short Film Producer</span>
+              <span>สตูดิโอละครสั้น AI Generator</span>
             </div>
           </div>
 
@@ -555,22 +609,58 @@ VOICE LOCKS:
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-amber-400/30 text-amber-400 text-xs font-semibold mb-4 shadow-lg shadow-amber-400/10">
             <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-            <span className="uppercase tracking-wider font-bold">DRAMA BEAT ENGINE V5.0</span>
-            <span className="text-slate-400 font-normal">· Cloned from Google Flow</span>
+            <span className="uppercase tracking-wider font-bold">AI SHORT DRAMA DIGITAL STUDIO</span>
+            <span className="text-slate-400 font-normal">· พร้อม AI Suggestion Random 200+ แบบ</span>
           </div>
 
           {/* Title */}
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-3">
-            A9 - Micro-Drama & <br className="sm:hidden" />
+            สตูดิโอละครสั้น <br className="sm:hidden" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">
-              Short Film Instant Producer
+              AI Generator &amp; Director Suite
             </span>
           </h1>
           
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed mb-6 font-normal">
-            ระบบสร้าง Prompt ละครสั้นแนวตั้ง & หนังสั้น AI ระดับสตูดิโอ วางโครงสร้าง 6 ช็อตดึงดูดสายตา 
-            (Hook 0-2s → Setup → Pressure → Turn → Payoff → Cliffhanger) พร้อม Voice Lock และ JSON สำหรับ Google Flow, Kling, Veo 3
+          <p className="text-xs sm:text-sm text-slate-300 max-w-3xl mx-auto leading-relaxed mb-6 font-normal">
+            ระบบดิจิทัลสตูดิโอสร้างละครสั้นและซีรีส์แนวตั้งครบวงจรด้วย AI พร้อม <strong>AI Suggestion Random กว่า 200+ แบบ</strong> พร้อมชื่อตัวละคร ล็อคเสียงพากย์ 
+            รองรับ <strong>✍️ DreamScript</strong> (เขียนบท/ดัดแปลงบท), <strong>🎨 Anycook</strong> (สร้างตัวละคร + ฉาก), <strong>🎥 DreamShot</strong> (สตอรีบอร์ด + จัดมุมกล้อง) 
+            และ <strong>🔁 ตัดต่อ เปลี่ยนช็อต สร้างเสียงใหม่</strong> ได้ในระบบเต็มรูปแบบ
           </p>
+
+          {/* 4 Core Pillars Pills */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 max-w-4xl mx-auto mb-6 text-left">
+            <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/10 hover:border-amber-400/40 transition-all">
+              <div className="flex items-center gap-2 text-amber-300 font-bold text-xs mb-1">
+                <PenTool className="w-3.5 h-3.5" />
+                <span>✍️ DreamScript</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">เขียนบท / ดัดแปลงบท วาง Hook 2 วินาทีแรก และปมขัดแย้ง</p>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/10 hover:border-emerald-400/40 transition-all">
+              <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs mb-1">
+                <Palette className="w-3.5 h-3.5" />
+                <span>🎨 Anycook</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">สร้างตัวละคร + ฉาก ล็อคใบหน้า เสื้อผ้า และบรรยากาศ</p>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/10 hover:border-blue-400/40 transition-all">
+              <div className="flex items-center gap-2 text-blue-300 font-bold text-xs mb-1">
+                <Camera className="w-3.5 h-3.5" />
+                <span>🎥 DreamShot</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">สตอรีบอร์ด 6 ช็อต จัดมุมกล้อง กำกับ Push-in, Vertigo</p>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/10 hover:border-purple-400/40 transition-all">
+              <div className="flex items-center gap-2 text-purple-300 font-bold text-xs mb-1">
+                <Repeat className="w-3.5 h-3.5" />
+                <span>🔁 ตัดต่อ/สร้างเสียง</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-snug">เปลี่ยนช็อต สร้างเสียงพากย์ใหม่ Voice Lock ในระบบเต็มรูปแบบ</p>
+            </div>
+          </div>
 
           {/* Mode Switcher Tabs */}
           <div className="inline-flex p-1 rounded-2xl bg-slate-900/90 border border-white/10 shadow-xl max-w-md w-full sm:w-auto">
@@ -583,7 +673,7 @@ VOICE LOCKS:
               }`}
             >
               <Clapperboard className="w-4 h-4" />
-              <span>สร้าง Prompt ละครสั้น (Producer)</span>
+              <span>สตูดิโอละครสั้น AI (Studio Suite)</span>
             </button>
             <button
               onClick={() => setActiveTab('catalog')}
@@ -771,15 +861,72 @@ VOICE LOCKS:
             )}
           </div>
 
-          {/* 2. PRODUCER WORKSPACE: CONFIGURATION + LIVE GENERATED MASTER PROMPT */}
+          {/* 2. PRODUCER WORKSPACE: 4 CORE PILLARS (DREAMSCRIPT · ANYCOOK · DREAMSHOT · ตัดต่อ/สร้างเสียง) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
-            {/* LEFT COLUMN: Input Configuration Form */}
+            {/* LEFT COLUMN: Input Configuration Form with 4 Studio Pillars */}
             <div className="lg:col-span-5 bg-[#0e1828] border border-white/10 rounded-3xl p-6 shadow-2xl relative space-y-4">
+              
+              {/* Studio Tool Selection Tabs */}
+              <div className="grid grid-cols-4 gap-1 p-1 bg-slate-900 rounded-2xl border border-white/5 text-[11px] font-bold">
+                <button
+                  type="button"
+                  onClick={() => setStudioTool('dreamscript')}
+                  className={`py-2 px-1 rounded-xl text-center transition flex flex-col items-center justify-center gap-0.5 ${
+                    studioTool === 'dreamscript' ? 'bg-amber-400 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <PenTool className="w-3.5 h-3.5" />
+                  <span>✍️ DreamScript</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setStudioTool('anycook')}
+                  className={`py-2 px-1 rounded-xl text-center transition flex flex-col items-center justify-center gap-0.5 ${
+                    studioTool === 'anycook' ? 'bg-emerald-400 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Palette className="w-3.5 h-3.5" />
+                  <span>🎨 Anycook</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStudioTool('dreamshot');
+                    setOutputTab('storyboard');
+                  }}
+                  className={`py-2 px-1 rounded-xl text-center transition flex flex-col items-center justify-center gap-0.5 ${
+                    studioTool === 'dreamshot' ? 'bg-blue-400 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Camera className="w-3.5 h-3.5" />
+                  <span>🎥 DreamShot</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStudioTool('editor');
+                    setOutputTab('editor');
+                  }}
+                  className={`py-2 px-1 rounded-xl text-center transition flex flex-col items-center justify-center gap-0.5 ${
+                    studioTool === 'editor' ? 'bg-purple-400 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Repeat className="w-3.5 h-3.5" />
+                  <span>🔁 ตัดต่อ/เสียง</span>
+                </button>
+              </div>
+
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <div>
                   <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest block">
-                    A9 PRODUCER CONFIG
+                    {studioTool === 'dreamscript' && '✍️ DREAMSCRIPT — เขียนบท / ดัดแปลงบท'}
+                    {studioTool === 'anycook' && '🎨 ANYCOOK — สร้างตัวละคร + ฉาก'}
+                    {studioTool === 'dreamshot' && '🎥 DREAMSHOT — สตอรีบอร์ด + จัดมุมกล้อง'}
+                    {studioTool === 'editor' && '🔁 ตัดต่อ เปลี่ยนช็อต สร้างเสียงใหม่'}
                   </span>
                   <h3 className="text-base font-bold text-white mt-0.5">
                     {selectedTrope.titleTh}
@@ -788,11 +935,11 @@ VOICE LOCKS:
 
                 <button
                   onClick={handleRandomizeDrama}
-                  title="สุ่มไอเดียใหม่"
-                  className="px-2.5 py-1.5 rounded-xl bg-amber-400/10 text-amber-400 hover:bg-amber-400/20 text-xs font-bold transition flex items-center gap-1"
+                  title="สุ่มไอเดียใหม่จาก 200 แบบ"
+                  className="px-2.5 py-1.5 rounded-xl bg-amber-400/10 text-amber-400 hover:bg-amber-400/20 text-xs font-bold transition flex items-center gap-1 shrink-0"
                 >
                   <Shuffle className="w-3.5 h-3.5" />
-                  <span>สุ่มไอเดีย</span>
+                  <span>สุ่ม ({randomCount}/200)</span>
                 </button>
               </div>
 
@@ -946,7 +1093,16 @@ VOICE LOCKS:
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
 
-                  <div className="flex rounded-xl bg-slate-900/80 p-0.5 border border-white/5">
+                  <div className="flex rounded-xl bg-slate-900/80 p-0.5 border border-white/5 flex-wrap">
+                    <button
+                      onClick={() => setOutputTab('editor')}
+                      className={`px-3 py-1 rounded-lg text-xs font-semibold transition flex items-center gap-1 ${
+                        outputTab === 'editor' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      <Repeat className="w-3.5 h-3.5" />
+                      <span>🔁 สตูดิโอตัดต่อ & แก้ช็อต</span>
+                    </button>
                     <button
                       onClick={() => setOutputTab('json')}
                       className={`px-3 py-1 rounded-lg text-xs font-semibold transition ${
@@ -961,7 +1117,7 @@ VOICE LOCKS:
                         outputTab === 'storyboard' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
                       }`}
                     >
-                      Storyboard 6 Beats
+                      DreamShot Storyboard
                     </button>
                     <button
                       onClick={() => setOutputTab('bible')}
@@ -985,8 +1141,109 @@ VOICE LOCKS:
                 </div>
               </div>
 
-              {/* Terminal Code Display */}
-              <div className="p-5 font-mono text-xs leading-relaxed text-slate-300 max-h-[580px] overflow-y-auto whitespace-pre-wrap select-text bg-[#070d17]/90">
+              {/* Terminal Code Display or Interactive Shot Editor */}
+              <div className="p-5 font-mono text-xs leading-relaxed text-slate-300 max-h-[580px] overflow-y-auto whitespace-pre-wrap select-text bg-[#070d17]/90 font-sans">
+                {outputTab === 'editor' && (
+                  <div className="space-y-4">
+                    <div className="p-3 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-between text-xs text-amber-300">
+                      <div className="flex items-center gap-2">
+                        <Repeat className="w-4 h-4 text-amber-400" />
+                        <span><strong>🔁 สตูดิโอตัดต่อ &amp; จัดการช็อตสด:</strong> แก้ไขคำพูด, สลับมุมกล้อง หรือเปลี่ยน Sound FX ของแต่ละช็อตได้แบบ Real-time</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleSelectTrope(selectedTrope);
+                          setToastMessage('รีเซ็ตช็อตกลับเป็นค่าเริ่มต้นของพล็อตนี้เรียบร้อย');
+                          setTimeout(() => setToastMessage(null), 2500);
+                        }}
+                        className="px-2.5 py-1 rounded-lg bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 text-[11px] font-bold"
+                      >
+                        คืนค่าเดิม
+                      </button>
+                    </div>
+
+                    <div className="space-y-3 font-sans">
+                      {liveShots.map((shot, idx) => (
+                        <div key={idx} className="p-3.5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-2.5">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <span className="w-6 h-6 rounded-lg bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center">
+                                {shot.shot}
+                              </span>
+                              <span className="text-xs font-bold text-white">
+                                {shot.role} · {shot.title}
+                              </span>
+                            </div>
+                            <span className="text-[11px] font-semibold text-amber-400">
+                              ผู้พูด: {shot.speaker}
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            <div className="space-y-1">
+                              <label className="text-[10px] text-slate-400 block font-semibold">บทพูดตัวละคร (Lip-Sync Line):</label>
+                              <input
+                                type="text"
+                                value={shot.dialogue}
+                                onChange={(e) => {
+                                  const updated = [...liveShots];
+                                  updated[idx].dialogue = e.target.value;
+                                  setLiveShots(updated);
+                                }}
+                                className="w-full bg-[#080f1a] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-amber-300 focus:outline-none focus:border-amber-400"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] text-slate-400 block font-semibold">มุมกล้อง (DreamShot Camera):</label>
+                              <input
+                                type="text"
+                                value={shot.camera}
+                                onChange={(e) => {
+                                  const updated = [...liveShots];
+                                  updated[idx].camera = e.target.value;
+                                  setLiveShots(updated);
+                                }}
+                                className="w-full bg-[#080f1a] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-400 font-mono text-[11px]"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            <div className="space-y-1">
+                              <label className="text-[10px] text-slate-400 block font-semibold">การกระทำในช็อต (Visual Action):</label>
+                              <input
+                                type="text"
+                                value={shot.action}
+                                onChange={(e) => {
+                                  const updated = [...liveShots];
+                                  updated[idx].action = e.target.value;
+                                  setLiveShots(updated);
+                                }}
+                                className="w-full bg-[#080f1a] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-amber-400"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] text-slate-400 block font-semibold">เสียงประกอบ (Sound & SFX Stem):</label>
+                              <input
+                                type="text"
+                                value={shot.sfx}
+                                onChange={(e) => {
+                                  const updated = [...liveShots];
+                                  updated[idx].sfx = e.target.value;
+                                  setLiveShots(updated);
+                                }}
+                                className="w-full bg-[#080f1a] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-amber-400 font-mono text-[11px]"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 {outputTab === 'json' && generatedVideoJson}
                 {outputTab === 'storyboard' && generatedStoryboardText}
                 {outputTab === 'bible' && generatedBibleJson}
