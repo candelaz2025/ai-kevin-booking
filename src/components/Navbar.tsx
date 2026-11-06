@@ -91,6 +91,14 @@ export default function Navbar() {
                   </Link>
 
                   <Link
+                    href="/prompts/meme-gif"
+                    onClick={() => setPromptsDropdownOpen(false)}
+                    className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
+                  >
+                    Meme GIF Animation (ChatGPT 2.6)
+                  </Link>
+
+                  <Link
                     href="/prompts/director-studio"
                     onClick={() => setPromptsDropdownOpen(false)}
                     className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
@@ -312,6 +320,13 @@ export default function Navbar() {
                   className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
                   Prompt Video ละคร
+                </Link>
+                <Link
+                  href="/prompts/meme-gif"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                >
+                  Meme GIF Animation (ChatGPT 2.6)
                 </Link>
                 <Link
                   href="/prompts/director-studio"

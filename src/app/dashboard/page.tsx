@@ -1709,7 +1709,7 @@ export default function DashboardPage() {
                       {!isOnline && (
                         <div className="flex items-center gap-2 text-xs text-slate-400">
                           <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                          <span>สถานที่: เวิร์กช็อปสด Onsite ({classInfo?.location || 'ชั้น 6 M Academy'})</span>
+                          <span>สถานที่: เวิร์กช็อปสด Onsite ({classInfo?.location || 'kevinaiagent.tech Studio'})</span>
                         </div>
                       )}
 
