@@ -86,8 +86,8 @@ function ArticleContent({ params }: { params: Promise<{ slug: string }> }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#080f1a] text-slate-100 py-10">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-[#080f1a] text-slate-100 py-10 overflow-x-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 w-full min-w-0">
         
         {/* Back Link */}
         <div className="mb-6">
@@ -101,7 +101,7 @@ function ArticleContent({ params }: { params: Promise<{ slug: string }> }) {
         </div>
 
         {/* Article Header */}
-        <header className="space-y-4 mb-8">
+        <header className="space-y-4 mb-8 w-full min-w-0 overflow-hidden break-words">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
               {article.category}
@@ -115,12 +115,12 @@ function ArticleContent({ params }: { params: Promise<{ slug: string }> }) {
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight break-words">
             {article.title}
           </h1>
 
           {article.excerpt && (
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed pt-1 border-l-2 border-amber-400 pl-4 font-normal">
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed pt-1 border-l-2 border-amber-400 pl-4 font-normal break-words">
               {article.excerpt}
             </p>
           )}
@@ -172,10 +172,10 @@ function ArticleContent({ params }: { params: Promise<{ slug: string }> }) {
         )}
 
         {/* Content Body */}
-        <article className="bg-[#101c2d] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl prose prose-invert max-w-none prose-headings:text-white prose-h2:text-2xl prose-h2:font-bold prose-h3:text-xl prose-p:text-slate-300 prose-p:leading-relaxed prose-li:text-slate-300 prose-strong:text-amber-300 prose-a:text-amber-400 prose-img:rounded-2xl prose-img:border prose-img:border-white/10">
+        <article className="bg-[#101c2d] border border-white/10 rounded-3xl p-5 sm:p-8 md:p-10 shadow-xl w-full min-w-0 max-w-full overflow-hidden break-words text-slate-200">
           <div 
             dangerouslySetInnerHTML={{ __html: article.content }} 
-            className="space-y-4"
+            className="article-content space-y-4 w-full min-w-0 max-w-full overflow-hidden"
           />
         </article>
 

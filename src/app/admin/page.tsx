@@ -6593,9 +6593,9 @@ export default function AdminPage() {
                     className="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-xs text-white focus:outline-none focus:border-amber-400 leading-relaxed font-mono"
                   />
                 ) : (
-                  <div className="w-full min-h-[260px] max-h-[380px] overflow-y-auto bg-slate-950 border border-white/10 rounded-xl p-5 prose prose-invert max-w-none text-xs leading-relaxed">
+                  <div className="w-full min-h-[260px] max-h-[420px] overflow-y-auto overflow-x-hidden bg-slate-950 border border-white/10 rounded-xl p-5 article-content min-w-0 max-w-full break-words text-xs leading-relaxed">
                     {editingArticle.content ? (
-                      <div dangerouslySetInnerHTML={{ __html: editingArticle.content }} />
+                      <div dangerouslySetInnerHTML={{ __html: editingArticle.content }} className="article-content space-y-3 min-w-0 max-w-full overflow-hidden" />
                     ) : (
                       <p className="text-slate-500 italic">ยังไม่มีเนื้อหาสำหรับแสดงผล...</p>
                     )}
