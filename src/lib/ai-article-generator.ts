@@ -170,13 +170,37 @@ export async function generateDailyAiArticle(type: ArticleGenerationCategory): P
           try {
             parsed = JSON.parse(jsonText);
           } catch {
-            // Clean unescaped control chars (like raw newlines inside string values)
-            const sanitized = jsonText.replace(/[\u0000-\u001F\u007F-\u009F]/g, (c: string) => {
-              if (c === '\n') return '\\n';
-              if (c === '\r') return '\\r';
-              if (c === '\t') return '\\t';
-              return '';
-            });
+            // Bulletproof sanitize unescaped newlines/tabs inside string literals
+            let inString = false;
+            let escaped = false;
+            let sanitized = '';
+            for (let i = 0; i < jsonText.length; i++) {
+              const c = jsonText[i];
+              if (c === '"' && !escaped) {
+                inString = !inString;
+                sanitized += c;
+              } else if (inString) {
+                if (escaped) {
+                  escaped = false;
+                  sanitized += c;
+                } else if (c === '\\') {
+                  escaped = true;
+                  sanitized += c;
+                } else if (c === '\n') {
+                  sanitized += '\\n';
+                } else if (c === '\r') {
+                  sanitized += '\\r';
+                } else if (c === '\t') {
+                  sanitized += '\\t';
+                } else if (c.charCodeAt(0) < 32) {
+                  // strip control character
+                } else {
+                  sanitized += c;
+                }
+              } else {
+                sanitized += c;
+              }
+            }
             parsed = JSON.parse(sanitized);
           }
           const articleId = `art-auto-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
