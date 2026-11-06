@@ -64,6 +64,45 @@ export default function HomePage() {
 
   return (
     <div className="space-y-24 pb-24">
+      {/* Course List & WebPage Schema for SEO/GEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            'name': 'คลาสเรียนและหลักสูตร AI โดย kevinaiagent.tech',
+            'description': 'รายการคอร์สเรียน AI Agent, Prompt Engineering, และ Workflow Automation สดตัวต่อตัวและกลุ่ม',
+            'itemListElement': classes.map((c, idx) => ({
+              '@type': 'ListItem',
+              'position': idx + 1,
+              'item': {
+                '@type': 'Course',
+                'name': c.title,
+                'description': c.description,
+                'provider': {
+                  '@type': 'EducationalOrganization',
+                  'name': 'kevinaiagent.tech',
+                  'url': 'https://ai-kevin-booking.vercel.app'
+                },
+                'instructor': {
+                  '@type': 'Person',
+                  'name': c.instructorName || 'อาจารย์ สรเชษฐ์ (อ. Kevin)',
+                  'url': 'https://www.linkedin.com/in/sorachetn/'
+                },
+                'offers': {
+                  '@type': 'Offer',
+                  'price': c.price,
+                  'priceCurrency': 'THB',
+                  'availability': 'https://schema.org/InStock',
+                  'category': c.type === 'online' ? 'Online Live Course' : 'Studio Workshop'
+                }
+              }
+            }))
+          })
+        }}
+      />
+
       {/* Optional Announcement Banner */}
       {siteSettings?.showAnnounceBanner !== false && siteSettings?.announceText && (
         <div className="bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-blue-500/20 border-b border-amber-400/20 py-2.5 px-4 text-center">
