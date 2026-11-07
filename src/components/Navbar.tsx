@@ -69,9 +69,23 @@ export default function Navbar() {
                   <Link
                     href="/prompts"
                     onClick={() => setPromptsDropdownOpen(false)}
+                    className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold text-white bg-cyan-500/10 border border-cyan-400/30 hover:bg-cyan-500/20 hover:text-cyan-300 transition-all group"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="text-base">🤖</span>
+                      <span>AI Agent (400 Use Cases)</span>
+                    </span>
+                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full bg-cyan-400 text-slate-950 uppercase tracking-wider group-hover:scale-105 transition-transform">
+                      NEW
+                    </span>
+                  </Link>
+
+                  <Link
+                    href="/prompts"
+                    onClick={() => setPromptsDropdownOpen(false)}
                     className="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-all"
                   >
-                    Prompt Generator
+                    Prompt Generator & Master Builder
                   </Link>
 
                   <Link
@@ -303,9 +317,22 @@ export default function Navbar() {
                 <Link
                   href="/prompts"
                   onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-semibold text-white bg-cyan-500/10 border border-cyan-400/30 hover:bg-cyan-500/20 hover:text-cyan-300 transition-colors"
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>🤖</span>
+                    <span>AI Agent (400 Use Cases & 500+ อาชีพ)</span>
+                  </span>
+                  <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full bg-cyan-400 text-slate-950 uppercase tracking-wider">
+                    NEW
+                  </span>
+                </Link>
+                <Link
+                  href="/prompts"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
                 >
-                  Prompt Generator
+                  Prompt Generator & Master Builder
                 </Link>
                 <Link
                   href="/prompts/video"

@@ -1,0 +1,4242 @@
+[
+  {
+    "id": "occ_1",
+    "titleTh": "เจ้าของธุรกิจ / ผู้ประกอบการ SME",
+    "titleEn": "SME Business Owner",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ต้องดูแลทุกอย่างคนเดียว ขาดเวลาโฟกัสกลยุทธ์เติบโต",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_2",
+    "titleTh": "ประธานเจ้าหน้าที่บริหาร (CEO)",
+    "titleEn": "Chief Executive Officer",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ต้องอ่านสรุปรายงานยาวๆ หลายแผนกทุกวัน ขาดเวลาคิดวิสัยทัศน์",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_3",
+    "titleTh": "ผู้จัดการฝ่ายปฏิบัติการ (COO)",
+    "titleEn": "Chief Operating Officer",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "กระบวนการทำงานข้ามแผนกติดขัด ขาด SOP ที่ชัดเจน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_4",
+    "titleTh": "ผู้จัดการฝ่ายการเงิน (CFO)",
+    "titleEn": "Chief Financial Officer",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "การคาดการณ์กระแสเงินสดล่วงหน้าคลาดเคลื่อน ตรวจสอบงบไม่ทัน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_5",
+    "titleTh": "ผู้จัดการฝ่ายเทคโนโลยี (CTO)",
+    "titleEn": "Chief Technology Officer",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ติดตามหนี้ทางเทคนิค (Tech Debt) และประเมิน AI Stack ใหม่ๆ ลำบาก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_6",
+    "titleTh": "ผู้จัดการฝ่ายการตลาด (CMO)",
+    "titleEn": "Chief Marketing Officer",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ติดตาม ROI และประสิทธิภาพโฆษณาหลายช่องทางไม่ทัน",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_7",
+    "titleTh": "กรรมการผู้จัดการ (Managing Director)",
+    "titleEn": "Managing Director",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ต้องตัดสินใจบนข้อมูลที่กระจัดกระจายหลายแผนก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_8",
+    "titleTh": "ผู้จัดการทั่วไป (General Manager)",
+    "titleEn": "General Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "จัดการงานประจำวันและแก้ปัญหาเฉพาะหน้าตลอดเวลาจนงานยุทธศาสตร์สะดุด",
+    "recommendedAi": "Gemini 2.0 Pro"
+  },
+  {
+    "id": "occ_9",
+    "titleTh": "ผู้จัดการโครงการ (Project Manager)",
+    "titleEn": "Project Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "การติดตามความคืบหน้าและ Task Dependencies ซับซ้อน โปรเจกต์เสี่ยงดีเลย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_10",
+    "titleTh": "เจ้าของผลิตภัณฑ์ (Product Owner)",
+    "titleEn": "Product Owner",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "เขียน User Story และ Acceptance Criteria ไม่ทัน Sprint Backlog",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_11",
+    "titleTh": "ผู้จัดการผลิตภัณฑ์ (Product Manager)",
+    "titleEn": "Product Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "สรุป User Feedback และจัดลำดับ Priority ฟีเจอร์ได้ช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_12",
+    "titleTh": "ผู้จัดการฝ่ายพัฒนาธุรกิจ (Business Development)",
+    "titleEn": "Business Development Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ค้นหาและคัดกรอง Leads องค์กรที่มีศักยภาพสูงใช้เวลานาน",
+    "recommendedAi": "Perplexity Pro"
+  },
+  {
+    "id": "occ_13",
+    "titleTh": "ที่ปรึกษาทางธุรกิจ (Business Consultant)",
+    "titleEn": "Business Consultant",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "รวบรวมข้อมูลอุตสาหกรรมและทำ Benchmark คู่แข่งหลายแหล่งเสียเวลามาก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_14",
+    "titleTh": "ผู้จัดการความเสี่ยง (Risk Manager)",
+    "titleEn": "Risk Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ตรวจจับความเสี่ยงด้านการปฏิบัติการและเครดิตไม่ทันการณ์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_15",
+    "titleTh": "ผู้จัดการสาขา (Branch Manager)",
+    "titleEn": "Branch Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ยอดขายรายสาขาไม่ถึงเป้า หาสาเหตุและวางแผนโปรโมชันเฉพาะจุดไม่ทัน",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_16",
+    "titleTh": "Scrum Master / Agile Coach",
+    "titleEn": "Scrum Master",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "การจัด Daily Standup และ Retrospective ขาดประเด็น Actionable",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_17",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อเชิงกลยุทธ์",
+    "titleEn": "Strategic Sourcing Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "เปรียบเทียบใบเสนอราคาจากซัพพลายเออร์หลายสิบรายล่าช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_18",
+    "titleTh": "ผู้จัดการความยั่งยืนองค์กร (ESG Manager)",
+    "titleEn": "Sustainability & ESG Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "รวบรวมข้อมูล Carbon Footprint และเขียนรายงาน ESG ตามมาตรฐานสากลยาก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_19",
+    "titleTh": "ผู้จัดการฝ่ายนวัตกรรม (Innovation Manager)",
+    "titleEn": "Innovation Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ไอเดียใหม่ๆ ในองค์กรไม่ถูกนำมาทดลองจริง ขาดแผน PoC ที่ชัดเจน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_20",
+    "titleTh": "ผู้บริหารกองทุน / นักลงทุน (Venture Capitalist)",
+    "titleEn": "Venture Capitalist",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ต้องคัดกรอง Pitch Deck สตาร์ทอัพหลายร้อยแห่งและทำ Due Diligence",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_21",
+    "titleTh": "ผู้ก่อตั้งสตาร์ทอัพ (Startup Founder)",
+    "titleEn": "Startup Founder",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ต้องสวมหมวกหลายใบ ทั้งพัฒนาสินค้า หาเงินทุน และทำตลาด",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_22",
+    "titleTh": "ผู้จัดการฝ่ายขายระดับภูมิภาค",
+    "titleEn": "Regional Sales Director",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ติดตามยอดขายและกระตุ้นทีมขายในหลายพื้นที่ไม่ทั่วถึง",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_23",
+    "titleTh": "ผู้อำนวยการฝ่ายทรัพยากรบุคคล (CHRO)",
+    "titleEn": "Chief Human Resources Officer",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "วางแผนกลยุทธ์รักษาคนเก่งและออกแบบเส้นทางเติบโตพนักงานไม่ทัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_24",
+    "titleTh": "ผู้จัดการฝ่ายลูกค้าสัมพันธ์ (CRM Manager)",
+    "titleEn": "CRM Manager",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "ลูกค้าไม่ซื้อซ้ำ ข้อมูลลูกค้ากระจัดกระจาย ไม่สามารถทำ Segmentation เฉพาะบุคคลได้",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_25",
+    "titleTh": "ผู้จัดการฝ่ายความต่อเนื่องทางธุรกิจ (BCP Specialist)",
+    "titleEn": "Business Continuity Planner",
+    "category": "บริหาร & ผู้ประกอบการ (Executive & Management)",
+    "painpoint": "เตรียมแผนรับมือวิกฤตและจำลองสถานการณ์ฉุกเฉินใช้เวลามาก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_26",
+    "titleTh": "นักยิงแอด / ผู้เชี่ยวชาญโฆษณา (Media Buyer)",
+    "titleEn": "Media Buyer / Performance Marketer",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ต้นทุนค่าแอดแพงขึ้น ค่า ROAS ต่ำ ต้องคอยปรับ Bid ตลอดเวลา",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_27",
+    "titleTh": "นักกลยุทธ์การตลาด (Marketing Strategist)",
+    "titleEn": "Marketing Strategist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "วิเคราะห์เทรนด์ผู้บริโภคและวางแผน Campaign Roadmap ล่าช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_28",
+    "titleTh": "ผู้เชี่ยวชาญ SEO (SEO Specialist)",
+    "titleEn": "SEO Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "วิเคราะห์ Search Intent และเขียนบทความยาวติดอันดับหน้าแรกกินเวลาเยอะ",
+    "recommendedAi": "Perplexity Pro"
+  },
+  {
+    "id": "occ_29",
+    "titleTh": "ผู้จัดการโซเชียลมีเดีย (Social Media Manager)",
+    "titleEn": "Social Media Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "หมดมุกคิดคอนเทนต์รายวัน ต้องโพสต์หลายแพลตฟอร์มทุกวัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_30",
+    "titleTh": "นักเขียนบทความ / ก๊อปปี้ไรเตอร์ (Copywriter)",
+    "titleEn": "Copywriter",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "คิด Headline และแคปชันปิดการขายให้ดึงดูดใจใช้เวลานาน",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_31",
+    "titleTh": "ผู้เชี่ยวชาญการตลาดอินฟลูเอนเซอร์ (KOL Manager)",
+    "titleEn": "Influencer Marketing Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "คัดเลือกและเจรจาเรทราคากับอินฟลูเอนเซอร์หลายสิบคนเสียเวลามาก",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_32",
+    "titleTh": "นักวิเคราะห์การตลาด (Marketing Data Analyst)",
+    "titleEn": "Marketing Analyst",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ข้อมูลยอดขาย แอด และพฤติกรรมบนเว็บอยู่คนละที่ สรุป Insight ลำบาก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_33",
+    "titleTh": "ผู้จัดการแบรนด์ (Brand Manager)",
+    "titleEn": "Brand Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ควบคุมทิศทางแบรนด์ (Brand Voice) ให้สอดคล้องกันทุกช่องทางยาก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_34",
+    "titleTh": "ผู้เชี่ยวชาญ Email Marketing",
+    "titleEn": "Email Marketing Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "อัตราการเปิดอ่านอีเมลต่ำ เขียนเนื้อหา Personalized รายบุคคลไม่ทัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_35",
+    "titleTh": "นักการตลาดอัตโนมัติ (Marketing Automation Specialist)",
+    "titleEn": "Marketing Automation Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "การสร้าง Flow ใน n8n / Make / HubSpot ซับซ้อนและเกิดบั๊กบ่อย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_36",
+    "titleTh": "ผู้จัดการงานอีเวนต์ & การตลาดประสบการณ์",
+    "titleEn": "Event Marketing Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ประสานงานสปอนเซอร์ จัดทำงบประมาณ และเตรียมสคริปต์เวทีซ้ำซ้อน",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_37",
+    "titleTh": "ผู้เชี่ยวชาญการตลาดเนื้อหา (Content Marketer)",
+    "titleEn": "Content Marketer",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ต้องเปลี่ยนบทความยาว 1 ชิ้นให้เป็นคอนเทนต์ย่อย 10 ชิ้นหลายฟอร์แมต",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_38",
+    "titleTh": "นักวิจัยตลาด (Market Researcher)",
+    "titleEn": "Market Researcher",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "รวบรวมแบบสอบถามและวิเคราะห์ข้อมูลเชิงคุณภาพกินเวลาเป็นสัปดาห์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_39",
+    "titleTh": "ผู้เชี่ยวชาญการตลาด TikTok / Reels",
+    "titleEn": "Short-form Video Marketer",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "คิด Hook 3 วินาทีแรกไม่ออก คลิปไม่เปิดการมองเห็น",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_40",
+    "titleTh": "ผู้เชี่ยวชาญ Affiliate Marketing",
+    "titleEn": "Affiliate Marketing Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ติดตามยอดขายจากตัวแทนและตรวจจับการฉ้อโกงลิงก์แอฟฟิลิเอตยาก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_41",
+    "titleTh": "ผู้เชี่ยวชาญการตลาด B2B (B2B Marketer)",
+    "titleEn": "B2B Marketing Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "วงจรการตัดสินใจซื้อนาน ขาด Lead Nurturing Content ที่น่าเชื่อถือ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_42",
+    "titleTh": "ผู้จัดการประชาสัมพันธ์ (PR Manager)",
+    "titleEn": "Public Relations Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "เขียนข่าวแจกสื่อ (Press Release) และติดตามการรายงานข่าวของสื่อช้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_43",
+    "titleTh": "ผู้เชี่ยวชาญการตลาดแอปมือถือ (ASO Specialist)",
+    "titleEn": "App Store Optimization Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ทำ A/B Test แคปชันและสกรีนช็อตบน App Store ไม่ทันการอัปเดต",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_44",
+    "titleTh": "นักออกแบบข้อเสนอแคมเปญ (Pitch Specialist)",
+    "titleEn": "Creative Pitch Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "จัดเตรียมสไลด์ไอเดียเสนอขายลูกค้าแบบด่วนใน 24 ชั่วโมง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_45",
+    "titleTh": "ผู้เชี่ยวชาญการตลาดท้องถิ่น (Local Marketing)",
+    "titleEn": "Local Marketing Specialist",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ปรับแต่ง Google My Business และตอบรีวิวหลายร้อยสาขาไม่ทัน",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_46",
+    "titleTh": "นักวางแผนโฆษณาโทรทัศน์ & ดิจิทัล (Media Planner)",
+    "titleEn": "Media Planner",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "คำนวณ Reach & Frequency และจัดสรรงบข้ามสื่อซับซ้อน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_47",
+    "titleTh": "ผู้เชี่ยวชาญการตลาดเพื่อชุมชน (Community Manager)",
+    "titleEn": "Community Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ต้องคอยมอนิเตอร์และตอบคำถามสมาชิกกลุ่ม Facebook/Discord ตลอด 24 ชม.",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_48",
+    "titleTh": "ที่ปรึกษาการตลาด Growth Hacking",
+    "titleEn": "Growth Hacker",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "ทดลองไอเดียหาลูกค้ารวดเร็วแต่ไม่มีเวลาเขียนโค้ดและวัดผล A/B Test",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_49",
+    "titleTh": "ผู้เชี่ยวชาญการตลาดโปรแกรม Loyalty / Point",
+    "titleEn": "Loyalty Program Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "สมาชิกไม่ยอมสะสมหรือแลกแต้ม ขาดข้อเสนอที่ดึงดูดใจเฉพาะบุคคล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_50",
+    "titleTh": "ผู้จัดการด้านการตลาดผ่านช่องทางพาร์ทเนอร์",
+    "titleEn": "Channel Marketing Manager",
+    "category": "การตลาดดิจิทัล & โฆษณา (Marketing & Advertising)",
+    "painpoint": "จัดเตรียม Marketing Collateral และอบรมตัวแทนจำหน่ายล่าช้า",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_51",
+    "titleTh": "พนักงานขายองค์กร (B2B Account Executive)",
+    "titleEn": "B2B Account Executive",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "เตรียมข้อมูลบริษัทลูกค้าก่อนเข้าพบและจดบันทึกการประชุมใช้เวลานาน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_52",
+    "titleTh": "ตัวแทนฝ่ายพัฒนาการขาย (SDR / BDR)",
+    "titleEn": "Sales Development Representative",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ส่ง Cold Email และทักหาลูกค้าใหม่แล้วไม่มีคนตอบกลับ",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_53",
+    "titleTh": "ผู้จัดการฝ่ายขาย (Sales Manager)",
+    "titleEn": "Sales Manager",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ติดตามเซลล์แต่ละคนอัปเดตสถานะใน CRM ไม่ครบ ยอด Forecast ไม่แม่นยำ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_54",
+    "titleTh": "วิศวกรฝ่ายขาย (Pre-Sales / Sales Engineer)",
+    "titleEn": "Sales Engineer",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ตอบคำถามเชิงเทคนิคในเอกสารประกวดราคา (RFP/TOR) หนาหลายร้อยหน้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_55",
+    "titleTh": "ผู้จัดการลูกค้ารายสำคัญ (Key Account Manager)",
+    "titleEn": "Key Account Manager",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "รักษาความสัมพันธ์และมองหาโอกาส Upsell / Cross-sell ไม่ทันการณ์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_56",
+    "titleTh": "พนักงานขายทางโทรศัพท์ (Telesales Specialist)",
+    "titleEn": "Telesales Representative",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "เจอลูกค้าปฏิเสธด้วยข้ออ้างเดิมๆ แต่ไม่มีสคริปต์แก้เกมทันที",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_57",
+    "titleTh": "เซลล์ขายบ้านและคอนโด (Real Estate Sales)",
+    "titleEn": "Property Sales Consultant",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ตอบคำถามสเปกห้อง คำนวณยอดผ่อน และส่งโบรชัวร์ให้ลูกค้าไม่ทัน",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_58",
+    "titleTh": "เซลล์ขายรถยนต์ (Automotive Sales Consultant)",
+    "titleEn": "Automotive Sales Consultant",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "เปรียบเทียบตารางผ่อน ดอกเบี้ย และโปรโมชันคู่แข่งให้ลูกค้าล่าช้า",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_59",
+    "titleTh": "ตัวแทนประกันชีวิตและการเงิน (Financial Advisor)",
+    "titleEn": "Insurance & Financial Advisor",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "วิเคราะห์ความคุ้มครองเดิมของลูกค้าและออกแบบพอร์ตประกันที่ตรงใจยาก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_60",
+    "titleTh": "ที่ปรึกษาด้านการขายโซลูชันไอที (IT Solution Sales)",
+    "titleEn": "IT Solution Consultant",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "เขียนร่างใบเสนอราคาและ Scope of Work (SOW) ให้ตรงตามความต้องการลูกค้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_61",
+    "titleTh": "ผู้จัดการฝ่ายขายต่างประเทศ (Export Sales Manager)",
+    "titleEn": "Export Sales Manager",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "เจรจาภาษาอังกฤษกับลูกค้าต่างชาติและติดตามสถานะชิปเมนต์ข้ามเขตเวลา",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_62",
+    "titleTh": "พนักงานขายหน้าร้าน (Retail Sales Associate)",
+    "titleEn": "Retail Sales Associate",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "จำข้อมูลสินค้า โปรโมชันบัตรเครดิต และสต็อกสินค้าไม่ครบถ้วน",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_63",
+    "titleTh": "ผู้จัดการฝ่ายความสำเร็จของลูกค้า (Customer Success Manager)",
+    "titleEn": "Customer Success Manager",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ตรวจจับสัญญาณลูกค้ายกเลิกบริการ (Churn Risk) ช้าเกินไป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_64",
+    "titleTh": "เซลล์ขายยาและเวชภัณฑ์ (Medical Representative)",
+    "titleEn": "Medical Representative",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "สรุปงานวิจัยยาตัวใหม่เพื่อนำเสนอแพทย์ให้เข้าใจง่ายในเวลา 3 นาที",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_65",
+    "titleTh": "ที่ปรึกษาการขายงานโฆษณา (Ad Sales Executive)",
+    "titleEn": "Media Ad Sales Executive",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "จัดทำ Media Kit และข้อเสนอแพ็กเกจโฆษณาเฉพาะแบรนด์",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_66",
+    "titleTh": "พนักงานขายอุปกรณ์อุตสาหกรรม (Industrial Equipment Sales)",
+    "titleEn": "Industrial Equipment Sales",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ต้องคำนวณสเปกเครื่องจักรและเปรียบเทียบค่าเสื่อมให้ลูกค้าเห็นภาพ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_67",
+    "titleTh": "ผู้เชี่ยวชาญการปิดการขายออนไลน์ (Live Stream Closer)",
+    "titleEn": "Live Commerce Closer",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "คิดคำพูดกระตุ้นยอดขายแบบเร่งด่วนในไลฟ์สดไม่ทันจังหวะ",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_68",
+    "titleTh": "ผู้จัดการฝ่ายปฏิบัติการขาย (Sales Operations)",
+    "titleEn": "Sales Operations Specialist",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "จัดการคลีนข้อมูล Lead ที่ซ้ำซ้อนใน CRM และคำนวณค่าคอมมิชชั่น",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_69",
+    "titleTh": "นักพัฒนาความสัมพันธ์คู่ค้า (Channel Partner Manager)",
+    "titleEn": "Partner Account Manager",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ติดตามยอดขายจากตัวแทนจำหน่ายและสนับสนุนสื่อการขายไม่ทัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_70",
+    "titleTh": "เซลล์งานบริการอีเวนต์ & จัดเลี้ยง (Catering Sales)",
+    "titleEn": "Catering & Banquet Sales",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "คำนวณค่าใช้จ่ายต่อหัวและออกแบบธีมงานตามงบประมาณลูกค้าช้า",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_71",
+    "titleTh": "พนักงานขายสินค้าความงาม & คลินิก (Beauty Consultant)",
+    "titleEn": "Beauty Sales Consultant",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "วิเคราะห์ปัญหาผิวของลูกค้าและแนะนำคอร์สที่คุ้มค่าไม่ให้ดูลัดนิ้วมือ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_72",
+    "titleTh": "พนักงานขายพื้นที่เช่าศูนย์การค้า (Leasing Officer)",
+    "titleEn": "Retail Leasing Officer",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "คัดกรองแบรนด์ที่เหมาะสมกับพื้นที่และร่างสัญญาเช่าเบื้องต้น",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_73",
+    "titleTh": "เซลล์ขายซอฟต์แวร์ SaaS (Inside Sales SaaS)",
+    "titleEn": "Inside Sales SaaS Specialist",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "สาธิตระบบ (Demo) ซอฟต์แวร์และตอบคำถามข้อโต้แย้งคู่แข่งไม่ทัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_74",
+    "titleTh": "ที่ปรึกษาการขายหลักทรัพย์ & กองทุน (Wealth Sales)",
+    "titleEn": "Wealth Management Advisor",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "จัดทำสรุปพอร์ตการลงทุนและชี้แจงมุมมองตลาดรายสัปดาห์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_75",
+    "titleTh": "ผู้จัดการประมูลงานภาครัฐ (Tender & Bidding Specialist)",
+    "titleEn": "Government Tender Specialist",
+    "category": "งานขาย & ปิดการขาย (Sales & Account Management)",
+    "painpoint": "ตรวจเช็กเอกสารประกวดราคาและข้อกำหนดทางเทคนิคไม่ให้ตกหล่น",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_76",
+    "titleTh": "นักพัฒนาเว็บฟูลสแตก (Full Stack Developer)",
+    "titleEn": "Full Stack Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ต้องสลับเขียนทั้ง Frontend/Backend สลับ Context บ่อย โค้ดเสร็จช้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_77",
+    "titleTh": "วิศวกรส่วนหน้า (Frontend Engineer)",
+    "titleEn": "Frontend Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "แปลง Figma Design ให้เป็น Responsive Code และทำ Animation ติดขัด",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_78",
+    "titleTh": "วิศวกรระบบหลังบ้าน (Backend Engineer)",
+    "titleEn": "Backend Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ออกแบบ Database Schema, เขียน API และรับมือกับปัญหา Performance Bottleneck",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_79",
+    "titleTh": "วิศวกร DevOps & คลาวด์ (DevOps / Cloud Engineer)",
+    "titleEn": "DevOps Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียน Dockerfile, CI/CD Pipeline และแก้ปัญหา Infrastructure Drift",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_80",
+    "titleTh": "สถาปนิกซอฟต์แวร์ (Software Architect)",
+    "titleEn": "Software Architect",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ออกแบบระบบ Microservices และทำ ADR (Architecture Decision Record) ล่าช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_81",
+    "titleTh": "วิศวกรความปลอดภัยทางไซเบอร์ (Cybersecurity Engineer)",
+    "titleEn": "Cybersecurity Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ตรวจจับช่องโหว่ OWASP Top 10 และวิเคราะห์ Log ความปลอดภัยมหาศาล",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_82",
+    "titleTh": "วิศวกร QA & ทดสอบระบบ (QA / Test Automation)",
+    "titleEn": "QA Automation Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียน Automated Test Scripts (E2E/Unit) ไม่ทันการปล่อยฟีเจอร์ใหม่",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_83",
+    "titleTh": "วิศวกรข้อมูล (Data Engineer)",
+    "titleEn": "Data Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียน ETL Pipeline และแก้ปัญหา Data Pipeline พังกลางดึก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_84",
+    "titleTh": "วิศวกร AI & Machine Learning",
+    "titleEn": "AI / ML Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เตรียม Data Cleansing, Fine-tuning โมเดล และเขียน RAG Pipeline",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_85",
+    "titleTh": "นักพัฒนาแอปมือถือ iOS (iOS Developer)",
+    "titleEn": "iOS Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "แก้ปัญหา Swift Concurrency, CoreData และรองรับ iOS เวอร์ชันใหม่ๆ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_86",
+    "titleTh": "นักพัฒนาแอปมือถือ Android (Android Developer)",
+    "titleEn": "Android Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "จัดการ Jetpack Compose State และความหลากหลายของอุปกรณ์ Android",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_87",
+    "titleTh": "ผู้ดูแลระบบฐานข้อมูล (Database Administrator - DBA)",
+    "titleEn": "Database Administrator",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียน SQL Query จูน Index ให้เร็วขึ้น และกู้คืนข้อมูลเมื่อระบบล่ม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_88",
+    "titleTh": "ผู้เชี่ยวชาญด้าน Site Reliability (SRE)",
+    "titleEn": "Site Reliability Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ตั้งค่า Alerting ไม่ให้รบกวนเกินไป (Alert Fatigue) และทำ Root Cause Analysis",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_89",
+    "titleTh": "ผู้เชี่ยวชาญไอทีซัพพอร์ต (IT Support Specialist)",
+    "titleEn": "IT Support Specialist",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ตอบคำถามรีเซ็ตรหัสผ่านและแก้ปัญหาคอมพิวเตอร์พนักงานซ้ำซาก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_90",
+    "titleTh": "นักพัฒนาบล็อกเชน (Blockchain Developer)",
+    "titleEn": "Blockchain Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ตรวจสอบความปลอดภัยของ Smart Contract (Audit) ป้องกัน Reentrancy Attack",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_91",
+    "titleTh": "วิศวกรเครือข่าย (Network Engineer)",
+    "titleEn": "Network Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ตั้งค่า Switch, Firewall, VPN และวิเคราะห์ Packet Loss ล่าช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_92",
+    "titleTh": "นักพัฒนาเกม (Game Developer)",
+    "titleEn": "Game Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียนฟิสิกส์ AI ศัตรูในเกม และปรับแต่ง Draw Call ให้เฟรมเรตไม่ตก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_93",
+    "titleTh": "วิศวกรระบบสมองกลฝังตัว & IoT",
+    "titleEn": "Embedded & IoT Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียน C/C++ จัดการ Memory จำกัด และดีบั๊กฮาร์ดแวร์ผ่าน Serial",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_94",
+    "titleTh": "วิศวกรด้านความปลอดภัยข้อมูล (Data Privacy Officer)",
+    "titleEn": "Data Privacy / Compliance Specialist",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ตรวจสอบการปฏิบัติตาม PDPA / GDPR ในโค้ดและฐานข้อมูล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_95",
+    "titleTh": "นักพัฒนา No-Code / Low-Code",
+    "titleEn": "No-Code / Low-Code Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เชื่อมต่อ API และสร้าง Logic ซับซ้อนใน Bubble/FlutterFlow ติดขัด",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_96",
+    "titleTh": "วิศวกรโครงสร้างพื้นฐานไอที (IT Infrastructure Engineer)",
+    "titleEn": "IT Infrastructure Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "การทำ Inventory รายการเซิร์ฟเวอร์และวางแผน Upgrade Hardware",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_97",
+    "titleTh": "ผู้จัดการฝ่ายความปลอดภัยสารสนเทศ (CISO)",
+    "titleEn": "Chief Information Security Officer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ประเมินความเสี่ยงและจัดทำรายงานความปลอดภัยเสนอผู้บริหาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_98",
+    "titleTh": "นักพัฒนาระบบอัตโนมัติ RPA (RPA Developer)",
+    "titleEn": "RPA Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "บอท RPA พังเมื่อหน้าเว็บหรือระบบปลายทางมีการเปลี่ยนแปลง UI",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_99",
+    "titleTh": "วิศวกร Prompt & AI Agent",
+    "titleEn": "AI Agent Engineer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ออกแบบ Multi-Agent Architecture และคุม Hallucination ของโมเดล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_100",
+    "titleTh": "ผู้เชี่ยวชาญการกู้คืนระบบจากภัยพิบัติ",
+    "titleEn": "Disaster Recovery Specialist",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "จำลองการกู้คืนระบบและทดสอบ Backup Failover ไม่ทันตามแผน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_101",
+    "titleTh": "นักบัญชี (Accountant)",
+    "titleEn": "Accountant",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ต้องคีย์ข้อมูลใบกำกับภาษีและกระทบยอดบัญชีเงินฝากธนาคารจำนวนมาก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_102",
+    "titleTh": "ผู้สอบบัญชีรับอนุญาต (CPA / Auditor)",
+    "titleEn": "Certified Public Accountant",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "สุ่มตรวจเอกสารหลักฐานและตรวจจับความผิดปกติในงบการเงินล่าช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_103",
+    "titleTh": "นักวิเคราะห์การเงิน (Financial Analyst)",
+    "titleEn": "Financial Analyst",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "สร้าง Financial Model และวิเคราะห์ความแปรปรวน (Variance Analysis) เสียเวลา",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_104",
+    "titleTh": "ผู้เชี่ยวชาญด้านภาษี (Tax Specialist)",
+    "titleEn": "Tax Consultant",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "อัปเดตกฎหมายภาษีใหม่ๆ และคำนวณภาษีนิติบุคคล/บุคคลธรรมดาซับซ้อน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_105",
+    "titleTh": "ผู้จัดการฝ่ายสินเชื่อ (Credit Analyst)",
+    "titleEn": "Credit Analyst",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ประเมินความสามารถในการชำระหนี้และงบการเงินของผู้ขอกู้หลายสิบราย",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_106",
+    "titleTh": "ผู้จัดการฝ่ายการเงินองค์กร (Treasury Manager)",
+    "titleEn": "Treasury Manager",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "บริหารความเสี่ยงจากอัตราแลกเปลี่ยน (FX Hedging) และสภาพคล่อง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_107",
+    "titleTh": "พนักงานบัญชีเจ้าหนี้ (AP Specialist)",
+    "titleEn": "Accounts Payable Specialist",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ตรวจสอบใบแจ้งหนี้ให้ตรงกับใบสั่งซื้อ (3-way Matching) ล่าช้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_108",
+    "titleTh": "พนักงานบัญชีลูกหนี้ (AR Specialist)",
+    "titleEn": "Accounts Receivable Specialist",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ติดตามทวงถามหนี้ค้างชำระและตัดยอดเงินโอนเข้าบัญชีไม่ตรง",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_109",
+    "titleTh": "ผู้ตรวจสอบภายใน (Internal Auditor)",
+    "titleEn": "Internal Auditor",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ตรวจสอบการทุจริตและการปฏิบัติตามนโยบายควบคุมภายในองค์กร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_110",
+    "titleTh": "ผู้จัดการฝ่ายวางแผนการเงิน (FP&A Manager)",
+    "titleEn": "FP&A Manager",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "รวบรวมตัวเลขงบประมาณจากทุกฝ่ายและทำ Scenario Planning ช้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_111",
+    "titleTh": "นักวางแผนการเงินส่วนบุคคล (Financial Planner - CFP)",
+    "titleEn": "Certified Financial Planner",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "วิเคราะห์ความต้องการเกษียณอายุและจัดพอร์ตกองทุนให้ลูกค้าแต่ละคน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_112",
+    "titleTh": "นักวิเคราะห์หลักทรัพย์ (Equity Research Analyst)",
+    "titleEn": "Equity Research Analyst",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "แกะงบการเงินบริษัทจดทะเบียนและเขียนบทวิเคราะห์หุ้นรายวัน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_113",
+    "titleTh": "ผู้จัดการกองทุนรวม (Fund Manager)",
+    "titleEn": "Fund Manager",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "มอนิเตอร์ข่าวเศรษฐกิจมหภาคและปรับสัดส่วนสินทรัพย์ในพอร์ต",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_114",
+    "titleTh": "ผู้ประเมินมูลค่าทรัพย์สิน (Valuation Specialist)",
+    "titleEn": "Asset Valuation Specialist",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "คำนวณมูลค่าหุ้นหรืออสังหาริมทรัพย์ด้วยวิธี DCF หรือ Market Approach",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_115",
+    "titleTh": "เจ้าหน้าที่การเงินนำเข้า-ส่งออก (Trade Finance)",
+    "titleEn": "Trade Finance Officer",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ตรวจสอบเอกสาร Letter of Credit (L/C) และเงื่อนไขธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_116",
+    "titleTh": "ผู้จัดการควบคุมต้นทุน (Cost Controller)",
+    "titleEn": "Cost Controller",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "วิเคราะห์จุดรั่วไหลของต้นทุนวัตถุดิบและค่าใช้จ่ายในการดำเนินงาน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_117",
+    "titleTh": "ที่ปรึกษาการควบรวมกิจการ (M&A Advisor)",
+    "titleEn": "M&A Advisor",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "จัดทำ Information Memorandum (IM) และประเมิน Synergy ของการรวมกิจการ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_118",
+    "titleTh": "ผู้จัดการสำนักงานบัญชี (Accounting Firm Manager)",
+    "titleEn": "Accounting Practice Manager",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "บริหารงานเอกสารลูกค้าหลายร้อยบริษัทและติดตามเดดไลน์ยื่นภาษี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_119",
+    "titleTh": "เจ้าหน้าที่เร่งรัดหนี้สิน (Debt Collection Specialist)",
+    "titleEn": "Debt Collection Officer",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "เจรจาต่อรองและจัดทำแผนผ่อนชำระหนี้ให้ลูกหนี้ที่ผิดนัด",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_120",
+    "titleTh": "นักคณิตศาสตร์ประกันภัย (Actuary)",
+    "titleEn": "Actuary",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "คำนวณเบี้ยประกันและเงินสำรองตามตารางมรณะและสถิติเคลม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_121",
+    "titleTh": "ผู้เชี่ยวชาญสินทรัพย์ดิจิทัล (Crypto Asset Analyst)",
+    "titleEn": "Crypto & Web3 Financial Analyst",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ติดตาม On-chain Data และคำนวณภาษีกำไรจากคริปโทเคอร์เรนซี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_122",
+    "titleTh": "พนักงานปิดงบการเงิน (General Ledger Accountant)",
+    "titleEn": "General Ledger Accountant",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ปิดงบการเงินสิ้นเดือนล่าช้าเพราะต้องรอข้อมูลปรับปรุงหลายรายการ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_123",
+    "titleTh": "ผู้ตรวจสอบระบบสารสนเทศทางการเงิน (IT Auditor)",
+    "titleEn": "IT Financial Auditor",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "ตรวจสอบความถูกต้องของสิทธิ์การเข้าถึงระบบ ERP และ Change Logs",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_124",
+    "titleTh": "ผู้เชี่ยวชาญด้านการจัดหาเงินทุน (Fundraising Specialist)",
+    "titleEn": "Corporate Financing Specialist",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "เตรียมเอกสารยื่นขอสินเชื่อธุรกิจวงเงินกู้กับสถาบันการเงิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_125",
+    "titleTh": "เจ้าหน้าที่ตรวจสอบการฟอกเงิน (AML/CFT Specialist)",
+    "titleEn": "AML Compliance Officer",
+    "category": "การเงิน, บัญชี & ภาษี (Finance & Accounting)",
+    "painpoint": "คัดกรองธุรกรรมการเงินที่น่าสงสัยและรายงานหน่วยงานกำกับดูแล",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_126",
+    "titleTh": "ผู้จัดการฝ่ายทรัพยากรบุคคล (HR Manager)",
+    "titleEn": "HR Manager",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ต้องจัดการทั้งเรื่องคน กฎหมายแรงงาน และการประเมินผลงาน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_127",
+    "titleTh": "นักสรรหาบุคลากร (Recruiter / Talent Acquisition)",
+    "titleEn": "Talent Acquisition Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "อ่านเรซูเม่หลายร้อยใบเพื่อคัดคนที่ตรงกับ Job Description",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_128",
+    "titleTh": "ผู้เชี่ยวชาญด้านการฝึกอบรม (L&D Specialist)",
+    "titleEn": "Learning & Development Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ออกแบบหลักสูตรอบรมพนักงานและทำแบบทดสอบวัดผลสัมฤทธิ์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_129",
+    "titleTh": "เจ้าหน้าที่บริหารค่าจ้างและผลประโยชน์ (C&B Specialist)",
+    "titleEn": "Compensation & Benefits Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "คำนวณเงินเดือน ภาษี โอที และเทียบฐานเงินเดือนกับตลาด (Salary Survey)",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_130",
+    "titleTh": "ผู้จัดการด้านแรงงานสัมพันธ์ (Employee Relations)",
+    "titleEn": "Employee Relations Manager",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ไกล่เกลี่ยข้อพิพาทพนักงานและร่างคำสั่งลงโทษทางวินัยให้รัดกุม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_131",
+    "titleTh": "ผู้เชี่ยวชาญการสร้างแบรนด์นายจ้าง (Employer Branding)",
+    "titleEn": "Employer Branding Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "คิดคอนเทนต์ดึงดูดคนรุ่นใหม่ให้มาสมัครงานกับบริษัท",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_132",
+    "titleTh": "นักวิเคราะห์ข้อมูลทรัพยากรบุคคล (HR Data Analyst)",
+    "titleEn": "HR Data Analyst",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "วิเคราะห์สาเหตุการลาออก (Turnover Rate) และปัจจัยความผูกพันในองค์กร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_133",
+    "titleTh": "ผู้ประสานงานด้านการต้อนรับพนักงานใหม่ (Onboarding)",
+    "titleEn": "HR Onboarding Coordinator",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "เตรียมเอกสาร สัญญา และตารางปฐมนิเทศพนักงานใหม่หลายคนพร้อมกัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_134",
+    "titleTh": "ที่ปรึกษาด้านการบริหารผลการปฏิบัติงาน (Performance Ops)",
+    "titleEn": "Performance Management Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ติดตามการตั้งเป้าหมาย OKR/KPI และสรุปคะแนนประเมินประจำปี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_135",
+    "titleTh": "ผู้จัดการฝ่ายวัฒนธรรมองค์กร (Culture Specialist)",
+    "titleEn": "Corporate Culture Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "จัดกิจกรรมสื่อสารค่านิยมองค์กรให้พนักงานมีส่วนร่วมจริง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_136",
+    "titleTh": "เจ้าหน้าที่ความปลอดภัยและอาชีวอนามัย (จป.วิชาชีพ)",
+    "titleEn": "Safety Officer (OH&S)",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "จัดทำรายงานการตรวจสอบความปลอดภัยและสอบสวนอุบัติเหตุในที่ทำงาน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_137",
+    "titleTh": "ผู้เชี่ยวชาญด้านการเคลื่อนย้ายแรงงาน (Global Mobility)",
+    "titleEn": "Global Mobility Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "จัดการวีซ่า ใบอนุญาตทำงาน (Work Permit) และสวัสดิการข้ามประเทศ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_138",
+    "titleTh": "นักพัฒนาศักยภาพผู้นำ (Leadership Development)",
+    "titleEn": "Leadership Coach",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ประเมินจุดแข็งจุดอ่อนของผู้บริหารและออกแบบแผนพัฒนาเฉพาะบุคคล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_139",
+    "titleTh": "ผู้จัดการฝ่ายพนักงานสัมพันธ์และความเป็นอยู่ที่ดี",
+    "titleEn": "Employee Wellness Manager",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "สำรวจสุขภาพจิตพนักงานและจัดโปรแกรมลดความเครียดจากการทำงาน",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_140",
+    "titleTh": "เจ้าหน้าที่สรรหาผู้บริหารระดับสูง (Headhunter)",
+    "titleEn": "Executive Search Consultant",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ค้นหาและทาบทามผู้บริหารระดับ C-Level ที่ไม่ได้เปิดหางาน (Passive Candidates)",
+    "recommendedAi": "Perplexity Pro"
+  },
+  {
+    "id": "occ_141",
+    "titleTh": "ผู้จัดการฝ่ายเทคโนโลยี HR (HRIS Specialist)",
+    "titleEn": "HRIS System Administrator",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ปรับแต่งฟิลด์และสิทธิ์การเข้าถึงในระบบ HR และเชื่อมต่อ API Payroll",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_142",
+    "titleTh": "ที่ปรึกษาการปรับโครงสร้างองค์กร (Organization Design)",
+    "titleEn": "Organization Design Consultant",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ออกแบบผังองค์กรใหม่และจัดสรรหน้าที่ไม่ให้ซ้ำซ้อนกัน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_143",
+    "titleTh": "ผู้เชี่ยวชาญด้านความหลากหลายและความเท่าเทียม (DEI)",
+    "titleEn": "Diversity, Equity & Inclusion Officer",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ตรวจเช็กความลำเอียงในการรับสมัครงานและการเลื่อนตำแหน่ง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_144",
+    "titleTh": "เจ้าหน้าที่จัดการสัญญาจ้างพนักงานชั่วคราว",
+    "titleEn": "Contract Staffing Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "ร่างสัญญาจ้างเหมาบริการและบริหารเวลาการทำงานของฟรีแลนซ์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_145",
+    "titleTh": "ผู้เชี่ยวชาญด้านการทดสอบบุคลิกภาพและจิตวิทยา",
+    "titleEn": "Psychometric Assessment Specialist",
+    "category": "ทรัพยากรบุคคล & การสรรหา (HR & Recruiting)",
+    "painpoint": "แปลผลแบบทดสอบบุคลิกภาพ (DISC, MBTI) เพื่อจัดทีมทำงานที่ลงตัว",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_146",
+    "titleTh": "ยูทูปเบอร์ / ครีเอเตอร์วิดีโอยาว (YouTuber)",
+    "titleEn": "YouTube Video Creator",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คิดหัวข้อคลิป คิด Hook เปิดเรื่อง และเขียนสคริปต์ความยาว 15 นาที",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_147",
+    "titleTh": "ครีเอเตอร์ TikTok / Reels",
+    "titleEn": "Short-form Video Creator",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "ตามเทรนด์เสียงไวรัลไม่ทัน และต้องตัดต่อลงคลิปวันละหลายตัว",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_148",
+    "titleTh": "พอดแคสเตอร์ (Podcaster)",
+    "titleEn": "Podcast Producer & Host",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คิดคำถามสัมภาษณ์แขกรับเชิญ และสรุปเนื้อหาเป็น Show Notes",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_149",
+    "titleTh": "นักตัดต่อวิดีโอ (Video Editor)",
+    "titleEn": "Video Editor",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เสียเวลานั่งฟังวิดีโอทั้งชั่วโมงเพื่อหาช่วงไฮไลต์และใส่คำบรรยายซับไตเติล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_150",
+    "titleTh": "นักเขียนบทภาพยนตร์ & ละครสั้น (Scriptwriter)",
+    "titleEn": "Screenwriter / Scriptwriter",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "หมดไอเดียสร้างจุดหักมุม (Plot Twist) และเกลี่ยบทตัวละครไม่เท่ากัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_151",
+    "titleTh": "สตรีมเมอร์เกม / บันเทิง (Streamer)",
+    "titleEn": "Live Streamer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "ต้องคอยคุยเอนเตอร์เทนคนดูหลายชั่วโมง และตัดคลิปไฮไลต์หลังสตรีมจบ",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_152",
+    "titleTh": "บล็อกเกอร์ท่องเที่ยว & โรงแรม (Travel Blogger)",
+    "titleEn": "Travel Content Creator",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "วางแผนตารางเที่ยว แนะนำมุมถ่ายรูป และสรุปพิกัดค่าใช้จ่าย",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_153",
+    "titleTh": "บล็อกเกอร์อาหาร & รีวิวร้านอาหาร (Food Blogger)",
+    "titleEn": "Food Reviewer / Food Blogger",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "บรรยายรสชาติและสัมผัสอาหารให้แตกต่าง ไม่ใช้คำซ้ำๆ ซากๆ",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_154",
+    "titleTh": "นักข่าวออนไลน์ (Online Journalist)",
+    "titleEn": "Digital Journalist",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "ต้องสรุปข่าวสารด่วนให้ถูกต้อง รวดเร็ว และไม่ตกประเด็นสำคัญ",
+    "recommendedAi": "Perplexity Pro"
+  },
+  {
+    "id": "occ_155",
+    "titleTh": "นักเขียนนิยาย & ซีรีส์ออนไลน์ (Web Novelist)",
+    "titleEn": "Web Novel Author",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เขียนเนื้อหาไม่ทันเดดไลน์รายวัน และพล็อตเรื่องเริ่มออกทะเล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_156",
+    "titleTh": "นักพากย์เสียง & โฆษณา (Voice Over Artist)",
+    "titleEn": "Voice Over Artist",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "ฝึกออกเสียงและปรับอารมณ์สคริปต์ให้เข้ากับคาแรกเตอร์หลากหลาย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_157",
+    "titleTh": "ผู้กำกับภาพยนตร์สั้น AI (AI Filmmaker)",
+    "titleEn": "AI Video Director",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เขียน Prompt ให้ภาพตัวละครและแสงต่อเนื่องกันทุกคัตซีน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_158",
+    "titleTh": "ช่างภาพอิสระ (Freelance Photographer)",
+    "titleEn": "Professional Photographer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คัดเลือกรูปหลายพันใบจากงานอีเวนต์และเขียนแคปชันส่งลูกค้า",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_159",
+    "titleTh": "ผู้ดูแลช่องทางสื่อข่าวสาร (News Anchor)",
+    "titleEn": "News Producer & Anchor",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "จัดลำดับหัวข้อข่าวและปรับสำนวนข่าวภาษาต่างประเทศให้ออกเสียงลื่นหู",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_160",
+    "titleTh": "นักรีวิวแกดเจ็ตและสินค้าไอที (Tech Reviewer)",
+    "titleEn": "Tech Gadget Reviewer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เปรียบเทียบสเปกชิป ฟีเจอร์ และสรุปข้อดีข้อเสียอย่างเป็นกลาง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_161",
+    "titleTh": "นักเขียนคอลัมน์การเงิน & การลงทุน (Finance Creator)",
+    "titleEn": "Finance & Wealth Creator",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "แปลงเรื่องการเงินยากๆ ให้เป็นภาพและภาษาที่คนทั่วไปเข้าใจง่าย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_162",
+    "titleTh": "นักแปลซับไตเติลและคอนเทนต์ (Subtitler / Translator)",
+    "titleEn": "Subtitler & Media Translator",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "แปลมุกตลกและคำสแลงเฉพาะถิ่นให้ตรงบริบทและจำนวนคำพอดีหน้าจอ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_163",
+    "titleTh": "ซาวด์ดีไซเนอร์ & โปรดิวเซอร์เพลง (Music Producer)",
+    "titleEn": "Sound Designer / Music Producer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เขียนเพลงหรือแต่งท่อนฮุก และคิด Prompt ดนตรีประกอบวิดีโอ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_164",
+    "titleTh": "นักจัดรายการวิทยุ & สื่อเสียง (Radio DJ)",
+    "titleEn": "Radio & Audio Show Host",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เตรียมบทพูดคั่นเพลงและหัวข้อสนทนาสดกับผู้ฟังทางบ้าน",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_165",
+    "titleTh": "ผู้จัดการสื่อสารในภาวะวิกฤต (Crisis PR Specialist)",
+    "titleEn": "Crisis Communication Specialist",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "ร่างแถลงการณ์ขอโทษและชี้แจงประเด็นดราม่าบนโซเชียลมีเดียแบบเร่งด่วน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_166",
+    "titleTh": "นักออกแบบ UI/UX (UI/UX Designer)",
+    "titleEn": "UI/UX Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "ทำ User Research, สรุป Personas และเขียน UX Copy ในแต่ละหน้าจอ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_167",
+    "titleTh": "นักออกแบบกราฟิก (Graphic Designer)",
+    "titleEn": "Graphic Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "คิด Mood Board คุมโทนสี และแกะไอเดียจากบรีฟลูกค้าที่ไม่ชัดเจน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_168",
+    "titleTh": "สถาปนิก (Architect)",
+    "titleEn": "Architect",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "เขียนคอนเซปต์งานออกแบบและสรุปกฎหมายผังเมืองควบคุมอาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_169",
+    "titleTh": "มัณฑนากร / นักออกแบบภายใน (Interior Designer)",
+    "titleEn": "Interior Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "จัดทำรายการเฟอร์นิเจอร์ คุมธีมวัสดุ และคำนวณงบตกแต่งให้ลูกค้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_170",
+    "titleTh": "นักวาดภาพประกอบ (Illustrator)",
+    "titleEn": "Digital Illustrator",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "คิด Character Sheet และท่าทางของตัวละครในมุมมองต่างๆ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_171",
+    "titleTh": "นักออกแบบโมชันกราฟิก (Motion Graphic Designer)",
+    "titleEn": "Motion Graphic Artist",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "คิด Storyboard การเคลื่อนไหวและจังหวะ Transition ของแต่ละช็อต",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_172",
+    "titleTh": "นักออกแบบผลิตภัณฑ์ (Industrial Product Designer)",
+    "titleEn": "Industrial Product Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "วิเคราะห์ Ergonomics และคิด Prompt เรนเดอร์รูปทรงผลิตภัณฑ์ 3D",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_173",
+    "titleTh": "นักออกแบบบรรจุภัณฑ์ (Packaging Designer)",
+    "titleEn": "Packaging Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "คำนวณขนาดไดคัท และจัดวางองค์ประกอบฉลากตามกฎหมาย อย.",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_174",
+    "titleTh": "นักออกแบบแฟชั่น (Fashion Designer)",
+    "titleEn": "Fashion Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "พยากรณ์เทรนด์คู่สีและสร้างภาพเรนเดอร์คอลเลกชันเสื้อผ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_175",
+    "titleTh": "ผู้กำกับศิลป์ (Art Director)",
+    "titleEn": "Art Director",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "เขียนบรีฟส่งต่องานให้ทีมกราฟิกและช่างภาพให้เข้าใจตรงกัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_176",
+    "titleTh": "นักออกแบบฟอนต์ & ตัวพิมพ์ (Typeface Designer)",
+    "titleEn": "Typeface Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "ออกแบบชุดตัวอักษรไทยให้เข้าคู่กับฟอนต์ภาษาอังกฤษยอดนิยม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_177",
+    "titleTh": "นักออกแบบนิทรรศการและอีเวนต์ (Exhibition Designer)",
+    "titleEn": "Exhibition & Booth Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "วาง Flow ทางเดินของผู้เข้าชมและคอนเซปต์แสงไฟในบูธ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_178",
+    "titleTh": "นักออกแบบเสียงประกอบ (Sound Effects Designer)",
+    "titleEn": "Sound FX Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "สร้างเสียงเอฟเฟกต์เฉพาะตัวสำหรับเกม แอปพลิเคชัน หรือคลิปไวรัล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_179",
+    "titleTh": "นักออกแบบภูมิทัศน์ (Landscape Architect)",
+    "titleEn": "Landscape Architect",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "เลือกพันธุ์ไม้ที่เหมาะกับสภาพดิน แดด และคอนเซปต์สวน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_180",
+    "titleTh": "นักออกแบบระบบตัวตนของแบรนด์ (Identity Designer)",
+    "titleEn": "Brand Identity Designer",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "เขียนคู่มือ Brand Guidelines และกำหนด Brand Tone of Voice",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_181",
+    "titleTh": "แอดมินเพจ & ตอบแชทลูกค้า (Social Commerce Admin)",
+    "titleEn": "Live Chat & Social Commerce Admin",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "ลูกค้าทักมาพร้อมกันหลายสิบคน ตอบไม่ทัน ปิดการขายหลุดมือ",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_182",
+    "titleTh": "หัวหน้าฝ่ายบริการลูกค้า (Customer Support Lead)",
+    "titleEn": "Customer Support Team Lead",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "สรุปประเภทปัญหาที่ลูกค้าพบบ่อยและวัดผล CSAT/SLA ของทีม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_183",
+    "titleTh": "เจ้าหน้าที่คอลเซ็นเตอร์ (Call Center Specialist)",
+    "titleEn": "Call Center Agent",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "ต้องรับสายลูกค้าอารมณ์เสียและหาข้อมูลนโยบายตอบกลับอย่างใจเย็น",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_184",
+    "titleTh": "เลขานุการผู้บริหาร (Executive Assistant)",
+    "titleEn": "Executive Assistant",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "จัดตารางนัดหมายที่ชนกัน ร่างอีเมลตอบกลับ และเตรียมวาระประชุม",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_185",
+    "titleTh": "เจ้าหน้าที่ธุรการทั่วไป (General Administrative Officer)",
+    "titleEn": "Administrative Officer",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "จัดการงานเอกสารเบิกจ่าย ร่างหนังสือราชการ และจองห้องประชุม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_186",
+    "titleTh": "ผู้ดูแลข้อร้องเรียนและวิกฤตลูกค้า (Escalation Specialist)",
+    "titleEn": "Customer Escalation Specialist",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "แก้ปัญหาเคสลูกค้าร้องเรียนรุนแรงและชดเชยเยียวยาตามกรอบบริษัท",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_187",
+    "titleTh": "ผู้จัดการฝ่ายต้อนรับ (Front Desk & Reception Manager)",
+    "titleEn": "Receptionist & Front Desk Lead",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "ตอบคำถามผู้มาติดต่อและแนะนำเส้นทางในอาคารสำนักงาน",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_188",
+    "titleTh": "เจ้าหน้าที่ดูแลความพึงพอใจลูกค้า (Customer Experience - CX)",
+    "titleEn": "Customer Experience Specialist",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "รวบรวมคะแนน NPS และวิเคราะห์ Customer Journey Map ที่มีปัญหา",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_189",
+    "titleTh": "แอดมินจัดการคำสั่งซื้อและการคืนสินค้า (Order & Returns Admin)",
+    "titleEn": "Order & RMA Administrator",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "ตรวจสอบหลักฐานพัสดุเสียหายและประสานงานเปลี่ยนคืนสินค้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_190",
+    "titleTh": "ผู้ดูแลระบบศูนย์ช่วยเหลือและบทความ FAQ (Knowledge Base)",
+    "titleEn": "Knowledge Base Content Manager",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "เขียนบทความ Help Center และวิธีใช้งานระบบให้ลูกค้าอ่านเข้าใจง่าย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_191",
+    "titleTh": "ทนายความ (Lawyer / Attorney)",
+    "titleEn": "Litigation & Trial Lawyer",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ค้นหาคำพิพากษาฎีกาเทียบเคียงและร่างคำฟ้อง/คำให้การคดีแพ่งและอาญา",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_192",
+    "titleTh": "ที่ปรึกษากฎหมายองค์กร (Corporate Legal Counsel)",
+    "titleEn": "Corporate Legal Counsel",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ตรวจทานสัญญาทางธุรกิจหลายสิบฉบับและชี้ประเด็นความเสี่ยง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_193",
+    "titleTh": "เจ้าหน้าที่กำกับดูแลการปฏิบัติตามกฎหมาย (Compliance Officer)",
+    "titleEn": "Compliance Officer",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ติดตามกฎเกณฑ์ใหม่จาก ธปท./ก.ล.ต. และจัดทำ Checklist องค์กร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_194",
+    "titleTh": "ผู้เชี่ยวชาญด้านทรัพย์สินทางปัญญา (IP / Patent Specialist)",
+    "titleEn": "Intellectual Property Specialist",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ตรวจเช็กความเหมือนคล้ายของเครื่องหมายการค้าและร่างคำขอสิทธิบัตร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_195",
+    "titleTh": "เจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (DPO)",
+    "titleEn": "Data Protection Officer",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ตรวจสอบการจัดทำ ROPA และร่างข้อความนโยบายความเป็นส่วนตัว (Privacy Policy)",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_196",
+    "titleTh": "ทนายความคดีครอบครัวและมรดก (Family Lawyer)",
+    "titleEn": "Family & Estate Lawyer",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ร่างพินัยกรรมและจัดการบัญชีทรัพย์สินมรดกให้ถูกต้องตามกฎหมาย",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_197",
+    "titleTh": "ที่ปรึกษากฎหมายแรงงาน (Labor Law Consultant)",
+    "titleEn": "Labor Law Consultant",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ร่างข้อบังคับการทำงานและสัญญาจ้างแรงงานป้องกันข้อพิพาท",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_198",
+    "titleTh": "ผู้เชี่ยวชาญด้านอนุญาโตตุลาการ (Arbitration Specialist)",
+    "titleEn": "Arbitration & Dispute Specialist",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "รวบรวมหลักฐานพยานเอกสารและจัดทำ Statement of Claim",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_199",
+    "titleTh": "เจ้าหน้าที่นิติกรรมสัญญาอสังหาริมทรัพย์ (Property Conveyancer)",
+    "titleEn": "Real Estate Legal Specialist",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "ตรวจสอบโฉนดที่ดิน ภาระจำยอม และสัญญาจะซื้อจะขาย",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_200",
+    "titleTh": "ผู้เชี่ยวชาญด้านกฎหมายภาษีอากร (Tax Attorney)",
+    "titleEn": "Tax Attorney",
+    "category": "กฎหมาย, สัญญา & Compliance (Legal & Contracts)",
+    "painpoint": "วางแผนโครงสร้างภาษีธุรกิจและยื่นคำอุทธรณ์ภาษีต่อกรมสรรพากร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_201",
+    "titleTh": "แพทย์เวชปฏิบัติทั่วไป (General Practitioner)",
+    "titleEn": "General Practitioner",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ต้องเขียนเวชระเบียน (SOAP Note) และสรุปประวัติคนไข้หลายสิบคนต่อวัน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_202",
+    "titleTh": "พยาบาลวิชาชีพ (Registered Nurse)",
+    "titleEn": "Registered Nurse",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ส่งมอบเวรพยาบาล และจัดทำแผนการพยาบาลรายบุคคล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_203",
+    "titleTh": "เภสัชกรชุมชน / ประจำร้านยา (Pharmacist)",
+    "titleEn": "Community Pharmacist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ตรวจสอบปฏิกิริยาระหว่างยา (Drug Interaction) และอธิบายวิธีใช้ยาให้คนไข้",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_204",
+    "titleTh": "นักกายภาพบำบัด (Physical Therapist)",
+    "titleEn": "Physical Therapist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ออกแบบโปรแกรมฟื้นฟูกล้ามเนื้อเฉพาะบุคคลและบันทึกองศาการเคลื่อนไหว",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_205",
+    "titleTh": "นักกำหนดอาหาร / นักโภชนาการ (Dietitian)",
+    "titleEn": "Clinical Dietitian / Nutritionist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "คำนวณสารอาหารและจัดตารางมื้ออาหารสำหรับผู้ป่วยเบาหวาน/ไต",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_206",
+    "titleTh": "จิตแพทย์ / นักจิตวิทยาคลินิก (Psychologist)",
+    "titleEn": "Clinical Psychologist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "จดบันทึกการให้คำปรึกษาและวิเคราะห์แนวโน้มพฤติกรรมคนไข้",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_207",
+    "titleTh": "ทันตแพทย์ (Dentist)",
+    "titleEn": "Dentist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "อธิบายขั้นตอนการรักษาจัดฟัน/รากฟันเทียม และข้อควรปฏิบัติหลังทำฟัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_208",
+    "titleTh": "เทรนเนอร์ส่วนบุคคล (Personal Trainer)",
+    "titleEn": "Certified Personal Trainer",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "จัดตารางเวทเทรนนิ่ง คาดิโอ และประเมินพัฒนาการสัดส่วนของลูกค้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_209",
+    "titleTh": "ผู้บริหารคลินิกความงาม (Aesthetic Clinic Manager)",
+    "titleEn": "Aesthetic Clinic Manager",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "จัดแพ็กเกจคอร์สทรีตเมนต์และตอบคำถามข้อกังวลเรื่องผลข้างเคียง",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_210",
+    "titleTh": "นักเวชศาสตร์ชะลอวัย (Anti-Aging Specialist)",
+    "titleEn": "Anti-Aging & Wellness Specialist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "แปลผลตรวจเลือดระดับฮอร์โมนและแนะนำวิตามินเฉพาะบุคคล",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_211",
+    "titleTh": "ครูโรงเรียนมัธยม (High School Teacher)",
+    "titleEn": "High School Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ต้องทำแผนการสอน (Lesson Plan) และออกข้อสอบหลายวิชาพร้อมเฉลย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_212",
+    "titleTh": "อาจารย์มหาวิทยาลัย (University Professor)",
+    "titleEn": "University Professor",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ตรวจการบ้าน ตรวจการคัดลอก (Plagiarism) และเตรียมสไลด์บรรยาย",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_213",
+    "titleTh": "ติวเตอร์สอบเข้า & กวดวิชา (Test Prep Tutor)",
+    "titleEn": "Test Prep Tutor",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "สรุปสูตรลัด วิเคราะห์สถิติข้อสอบเก่า และสร้างแบบฝึกหัดเสมือนจริง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_214",
+    "titleTh": "ครูสอนภาษาอังกฤษ (English Language Teacher)",
+    "titleEn": "English Language Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ตรวจแกรมม่า คำศัพท์ และให้ Feedback การเขียน Essay ของนักเรียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_215",
+    "titleTh": "นักออกแบบหลักสูตรออนไลน์ (Instructional Designer)",
+    "titleEn": "Instructional Designer",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "แปลงเนื้อหาตำราเรียนหนาๆ ให้เป็นบทเรียนย่อยแบบ Microlearning",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_216",
+    "titleTh": "ผู้ดูแลเด็กปฐมวัย (Early Childhood Educator)",
+    "titleEn": "Kindergarten Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "คิดกิจกรรมเสริมทักษะ sensory play และเขียนรายงานพัฒนาการส่งผู้ปกครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_217",
+    "titleTh": "โค้ชฝึกอบรมองค์กร (Corporate Trainer)",
+    "titleEn": "Corporate Trainer",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ออกแบบเวิร์กช็อปแบบ Interactive และทำแบบประเมินความพร้อมก่อน-หลังเรียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_218",
+    "titleTh": "ครูสอนดนตรี (Music Instructor)",
+    "titleEn": "Music Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "เขียนแบบฝึกหัดคอร์ด โน้ตเพลง และตารางซ้อมประจำวันให้นักเรียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_219",
+    "titleTh": "ครูสอนศิลปะ (Art Teacher)",
+    "titleEn": "Art Instructor",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "จัดลำดับเนื้อหาประวัติศาสตร์ศิลป์และโจทย์การสร้างสรรค์ผลงาน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_220",
+    "titleTh": "นักแนะแนวการศึกษาต่อต่างประเทศ (Education Consultant)",
+    "titleEn": "Study Abroad Consultant",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ตรวจแก้ Statement of Purpose (SOP) และแนะนำมหาวิทยาลัยที่เหมาะสม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_221",
+    "titleTh": "นายหน้าอสังหาริมทรัพย์ (Real Estate Broker)",
+    "titleEn": "Real Estate Broker",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "เขียนแคปชันโพสต์ขายบ้าน/คอนโดหลายแพลตฟอร์ม และเปรียบเทียบราคาตลาด",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_222",
+    "titleTh": "ผู้จัดการนิติบุคคลอาคารชุด (Condo Property Manager)",
+    "titleEn": "Condo Property Manager",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "จัดการลูกบ้านค้างชำระค่าส่วนกลางและแจ้งประกาศซ่อมบำรุงอาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_223",
+    "titleTh": "นักพัฒนาอสังหาริมทรัพย์ (Property Developer)",
+    "titleEn": "Property Developer",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "วิเคราะห์ Feasibility Study คำนวณผลตอบแทนโครงการและศึกษาคู่แข่ง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_224",
+    "titleTh": "ผู้จัดการสินทรัพย์รอการขาย (NPA Specialist)",
+    "titleEn": "NPA Asset Manager",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "สำรวจสภาพทรัพย์สินและวางกลยุทธ์ตั้งราคาขายทอดตลาด",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_225",
+    "titleTh": "ผู้เชี่ยวชาญการตรวจรับบ้านและคอนโด (Home Inspector)",
+    "titleEn": "Home Inspection Specialist",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "จัดทำรายการ Defect พร้อมภาพถ่ายและแนวทางแก้ไขให้ช่างโครงการ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_226",
+    "titleTh": "ผู้จัดการร้านค้า Shopee/Lazada/TikTok Shop",
+    "titleEn": "E-Commerce Marketplace Manager",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "ลงสินค้าพร้อมกันหลายร้อย SKU ปรับชื่อสินค้า SEO และร่วมแคมเปญ Flash Sale",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_227",
+    "titleTh": "ผู้เชี่ยวชาญ Dropshipping & จัดหาสินค้า",
+    "titleEn": "Dropshipping Specialist",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "ค้นหาสินค้า Winning Products และวิเคราะห์กำไรหลังหักค่าธรรมเนียม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_228",
+    "titleTh": "ผู้จัดการคลังสินค้าออนไลน์ (Fulfillment Manager)",
+    "titleEn": "E-Commerce Fulfillment Manager",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "จัดการปัญหาสต็อกจม สต็อกขาด และติดตามการแพ็กส่งสินค้าไม่ให้ตกหล่น",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_229",
+    "titleTh": "นักวิเคราะห์การกำหนดราคาสินค้า (Pricing Analyst)",
+    "titleEn": "Pricing Optimization Analyst",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "ตรวจสอบราคาสินค้าคู่แข่งบน Shopee/Lazada แบบเรียลไทม์เพื่อปรับราคาแข่ง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_230",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อสินค้าแฟชั่น & ค้าปลีก",
+    "titleEn": "Retail Fashion Buyer",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "คำนวณไซส์ สี และคาดการณ์ยอดสั่งซื้อล่วงหน้าเพื่อไม่ให้สินค้าค้างสต็อก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_231",
+    "titleTh": "ผู้จัดการฝ่ายโลจิสติกส์ (Logistics Manager)",
+    "titleEn": "Logistics Manager",
+    "category": "ขนส่ง, โลจิสติกส์ & ซัพพลายเชน (Logistics & Supply Chain)",
+    "painpoint": "วางแผนเส้นทางเดินรถ (Route Optimization) เพื่อลดค่าน้ำมันและเวลาขนส่ง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_232",
+    "titleTh": "เจ้าหน้าที่ชิปปิ้งและพิธีการศุลกากร (Customs Broker)",
+    "titleEn": "Customs Clearance Specialist",
+    "category": "ขนส่ง, โลจิสติกส์ & ซัพพลายเชน (Logistics & Supply Chain)",
+    "painpoint": "เช็กพิกัดศุลกากร (HS Code) อัตราภาษีนำเข้า และสิทธิพิเศษทางภาษี FTA",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_233",
+    "titleTh": "ผู้จัดการฝ่ายซัพพลายเชน (Supply Chain Director)",
+    "titleEn": "Supply Chain Director",
+    "category": "ขนส่ง, โลจิสติกส์ & ซัพพลายเชน (Logistics & Supply Chain)",
+    "painpoint": "รับมือกับวิกฤตซัพพลายเออร์ส่งของล่าช้าและผลกระทบจากสถานการณ์โลก",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_234",
+    "titleTh": "ผู้จัดการคลังสินค้า (Warehouse Manager)",
+    "titleEn": "Warehouse Manager",
+    "category": "ขนส่ง, โลจิสติกส์ & ซัพพลายเชน (Logistics & Supply Chain)",
+    "painpoint": "จัดวางพื้นที่เก็บสินค้า (Slotting Optimization) และตรวจนับสต็อกประจำปี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_235",
+    "titleTh": "ผู้ประสานงานขนส่งสินค้าทางเรือและอากาศ (Freight Forwarder)",
+    "titleEn": "Freight Forwarder",
+    "category": "ขนส่ง, โลจิสติกส์ & ซัพพลายเชน (Logistics & Supply Chain)",
+    "painpoint": "เปรียบเทียบค่าระวางเรือ/เครื่องบิน และติดตามสถานะตู้คอนเทนเนอร์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_236",
+    "titleTh": "เจ้าของร้านอาหาร / คาเฟ่ (Restaurant Owner)",
+    "titleEn": "Restaurant & Cafe Owner",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "คำนวณ Food Cost ต่อจาน คิดเมนูใหม่ตามฤดูกาล และโปรโมตร้านบนโซเชียล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_237",
+    "titleTh": "เชฟใหญ่ / หัวหน้าพ่อครัว (Executive Chef)",
+    "titleEn": "Executive Chef",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "จัดทำสูตรมาตรฐาน (Standard Recipe) และควบคุมการสูญเสียวัตถุดิบในครัว",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_238",
+    "titleTh": "ผู้จัดการร้านอาหาร (Restaurant Manager)",
+    "titleEn": "Restaurant Manager",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "จัดตารางกะพนักงาน ดูแลการบริการ และรับมือกับรีวิวติชมบน Google Map",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_239",
+    "titleTh": "บาริสต้า & ผู้เชี่ยวชาญด้านกาแฟ (Head Barista)",
+    "titleEn": "Head Barista",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "ออกแบบเครื่องดื่มซิกเนเจอร์ คำนวณต้นทุนเมล็ดกาแฟและไซรัป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_240",
+    "titleTh": "บาร์เทนเดอร์ & มิกโซโลจิสต์ (Mixologist)",
+    "titleEn": "Mixologist & Beverage Specialist",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "คิดสูตรค็อกเทลและเรื่องราวประกอบเครื่องดื่ม (Storytelling)",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_241",
+    "titleTh": "วิศวกรโรงงาน / ควบคุมการผลิต (Production Engineer)",
+    "titleEn": "Production Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "ลดเวลาหยุดทำงานของเครื่องจักร (Downtime) และคำนวณค่า OEE",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_242",
+    "titleTh": "วิศวกรควบคุมคุณภาพ (QC / QA Engineer)",
+    "titleEn": "Quality Control Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "วิเคราะห์สาเหตุของเสียในกระบวนการผลิตด้วยเครื่องมือ 7 QC Tools",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_243",
+    "titleTh": "วิศวกรซ่อมบำรุง (Maintenance Engineer)",
+    "titleEn": "Maintenance Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "วางแผนการซ่อมบำรุงเชิงป้องกัน (Preventive Maintenance) และสั่งอะไหล่",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_244",
+    "titleTh": "วิศวกรความปลอดภัยโรงงาน (Industrial Safety Engineer)",
+    "titleEn": "Industrial Safety Specialist",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "จัดทำเอกสาร JSA (Job Safety Analysis) และประเมินความเสี่ยงสารเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_245",
+    "titleTh": "ผู้จัดการโรงงาน (Plant Manager)",
+    "titleEn": "Factory Plant Manager",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "ควบคุมต้นทุนการผลิต จัดการพลังงาน และวางแผนกำลังคนตามยอดสั่งซื้อ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_246",
+    "titleTh": "นักวิทยาศาสตร์ข้อมูล (Data Scientist)",
+    "titleEn": "Data Scientist",
+    "category": "วิทยาศาสตร์ข้อมูล & งานวิจัย (Data Science & Research)",
+    "painpoint": "ทดลองโมเดล Machine Learning และแปลงผลทางสถิติให้ฝ่ายธุรกิจเข้าใจ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_247",
+    "titleTh": "นักวิจัยทางวิชาการ (Academic Researcher)",
+    "titleEn": "Academic Researcher",
+    "category": "วิทยาศาสตร์ข้อมูล & งานวิจัย (Data Science & Research)",
+    "painpoint": "ค้นหาวรรณกรรมที่เกี่ยวข้อง (Literature Review) และสังเคราะห์งานวิจัย",
+    "recommendedAi": "Perplexity Pro"
+  },
+  {
+    "id": "occ_248",
+    "titleTh": "นักวิเคราะห์ระบบธุรกิจ (Business Intelligence - BI)",
+    "titleEn": "BI Developer / Analyst",
+    "category": "วิทยาศาสตร์ข้อมูล & งานวิจัย (Data Science & Research)",
+    "painpoint": "ออกแบบแดชบอร์ด Power BI / Tableau และเขียนสูตร DAX ซับซ้อน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_249",
+    "titleTh": "นักวิจัยชีววิทยาและวิทยาศาสตร์สุขภาพ (Life Science)",
+    "titleEn": "Biomedical Researcher",
+    "category": "วิทยาศาสตร์ข้อมูล & งานวิจัย (Data Science & Research)",
+    "painpoint": "สืบค้นข้อมูลจีโนมิกส์และเอกสารวิจัยทางคลินิกจากฐานข้อมูลสากล",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_250",
+    "titleTh": "นักวิเคราะห์สถิติและการสำรวจ (Statistician)",
+    "titleEn": "Statistician",
+    "category": "วิทยาศาสตร์ข้อมูล & งานวิจัย (Data Science & Research)",
+    "painpoint": "ทดสอบสมมติฐานทางสถิติและคำนวณขนาดตัวอย่าง (Sample Size)",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_251",
+    "titleTh": "เจ้าของฟาร์มเกษตรอัจฉริยะ (Smart Farmer)",
+    "titleEn": "Smart Farm Owner",
+    "category": "เกษตรกรรม & ปศุสัตว์ (Agriculture & Farming)",
+    "painpoint": "วิเคราะห์สภาพอากาศ ดิน ปุ๋ย และโรคพืชเพื่อวางแผนการเก็บเกี่ยว",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_252",
+    "titleTh": "นักวิชาการเกษตร (Agricultural Specialist)",
+    "titleEn": "Agricultural Consultant",
+    "category": "เกษตรกรรม & ปศุสัตว์ (Agriculture & Farming)",
+    "painpoint": "วินิจฉัยศัตรูพืชและแนะนำสูตรปุ๋ยอินทรีย์ตามสภาพแวดล้อม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_253",
+    "titleTh": "ผู้จัดการฟาร์มปศุสัตว์ (Livestock Farm Manager)",
+    "titleEn": "Livestock Manager",
+    "category": "เกษตรกรรม & ปศุสัตว์ (Agriculture & Farming)",
+    "painpoint": "ควบคุมสูตรอาหารสัตว์ ติดตามอัตราการเจริญเติบโต และตารางฉีดวัคซีน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_254",
+    "titleTh": "ผู้ประกอบการแปรรูปผลผลิตเกษตร (Agri-Processor)",
+    "titleEn": "Agri-Processing Entrepreneur",
+    "category": "เกษตรกรรม & ปศุสัตว์ (Agriculture & Farming)",
+    "painpoint": "ยืดอายุการเก็บรักษาผลิตภัณฑ์ คำนวณต้นทุนบรรจุภัณฑ์ และหาตลาดใหม่",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_255",
+    "titleTh": "ผู้จัดการตลาดกลางสินค้าเกษตร (Agri-Commodity Broker)",
+    "titleEn": "Agri-Commodity Trader",
+    "category": "เกษตรกรรม & ปศุสัตว์ (Agriculture & Farming)",
+    "painpoint": "ติดตามราคาสินค้าโภคภัณฑ์เกษตรล่วงหน้าและประเมินผลผลิตของฤดูกาล",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_256",
+    "titleTh": "ผู้จัดการทั่วไปโรงแรม (Hotel General Manager)",
+    "titleEn": "Hotel General Manager",
+    "category": "โรงแรม, ท่องเที่ยว & สันทนาการ (Hospitality & Tourism)",
+    "painpoint": "บริหารอัตราการเข้าพัก (Occupancy Rate) และควบคุมต้นทุนดำเนินงาน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_257",
+    "titleTh": "ผู้จัดการฝ่ายจัดการรายได้โรงแรม (Revenue Manager)",
+    "titleEn": "Hotel Revenue Manager",
+    "category": "โรงแรม, ท่องเที่ยว & สันทนาการ (Hospitality & Tourism)",
+    "painpoint": "กำหนดราคารายวันแบบ Dynamic Pricing แข่งกับโรงแรมข้างเคียงบน OTA",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_258",
+    "titleTh": "มัคคุเทศก์ / ผู้นำเที่ยว (Tour Guide / Tour Leader)",
+    "titleEn": "Professional Tour Guide",
+    "category": "โรงแรม, ท่องเที่ยว & สันทนาการ (Hospitality & Tourism)",
+    "painpoint": "อธิบายประวัติศาสตร์วัฒนธรรมให้น่าสนใจและแก้ปัญหาเฉพาะหน้าให้ลูกทัวร์",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_259",
+    "titleTh": "ผู้จัดการฝ่ายแม่บ้านโรงแรม (Executive Housekeeper)",
+    "titleEn": "Executive Housekeeper",
+    "category": "โรงแรม, ท่องเที่ยว & สันทนาการ (Hospitality & Tourism)",
+    "painpoint": "จัดสรรตารางทำความสะอาดห้องพักตามรอบเช็กอิน-เช็กเอาต์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_260",
+    "titleTh": "เจ้าหน้าที่วางแผนการเดินทางเฉพาะบุคคล (Travel Designer)",
+    "titleEn": "Luxury Travel Designer",
+    "category": "โรงแรม, ท่องเที่ยว & สันทนาการ (Hospitality & Tourism)",
+    "painpoint": "ออกแบบทริปท่องเที่ยวส่วนตัวแบบเอ็กซ์คลูซีฟตามความชอบของลูกค้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_261",
+    "titleTh": "เจ้าหน้าที่วิเคราะห์นโยบายและแผน (Policy Analyst)",
+    "titleEn": "Policy & Planning Analyst",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "ยกร่างแผนปฏิบัติราชการประจำปีและตัวชี้วัดความคุ้มค่าโครงการ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_262",
+    "titleTh": "ผู้จัดการโครงการองค์กรไม่แสวงหากำไร (NGO Director)",
+    "titleEn": "NGO Project Director",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "เขียนข้อเสนอขอรับทุนสนับสนุน (Grant Proposal) จากองค์กรระหว่างประเทศ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_263",
+    "titleTh": "เจ้าหน้าที่จัดซื้อจัดจ้างภาครัฐ (Government Procurement)",
+    "titleEn": "Government Procurement Officer",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "ร่างขอบเขตงาน (TOR) และเปรียบเทียบราคากลางให้ถูกต้องตาม พ.ร.บ. จัดซื้อจัดจ้าง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_264",
+    "titleTh": "เจ้าหน้าที่ประชาสัมพันธ์หน่วยงานรัฐ (Government PR)",
+    "titleEn": "Public Sector PR Officer",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "แปลงภาษาราชการยากๆ ให้เป็นอินโฟกราฟิกและประกาศที่ประชาชนเข้าใจง่าย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_265",
+    "titleTh": "นักพัฒนาสังคมและสิทธิมนุษยชน (Social Worker)",
+    "titleEn": "Social Development Specialist",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "สรุปเคสให้ความช่วยเหลือประชาชนกลุ่มเปราะบางและส่งต่อหน่วยงานที่เกี่ยวข้อง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_266",
+    "titleTh": "นักจัดรายการสดวิทยุชุมชน",
+    "titleEn": "Community Radio Host",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คิดหัวข้อทอล์กประจำวันและเปิดรับสายผู้ฟัง",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_267",
+    "titleTh": "นักแต่งเพลงโฆษณา (Jingle Writer)",
+    "titleEn": "Commercial Jingle Composer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คิดเมโลดี้ติดหูและคำสัมผัสสั้นๆ 15 วินาที",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_268",
+    "titleTh": "นักวาดภาพการ์ตูนล้อเลียน",
+    "titleEn": "Caricature Artist",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "ดึงจุดเด่นบนใบหน้ามาวาดเป็นการ์ตูนขำขัน",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_269",
+    "titleTh": "นักออกแบบตัวละคร 3D (3D Character Artist)",
+    "titleEn": "3D Character Modeler",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "ปั้นโมเดลและจัด Topology ให้เหมาะกับการทำแอนิเมชัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_270",
+    "titleTh": "นักทำสีภาพยนตร์ (Colorist)",
+    "titleEn": "Colorist",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "เกลี่ยสีภาพยนตร์ให้ได้ Mood & Tone สม่ำเสมอทุกช็อต",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_271",
+    "titleTh": "ผู้ดูแลสตูดิโออัดเสียง",
+    "titleEn": "Recording Studio Engineer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "จัดการเสียงสะท้อนและมิกซ์เสียงพูดให้ใสชัดเจน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_272",
+    "titleTh": "นักพิสูจน์อักษร (Proofreader)",
+    "titleEn": "Proofreader",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "ตรวจหาคำสะกดผิด วรรคตอน และการจัดรูปแบบเอกสาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_273",
+    "titleTh": "บรรณาธิการบริหารสำนักพิมพ์",
+    "titleEn": "Editor-in-Chief",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คัดเลือกต้นฉบับหนังสือและวางแผนตารางตีพิมพ์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_274",
+    "titleTh": "นักข่าวสายสืบสวนสอบสวน",
+    "titleEn": "Investigative Reporter",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "แกะรอยเส้นทางการเงินและเอกสารราชการที่ซับซ้อน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_275",
+    "titleTh": "ผู้ประกาศข่าวพยากรณ์อากาศ",
+    "titleEn": "Meteorology Presenter",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "อธิบายแผนที่ความกดอากาศและเรดาร์ฝนให้เข้าใจง่าย",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_276",
+    "titleTh": "ศัลยแพทย์กระดูกและข้อ (Orthopedic Surgeon)",
+    "titleEn": "Orthopedic Surgeon",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "อธิบายแผนผ่าตัดข้อเข่าเทียมและระยะเวลาพักฟื้น",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_277",
+    "titleTh": "กุมารแพทย์ (Pediatrician)",
+    "titleEn": "Pediatrician",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ตอบคำถามเรื่องวัคซีนและพัฒนาการเด็กตามช่วงวัย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_278",
+    "titleTh": "จักษุแพทย์ (Ophthalmologist)",
+    "titleEn": "Ophthalmologist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "แนะนำการดูแลสายตาจากอาการคอมพิวเตอร์วิชั่นซินโดรม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_279",
+    "titleTh": "แพทย์ผิวหนัง (Dermatologist)",
+    "titleEn": "Dermatologist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "วิเคราะห์ผื่นแพ้และจัดลำดับสกินแคร์ที่ปลอดภัย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_280",
+    "titleTh": "นักกิจกรรมบำบัด (Occupational Therapist)",
+    "titleEn": "Occupational Therapist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ฝึกทักษะการใช้ชีวิตประจำวันให้ผู้ป่วยหลอดเลือดสมอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_281",
+    "titleTh": "นักแก้ไขการพูด (Speech Therapist)",
+    "titleEn": "Speech-Language Pathologist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ออกแบบแบบฝึกหัดฝึกพูดสำหรับเด็กพูดช้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_282",
+    "titleTh": "แพทย์แผนไทยประยุกต์",
+    "titleEn": "Applied Thai Traditional Doctor",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "วินิจฉัยธาตุเจ้าเรือนและจัดตำรับยาสมุนไพร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_283",
+    "titleTh": "สัตวแพทย์สัตว์เลี้ยง (Small Animal Vet)",
+    "titleEn": "Small Animal Veterinarian",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "คำนวณขนาดยาตามน้ำหนักตัวของสุนัขและแมว",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_284",
+    "titleTh": "สัตวแพทย์สัตว์เศรษฐกิจ (Farm Animal Vet)",
+    "titleEn": "Livestock Veterinarian",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "วางมาตรการควบคุมโรคระบาดในฟาร์มหมูและไก่",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_285",
+    "titleTh": "นักรังสีเทคนิค (Radiologic Technologist)",
+    "titleEn": "Radiologic Technologist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "จัดท่าเอกซเรย์/MRI และบันทึกปริมาณรังสีที่ผู้ป่วยได้รับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_286",
+    "titleTh": "วิศวกรโยธา (Civil Engineer)",
+    "titleEn": "Civil Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณโครงสร้างคอนกรีตเสริมเหล็กและปริมาณงานเสาเข็ม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_287",
+    "titleTh": "วิศวกรไฟฟ้ากำลัง (Electrical Power Engineer)",
+    "titleEn": "Electrical Power Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณโหลดไฟฟ้าและขนาดหม้อแปลงสำหรับโรงงาน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_288",
+    "titleTh": "วิศวกรเครื่องกล (Mechanical Engineer)",
+    "titleEn": "Mechanical Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "ออกแบบระบบท่อส่งน้ำและระบบปรับอากาศ HVAC",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_289",
+    "titleTh": "วิศวกรเคมี (Chemical Engineer)",
+    "titleEn": "Chemical Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณสมดุลมวลและพลังงานในหอกลั่น",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_290",
+    "titleTh": "วิศวกรชีวการแพทย์ (Biomedical Engineer)",
+    "titleEn": "Biomedical Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "บำรุงรักษาเครื่องช่วยหายใจและเครื่องตรวจคลื่นหัวใจ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_291",
+    "titleTh": "วิศวกรการบินและอวกาศ (Aerospace Engineer)",
+    "titleEn": "Aerospace Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณแรงขับและจำลองอากาศพลศาสตร์ (Aerodynamics)",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_292",
+    "titleTh": "วิศวกรสิ่งแวดล้อม (Environmental Engineer)",
+    "titleEn": "Environmental Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณขนาดระบบบำบัดน้ำเสียและมลพิษทางอากาศ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_293",
+    "titleTh": "วิศวกรระบบราง (Railway Systems Engineer)",
+    "titleEn": "Railway Systems Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "ตรวจสอบระบบอาณัติสัญญาณและตารางเวลาเดินรถไฟ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_294",
+    "titleTh": "วิศวกรยานยนต์พลังงานไฟฟ้า (EV Engineer)",
+    "titleEn": "Electric Vehicle Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "ออกแบบชุดควบคุมแบตเตอรี่ BMS และระบบระบายความร้อน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_295",
+    "titleTh": "วิศวกรหุ่นยนต์และระบบอัตโนมัติ (Robotics Engineer)",
+    "titleEn": "Robotics & Automation Engineer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "เขียนโปรแกรมแขนกลหุ่นยนต์และจำลองวิถีการเคลื่อนที่",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_296",
+    "titleTh": "นักพัฒนา React / Next.js",
+    "titleEn": "React / Next.js Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "จัดการ Server Actions, Cache Components และ SEO",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_297",
+    "titleTh": "นักพัฒนา Vue / Nuxt",
+    "titleEn": "Vue / Nuxt Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "จัดการ Pinia Store และ Server-side Rendering",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_298",
+    "titleTh": "นักพัฒนา Python / FastAPI",
+    "titleEn": "Python / FastAPI Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียน API แบบ Asynchronous และจัดการ Pydantic Validation",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_299",
+    "titleTh": "นักพัฒนา Go / Golang",
+    "titleEn": "Go Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "จัดการ Goroutine, Channels และเขียน Microservices ความเร็วสูง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_300",
+    "titleTh": "นักพัฒนา Rust",
+    "titleEn": "Rust Systems Developer",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "แก้ปัญหา Borrow Checker และเขียน Memory-safe Application",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_301",
+    "titleTh": "นักวิเคราะห์ความปลอดภัยทางไซเบอร์ (SOC Analyst)",
+    "titleEn": "SOC Analyst",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "คัดกรองการแจ้งเตือนภัยคุกคามในระบบ SIEM รายวัน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_302",
+    "titleTh": "นักทดสอบเจาะระบบ (Penetration Tester / Ethical Hacker)",
+    "titleEn": "Penetration Tester",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เขียนรายงานผลการเจาะระบบและแนวทางแก้ไขช่องโหว่",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_303",
+    "titleTh": "วิศวกรคลาวด์ AWS (AWS Cloud Architect)",
+    "titleEn": "AWS Cloud Architect",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "ออกแบบสถาปัตยกรรม Well-Architected และลดค่าบริการ AWS",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_304",
+    "titleTh": "วิศวกรคลาวด์ Azure (Azure Solutions Architect)",
+    "titleEn": "Azure Cloud Architect",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "เชื่อมต่อระบบ On-premise เข้ากับ Azure Hybrid Cloud",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_305",
+    "titleTh": "วิศวกรคลาวด์ GCP (Google Cloud Architect)",
+    "titleEn": "GCP Cloud Architect",
+    "category": "โปรแกรมเมอร์ & ไอที (Software & IT)",
+    "painpoint": "สร้าง Data Warehouse ด้วย BigQuery และจัดการ Kubernetes GKE",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_306",
+    "titleTh": "ผู้จัดการจัดเลี้ยงงานแต่งงาน (Wedding Planner)",
+    "titleEn": "Wedding Planner",
+    "category": "โรงแรม, ท่องเที่ยว & สันทนาการ (Hospitality & Tourism)",
+    "painpoint": "ประสานงานช่างภาพ ดอกไม้ สถานที่ และคุมงบประมาณงานแต่ง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_307",
+    "titleTh": "ซอมเมอลิเยร์ / ผู้เชี่ยวชาญด้านไวน์ (Sommelier)",
+    "titleEn": "Sommelier",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "จับคู่ไวน์กับอาหารและจัดทำบันทึกคำอธิบายรสชาติไวน์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_308",
+    "titleTh": "เชฟขนมอบและเบเกอรี่ (Pastry Chef)",
+    "titleEn": "Pastry Chef",
+    "category": "ร้านอาหาร, คาเฟ่ & F&B (Restaurants & Hospitality)",
+    "painpoint": "คำนวณสูตรเบเกอรี่ ปรับอุณหภูมิอบ และคิดเมนูขนมหวานใหม่",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_309",
+    "titleTh": "ผู้จัดการร้านสะดวกซื้อ",
+    "titleEn": "Convenience Store Manager",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "จัดเรียงสินค้าหน้าร้านและลดการสูญเสียสินค้าหมดอายุ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_310",
+    "titleTh": "พนักงานจัดซื้อสินค้าสด (Fresh Food Buyer)",
+    "titleEn": "Fresh Produce Buyer",
+    "category": "อีคอมเมิร์ซ & ค้าปลีก (E-Commerce & Retail)",
+    "painpoint": "เช็กคุณภาพผักผลไม้เนื้อสัตว์และต่อรองราคากับชาวสวน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_311",
+    "titleTh": "ครูสอนวิทยาศาสตร์ประถมศึกษา",
+    "titleEn": "Primary Science Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ทำการทดลองวิทยาศาสตร์ง่ายๆ จากของรอบตัวให้นักเรียนสนุก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_312",
+    "titleTh": "ครูสอนคณิตศาสตร์",
+    "titleEn": "Mathematics Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "อธิบายโจทย์แคลคูลัสและพีชคณิตเป็นภาพทีละสเต็ป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_313",
+    "titleTh": "ครูสอนประวัติศาสตร์",
+    "titleEn": "History Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "เล่าเรื่องราวเหตุการณ์สำคัญในอดีตเชื่อมโยงกับปัจจุบัน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_314",
+    "titleTh": "อาจารย์สอนเขียนโปรแกรมเด็ก (Kids Coding Coach)",
+    "titleEn": "Kids Coding Instructor",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "สร้างแบบฝึกหัด Scratch และโจทย์บล็อกเกมที่เข้าใจง่าย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_315",
+    "titleTh": "ครูสอนภาษาจีน (Chinese Language Teacher)",
+    "titleEn": "Chinese Language Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "อธิบายโครงสร้างประโยค HSK และฝึกแต่งบทสนทนาใช้จริง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_316",
+    "titleTh": "ครูสอนภาษาญี่ปุ่น (Japanese Language Teacher)",
+    "titleEn": "Japanese Language Teacher",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "สอนไวยากรณ์ JLPT และอธิบายวัฒนธรรมการใช้คำสุภาพ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_317",
+    "titleTh": "โค้ชสอนทักษะการพูดในที่สาธารณะ (Public Speaking Coach)",
+    "titleEn": "Public Speaking Coach",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ปรับแต่งบทพูดเปิดเรื่องและฝึกภาษากายลดความประหม่า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_318",
+    "titleTh": "ติวเตอร์สอบเข้าแพทย์และทันตะ (BMAT/TPAT1)",
+    "titleEn": "Medical Entrance Exam Tutor",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "วิเคราะห์แนวข้อสอบเชื่อมโยงและจริยธรรมแพทย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_319",
+    "titleTh": "ติวเตอร์สอบ IELTS / TOEFL",
+    "titleEn": "IELTS / TOEFL Prep Tutor",
+    "category": "การศึกษา, ติวเตอร์ & EdTech (Education & Training)",
+    "painpoint": "ตรวจงานเขียน Writing Task 1-2 และเทคนิคทำ Reading ให้ทันเวลา",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_320",
+    "titleTh": "ครูสอนโยคะและพิลาทิส (Yoga & Pilates Instructor)",
+    "titleEn": "Yoga & Pilates Instructor",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "ออกแบบ Sequence ท่าฝึกและคำบรรยายจัดระเบียบร่างกาย",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_321",
+    "titleTh": "มัณฑนากรจัดพร็อพตกแต่งบ้าน (Home Stager)",
+    "titleEn": "Home Staging Specialist",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "จัดเฟอร์นิเจอร์และของตกแต่งให้บ้านดูโปร่งเพื่อขายได้เร็วขึ้น",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_322",
+    "titleTh": "นักพัฒนาคอนโดมิเนียม High-rise",
+    "titleEn": "High-Rise Condo Developer",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "วางแผน Facilities และคำนวณพื้นที่ขายสุทธิต่อตารางเมตร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_323",
+    "titleTh": "ผู้จัดการปล่อยเช่ารายวัน (Airbnb Host / Operator)",
+    "titleEn": "Short-Term Rental Operator",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "ตอบข้อความแขกต่างชาติ แนะนำคู่มือการเข้าพัก และปรับราคาคืนพัก",
+    "recommendedAi": "ChatGPT Plus / Operator"
+  },
+  {
+    "id": "occ_324",
+    "titleTh": "นักลงทุนพลิกบ้านเก่า (House Flipper)",
+    "titleEn": "House Flipping Investor",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "คำนวณงบรีโนเวทและประเมินราคาขายต่อหลังปรับปรุง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_325",
+    "titleTh": "ผู้ประเมินผลกระทบสิ่งแวดล้อม (EIA Specialist)",
+    "titleEn": "EIA Consultant",
+    "category": "อสังหาริมทรัพย์ & นายหน้า (Real Estate)",
+    "painpoint": "รวบรวมข้อมูลชุมชนและจัดทำรายงานวิเคราะห์สิ่งแวดล้อม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_326",
+    "titleTh": "นักสังคมสงเคราะห์เด็กและเยาวชน",
+    "titleEn": "Youth Social Worker",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "ประเมินสภาพแวดล้อมครอบครัวและจัดทำแผนคุ้มครองเด็ก",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_327",
+    "titleTh": "ผู้บริหารมูลนิธิเพื่อการกุศล",
+    "titleEn": "Charity Foundation Director",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "จัดทำรายงานความโปร่งใสทางการเงินและขอบคุณผู้บริจาค",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_328",
+    "titleTh": "เจ้าหน้าที่จัดการภัยพิบัติและกู้ภัย",
+    "titleEn": "Disaster Relief Coordinator",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "ประสานงานทรัพยากรช่วยเหลือผู้ประสบภัยน้ำท่วม/ไฟไหม้",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_329",
+    "titleTh": "นักวิจัยด้านการพัฒนานโยบายเมือง (Urban Planner)",
+    "titleEn": "Urban Planning Researcher",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "วิเคราะห์การกระจายตัวของประชากรและโครงข่ายขนส่งสาธารณะ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_330",
+    "titleTh": "ผู้ประสานงานความร่วมมือระหว่างประเทศ",
+    "titleEn": "International Cooperation Officer",
+    "category": "งานราชการ, สาธารณประโยชน์ & NGO (Public Sector & NGO)",
+    "painpoint": "ร่างบันทึกความเข้าใจ (MOU) สองภาษาและกำหนดการทูต",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_331",
+    "titleTh": "ช่างภาพโฆษณาสินค้า",
+    "titleEn": "Commercial Product Photographer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "จัดแสงสตูดิโอให้สินค้าสะท้อนแสงสวยงามและคมชัด",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_332",
+    "titleTh": "ช่างภาพงานแต่งงาน",
+    "titleEn": "Wedding Photographer",
+    "category": "คอนเทนต์ครีเอเตอร์ & สื่อ (Content & Media)",
+    "painpoint": "คัดเลือกและแต่งโทนสีภาพบรรยากาศหลายพันใบให้เสร็จทันเวลา",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_333",
+    "titleTh": "ช่างแต่งหน้าเจ้าสาว & แฟชั่น",
+    "titleEn": "Bridal & Fashion Makeup Artist",
+    "category": "การแพทย์, สุขภาพ & ฟิตเนส (Healthcare & Wellness)",
+    "painpoint": "แนะนำสไตล์แต่งหน้าให้เข้ากับชุดและรูปหน้าของลูกค้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_334",
+    "titleTh": "สไตลิสต์แฟชั่น & งานถ่ายแบบ",
+    "titleEn": "Fashion Stylist",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "มิกซ์แอนด์แมตช์ชุดและยืมเสื้อผ้าจากแบรนด์ต่างๆ ตามธีมงาน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_335",
+    "titleTh": "นักออกแบบดอกไม้ & ฟลอริสต์",
+    "titleEn": "Floral Designer / Florist",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "จัดช่อดอกไม้และคำนวณต้นทุนดอกไม้นำเข้าตามฤดูกาล",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_336",
+    "titleTh": "ช่างซ่อมบำรุงรถยนต์และเครื่องยนต์",
+    "titleEn": "Automotive Technician",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "อ่านโค้ดความผิดปกติของกล่อง ECU และหาสาเหตุอาการเสีย",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_337",
+    "titleTh": "ช่างติดตั้งโซลาร์เซลล์บนหลังคา",
+    "titleEn": "Solar Rooftop Installer",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณมุมเอียงแผงโซลาร์และความแข็งแรงของโครงหลังคา",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_338",
+    "titleTh": "ช่างเทคนิคระบบไฟฟ้าภายในบ้าน",
+    "titleEn": "Residential Electrician",
+    "category": "โรงงาน & การผลิต (Manufacturing & Engineering)",
+    "painpoint": "คำนวณโหลดเบรกเกอร์และเดินสายไฟให้ปลอดภัยตามมาตรฐาน กฟภ.",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_339",
+    "titleTh": "ช่างติดตั้งและล้างเครื่องปรับอากาศ",
+    "titleEn": "HVAC Technician",
+    "category": "บริการลูกค้า & แอดมิน (Customer Support & Admin)",
+    "painpoint": "ตรวจเช็กแรงดันน้ำยาแอร์และแก้ปัญหาน้ำแอร์หยด",
+    "recommendedAi": "Gemini 2.0 Flash"
+  },
+  {
+    "id": "occ_340",
+    "titleTh": "ช่างเฟอร์นิเจอร์บิวท์อิน",
+    "titleEn": "Custom Built-in Carpenter",
+    "category": "ออกแบบ, UX/UI & กราฟิก (Design & Creative)",
+    "painpoint": "ถอดแบบไม้ ปาร์ติเคิลบอร์ด และอุปกรณ์ฟิตติ้งตามแปลน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_341",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Data Analyst (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_342",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Quality Assurance Lead (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_343",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Regulatory Compliance Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_344",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Special Project Coordinator (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_345",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Technical Training Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_346",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "R&D Research Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_347",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Technical Procurement Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_348",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Growth Strategy Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_349",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Automation Workflow Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_350",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Cost & Pricing Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_351",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Enterprise Account Executive (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_352",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Safety & Standards Auditor (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_353",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Corporate Communications Specialist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_354",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Customer Experience Architect (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_355",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมพลังงานหมุนเวียน",
+    "titleEn": "Digital Transformation Strategist (Renewable Energy)",
+    "category": "อุตสาหกรรมเฉพาะทาง: พลังงานหมุนเวียน",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของพลังงานหมุนเวียน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_356",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Data Analyst (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_357",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Quality Assurance Lead (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_358",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Regulatory Compliance Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_359",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Special Project Coordinator (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_360",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Technical Training Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_361",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "R&D Research Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_362",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Technical Procurement Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_363",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Growth Strategy Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_364",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Automation Workflow Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_365",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Cost & Pricing Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_366",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Enterprise Account Executive (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_367",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Safety & Standards Auditor (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_368",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Corporate Communications Specialist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_369",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Customer Experience Architect (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_370",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมยานยนต์ & ยานพาหนะไฟฟ้า",
+    "titleEn": "Digital Transformation Strategist (Automotive & EV)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ยานยนต์ & ยานพาหนะไฟฟ้า",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของยานยนต์ & ยานพาหนะไฟฟ้า",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_371",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Data Analyst (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_372",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Quality Assurance Lead (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_373",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Regulatory Compliance Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_374",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Special Project Coordinator (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_375",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Technical Training Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_376",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "R&D Research Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_377",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Technical Procurement Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_378",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Growth Strategy Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_379",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Automation Workflow Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_380",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Cost & Pricing Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_381",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Enterprise Account Executive (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_382",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Safety & Standards Auditor (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_383",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Corporate Communications Specialist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_384",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Customer Experience Architect (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_385",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมเคมีภัณฑ์ & ปิโตรเคมี",
+    "titleEn": "Digital Transformation Strategist (Chemicals & Petrochemicals)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เคมีภัณฑ์ & ปิโตรเคมี",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของเคมีภัณฑ์ & ปิโตรเคมี",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_386",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Data Analyst (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_387",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Quality Assurance Lead (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_388",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Regulatory Compliance Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_389",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Special Project Coordinator (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_390",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Technical Training Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_391",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "R&D Research Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_392",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Technical Procurement Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_393",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Growth Strategy Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_394",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Automation Workflow Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_395",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Cost & Pricing Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_396",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Enterprise Account Executive (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_397",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Safety & Standards Auditor (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_398",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Corporate Communications Specialist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_399",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Customer Experience Architect (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_400",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมอาหารและเครื่องดื่มแปรรูป",
+    "titleEn": "Digital Transformation Strategist (Food Processing)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อาหารและเครื่องดื่มแปรรูป",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของอาหารและเครื่องดื่มแปรรูป",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_401",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Data Analyst (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_402",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Quality Assurance Lead (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_403",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Regulatory Compliance Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_404",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Special Project Coordinator (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_405",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Technical Training Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_406",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "R&D Research Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_407",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Technical Procurement Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_408",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Growth Strategy Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_409",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Automation Workflow Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_410",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Cost & Pricing Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_411",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Enterprise Account Executive (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_412",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Safety & Standards Auditor (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_413",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Corporate Communications Specialist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_414",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Customer Experience Architect (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_415",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมการเงินการธนาคาร",
+    "titleEn": "Digital Transformation Strategist (Banking & Fintech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การเงินการธนาคาร",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของการเงินการธนาคาร",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_416",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Data Analyst (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของโทรคมนาคม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_417",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Quality Assurance Lead (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของโทรคมนาคม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_418",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Regulatory Compliance Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_419",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Special Project Coordinator (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_420",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Technical Training Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_421",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "R&D Research Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของโทรคมนาคม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_422",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Technical Procurement Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของโทรคมนาคม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_423",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Growth Strategy Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_424",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Automation Workflow Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_425",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Cost & Pricing Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของโทรคมนาคม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_426",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Enterprise Account Executive (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_427",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Safety & Standards Auditor (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของโทรคมนาคม",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_428",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Corporate Communications Specialist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_429",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Customer Experience Architect (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_430",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมโทรคมนาคม",
+    "titleEn": "Digital Transformation Strategist (Telecommunications)",
+    "category": "อุตสาหกรรมเฉพาะทาง: โทรคมนาคม",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของโทรคมนาคม",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_431",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Data Analyst (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_432",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Quality Assurance Lead (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_433",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Regulatory Compliance Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_434",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Special Project Coordinator (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_435",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Technical Training Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_436",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "R&D Research Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_437",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Technical Procurement Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_438",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Growth Strategy Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_439",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Automation Workflow Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_440",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Cost & Pricing Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_441",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Enterprise Account Executive (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_442",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Safety & Standards Auditor (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_443",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Corporate Communications Specialist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_444",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Customer Experience Architect (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_445",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมประกันภัย & ความคุ้มครอง",
+    "titleEn": "Digital Transformation Strategist (Insurance)",
+    "category": "อุตสาหกรรมเฉพาะทาง: ประกันภัย & ความคุ้มครอง",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของประกันภัย & ความคุ้มครอง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_446",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Data Analyst (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_447",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Quality Assurance Lead (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_448",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Regulatory Compliance Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_449",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Special Project Coordinator (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_450",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Technical Training Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_451",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "R&D Research Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_452",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Technical Procurement Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_453",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Growth Strategy Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_454",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Automation Workflow Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_455",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Cost & Pricing Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_456",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Enterprise Account Executive (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_457",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Safety & Standards Auditor (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_458",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Corporate Communications Specialist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_459",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Customer Experience Architect (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_460",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมอวกาศและการบิน",
+    "titleEn": "Digital Transformation Strategist (Aviation & Aerospace)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อวกาศและการบิน",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของอวกาศและการบิน",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_461",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Data Analyst (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_462",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Quality Assurance Lead (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_463",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Regulatory Compliance Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_464",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Special Project Coordinator (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_465",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Technical Training Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_466",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "R&D Research Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_467",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Technical Procurement Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_468",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Growth Strategy Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_469",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Automation Workflow Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_470",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Cost & Pricing Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_471",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Enterprise Account Executive (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_472",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Safety & Standards Auditor (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_473",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Corporate Communications Specialist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_474",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Customer Experience Architect (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_475",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมอัญมณีและเครื่องประดับ",
+    "titleEn": "Digital Transformation Strategist (Jewelry & Luxury)",
+    "category": "อุตสาหกรรมเฉพาะทาง: อัญมณีและเครื่องประดับ",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของอัญมณีและเครื่องประดับ",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_476",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Data Analyst (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_477",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Quality Assurance Lead (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_478",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Regulatory Compliance Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_479",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Special Project Coordinator (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_480",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Technical Training Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_481",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "R&D Research Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_482",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Technical Procurement Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_483",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Growth Strategy Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_484",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Automation Workflow Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_485",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Cost & Pricing Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_486",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Enterprise Account Executive (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_487",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Safety & Standards Auditor (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_488",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Corporate Communications Specialist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_489",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Customer Experience Architect (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_490",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมการขนส่งทางรางและระบบราง",
+    "titleEn": "Digital Transformation Strategist (Railways)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การขนส่งทางรางและระบบราง",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของการขนส่งทางรางและระบบราง",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_491",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Data Analyst (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_492",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Quality Assurance Lead (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_493",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Regulatory Compliance Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_494",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Special Project Coordinator (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_495",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Technical Training Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_496",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "R&D Research Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_497",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Technical Procurement Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_498",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Growth Strategy Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_499",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Automation Workflow Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_500",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Cost & Pricing Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_501",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Enterprise Account Executive (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_502",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Safety & Standards Auditor (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_503",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Corporate Communications Specialist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_504",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Customer Experience Architect (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_505",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมการต่อเรือและเดินเรือพาณิชย์",
+    "titleEn": "Digital Transformation Strategist (Maritime & Shipping)",
+    "category": "อุตสาหกรรมเฉพาะทาง: การต่อเรือและเดินเรือพาณิชย์",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของการต่อเรือและเดินเรือพาณิชย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_506",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Data Analyst (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_507",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Quality Assurance Lead (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_508",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Regulatory Compliance Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_509",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Special Project Coordinator (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_510",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Technical Training Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_511",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "R&D Research Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_512",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Technical Procurement Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_513",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Growth Strategy Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_514",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Automation Workflow Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_515",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Cost & Pricing Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_516",
+    "titleTh": "ผู้จัดการลูกค้าองค์กรระดับพรีเมียม - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Enterprise Account Executive (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "เจรจาข้อตกลงระยะยาวและรักษาความสัมพันธ์คู่ค้าระดับสูง ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_517",
+    "titleTh": "ผู้ตรวจประเมินมาตรฐานความปลอดภัย - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Safety & Standards Auditor (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ตรวจจับจุดเสี่ยงอันตรายและออกใบแจ้งปรับปรุง ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_518",
+    "titleTh": "นักสื่อสารองค์กรและภาพลักษณ์ - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Corporate Communications Specialist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "เขียนข่าวประชาสัมพันธ์และบทความสร้างภาพลักษณ์เชิงบวก ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_519",
+    "titleTh": "ผู้จัดการฝ่ายประสบการณ์ผู้ใช้บริการ - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Customer Experience Architect (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "ออกแบบขั้นตอนบริการเพื่อลดความไม่พอใจของลูกค้า ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_520",
+    "titleTh": "นักวางแผนกลยุทธ์ดิจิทัลทรานส์ฟอร์เมชัน - อุตสาหกรรมเวชภัณฑ์และชีวเภสัช",
+    "titleEn": "Digital Transformation Strategist (Pharma & Biotech)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เวชภัณฑ์และชีวเภสัช",
+    "painpoint": "เลือกเครื่องมือซอฟต์แวร์และ AI เข้ามาปรับใช้ในองค์กร ในบริบทของเวชภัณฑ์และชีวเภสัช",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_521",
+    "titleTh": "นักวิเคราะห์ข้อมูลประจำสายงาน - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Data Analyst (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "ดึงข้อมูลและสร้างรายงานเฉพาะทางประจำสัปดาห์ ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_522",
+    "titleTh": "ผู้จัดการฝ่ายควบคุมคุณภาพ - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Quality Assurance Lead (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "ตรวจสอบเกณฑ์มาตรฐานและการรับรองประจำอุตสาหกรรม ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_523",
+    "titleTh": "ผู้เชี่ยวชาญการปฏิบัติตามกฎเกณฑ์ - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Regulatory Compliance Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "เตรียมเอกสารยื่นขอใบอนุญาตและต่ออายุมาตรฐานสากล ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_524",
+    "titleTh": "ผู้ประสานงานโครงการพิเศษ - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Special Project Coordinator (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "ติดตามความคืบหน้าโครงการข้ามสายงานและรายงานผล ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_525",
+    "titleTh": "ผู้เชี่ยวชาญการฝึกอบรมบุคลากรเฉพาะทาง - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Technical Training Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "จัดทำคู่มือ SOP และอบรมทักษะเฉพาะด้าน ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_526",
+    "titleTh": "นักวิจัยและพัฒนาผลิตภัณฑ์ใหม่ (R&D) - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "R&D Research Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "ทดสอบและพัฒนาสูตรต้นแบบสินค้าใหม่ ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_527",
+    "titleTh": "ผู้จัดการฝ่ายจัดซื้อวัตถุดิบเฉพาะทาง - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Technical Procurement Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "สรรหาแหล่งวัตถุดิบและต่อรองราคาในตลาดโลก ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "DeepSeek-R1"
+  },
+  {
+    "id": "occ_528",
+    "titleTh": "นักกลยุทธ์การเติบโตประจำกลุ่มธุรกิจ - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Growth Strategy Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "หาช่องทางสร้างรายได้ใหม่และการขยายฐานลูกค้า ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_529",
+    "titleTh": "ผู้เชี่ยวชาญด้านระบบอัตโนมัติประจำส่วนงาน - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Automation Workflow Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "ออกแบบกระบวนการทำงานอัตโนมัติลดขั้นตอนซ้ำซ้อน ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "Claude 3.7 Sonnet"
+  },
+  {
+    "id": "occ_530",
+    "titleTh": "นักวิเคราะห์ต้นทุนและราคาขาย - อุตสาหกรรมเครื่องมือแพทย์",
+    "titleEn": "Cost & Pricing Specialist (Medical Devices)",
+    "category": "อุตสาหกรรมเฉพาะทาง: เครื่องมือแพทย์",
+    "painpoint": "คำนวณจุดคุ้มทุนและวางโครงสร้างราคาแข่งขัน ในบริบทของเครื่องมือแพทย์",
+    "recommendedAi": "DeepSeek-R1"
+  }
+]

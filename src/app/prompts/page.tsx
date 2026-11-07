@@ -5,11 +5,12 @@ import Link from 'next/link';
 import { PromptTemplate } from '@/lib/types';
 import pool500Data from '@/data/random-500-prompts.json';
 import confetti from 'canvas-confetti';
+import AiAgentStudio from '@/components/prompts/AiAgentStudio';
 import {
   Sparkles, Copy, Check, Terminal, Sliders, Layers, ArrowRight,
   Search, BookOpen, Download, Share2, RefreshCw, Cpu, Code2,
   CheckCircle2, Flame, ExternalLink, HelpCircle, Video, Film, Palette, Clapperboard,
-  Dices, Wand2, Shuffle, X, FileText, CheckCircle
+  Dices, Wand2, Shuffle, X, FileText, CheckCircle, Bot, Briefcase
 } from 'lucide-react';
 
 // ============================================================================
@@ -283,6 +284,22 @@ export default function PromptsPage() {
   // Selected AI Engine Target (Google Flow, Meta AI, DreamRadar, MiniMax Hailuo H3)
   const [targetEngine, setTargetEngine] = useState<'minimax' | 'flow' | 'meta' | 'dreamradar'>('minimax');
 
+  // Active Tab: 'agent_studio' (400 Use Cases & 500+ Occupations) or 'master_prompts'
+  const [activeTab, setActiveTab] = useState<'agent_studio' | 'master_prompts'>('agent_studio');
+
+  // Listen to URL parameter for default tab
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab === 'master_prompts' || tab === 'builder' || tab === 'master') {
+        setActiveTab('master_prompts');
+      } else if (tab === 'agent_studio' || tab === 'agent' || tab === 'ai_agent') {
+        setActiveTab('agent_studio');
+      }
+    }
+  }, []);
+
   // 500 Random Ideas & Prompts System States
   const [showPoolModal, setShowPoolModal] = useState(false);
   const [selectedPoolCategory, setSelectedPoolCategory] = useState<string>('all');
@@ -430,6 +447,7 @@ export default function PromptsPage() {
   // Randomly selects a prompt template AND applies a smart creative preset or dynamic AI idea
   const handleRandomPrompt = () => {
     if (prompts.length === 0) return;
+    setActiveTab('master_prompts');
     setIsRandomizing(true);
 
     // 1. Pick a random prompt
@@ -588,14 +606,26 @@ export default function PromptsPage() {
           </p>
 
           {/* HERO AI RANDOM PROMPT & 500 POOL BUTTONS */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 flex-wrap">
+            <button
+              onClick={() => setActiveTab('agent_studio')}
+              className={`w-full sm:w-auto px-6 py-4 rounded-2xl font-black text-sm sm:text-base shadow-xl transition-all flex items-center justify-center gap-2.5 border ${
+                activeTab === 'agent_studio'
+                  ? 'bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 text-slate-950 shadow-cyan-500/25 border-cyan-200/50 scale-[1.02]'
+                  : 'bg-slate-900/90 hover:bg-slate-800 text-cyan-300 border-cyan-500/40'
+              }`}
+            >
+              <Bot className="w-5 h-5 text-cyan-400" />
+              <span>🤖 AI Agent (400 Use Cases & 500+ อาชีพ)</span>
+            </button>
+
             <button
               onClick={() => handleRandomFrom500()}
               disabled={isRandomizing}
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-amber-400/25 hover:shadow-amber-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/50"
+              className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-xl shadow-amber-400/25 hover:shadow-amber-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/50"
             >
               <Dices className={`w-5 h-5 text-slate-950 ${isRandomizing ? 'animate-spin' : ''}`} />
-              <span>{isRandomizing ? 'กำลังสุ่มไอเดียด้วย AI...' : '🎲 สุ่มไอเดีย & Prompt 500 รายการ'}</span>
+              <span>{isRandomizing ? 'กำลังสุ่มไอเดียด้วย AI...' : '🎲 สุ่มไอเดีย 500 รายการ'}</span>
             </button>
 
             <button
@@ -603,10 +633,10 @@ export default function PromptsPage() {
                 setActivePoolItem(null);
                 setShowPoolModal(true);
               }}
-              className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-600/30 via-indigo-600/30 to-slate-900/80 hover:from-purple-600/40 hover:to-indigo-600/40 text-purple-200 text-sm font-bold border border-purple-500/40 hover:border-purple-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-500/10"
+              className="w-full sm:w-auto px-5 py-4 rounded-2xl bg-gradient-to-r from-purple-600/30 via-indigo-600/30 to-slate-900/80 hover:from-purple-600/40 hover:to-indigo-600/40 text-purple-200 text-sm font-bold border border-purple-500/40 hover:border-purple-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-purple-500/10"
             >
               <Sparkles className="w-4 h-4 text-purple-400" />
-              <span>คลังสุ่ม 500 ไอเดีย (ดูทั้งหมด)</span>
+              <span>คลังสุ่ม 500 ไอเดีย</span>
             </button>
 
             <button
@@ -841,8 +871,58 @@ export default function PromptsPage() {
         </div>
 
         {/* ======================================================== */}
-        {/* SECTION 1: PROMPT PRESETS / CARDS SELECTOR               */}
+        {/* VIEW / TAB SWITCHER: AI AGENT STUDIO vs MASTER PROMPTS   */}
         {/* ======================================================== */}
+        <div id="agent-studio" className="flex items-center justify-center mb-12">
+          <div className="inline-flex p-1.5 rounded-2xl bg-slate-900/90 border border-white/10 shadow-2xl backdrop-blur-xl">
+            <button
+              type="button"
+              onClick={() => setActiveTab('agent_studio')}
+              className={`flex items-center gap-2.5 px-4 sm:px-8 py-3.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
+                activeTab === 'agent_studio'
+                  ? 'bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white shadow-xl shadow-cyan-500/25 ring-1 ring-cyan-300/40 scale-[1.02]'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Bot className="w-4 h-4 text-cyan-300" />
+              <span>AI Agent Studio (400 Use Cases & 500+ อาชีพ)</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-400 text-slate-950 shadow-sm animate-pulse">
+                NEW
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('master_prompts')}
+              className={`flex items-center gap-2.5 px-4 sm:px-8 py-3.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
+                activeTab === 'master_prompts'
+                  ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-xl shadow-amber-400/25 ring-1 ring-amber-300/40 scale-[1.02]'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Master Prompt Builder & คลังแม่แบบ</span>
+            </button>
+          </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* TAB 1: AI AGENT STUDIO (400 Use Cases & 500+ Occupations) */}
+        {/* ======================================================== */}
+        {activeTab === 'agent_studio' && (
+          <div className="mb-14">
+            <AiAgentStudio />
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* TAB 2: MASTER PROMPT BUILDER & PRESETS                   */}
+        {/* ======================================================== */}
+        {activeTab === 'master_prompts' && (
+          <>
+            {/* ======================================================== */}
+            {/* SECTION 1: PROMPT PRESETS / CARDS SELECTOR               */}
+            {/* ======================================================== */}
         <div className="mb-14">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
             <div>
@@ -1287,6 +1367,8 @@ export default function PromptsPage() {
 
           </div>
         </div>
+          </>
+        )}
 
       </div>
 
@@ -1294,7 +1376,7 @@ export default function PromptsPage() {
       {/* 4. FIXED POSITION FLOATING BOTTOM ACTION BAR             */}
       {/* (User request: Copy or Gen directly without scrolling up) */}
       {/* ======================================================== */}
-      {selectedPrompt && (
+      {selectedPrompt && activeTab === 'master_prompts' && (
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-3xl bg-[#0b1424]/95 backdrop-blur-xl border border-amber-400/40 shadow-2xl shadow-black/80 rounded-2xl px-4 py-3 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
           
           {/* Active Prompt Title & Status */}
