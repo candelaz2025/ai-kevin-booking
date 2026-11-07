@@ -322,40 +322,41 @@ declare global {
 
 // Convert DB snake_case to ClassItem camelCase
 function mapDbClass(row: any): ClassItem {
-  let cleanPrerequisites = row.prerequisites || '';
+  const rawPrereq = row.prerequisites || '';
+  const getTag = (name: string): string | null => {
+    const m = rawPrereq.match(new RegExp(`<!--${name}:([\\s\\S]*?)-->`));
+    return m ? m[1].trim() : null;
+  };
+
+  const cleanPrerequisites = rawPrereq.replace(/<!--[\s\S]*?-->/g, '').trim();
+
   let parsedAttachments = [];
-  if (cleanPrerequisites.includes('<!--attachments:')) {
-    const parts = cleanPrerequisites.split('<!--attachments:');
-    cleanPrerequisites = parts[0];
+  const attTag = getTag('attachments');
+  if (attTag) {
     try {
-      const jsonStr = parts[1].split('-->')[0].trim();
-      parsedAttachments = JSON.parse(jsonStr);
+      parsedAttachments = JSON.parse(attTag);
     } catch {
       parsedAttachments = [];
     }
   }
 
   let rewardPoints = row.reward_points !== undefined ? Number(row.reward_points) : undefined;
-  if (cleanPrerequisites.includes('<!--rewardPoints:')) {
-    const pParts = cleanPrerequisites.split('<!--rewardPoints:');
-    cleanPrerequisites = pParts[0];
+  const pointsTag = getTag('rewardPoints');
+  if (pointsTag) {
     try {
-      rewardPoints = Number(pParts[1].split('-->')[0].trim());
+      rewardPoints = Number(pointsTag);
     } catch {}
   }
   if (rewardPoints === undefined || isNaN(rewardPoints)) {
     rewardPoints = Math.round((Number(row.price) || 0) / 10);
   }
 
-  // Parse duration tag: <!--duration:3:hour-->
   let durationValue: number | undefined = undefined;
   let durationUnit: 'minute' | 'hour' | 'day' | undefined = undefined;
-  if (cleanPrerequisites.includes('<!--duration:')) {
-    const dParts = cleanPrerequisites.split('<!--duration:');
-    cleanPrerequisites = dParts[0];
+  const durationTag = getTag('duration');
+  if (durationTag) {
     try {
-      const dTag = dParts[1].split('-->')[0].trim();
-      const [valStr, unitStr] = dTag.split(':');
+      const [valStr, unitStr] = durationTag.split(':');
       if (valStr && !isNaN(Number(valStr))) {
         durationValue = Number(valStr);
         if (unitStr === 'day' || unitStr === 'hour' || unitStr === 'minute') {
@@ -379,119 +380,89 @@ function mapDbClass(row: any): ClassItem {
     }
   }
 
-  // Parse isFree tag: <!--isFree:true-->
   let isFree: boolean | undefined = undefined;
-  if (cleanPrerequisites.includes('<!--isFree:')) {
-    const fParts = cleanPrerequisites.split('<!--isFree:');
-    cleanPrerequisites = fParts[0];
-    try {
-      isFree = fParts[1].split('-->')[0].trim() === 'true';
-    } catch {}
-  }
-  if (isFree === undefined) {
+  const freeTag = getTag('isFree');
+  if (freeTag) {
+    isFree = freeTag === 'true';
+  } else {
     isFree = Number(row.price) === 0;
   }
 
-  // Parse level tag: <!--level:beginner-->
   let level: CourseLevel = (row.level || 'beginner') as CourseLevel;
-  if (cleanPrerequisites.includes('<!--level:')) {
-    const lParts = cleanPrerequisites.split('<!--level:');
-    cleanPrerequisites = lParts[0];
-    try {
-      const parsedLevel = lParts[1].split('-->')[0].trim() as CourseLevel;
-      if (['beginner', 'intermediate', 'advanced'].includes(parsedLevel)) {
-        level = parsedLevel;
-      }
-    } catch {}
+  const levelTag = getTag('level');
+  if (levelTag && ['beginner', 'intermediate', 'advanced'].includes(levelTag)) {
+    level = levelTag as CourseLevel;
   }
 
-  // Parse videoUrl tag: <!--videoUrl:...-->
   let videoUrl: string | undefined = row.video_url || undefined;
-  if (cleanPrerequisites.includes('<!--videoUrl:')) {
-    const vParts = cleanPrerequisites.split('<!--videoUrl:');
-    cleanPrerequisites = vParts[0];
+  const videoTag = getTag('videoUrl');
+  if (videoTag) {
     try {
-      videoUrl = decodeURIComponent(vParts[1].split('-->')[0].trim());
+      videoUrl = decodeURIComponent(videoTag);
     } catch {
-      videoUrl = vParts[1].split('-->')[0].trim();
+      videoUrl = videoTag;
     }
   }
 
-  // Parse lessons tag: <!--lessons:...-->
   let lessons: any[] = Array.isArray(row.lessons) ? row.lessons : [];
-  if (cleanPrerequisites.includes('<!--lessons:')) {
-    const lesParts = cleanPrerequisites.split('<!--lessons:');
-    cleanPrerequisites = lesParts[0];
+  const lessonsTag = getTag('lessons');
+  if (lessonsTag) {
     try {
-      const lesRaw = lesParts[1].split('-->')[0].trim();
-      const decodedLes = decodeURIComponent(lesRaw);
-      lessons = JSON.parse(decodedLes);
+      lessons = JSON.parse(decodeURIComponent(lessonsTag));
     } catch {
       try {
-        lessons = JSON.parse(lesParts[1].split('-->')[0].trim());
+        lessons = JSON.parse(lessonsTag);
       } catch {}
     }
   }
 
-  // Parse instructorName tag: <!--instName:...-->
   let instructorName: string | undefined = row.instructor_name || undefined;
-  if (cleanPrerequisites.includes('<!--instName:')) {
-    const inParts = cleanPrerequisites.split('<!--instName:');
-    cleanPrerequisites = inParts[0];
+  const instNameTag = getTag('instName');
+  if (instNameTag) {
     try {
-      instructorName = decodeURIComponent(inParts[1].split('-->')[0].trim());
+      instructorName = decodeURIComponent(instNameTag);
     } catch {
-      instructorName = inParts[1].split('-->')[0].trim();
+      instructorName = instNameTag;
     }
   }
   if (!instructorName) {
     instructorName = 'อาจารย์ สรเชษฐ์ (อ. เควิน)';
   }
 
-  // Parse instructorTitle tag: <!--instTitle:...-->
   let instructorTitle: string | undefined = row.instructor_title || undefined;
-  if (cleanPrerequisites.includes('<!--instTitle:')) {
-    const itParts = cleanPrerequisites.split('<!--instTitle:');
-    cleanPrerequisites = itParts[0];
+  const instTitleTag = getTag('instTitle');
+  if (instTitleTag) {
     try {
-      instructorTitle = decodeURIComponent(itParts[1].split('-->')[0].trim());
+      instructorTitle = decodeURIComponent(instTitleTag);
     } catch {
-      instructorTitle = itParts[1].split('-->')[0].trim();
+      instructorTitle = instTitleTag;
     }
   }
   if (!instructorTitle) {
     instructorTitle = 'Founder & Lead AI Instructor, kevinaiagent.tech';
   }
 
-  // Parse instructorSignature tag: <!--instSig:...-->
   let instructorSignature: string | undefined = row.instructor_signature || undefined;
-  if (cleanPrerequisites.includes('<!--instSig:')) {
-    const isParts = cleanPrerequisites.split('<!--instSig:');
-    cleanPrerequisites = isParts[0];
+  const instSigTag = getTag('instSig');
+  if (instSigTag) {
     try {
-      instructorSignature = decodeURIComponent(isParts[1].split('-->')[0].trim());
+      instructorSignature = decodeURIComponent(instSigTag);
     } catch {
-      instructorSignature = isParts[1].split('-->')[0].trim();
+      instructorSignature = instSigTag;
     }
   }
 
-  // Parse certificateEnabled tag: <!--certEnabled:...-->
   let certificateEnabled: boolean = row.certificate_enabled !== undefined ? Boolean(row.certificate_enabled) : true;
-  if (cleanPrerequisites.includes('<!--certEnabled:')) {
-    const ceParts = cleanPrerequisites.split('<!--certEnabled:');
-    cleanPrerequisites = ceParts[0];
-    try {
-      certificateEnabled = ceParts[1].split('-->')[0].trim() !== 'false';
-    } catch {}
+  const certTag = getTag('certEnabled');
+  if (certTag) {
+    certificateEnabled = certTag !== 'false';
   }
 
-  // Parse passingScore tag: <!--passScore:...-->
   let passingScorePercent: number = row.passing_score_percent ? Number(row.passing_score_percent) : 70;
-  if (cleanPrerequisites.includes('<!--passScore:')) {
-    const psParts = cleanPrerequisites.split('<!--passScore:');
-    cleanPrerequisites = psParts[0];
+  const scoreTag = getTag('passScore');
+  if (scoreTag) {
     try {
-      const parsedScore = Number(psParts[1].split('-->')[0].trim());
+      const parsedScore = Number(scoreTag);
       if (!isNaN(parsedScore) && parsedScore > 0) passingScorePercent = parsedScore;
     } catch {}
   }
