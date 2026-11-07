@@ -328,7 +328,7 @@ function mapDbClass(row: any): ClassItem {
     const parts = cleanPrerequisites.split('<!--attachments:');
     cleanPrerequisites = parts[0];
     try {
-      const jsonStr = parts[1].replace('-->', '');
+      const jsonStr = parts[1].split('-->')[0].trim();
       parsedAttachments = JSON.parse(jsonStr);
     } catch {
       parsedAttachments = [];
@@ -340,7 +340,7 @@ function mapDbClass(row: any): ClassItem {
     const pParts = cleanPrerequisites.split('<!--rewardPoints:');
     cleanPrerequisites = pParts[0];
     try {
-      rewardPoints = Number(pParts[1].replace('-->', ''));
+      rewardPoints = Number(pParts[1].split('-->')[0].trim());
     } catch {}
   }
   if (rewardPoints === undefined || isNaN(rewardPoints)) {
@@ -354,7 +354,7 @@ function mapDbClass(row: any): ClassItem {
     const dParts = cleanPrerequisites.split('<!--duration:');
     cleanPrerequisites = dParts[0];
     try {
-      const dTag = dParts[1].replace('-->', '');
+      const dTag = dParts[1].split('-->')[0].trim();
       const [valStr, unitStr] = dTag.split(':');
       if (valStr && !isNaN(Number(valStr))) {
         durationValue = Number(valStr);
@@ -385,7 +385,7 @@ function mapDbClass(row: any): ClassItem {
     const fParts = cleanPrerequisites.split('<!--isFree:');
     cleanPrerequisites = fParts[0];
     try {
-      isFree = fParts[1].replace('-->', '').trim() === 'true';
+      isFree = fParts[1].split('-->')[0].trim() === 'true';
     } catch {}
   }
   if (isFree === undefined) {
