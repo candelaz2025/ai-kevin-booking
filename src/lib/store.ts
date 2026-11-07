@@ -510,7 +510,20 @@ function mapDbBooking(row: any): Booking {
   const paymentDueAt = dueMatch ? dueMatch[1] : (row.payment_due_at || undefined);
   const payLaterMatch = rawNotes.match(/<!--isPayLater7Days:(true|false)-->/);
   const isPayLater7Days = payLaterMatch ? payLaterMatch[1] === 'true' : (row.is_pay_later || row.payment_method === 'pay_later_7days');
-  const cleanNotes = rawNotes.replace(/<!--paymentDueAt:.*?-->/g, '').replace(/<!--isPayLater7Days:.*?-->/g, '').trim();
+  
+  const groupMatch = rawNotes.match(/<!--groupBooking:(.*?)-->/);
+  let groupData: any = {};
+  if (groupMatch) {
+    try {
+      groupData = JSON.parse(groupMatch[1]);
+    } catch {}
+  }
+
+  const cleanNotes = rawNotes
+    .replace(/<!--paymentDueAt:.*?-->/g, '')
+    .replace(/<!--isPayLater7Days:.*?-->/g, '')
+    .replace(/<!--groupBooking:.*?-->/g, '')
+    .trim();
 
   let bookingStatus = row.booking_status;
   let rescheduledReason = row.rescheduled_reason || '';
@@ -554,7 +567,14 @@ function mapDbBooking(row: any): Booking {
     paymentDueAt,
     isPayLater7Days,
     createdAt: row.created_at,
-    confirmedAt: row.confirmed_at || undefined
+    confirmedAt: row.confirmed_at || undefined,
+    bookingType: groupData.bookingType || 'individual',
+    attendeeCount: groupData.attendeeCount ? Number(groupData.attendeeCount) : 1,
+    groupName: groupData.groupName || undefined,
+    additionalAttendees: groupData.additionalAttendees || undefined,
+    unitPrice: groupData.unitPrice !== undefined ? Number(groupData.unitPrice) : undefined,
+    groupDiscountPercent: groupData.groupDiscountPercent !== undefined ? Number(groupData.groupDiscountPercent) : undefined,
+    groupDiscountAmount: groupData.groupDiscountAmount !== undefined ? Number(groupData.groupDiscountAmount) : undefined
   };
 }
 
@@ -815,10 +835,25 @@ export async function getBookings(filters?: { userEmail?: string; userId?: strin
 }
 
 export async function saveBooking(booking: Booking): Promise<Booking> {
-  const rawNotes = (booking.notes || '').replace(/<!--paymentDueAt:.*?-->/g, '').replace(/<!--isPayLater7Days:.*?-->/g, '').trim();
+  const rawNotes = (booking.notes || '')
+    .replace(/<!--paymentDueAt:.*?-->/g, '')
+    .replace(/<!--isPayLater7Days:.*?-->/g, '')
+    .replace(/<!--groupBooking:.*?-->/g, '')
+    .trim();
   const duePart = booking.paymentDueAt ? `<!--paymentDueAt:${booking.paymentDueAt}-->` : '';
   const payLaterPart = booking.isPayLater7Days !== undefined ? `<!--isPayLater7Days:${booking.isPayLater7Days}-->` : '';
-  const encodedNotes = `${rawNotes}${duePart}${payLaterPart}`;
+  const groupPart = (booking.bookingType === 'private_group' || (booking.attendeeCount && booking.attendeeCount > 1))
+    ? `<!--groupBooking:${JSON.stringify({
+        bookingType: booking.bookingType || 'private_group',
+        attendeeCount: booking.attendeeCount || 1,
+        groupName: booking.groupName || '',
+        additionalAttendees: booking.additionalAttendees || '',
+        unitPrice: booking.unitPrice,
+        groupDiscountPercent: booking.groupDiscountPercent,
+        groupDiscountAmount: booking.groupDiscountAmount
+      })}-->`
+    : '';
+  const encodedNotes = `${rawNotes}${duePart}${payLaterPart}${groupPart}`;
 
   if (isSupabaseConfigured && supabase) {
     try {

@@ -16,6 +16,20 @@ export interface CartItem {
   timeSlot: string;
   durationText?: string;
   level?: string;
+  // Private Group Booking support:
+  bookingType?: 'individual' | 'private_group';
+  attendeeCount?: number;
+  groupName?: string;
+  unitPrice?: number;
+  discountPercent?: number;
+  discountAmount?: number;
+}
+
+export function calculateGroupDiscount(attendeeCount: number): { percent: number; label: string } {
+  if (attendeeCount >= 10) return { percent: 20, label: 'ลด 20% (10 ท่านขึ้นไป)' };
+  if (attendeeCount >= 5) return { percent: 15, label: 'ลด 15% (5-9 ท่าน)' };
+  if (attendeeCount >= 2) return { percent: 10, label: 'ลด 10% (2-4 ท่าน)' };
+  return { percent: 0, label: 'ราคาปกติ' };
 }
 
 interface CartContextType {
@@ -23,6 +37,7 @@ interface CartContextType {
   addItem: (item: Omit<CartItem, 'id'>) => void;
   removeItem: (id: string) => void;
   updateItemSlot: (id: string, date: string, timeSlot: string) => void;
+  updateItemAttendees: (id: string, count: number, bookingType?: 'individual' | 'private_group', groupName?: string) => void;
   clearCart: () => void;
   totalAmount: number;
   totalPoints: number;
@@ -102,6 +117,38 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }));
   }, []);
 
+  const updateItemAttendees = useCallback((id: string, count: number, bookingType?: 'individual' | 'private_group', groupName?: string) => {
+    setItems(prev => prev.map(item => {
+      if (item.id === id || item.classId === id) {
+        const type = bookingType || item.bookingType || 'individual';
+        const attendees = type === 'private_group' ? Math.max(2, count) : 1;
+        const unit = item.unitPrice || (item.isFree ? 0 : item.price);
+        let finalPrice = unit * attendees;
+        let discountPercent = 0;
+        let discountAmount = 0;
+
+        if (type === 'private_group' && !item.isFree && unit > 0) {
+          discountPercent = calculateGroupDiscount(attendees).percent;
+          discountAmount = Math.round((unit * attendees * discountPercent) / 100);
+          finalPrice = (unit * attendees) - discountAmount;
+        }
+
+        return {
+          ...item,
+          bookingType: type,
+          attendeeCount: attendees,
+          groupName: groupName !== undefined ? groupName : item.groupName,
+          unitPrice: unit,
+          discountPercent,
+          discountAmount,
+          price: item.isFree ? 0 : finalPrice,
+          rewardPoints: Math.round(finalPrice / 10)
+        };
+      }
+      return item;
+    }));
+  }, []);
+
   const clearCart = useCallback(() => {
     setItems([]);
     try {
@@ -130,6 +177,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         addItem,
         removeItem,
         updateItemSlot,
+        updateItemAttendees,
         clearCart,
         totalAmount,
         totalPoints,

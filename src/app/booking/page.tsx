@@ -45,9 +45,15 @@ import {
   BookOpen,
   Info,
   HelpCircle,
-  AlertCircle
+  AlertCircle,
+  Users,
+  User,
+  Building,
+  Plus,
+  Minus
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { calculateGroupDiscount } from '@/lib/cart-context';
 
 // 6 Core Steps as explicitly requested by user
 type FlowStep = 'find' | 'select' | 'cart' | 'confirm' | 'payment' | 'waiting';
@@ -64,6 +70,9 @@ interface CreatedBookingSummary {
   paymentMethod?: string;
   paymentDueAt?: string;
   onlineMeetingUrl?: string;
+  bookingType?: 'individual' | 'private_group';
+  attendeeCount?: number;
+  groupName?: string;
 }
 
 function BookingContent() {
@@ -80,6 +89,7 @@ function BookingContent() {
     addItem, 
     removeItem, 
     updateItemSlot, 
+    updateItemAttendees,
     clearCart, 
     totalAmount, 
     totalPoints, 
@@ -104,6 +114,35 @@ function BookingContent() {
   const [selectedClass, setSelectedClass] = useState<ClassItem | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
+
+  // Private Group Booking State
+  const [bookingType, setBookingType] = useState<'individual' | 'private_group'>('individual');
+  const [attendeeCount, setAttendeeCount] = useState<number>(1);
+  const [groupName, setGroupName] = useState<string>('');
+  const [additionalAttendees, setAdditionalAttendees] = useState<string>('');
+
+  // Live Group Discount calculation for currently selected class in Step 2
+  const selectedDiscount = useMemo(() => {
+    if (bookingType !== 'private_group') return { percent: 0, label: 'ราคาปกติ' };
+    return calculateGroupDiscount(attendeeCount);
+  }, [bookingType, attendeeCount]);
+
+  const selectedCalculatedPrice = useMemo(() => {
+    if (!selectedClass) return 0;
+    if (isClassFree(selectedClass)) return 0;
+    const unit = selectedClass.price || 0;
+    const count = bookingType === 'private_group' ? Math.max(2, attendeeCount) : 1;
+    const subtotal = unit * count;
+    const discountAmount = Math.round((subtotal * selectedDiscount.percent) / 100);
+    return Math.max(0, subtotal - discountAmount);
+  }, [selectedClass, bookingType, attendeeCount, selectedDiscount]);
+
+  const selectedDiscountAmount = useMemo(() => {
+    if (!selectedClass || isClassFree(selectedClass) || bookingType !== 'private_group') return 0;
+    const unit = selectedClass.price || 0;
+    const count = Math.max(2, attendeeCount);
+    return Math.round((unit * count * selectedDiscount.percent) / 100);
+  }, [selectedClass, bookingType, attendeeCount, selectedDiscount]);
 
   // Step 4: Student info
   const [userName, setUserName] = useState<string>('');
@@ -316,24 +355,37 @@ function BookingContent() {
     if (!selectedClass) return;
     const finalDate = selectedDate || (selectedClass.availableDates?.[0] || new Date().toISOString().slice(0, 10));
     const finalSlot = selectedTimeSlot || (selectedClass.timeSlots?.[0] || '13:00 - 16:00');
+    const isFree = isClassFree(selectedClass);
+    const unit = isFree ? 0 : selectedClass.price;
+    const isGroup = bookingType === 'private_group';
+    const count = isGroup ? Math.max(2, attendeeCount) : 1;
+    const discountPercent = isGroup && !isFree ? selectedDiscount.percent : 0;
+    const discountAmount = isGroup && !isFree ? selectedDiscountAmount : 0;
+    const finalItemPrice = isFree ? 0 : (isGroup ? selectedCalculatedPrice : unit);
 
     addItem({
       classId: selectedClass.id,
       classTitle: selectedClass.title,
       subtitle: selectedClass.subtitle,
       classType: selectedClass.type,
-      price: isClassFree(selectedClass) ? 0 : selectedClass.price,
-      isFree: isClassFree(selectedClass),
-      rewardPoints: selectedClass.rewardPoints ?? Math.round((selectedClass.price || 0) / 10),
+      price: finalItemPrice,
+      unitPrice: unit,
+      isFree,
+      rewardPoints: Math.round(finalItemPrice / 10),
       image: selectedClass.image,
       date: finalDate,
       timeSlot: finalSlot,
       durationText: formatClassDuration(selectedClass),
-      level: selectedClass.level || 'beginner'
+      level: selectedClass.level || 'beginner',
+      bookingType,
+      attendeeCount: count,
+      groupName: isGroup ? groupName : undefined,
+      discountPercent,
+      discountAmount
     });
 
     confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
-    showToast(`🛒 เพิ่ม "${selectedClass.title}" ลงในตะกร้าเรียบร้อย`);
+    showToast(`🛒 เพิ่ม "${selectedClass.title}" ${isGroup ? `(Private กลุ่ม ${count} ท่าน)` : ''} ลงในตะกร้าเรียบร้อย`);
     setCurrentStep('cart');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -343,20 +395,33 @@ function BookingContent() {
     if (!selectedClass) return;
     const finalDate = selectedDate || (selectedClass.availableDates?.[0] || new Date().toISOString().slice(0, 10));
     const finalSlot = selectedTimeSlot || (selectedClass.timeSlots?.[0] || '13:00 - 16:00');
+    const isFree = isClassFree(selectedClass);
+    const unit = isFree ? 0 : selectedClass.price;
+    const isGroup = bookingType === 'private_group';
+    const count = isGroup ? Math.max(2, attendeeCount) : 1;
+    const discountPercent = isGroup && !isFree ? selectedDiscount.percent : 0;
+    const discountAmount = isGroup && !isFree ? selectedDiscountAmount : 0;
+    const finalItemPrice = isFree ? 0 : (isGroup ? selectedCalculatedPrice : unit);
 
     addItem({
       classId: selectedClass.id,
       classTitle: selectedClass.title,
       subtitle: selectedClass.subtitle,
       classType: selectedClass.type,
-      price: isClassFree(selectedClass) ? 0 : selectedClass.price,
-      isFree: isClassFree(selectedClass),
-      rewardPoints: selectedClass.rewardPoints ?? Math.round((selectedClass.price || 0) / 10),
+      price: finalItemPrice,
+      unitPrice: unit,
+      isFree,
+      rewardPoints: Math.round(finalItemPrice / 10),
       image: selectedClass.image,
       date: finalDate,
       timeSlot: finalSlot,
       durationText: formatClassDuration(selectedClass),
-      level: selectedClass.level || 'beginner'
+      level: selectedClass.level || 'beginner',
+      bookingType,
+      attendeeCount: count,
+      groupName: isGroup ? groupName : undefined,
+      discountPercent,
+      discountAmount
     });
 
     setCurrentStep('confirm');
@@ -437,7 +502,14 @@ function BookingContent() {
           paymentMethod: method,
           slipUrl: item.isFree ? 'FREE_ENROLLMENT' : slipUrl,
           stripePaymentIntentId: stripeId,
-          referredBy: storedRef || undefined
+          referredBy: storedRef || undefined,
+          bookingType: item.bookingType || 'individual',
+          attendeeCount: item.attendeeCount || 1,
+          groupName: groupName || item.groupName || undefined,
+          additionalAttendees: additionalAttendees || undefined,
+          unitPrice: item.unitPrice || item.price,
+          groupDiscountPercent: item.discountPercent || 0,
+          groupDiscountAmount: item.discountAmount || 0
         };
 
         const res = await fetch('/api/bookings', {
@@ -459,7 +531,10 @@ function BookingContent() {
             bookingStatus: data.data.bookingStatus || 'pending_payment',
             paymentMethod: data.data.paymentMethod,
             paymentDueAt: data.data.paymentDueAt,
-            onlineMeetingUrl: data.data.onlineMeetingUrl
+            onlineMeetingUrl: data.data.onlineMeetingUrl,
+            bookingType: data.data.bookingType || item.bookingType || 'individual',
+            attendeeCount: data.data.attendeeCount || item.attendeeCount || 1,
+            groupName: data.data.groupName || item.groupName || groupName
           });
         }
       }
@@ -1072,26 +1147,188 @@ function BookingContent() {
                     }}
                   />
 
-                  {/* Selected Slot Recap */}
-                  <div className="p-4 rounded-2xl bg-slate-900/90 border border-amber-400/30 flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
-                        <Calendar className="w-5 h-5" />
+                  {/* Booking Type Selection: Individual vs Private Group */}
+                  <div className="space-y-3 pt-3 border-t border-white/10">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <Users className="w-4 h-4" />
+                        <span>รูปแบบการจองเรียน (Booking Type)</span>
+                      </label>
+                      {bookingType === 'private_group' && selectedDiscount.percent > 0 && !isClassFree(selectedClass) && (
+                        <span className="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                          🎉 ได้รับส่วนลดกลุ่ม {selectedDiscount.percent}%
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Option 1: Individual */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setBookingType('individual');
+                          setAttendeeCount(1);
+                        }}
+                        className={`p-3.5 rounded-2xl border text-left transition relative cursor-pointer ${
+                          bookingType === 'individual'
+                            ? 'bg-amber-400/10 border-amber-400 text-white shadow-lg shadow-amber-400/10'
+                            : 'bg-slate-900/60 border-white/5 hover:border-white/20 text-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <User className={`w-4 h-4 ${bookingType === 'individual' ? 'text-amber-400' : 'text-slate-400'}`} />
+                          <span className="text-xs font-bold">จองเรียนเดี่ยว</span>
+                        </div>
+                        <p className="text-[11px] text-slate-400">1 ท่าน (ราคาปกติ)</p>
+                        {bookingType === 'individual' && (
+                          <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-amber-400" />
+                        )}
+                      </button>
+
+                      {/* Option 2: Private Group */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setBookingType('private_group');
+                          if (attendeeCount < 2) setAttendeeCount(3);
+                        }}
+                        className={`p-3.5 rounded-2xl border text-left transition relative cursor-pointer ${
+                          bookingType === 'private_group'
+                            ? 'bg-gradient-to-br from-amber-400/15 to-emerald-500/10 border-amber-400 text-white shadow-lg shadow-amber-400/15'
+                            : 'bg-slate-900/60 border-white/5 hover:border-white/20 text-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <Users className={`w-4 h-4 ${bookingType === 'private_group' ? 'text-amber-400' : 'text-slate-400'}`} />
+                          <span className="text-xs font-bold">Private กลุ่ม</span>
+                        </div>
+                        <p className="text-[11px] text-emerald-400 font-medium">ทีม/องค์กร (ลดสูงสุด 20%)</p>
+                        {bookingType === 'private_group' && (
+                          <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-emerald-400" />
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Private Group Controls */}
+                    {bookingType === 'private_group' && (
+                      <div className="p-4 rounded-2xl bg-slate-950/90 border border-amber-400/30 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                        {/* Attendee Stepper */}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                          <div>
+                            <span className="text-xs font-bold text-white block">จำนวนผู้เรียนในกลุ่ม:</span>
+                            <span className="text-[11px] text-slate-400 block">เลือกตั้งแต่ 2 ถึง 30 ท่าน</span>
+                          </div>
+
+                          <div className="flex items-center gap-3 bg-slate-900 border border-white/10 rounded-xl p-1.5 self-start sm:self-auto">
+                            <button
+                              type="button"
+                              disabled={attendeeCount <= 2}
+                              onClick={() => setAttendeeCount(prev => Math.max(2, prev - 1))}
+                              className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center font-bold text-sm transition"
+                            >
+                              <Minus className="w-3.5 h-3.5" />
+                            </button>
+
+                            <span className="w-16 text-center font-black text-amber-400 text-sm">
+                              {attendeeCount} ท่าน
+                            </span>
+
+                            <button
+                              type="button"
+                              disabled={attendeeCount >= 30}
+                              onClick={() => setAttendeeCount(prev => Math.min(30, prev + 1))}
+                              className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center font-bold text-sm transition"
+                            >
+                              <Plus className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Group Discount Tier Badges */}
+                        <div className="grid grid-cols-3 gap-2 pt-1">
+                          <div className={`p-2 rounded-xl text-center border transition ${
+                            attendeeCount >= 2 && attendeeCount <= 4
+                              ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-bold'
+                              : 'bg-slate-900 border-white/5 text-slate-400'
+                          }`}>
+                            <span className="text-[10px] block">2–4 ท่าน</span>
+                            <strong className="text-xs block text-emerald-400">ลด 10%</strong>
+                          </div>
+                          <div className={`p-2 rounded-xl text-center border transition ${
+                            attendeeCount >= 5 && attendeeCount <= 9
+                              ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-bold'
+                              : 'bg-slate-900 border-white/5 text-slate-400'
+                          }`}>
+                            <span className="text-[10px] block">5–9 ท่าน</span>
+                            <strong className="text-xs block text-emerald-400">ลด 15%</strong>
+                          </div>
+                          <div className={`p-2 rounded-xl text-center border transition ${
+                            attendeeCount >= 10
+                              ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-bold'
+                              : 'bg-slate-900 border-white/5 text-slate-400'
+                          }`}>
+                            <span className="text-[10px] block">10+ ท่าน</span>
+                            <strong className="text-xs block text-emerald-400">ลด 20%</strong>
+                          </div>
+                        </div>
+
+                        {/* Optional Company / Team Name */}
+                        <div>
+                          <label className="block text-[11px] font-semibold text-slate-300 mb-1 flex items-center gap-1">
+                            <Building className="w-3.5 h-3.5 text-amber-400" />
+                            <span>ชื่อบริษัท / ทีม / องค์กร (ทางเลือก)</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={groupName}
+                            onChange={e => setGroupName(e.target.value)}
+                            placeholder="เช่น ทีม Digital Marketing, บจก. AI Innovate"
+                            className="w-full bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                          />
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-[11px] text-slate-400 block">รอบเรียนที่คุณเลือก:</span>
-                        <strong className="text-xs sm:text-sm text-white font-bold block">
-                          {selectedDate || 'กรุณาเลือกวัน'} ({selectedTimeSlot || 'กรุณาเลือกรอบเวลา'})
+                    )}
+                  </div>
+
+                  {/* Selected Slot Recap */}
+                  <div className="p-4 rounded-2xl bg-slate-900/90 border border-amber-400/30 space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
+                          <Calendar className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <span className="text-[11px] text-slate-400 block">รอบเรียนที่คุณเลือก:</span>
+                          <strong className="text-xs sm:text-sm text-white font-bold block">
+                            {selectedDate || 'กรุณาเลือกวัน'} ({selectedTimeSlot || 'กรุณาเลือกรอบเวลา'})
+                          </strong>
+                        </div>
+                      </div>
+
+                      <div className="text-right">
+                        <span className="text-[11px] text-slate-400 block">
+                          {bookingType === 'private_group' ? `ยอดรวม (${attendeeCount} ท่าน)` : 'ราคา (1 ท่าน)'}
+                        </span>
+                        <strong className={`text-base sm:text-lg font-extrabold ${isClassFree(selectedClass) ? 'text-emerald-400' : 'text-amber-400'}`}>
+                          {isClassFree(selectedClass) 
+                            ? 'ฟรี 0.-' 
+                            : `฿${(bookingType === 'private_group' ? selectedCalculatedPrice : selectedClass.price).toLocaleString()}`}
                         </strong>
                       </div>
                     </div>
 
-                    <div className="text-right">
-                      <span className="text-[11px] text-slate-400 block">ราคา</span>
-                      <strong className={`text-base font-extrabold ${isClassFree(selectedClass) ? 'text-emerald-400' : 'text-amber-400'}`}>
-                        {isClassFree(selectedClass) ? 'ฟรี 0.-' : `฿${selectedClass.price.toLocaleString()}`}
-                      </strong>
-                    </div>
+                    {bookingType === 'private_group' && !isClassFree(selectedClass) && (
+                      <div className="pt-2.5 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
+                        <div className="space-x-1">
+                          <span>ราคาต่อท่าน: <strong>฿{selectedClass.price.toLocaleString()}</strong> × {attendeeCount} ท่าน</span>
+                        </div>
+                        {selectedDiscount.percent > 0 && (
+                          <span className="text-emerald-400 font-bold">
+                            ประหยัด ฿{selectedDiscountAmount.toLocaleString()} (-{selectedDiscount.percent}%)
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Action Buttons for Step 2 */}
@@ -1188,7 +1425,7 @@ function BookingContent() {
                         </div>
 
                         <div className="min-w-0 flex-1 space-y-1">
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-wrap items-center gap-1.5">
                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                               item.classType === 'online'
                                 ? 'bg-emerald-500/20 text-emerald-300'
@@ -1196,6 +1433,25 @@ function BookingContent() {
                             }`}>
                               {item.classType === 'online' ? '🌐 ออนไลน์' : '🏢 Onsite'}
                             </span>
+
+                            {item.bookingType === 'private_group' ? (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                                <Users className="w-3 h-3" />
+                                <span>Private กลุ่ม ({item.attendeeCount || 1} ท่าน)</span>
+                              </span>
+                            ) : (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-white/5 flex items-center gap-1">
+                                <User className="w-3 h-3" />
+                                <span>เรียนเดี่ยว</span>
+                              </span>
+                            )}
+
+                            {item.discountPercent && item.discountPercent > 0 ? (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                ลด {item.discountPercent}%
+                              </span>
+                            ) : null}
+
                             <span className="text-[11px] text-amber-300 font-semibold flex items-center gap-1">
                               <Sparkles className="w-3 h-3 text-amber-400" />
                               +{item.rewardPoints} แต้ม
@@ -1210,6 +1466,40 @@ function BookingContent() {
                             <Calendar className="w-3.5 h-3.5 text-amber-400" />
                             <span>รอบ: <strong>{item.date}</strong> ({item.timeSlot})</span>
                           </div>
+
+                          {/* Private Group seat adjuster in cart */}
+                          {item.bookingType === 'private_group' && !item.isFree && (
+                            <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
+                              <div className="flex items-center gap-2 bg-slate-900 border border-white/10 rounded-lg p-1">
+                                <span className="text-[11px] text-slate-400 pl-1.5">ผู้เรียน:</span>
+                                <button
+                                  type="button"
+                                  disabled={(item.attendeeCount || 2) <= 2}
+                                  onClick={() => updateItemAttendees(item.id, Math.max(2, (item.attendeeCount || 2) - 1))}
+                                  className="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center font-bold text-xs"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="font-bold text-amber-400 text-xs px-1">
+                                  {item.attendeeCount || 2} ท่าน
+                                </span>
+                                <button
+                                  type="button"
+                                  disabled={(item.attendeeCount || 2) >= 30}
+                                  onClick={() => updateItemAttendees(item.id, Math.min(30, (item.attendeeCount || 2) + 1))}
+                                  className="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center font-bold text-xs"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+
+                              {item.groupName && (
+                                <span className="text-[11px] text-slate-400 truncate max-w-[200px]">
+                                  ทีม: <strong className="text-slate-200">{item.groupName}</strong>
+                                </span>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -1217,9 +1507,19 @@ function BookingContent() {
                       <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-white/5 shrink-0 gap-2">
                         <div className="text-right">
                           <span className="text-xs text-slate-400 block sm:hidden">ราคา</span>
+                          {item.bookingType === 'private_group' && !item.isFree && item.discountPercent && item.discountPercent > 0 ? (
+                            <span className="text-[10px] text-slate-400 block line-through">
+                              ฿{((item.unitPrice || item.price) * (item.attendeeCount || 1)).toLocaleString()}
+                            </span>
+                          ) : null}
                           <strong className={`text-base font-black ${item.isFree ? 'text-emerald-400' : 'text-amber-400'}`}>
                             {item.isFree ? 'ฟรี 0 บาท' : `฿${item.price.toLocaleString()}`}
                           </strong>
+                          {item.bookingType === 'private_group' && !item.isFree && (
+                            <span className="text-[10px] text-emerald-400 block font-semibold">
+                              (เฉลี่ย ฿{Math.round(item.price / (item.attendeeCount || 1)).toLocaleString()}/ท่าน)
+                            </span>
+                          )}
                         </div>
 
                         <button
@@ -1488,6 +1788,47 @@ function BookingContent() {
                       />
                     </div>
 
+                    {/* Private Group Additional Team Information */}
+                    {cartItems.some(i => i.bookingType === 'private_group') && (
+                      <div className="p-4 rounded-2xl bg-amber-400/5 border border-amber-400/30 space-y-3 animate-in fade-in">
+                        <div className="flex items-center gap-2">
+                          <Building className="w-4 h-4 text-amber-400" />
+                          <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">
+                            ข้อมูลสำหรับ Private กลุ่ม (ทีม / องค์กร)
+                          </span>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-300 mb-1">
+                            ชื่อบริษัท / ชื่อทีม / กลุ่มองค์กร (Company / Team Name)
+                          </label>
+                          <input
+                            type="text"
+                            value={groupName}
+                            onChange={e => setGroupName(e.target.value)}
+                            placeholder="เช่น ทีม AI Content & Marketing, บริษัท อินโนเวชั่น จำกัด"
+                            className="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-300 mb-1">
+                            รายชื่อหรืออีเมลผู้ร่วมเรียนในกลุ่ม (ทางเลือก)
+                          </label>
+                          <textarea
+                            rows={2}
+                            value={additionalAttendees}
+                            onChange={e => setAdditionalAttendees(e.target.value)}
+                            placeholder="เช่น นาย สมศักดิ์ (somsak@company.com), นางสาว วรรณา (wanna@company.com)"
+                            className="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 leading-relaxed"
+                          />
+                          <span className="text-[11px] text-slate-400 block mt-1">
+                            * สามารถระบุเพิ่มเติม หรือส่งให้แอดมินทาง LINE/Email ภายหลังได้
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                     <div>
                       <label className="block text-xs font-semibold text-slate-300 mb-1">
                         โจทย์ AI หรือเป้าหมายที่ต้องการโฟกัสเป็นพิเศษ
@@ -1526,9 +1867,16 @@ function BookingContent() {
                           {item.isFree ? 'ฟรี' : `฿${item.price.toLocaleString()}`}
                         </span>
                       </div>
-                      <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
-                        <Calendar className="w-3 h-3 text-amber-400" />
-                        <span>{item.date} ({item.timeSlot})</span>
+                      <div className="text-[11px] text-slate-400 flex items-center justify-between">
+                        <span className="flex items-center gap-1.5">
+                          <Calendar className="w-3 h-3 text-amber-400" />
+                          <span>{item.date} ({item.timeSlot})</span>
+                        </span>
+                        {item.bookingType === 'private_group' && (
+                          <span className="text-amber-300 font-bold text-[10px] bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
+                            👥 {item.attendeeCount || 1} ท่าน
+                          </span>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -1769,6 +2117,19 @@ function BookingContent() {
                         <h4 className="text-sm font-bold text-white">
                           {b.classTitle}
                         </h4>
+                        {b.bookingType === 'private_group' && (
+                          <div className="flex flex-wrap items-center gap-2 pt-1">
+                            <span className="text-[10px] font-bold text-cyan-300 bg-cyan-500/15 border border-cyan-500/30 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                              <Users className="w-3 h-3" />
+                              <span>Private กลุ่ม ({b.attendeeCount || 1} ท่าน)</span>
+                            </span>
+                            {b.groupName && (
+                              <span className="text-[11px] text-slate-300">
+                                ทีม: <strong className="text-white">{b.groupName}</strong>
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
                       <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/30 self-start sm:self-auto">
                         {b.amount === 0 ? 'ฟรี 0.-' : `฿${b.amount.toLocaleString()}`}

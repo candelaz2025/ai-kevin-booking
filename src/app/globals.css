@@ -39,14 +39,16 @@ body {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
   word-break: break-word !important;
-  word-wrap: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content * {
   max-width: 100% !important;
   box-sizing: border-box !important;
+  overflow-wrap: anywhere !important;
+  line-break: anywhere !important;
 }
 
 .article-content h1,
@@ -60,8 +62,9 @@ body {
   line-height: 1.35 !important;
   margin-top: 1.75rem !important;
   margin-bottom: 0.75rem !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
   word-break: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content h1 { font-size: 1.75rem !important; }
@@ -74,8 +77,9 @@ body {
   line-height: 1.8 !important;
   margin-top: 0.75rem !important;
   margin-bottom: 1rem !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
   word-break: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content strong,
@@ -90,13 +94,14 @@ body {
   text-underline-offset: 3px !important;
   overflow-wrap: anywhere !important;
   word-break: break-all !important;
+  line-break: anywhere !important;
 }
 
 .article-content a:hover {
   color: #fef08a !important;
 }
 
-/* Bulletproof code & pre blocks */
+/* Bulletproof code & pre blocks: Never overflows or clips unexpectedly */
 .article-content pre {
   display: block !important;
   width: 100% !important;
@@ -104,8 +109,9 @@ body {
   min-width: 0 !important;
   overflow-x: auto !important;
   white-space: pre-wrap !important;       /* Wraps code and prompts within card boundary */
-  word-break: break-word !important;      /* Breaks long words naturally */
+  word-break: break-all !important;       /* Breaks long continuous text/words safely */
   overflow-wrap: anywhere !important;     /* Ensures no string bleeds off-screen */
+  line-break: anywhere !important;        /* Supports seamless Thai/CJK line wrapping */
   background: #080f1d !important;
   color: #86efac !important;              /* Soft emerald syntax */
   border: 1px solid rgba(251, 191, 36, 0.25) !important;
@@ -120,10 +126,24 @@ body {
 
 .article-content code {
   max-width: 100% !important;
-  word-break: break-word !important;
+  word-break: break-all !important;
   overflow-wrap: anywhere !important;
+  line-break: anywhere !important;
   white-space: pre-wrap !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+.article-content pre code {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
+  overflow-wrap: anywhere !important;
+  line-break: anywhere !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 /* Inline code tags outside pre */
@@ -134,6 +154,8 @@ body {
   border-radius: 0.375rem !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   font-size: 0.85em !important;
+  word-break: break-all !important;
+  line-break: anywhere !important;
 }
 
 .article-content blockquote {
@@ -146,8 +168,9 @@ body {
   margin: 1.25rem 0 !important;
   color: #e2e8f0 !important;
   font-style: normal !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
   word-break: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content ul,
@@ -156,6 +179,9 @@ body {
   margin-top: 0.75rem !important;
   margin-bottom: 1rem !important;
   color: #cbd5e1 !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content ul {
@@ -169,8 +195,9 @@ body {
 .article-content li {
   margin-bottom: 0.35rem !important;
   line-height: 1.7 !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
   word-break: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content img {
@@ -198,7 +225,9 @@ body {
   padding: 0.75rem 1rem !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   text-align: left !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  line-break: anywhere !important;
 }
 
 .article-content th {

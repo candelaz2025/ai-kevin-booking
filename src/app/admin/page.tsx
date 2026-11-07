@@ -1964,6 +1964,12 @@ export default function AdminPage() {
                     }`}>
                       {isOnline ? '🌐 คลาสออนไลน์' : '🏢 Onsite Workshop'}
                     </span>
+                    {b.bookingType === 'private_group' && (
+                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                        <Users className="w-3 h-3" />
+                        <span>👥 Private กลุ่ม ({b.attendeeCount || 1} ท่าน){b.groupName ? ` • ${b.groupName}` : ''}</span>
+                      </span>
+                    )}
                     {b.isPayLater7Days || b.paymentMethod === 'pay_later_7days' ? (
                       <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
                         isConfirmed 
@@ -2112,6 +2118,16 @@ export default function AdminPage() {
                     <div className="text-white font-medium">{b.userName}</div>
                     <div className="text-slate-300">✉️ {b.userEmail}</div>
                     <div className="text-slate-300">📞 {b.userPhone} {b.lineId && `(Line: ${b.lineId})`}</div>
+                    {b.bookingType === 'private_group' && (
+                      <div className="mt-1.5 p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-[11px] text-cyan-200 space-y-0.5">
+                        <div className="font-bold flex items-center gap-1 text-cyan-300">
+                          <Users className="w-3.5 h-3.5" />
+                          <span>Private กลุ่ม: {b.attendeeCount || 1} ท่าน</span>
+                        </div>
+                        {b.groupName && <div>องค์กร/ทีม: <strong>{b.groupName}</strong></div>}
+                        {b.additionalAttendees && <div className="text-slate-400 text-[10px]">ผู้ร่วมเรียน: {b.additionalAttendees}</div>}
+                      </div>
+                    )}
                     {b.notes && <div className="text-amber-400/80 italic mt-1">Note: {b.notes}</div>}
                   </div>
 

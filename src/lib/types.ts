@@ -176,6 +176,14 @@ export interface Booking {
   // 7-day payment window & auto-expiry fields
   paymentDueAt?: string; // ISO date string (7 days after registration)
   isPayLater7Days?: boolean;
+  // Private Group Booking support:
+  bookingType?: 'individual' | 'private_group';
+  attendeeCount?: number;
+  groupName?: string;
+  additionalAttendees?: string;
+  unitPrice?: number;
+  groupDiscountPercent?: number;
+  groupDiscountAmount?: number;
 }
 
 /**

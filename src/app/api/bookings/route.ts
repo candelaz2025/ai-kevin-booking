@@ -87,12 +87,20 @@ export async function POST(req: Request) {
     }
 
     const isFreeCourse = (classItem && (classItem.isFree || classItem.price === 0)) || Number(body.amount) === 0 || body.slipUrl === 'FREE_ENROLLMENT';
-    const bookingAmount = isFreeCourse ? 0 : (classItem ? classItem.price : Number(body.amount) || 499);
+    // If client supplied specific amount (e.g. for group discount or private group), respect it
+    const bookingAmount = isFreeCourse
+      ? 0 
+      : (body.amount !== undefined && !isNaN(Number(body.amount)) && Number(body.amount) >= 0
+          ? Number(body.amount)
+          : (classItem ? classItem.price : 499));
 
     const isPayLater = !isFreeCourse && (body.paymentMethod === 'pay_later_7days' || body.isPayLater7Days);
     const paymentDueAt = isPayLater 
       ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
       : undefined;
+
+    const bookingType = body.bookingType === 'private_group' ? 'private_group' : 'individual';
+    const attendeeCount = Math.max(1, Number(body.attendeeCount) || 1);
 
     const newBooking: Booking = {
       id: bookingId,
@@ -116,7 +124,14 @@ export async function POST(req: Request) {
       paymentDueAt,
       isPayLater7Days: isPayLater,
       createdAt: new Date().toISOString(),
-      confirmedAt: isFreeCourse ? new Date().toISOString() : undefined
+      confirmedAt: isFreeCourse ? new Date().toISOString() : undefined,
+      bookingType,
+      attendeeCount,
+      groupName: body.groupName || undefined,
+      additionalAttendees: body.additionalAttendees || undefined,
+      unitPrice: body.unitPrice !== undefined ? Number(body.unitPrice) : (classItem ? classItem.price : undefined),
+      groupDiscountPercent: body.groupDiscountPercent !== undefined ? Number(body.groupDiscountPercent) : undefined,
+      groupDiscountAmount: body.groupDiscountAmount !== undefined ? Number(body.groupDiscountAmount) : undefined
     };
 
     // Store in recent dedup cache immediately
@@ -131,10 +146,11 @@ export async function POST(req: Request) {
     }
 
     // Fire in-app alert asynchronously so user doesn't wait for extra roundtrip
+    const groupBadge = bookingType === 'private_group' ? `👥 [กลุ่ม ${attendeeCount} ท่าน${body.groupName ? ` - ${body.groupName}` : ''}] ` : '';
     addNotification({
       type: 'new_booking',
       title: isPayLater ? `จองสิทธิ์ใน 7 วัน: ${newBooking.id}` : `จองคลาสใหม่: ${newBooking.id}`,
-      message: `คุณ ${newBooking.userName} ได้ทำการจอง ${newBooking.classTitle} (${newBooking.amount.toLocaleString()} บาท) ${isPayLater ? '• กำหนดชำระเงินภายใน 7 วัน' : ''}`,
+      message: `${groupBadge}คุณ ${newBooking.userName} ได้ทำการจอง ${newBooking.classTitle} (${newBooking.amount.toLocaleString()} บาท) ${isPayLater ? '• กำหนดชำระเงินภายใน 7 วัน' : ''}`,
       read: false,
       bookingId: newBooking.id
     }).catch(console.error);
