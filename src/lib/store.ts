@@ -5,6 +5,138 @@ import all500PromptsData from '@/data/all-categories-prompts.json';
 // Default initial classes based on https://ai-creator-workshop.vercel.app/
 export const INITIAL_CLASSES: ClassItem[] = [
   {
+    id: 'ai-agent-foundation',
+    title: 'Agentic AI Foundation — คอร์สเรียนสด 2 ชั่วโมง (สำหรับผู้เริ่มต้น)',
+    subtitle: 'ให้ AI ทำงานแทนคุณ ทั้งชีวิตประจำวันและงานออฟฟิศ ด้วย ChatGPT และ Meta AI พร้อม 3 โมดูลเสริม',
+    description: `คอร์สเรียนสดแบบจับมือทำ 2 ชั่วโมงเต็ม (พร้อม 3 โมดูลเสริมเข้มข้น) ออกแบบสำหรับผู้เริ่มต้นโดยเฉพาะ ไม่จำเป็นต้องมีพื้นฐานด้านเทคนิคหรือการเขียนโปรแกรม!
+
+เรียนรู้วิธีเปลี่ยนจากการใช้ Generative AI แบบเดิมที่ต้องสั่งทีละข้อ สู่ "Agentic AI" ที่รับแค่เป้าหมาย แล้ววางแผน แตกขั้นตอน เรียกเครื่องมือ และตรวจผลลัพธ์ให้คุณโดยอัตโนมัติ
+
+ครอบคลุมทั้งงานออฟฟิศและการใช้ชีวิตประจำวัน:
+• วงจร Agentic AI 4 ขั้น (เป้าหมาย → วางแผน → ลงมือ → ตรวจผล) วนจนงานเสร็จ
+• ออกแบบและคิดงานเป็น Workflow 6 ช่อง (ตัวกระตุ้น, ข้อมูลเข้า, ขั้นตอน, เครื่องมือ, จุดตรวจ, ผลลัพธ์)
+• รั้วกั้นความปลอดภัย: 4 เรื่องสำคัญที่คนต้องอนุมัติก่อนเสมอ (ส่งออก, เงิน, ลบ/ย้อนกลับไม่ได้, ข้อมูลส่วนบุคคล)
+• Master Prompt Template 7 บล็อก สำหรับสั่งการ Agentic AI
+• Hands-on Lab 5 ข้อใน ChatGPT (Projects, สรุปประชุมดึงงาน, Deep Research, Scheduled tasks รันอัตโนมัติ, Agent mode)
+• Hands-on Lab 2 ข้อใน Meta AI (แผนมื้ออาหาร+รายการซื้อของ, โครงสไลด์พร้อมแหล่งอ้างอิง)
+• กฎ 5 ข้อใช้ AI ให้ปลอดภัย (ไม่ใส่ข้อมูลลับ, ตรวจก่อนใช้, AI ร่างคุณกดส่ง, เริ่มจากงานเสี่ยงต่ำ, สิทธิ์เท่าที่จำเป็น)
+• 3 โมดูลเสริมหลังจบคลาส: NotebookLM Studio ครบวงจร 9 ผลลัพธ์, Agent Skills มาตรฐาน SKILL.md และ Real-time Dashboard จาก Google Sheets
+
+🎁 รับฟรี! Agentic Prompt Pack สำเร็จรูป, ใบงาน Workflow 6 ช่อง, และสิทธิ์เข้าถึงคลัง Master Prompt บนระบบ`,
+    type: 'online',
+    level: 'beginner',
+    price: 799,
+    isFree: false,
+    rewardPoints: 80,
+    durationMinutes: 120,
+    durationValue: 2,
+    durationUnit: 'hour',
+    location: 'Online Live via Google Meet & Live Studio',
+    onlineMeetingUrl: 'https://meet.google.com/kevin-agentic-ai-foundation',
+    maxSeats: 30,
+    availableDates: [
+      '2026-11-14',
+      '2026-11-15',
+      '2026-11-21',
+      '2026-11-22',
+      '2026-11-28',
+      '2026-11-29',
+      '2026-12-05',
+      '2026-12-06',
+    ],
+    timeSlots: ['10:00 - 12:00', '13:30 - 15:30', '19:00 - 21:00'],
+    topics: [
+      'โมดูล 0: เริ่มจากงานจริงของทีม — ถอดงานซ้ำ 5-6 ขั้น และแยกว่าขั้นไหนให้ AI ร่าง ขั้นไหนทำ Automation ขั้นไหนคนต้องตัดสินใจ',
+      'โมดูล 1: Generative AI คืออะไร — สิ่งที่ทำได้ดี จุดพลาดบ่อย (Hallucination) และวิธีรับมือ',
+      'โมดูล 2: Agentic AI และความแตกต่าง — วงจร 4 ขั้นที่ AI วนทำเอง และ 3 ระดับของ Agent (แชต → ผู้ช่วยมีบริบท → เอเจนต์ทำงานเอง)',
+      'โมดูล 3: แผนที่เครื่องมือ — ฟีเจอร์ลับ ChatGPT (Projects, Deep Research, Scheduled tasks, Agent Mode) และ Meta AI',
+      'โมดูล 4: Workflow 6 ช่อง & Prompt 7 บล็อก — คิดงานเป็นระบบและโครงสร้าง Prompt แม่แบบที่นำไปสั่งงานได้ทันที',
+      'โมดูล 5: Hands-on Lab ChatGPT 5 ภารกิจ — ตั้ง Project ประจำ, สรุปประชุมดึง Action Items, Deep Research วิจัยคู่แข่ง, Scheduled รันงานอัตโนมัติ, Agent Mode',
+      'โมดูล 6: Hands-on Lab Meta AI 2 ภารกิจ — วางแผนมื้ออาหาร+รายการซื้อของ และเตรียมโครงสไลด์พร้อมอ้างอิง',
+      'โมดูล 7: กฎความปลอดภัย 5 ข้อ & ออกแบบ Workflow ของคุณเอง — สร้าง Prompt สำหรับงานจริงของตัวคุณเอง 1 ชิ้น',
+      'โมดูลเสริม 1: NotebookLM Studio — สร้างพอดแคสต์ (Audio Overview), วิดีโอ, สไลด์, และ Mind Map จากเอกสารของคุณ',
+      'โมดูลเสริม 2: มาตรฐาน Agent Skills (SKILL.md) — วิธีสร้างและดาวน์โหลดสกิลจาก SkillsMP ติดตั้งลง Gemini, ChatGPT, Claude',
+      'โมดูลเสริม 3: Real-time Dashboard จาก Google Sheets — เชื่อมตารางชีตสู่หน้าเว็บ Dashboard อัปเดตทุก 30 วินาที',
+      '🎁 ของแถมพิเศษ: Agentic Prompt Pack สำเร็จรูป + ใบงาน Workflow 6 ช่อง + Certificate of Completion'
+    ],
+    toolsUsed: ['ChatGPT', 'Meta AI', 'NotebookLM', 'Agent Skills', 'Claude 3.7', 'Google Sheets'],
+    prerequisites: 'บัญชี ChatGPT (แพ็กเกจฟรีทำตามได้ส่วนใหญ่), แอป Meta AI หรือเว็บ meta.ai, และเตรียมโจทย์งานซ้ำในชีวิตหรือที่ทำงานจริง 1 ชิ้น (ไม่ใช้ข้อมูลลับ)',
+    image: '/assets/agentic-ai-foundation.png',
+    featured: true,
+    videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+    lessons: [
+      {
+        id: 'les-f1',
+        title: 'โมดูล 0-2: พื้นฐาน Agentic AI และวงจร 4 ขั้นที่ AI วนทำเอง',
+        duration: '18 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'เข้าใจความแตกต่างระหว่าง Gen AI กับ Agentic AI และการแบ่งบทบาท AI ร่าง vs Automation vs คนตัดสินใจ'
+      },
+      {
+        id: 'les-f2',
+        title: 'โมดูล 3-4: ออกแบบ Workflow 6 ช่อง และเขียน Prompt 7 บล็อก',
+        duration: '22 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'กรอบคิด Workflow 6 ช่อง รั้วกั้นความปลอดภัย 4 เรื่อง และโครงสร้าง Prompt แบบ Agentic 7 บล็อก'
+      },
+      {
+        id: 'les-f3',
+        title: 'โมดูล 5: Hands-on Lab ChatGPT (Projects, Deep Research, Scheduled Tasks, Agent Mode)',
+        duration: '25 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ฝึกปฏิบัติจริง 5 ภารกิจใน ChatGPT ตั้งแต่การตั้งค่า Project จนถึงการตั้งรันงานอัตโนมัติตามเวลา'
+      },
+      {
+        id: 'les-f4',
+        title: 'โมดูล 6: Hands-on Lab Meta AI (วางแผนมื้ออาหาร & ทำโครงสไลด์พร้อมอ้างอิง)',
+        duration: '15 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ฝึกใช้ Meta AI วางแผนมื้ออาหาร 5 วันพร้อมรายการซื้อของ และค้นคว้าทำโครงสไลด์นำเสนอ'
+      },
+      {
+        id: 'les-f5',
+        title: 'โมดูล 7: กฎความปลอดภัย 5 ข้อ และออกแบบ Workflow งานจริงของคุณ',
+        duration: '15 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'สร้าง Master Prompt สำหรับงานซ้ำของตัวคุณเอง พร้อมจุดตรวจอนุมัติก่อนนำไปใช้งานจริง'
+      },
+      {
+        id: 'les-f6',
+        title: 'โมดูลเสริม: NotebookLM Studio 9 ผลลัพธ์, Agent Skills (SKILL.md) & Google Sheets Dashboard',
+        duration: '30 นาที',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'เจาะลึกการทำพอดแคสต์/สไลด์ด้วย NotebookLM, การเขียนและติดตั้ง Agent Skills, และสร้าง Dashboard สดใน 30 วินาที'
+      }
+    ],
+    instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+    instructorTitle: 'Founder & Lead AI Instructor, kevinaiagent.tech',
+    instructorSignature: '',
+    certificateEnabled: true,
+    passingScorePercent: 70,
+    attachments: [
+      {
+        id: 'att-f1',
+        name: 'สไลด์ประกอบการสอน Agentic AI เบื้องต้น (PDF 19 MB)',
+        type: 'pdf',
+        url: '/downloads/Agentic-AI-Foundation-Course-Deck.pdf',
+        size: '19.7 MB'
+      },
+      {
+        id: 'att-f2',
+        name: 'สไลด์ต้นฉบับสำหรับนำไปปรับใช้ (PowerPoint PPTX)',
+        type: 'doc',
+        url: '/downloads/Agentic-AI-Foundation-Slides.pptx',
+        size: '640 KB'
+      },
+      {
+        id: 'att-f3',
+        name: 'คลัง 400 AI Agent Use Cases & Master Prompt Library',
+        type: 'link',
+        url: 'https://ai-kevin-booking.vercel.app/prompts'
+      }
+    ]
+  },
+  {
     id: 'ai-content-workshop',
     title: 'AI Content Workshop — ทำคอนเทนต์และ AI Agent ในคลาสเดียว',
     subtitle: 'จากไอเดีย สู่คอนเทนต์ที่พร้อมเผยแพร่ ด้วย ChatGPT, Meta AI และ Grok Bot',
@@ -3476,6 +3608,138 @@ export async function addSocialBroadcastHistory(item: Omit<SocialBroadcastHistor
    ========================================================================= */
 
 export const INITIAL_QUIZZES: Quiz[] = [
+  {
+    id: 'quiz-ai-agent-foundation',
+    title: 'แบบทดสอบประเมินผล: Agentic AI Foundation (วัดผล 10 ข้อ)',
+    subtitle: 'ประเมินความเข้าใจหลักสูตร Agentic AI เบื้องต้น: วงจรเอเจนต์, Workflow 6 ช่อง, Prompt 7 บล็อก และความปลอดภัย',
+    description: 'แบบทดสอบหลังเรียน 10 ข้อ เพื่อรับใบประกาศนียบัตรรับรอง (Certificate of Completion) ครอบคลุมการจำแนก Gen AI vs Agentic AI, วงจร 4 ขั้น, รั้วกั้นความปลอดภัย 4 เรื่อง และการเลือกใช้เครื่องมือ',
+    classId: 'ai-agent-foundation',
+    classTitle: 'Agentic AI Foundation — คอร์สเรียนสด 2 ชั่วโมง (สำหรับผู้เริ่มต้น)',
+    passingScorePercent: 70,
+    questions: [
+      {
+        id: 'qf1',
+        question: '1. ข้อใดอธิบายความแตกต่างที่สำคัญที่สุดระหว่าง Generative AI กับ Agentic AI ได้ถูกต้องที่สุด?',
+        options: [
+          'Generative AI ใช้งานฟรี ส่วน Agentic AI ต้องจ่ายเงินเท่านั้น',
+          'Generative AI สั่ง 1 ครั้ง AI ตอบ 1 รอบแล้วหยุดรอ ส่วน Agentic AI รับเป้าหมายแล้ววางแผน ลงมือ และตรวจผลเองจนเสร็จ',
+          'Generative AI เขียนได้เฉพาะข้อความ ส่วน Agentic AI ทำได้เฉพาะวิดีโอ',
+          'Generative AI มีความแม่นยำสูงกว่า ไม่เคยมีปัญหาข้อมูลผิดพลาด (Hallucination)'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'Generative AI ทำตามคำสั่งทีละรอบแล้วหยุดรอ แต่ Agentic AI สามารถรับเป้าหมาย วางแผน แตกขั้นตอน เรียกใช้เครื่องมือ และตรวจผลลัพธ์ด้วยตนเอง'
+      },
+      {
+        id: 'qf2',
+        question: '2. วงจร 4 ขั้นตอนที่ Agentic AI ทำงานวนซ้ำโดยอัตโนมัติประกอบด้วยอะไรบ้าง?',
+        options: [
+          'พิมพ์คำสั่ง → จ่ายเงิน → ร่างอีเมล → ส่งออก',
+          'เป้าหมาย (คุณตั้ง) → วางแผน → ลงมือ → ตรวจผล (AI วนทำเอง) แล้วส่งให้คุณตรวจ',
+          'เปิดแอป → ถามคำถาม → ก๊อปปี้ข้อความ → ปิดแอป',
+          'ดาวน์โหลดสคริปต์ → ติดตั้งปลั๊กอิน → รันโค้ด → แก้บั๊ก'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'วงจรของ Agentic AI คือ คุณกำหนดเป้าหมาย (Goal) จากนั้น AI จะวางแผน (Plan) → ลงมือ (Act) → ตรวจผล (Evaluate) วนจนได้งานแล้วส่งมอบให้มนุษย์ตรวจ'
+      },
+      {
+        id: 'qf3',
+        question: '3. ในการออกแบบ Workflow การทำงานของทีม มีหลักการแบ่งบทบาท 3 ส่วนอย่างไร?',
+        options: [
+          'AI ทำทุกอย่าง 100% โดยคนไม่ต้องยุ่งเกี่ยว',
+          'AI ร่างงานที่ต้องคิด/เรียบเรียง, Automation รันงานที่เกิดซ้ำตามเวลา, และ คนตัดสินใจในขั้นที่ผิดแล้วเสียหาย',
+          'คนทำทุกอย่าง AI มีไว้เพื่อตรวจคำผิดอย่างเดียว',
+          'แบ่งตามตำแหน่งงาน ผู้บริหารใช้ AI พนักงานทั่วไปใช้ Automation'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'กฎเหล็กของ Workflow คือ: AI ร่าง (งานคิด/เรียบเรียง), Automation (งานตามเวลา/เหตุการณ์ที่ขั้นตอนซ้ำเดิม), และ คนตัดสินใจ (จุดที่ผิดแล้วมีคนเสียหาย)'
+      },
+      {
+        id: 'qf4',
+        question: '4. ข้อใดคือ 4 เรื่องสำคัญที่ต้องมี "จุดตรวจ (Human Approval Gate)" และห้ามให้ AI ทำเองโดยพลการ?',
+        options: [
+          'การเปิดคอมพิวเตอร์, การพิมพ์ภาษาไทย, การจัดตาราง, การคำนวณบวกเลข',
+          'ส่งออกไปข้างนอก (อีเมล/โพสต์), เกี่ยวกับเงิน (จ่าย/จอง), ย้อนกลับไม่ได้ (ลบไฟล์), ข้อมูลส่วนบุคคล',
+          'การสรุปบันทึกประชุม, การค้นหาร้านอาหาร, การทำตารางเปรียบเทียบ, การแปลภาษา',
+          'การค้นหาด้วย Google, การถามคำถาม, การเซฟโน้ต, การเปิดอ่านไฟล์ PDF'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'จุดตรวจที่มนุษย์ต้องอนุมัติก่อนเสมอคือ: ส่งออกข้างนอก, เกี่ยวกับเงิน, การกระทำที่ย้อนกลับไม่ได้ (ลบข้อมูล), และข้อมูลส่วนบุคคล'
+      },
+      {
+        id: 'qf5',
+        question: '5. โครงสร้าง Agentic Prompt 7 บล็อกตามหลักสูตร ประกอบด้วยส่วนประกอบใดบ้าง?',
+        options: [
+          'บทบาท, เป้าหมาย, บริบท, ขั้นตอน, เครื่องมือ, จุดตรวจ, รูปแบบผลลัพธ์',
+          'หัวข้อ, เนื้อหา, รูปภาพ, วิดีโอ, ลิงก์, เครดิต, แฮชแท็ก',
+          'Prompt, Model, Temperature, Top-P, Frequency, Presence, Stop',
+          'คำทักทาย, คำชม, คำสั่ง, ข้อห้าม, ตัวอย่าง, คำขอบคุณ, การให้คะแนน'
+        ],
+        correctOptionIndex: 0,
+        explanation: 'โครงสร้าง 7 บล็อกช่วยให้ AI ทำงานเป็นระบบ ได้แก่: 1. บทบาท 2. เป้าหมาย 3. บริบท 4. ขั้นตอน 5. เครื่องมือ 6. จุดตรวจ 7. รูปแบบผลลัพธ์'
+      },
+      {
+        id: 'qf6',
+        question: '6. หากคุณต้องการให้ ChatGPT รันงานสรุปประจำสัปดาห์ทุกวันศุกร์เวลา 16:00 น. โดยอัตโนมัติ ควรใช้ฟีเจอร์ใด?',
+        options: [
+          'Voice Mode',
+          'Scheduled tasks (งานประจำตามเวลา)',
+          'DALL-E 3',
+          'Custom Instructions แบบเก่า'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'Scheduled tasks คือฟีเจอร์ตั้งงานประจำตามเวลา (Time-based Trigger) ให้ AI ทำงานตามเวลาที่กำหนด'
+      },
+      {
+        id: 'qf7',
+        question: '7. จุดเด่นที่สุดของโหมด Deep Research ใน ChatGPT คืออะไร?',
+        options: [
+          'สร้างภาพอนิเมชัน 3D ได้รวดเร็ว',
+          'ค้นคว้าข้อมูลจากหลายแหล่งบนอินเทอร์เน็ต เขียนรายงานเปรียบเทียบพร้อมลิงก์อ้างอิงทุกจุด',
+          'สามารถแฮกระบบฐานข้อมูลคู่แข่งได้',
+          'ช่วยตอบข้อความแชตลูกค้าแทนแอดมินแบบเรียลไทม์'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'Deep Research มีความสามารถในการสืบค้นข้อมูลเชิงลึกจากแหล่งทางการหลายแห่ง และสังเคราะห์เป็นรายงานพร้อมหลักฐานอ้างอิง'
+      },
+      {
+        id: 'qf8',
+        question: '8. ในการตั้งคำสั่งให้ AI Agent ค้นหาร้านอาหารเลี้ยงทีม รั้วกั้นความปลอดภัยที่ต้องระบุใน Prompt คืออะไร?',
+        options: [
+          'ห้ามค้นหาร้านที่มีราคาเกินงบ',
+          'ห้ามจอง จ่ายเงิน หรือกรอกข้อมูลส่วนบุคคล ให้สรุปตัวเลือกแล้วหยุดถามฉันก่อนเสมอ',
+          'ห้ามเลือกร้านที่ไม่มีที่จอดรถ',
+          'ต้องเลือกร้านที่มีดนตรีสดเท่านั้น'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'รั้วกั้นสำคัญคือห้ามทำธุรกรรมที่เกี่ยวกับเงินหรือส่งข้อมูลส่วนตัว AI มีหน้าที่หาร้านและเทียบเงื่อนไข ส่วนการจองและจ่ายเงินเป็นหน้าที่ของมนุษย์'
+      },
+      {
+        id: 'qf9',
+        question: '9. เหตุใด NotebookLM จึงได้รับความนิยมในการทำงานเอกสารและวิจัยสำหรับองค์กร?',
+        options: [
+          'เพราะตอบคำถามและอ้างอิงจากเฉพาะเอกสารและแหล่งข้อมูลที่เราอัปโหลดเข้าไปเท่านั้น (Source-grounded)',
+          'เพราะราคาถูกที่สุดในตลาด',
+          'เพราะสามารถเล่นเกมคอมพิวเตอร์แทนเราได้',
+          'เพราะไม่ต้องเชื่อมต่ออินเทอร์เน็ตเลย'
+        ],
+        correctOptionIndex: 0,
+        explanation: 'NotebookLM ตอบจากเฉพาะเอกสารที่เราเลือก พร้อมเลขคลิกตรวจต้นฉบับ ป้องกันการมโนข้อมูล (Zero Hallucination)'
+      },
+      {
+        id: 'qf10',
+        question: '10. ตามข้อกำหนดมาตรฐาน Agent Skills ไฟล์ใดที่จำเป็นต้องมี และต้องระบุข้อมูลอะไรใน YAML Header?',
+        options: [
+          'README.txt ต้องระบุวิธีใช้งาน',
+          'SKILL.md ต้องระบุ name (ชื่อโฟลเดอร์) และ description (บอกว่าทำอะไรและใช้เมื่อไร)',
+          'index.js ต้องเขียนฟังก์ชัน main()',
+          'config.json ต้องใส่ API Key'
+        ],
+        correctOptionIndex: 1,
+        explanation: 'ตามมาตรฐาน agentskills.io จำเป็นต้องมีไฟล์ SKILL.md โดยมี YAML frontmatter ระบุ name และ description เพื่อให้ AI Agent รู้ว่าควรเรียกใช้เมื่อไร'
+      }
+    ],
+    createdAt: new Date().toISOString()
+  },
   {
     id: 'quiz-ai-content-workshop',
     title: 'แบบทดสอบประเมินผล: AI Content Workshop & AI Agent Mastery',
