@@ -246,3 +246,25 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   margin: 2rem 0 !important;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-certificate, #printable-certificate * {
+    visibility: visible;
+  }
+  #printable-certificate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #090f1d !important;
+    color: #ffffff !important;
+    border: 3px solid #f59e0b !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+  }
+}

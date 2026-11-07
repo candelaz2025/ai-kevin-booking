@@ -2,16 +2,23 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { useCart } from '@/lib/cart-context';
 import { User, LogOut, Menu, X, Sparkles, ChevronDown, ShoppingCart } from 'lucide-react';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { user, logout, isAdmin } = useAuth();
   const { totalItems } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [promptsDropdownOpen, setPromptsDropdownOpen] = useState(false);
   const [mobilePromptsOpen, setMobilePromptsOpen] = useState(true);
+
+  // In full-screen classroom player, hide the global navbar for an immersive theatre experience
+  if (pathname?.startsWith('/classroom')) {
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[#09111e]/90 border-b border-white/10 transition-all">

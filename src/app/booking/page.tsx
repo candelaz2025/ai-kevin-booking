@@ -970,6 +970,14 @@ function BookingContent() {
                           <span>{inCart ? 'ในตะกร้าแล้ว' : '+ ตะกร้า'}</span>
                         </button>
                       </div>
+
+                      <Link
+                        href={`/courses/${c.id}`}
+                        className="w-full py-2 px-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/5 hover:border-emerald-500/40 text-slate-300 hover:text-emerald-300 font-semibold text-[11px] transition flex items-center justify-center gap-1.5 text-center"
+                      >
+                        <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>ดูเนื้อหาคอร์ส & วิดีโอตัวอย่าง</span>
+                      </Link>
                     </div>
                   </div>
                 );

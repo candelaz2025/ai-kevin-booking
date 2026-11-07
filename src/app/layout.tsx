@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Sans_Thai, Manrope } from 'next/font/google';
 import './globals.css';
@@ -187,11 +188,15 @@ export default function RootLayout({
       <body className="min-h-screen bg-[#09111e] text-[#f6f7fb] font-sans antialiased flex flex-col selection:bg-amber-400 selection:text-slate-950">
         <AuthProvider>
           <CartProvider>
-            <Navbar />
+            <Suspense fallback={null}>
+              <Navbar />
+            </Suspense>
             <main className="flex-1">
               {children}
             </main>
-            <Footer />
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
           </CartProvider>
         </AuthProvider>
       </body>

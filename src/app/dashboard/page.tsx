@@ -1837,6 +1837,15 @@ export default function DashboardPage() {
                       </button>
                     )}
 
+                    {/* E-Learning Classroom Link */}
+                    <Link
+                      href={`/classroom/${b.classId}`}
+                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 active:scale-98 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/25 transition cursor-pointer"
+                    >
+                      <Play className="w-4 h-4 fill-current text-slate-950" />
+                      <span>เข้าห้องเรียนออนไลน์ (วิดีโอ)</span>
+                    </Link>
+
                     {/* View Details Button */}
                     <button
                       type="button"

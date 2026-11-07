@@ -5,6 +5,184 @@ import all500PromptsData from '@/data/all-categories-prompts.json';
 // Default initial classes based on https://ai-creator-workshop.vercel.app/
 export const INITIAL_CLASSES: ClassItem[] = [
   {
+    id: 'ai-unlock',
+    title: 'AI UNLOCK ใช้เอไอเป็นทำอะไรก็ง่าย',
+    subtitle: 'แนวคิดหลักของคอร์ส: ไม่ใช่แค่ใช้ AI ถาม-ตอบ แต่เรียนรู้วิธีสั่งให้ AI ลงมือทำงานแทนเรา และเปลี่ยนไอเดียให้กลายเป็นผลงานที่ใช้งานได้จริง',
+    description: `คอร์สเรียน AI แบบลงมือทำจริง ตั้งแต่การใช้ AI ช่วยทำงานประจำวัน สร้างคอนเทนต์ ไปจนถึงการสร้างเว็บไซต์และระบบงานของตัวเอง โดยไม่จำเป็นต้องมีพื้นฐานเขียนโปรแกรมมาก่อน
+
+แนวคิดหลักของคอร์ส: ไม่ใช่แค่ใช้ AI ถาม-ตอบ แต่เรียนรู้วิธีสั่งให้ AI ลงมือทำงานแทนเรา และเปลี่ยนไอเดียให้กลายเป็นผลงานที่ใช้งานได้จริง
+
+*** คอร์สนี้ จะปลดล็อค เรื่อยๆตามเวลา ***`,
+    type: 'online',
+    level: 'beginner',
+    price: 990,
+    isFree: false,
+    rewardPoints: 100,
+    durationMinutes: 180,
+    durationValue: 3,
+    durationUnit: 'hour',
+    location: 'Online Classroom (Vibe Coding Studio)',
+    onlineMeetingUrl: 'https://meet.google.com/kevin-ai-unlock',
+    maxSeats: 100,
+    availableDates: ['2026-11-15', '2026-11-22', '2026-11-29', '2026-12-06', '2026-12-13'],
+    timeSlots: ['เรียนได้ตลอดเวลา (24/7 E-Learning)', '13:00 - 16:00', '19:00 - 21:00'],
+    topics: [
+      'EP.1 พื้นฐานการใช้งาน ChatGPT , Claude อย่างลึกซึ้ง (30 น.)',
+      'EP.2 การสร้างเว็บบ้านๆด้วย GPT Site , Claude Design (30 น.)',
+      'EP.3 พื้นฐานเกี่ยวกับ การทำเว็บแอพพลิเคชั่น และการออนไลน์เว็บ (16 น.)',
+      'EP.4 เรื่องของ API & MCP (6 น.)',
+      'EP.5 การติดตั้ง เตรียมเครื่องให้พร้อมพัฒนาเว็บแอพพลิเคชั่น (23 น.)',
+      'EP.6 Workshop-1 การทำเว็บแจ้งซ่อมด้วย Chatgpt-Codex + Supabase + Vercel (40 น.)',
+      'Workshop-2 การสร้างเว็บที่มีการเชื่อมต่อ API ด้วย Claude (35 น.)',
+      'Workshop-3 การสร้าง Chrome Extention ด้วย GPT (รออัพเดท)',
+      'Workshop-4 การทำ AI แชทผ่าน Line ง่ายๆด้วย Claude (รออัพเดท)',
+      'Workshop-5 การสร้างโปรแกรม .EXE และ .DMG ด้วย Claude (รออัพเดท)',
+      'Workshop-6 การสร้างระบบ LMS ด้วย Claude (รออัพเดท)',
+      'Workshop-7 การสร้างบอทเทรด AI อัตโนมัติ (รออัพเดท)'
+    ],
+    toolsUsed: ['ChatGPT', 'Claude', 'Vibe Coding', 'Supabase', 'Vercel', 'MCP', 'Chrome Extension'],
+    prerequisites: 'ไม่จำเป็นต้องมีพื้นฐานการเขียนโปรแกรม มีคอมพิวเตอร์และอินเทอร์เน็ตพร้อมใช้งาน',
+    image: '/assets/ai-unlock-cover.jpg',
+    featured: true,
+    videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+    lessons: [
+      {
+        id: 'ep-1',
+        title: 'EP.1 พื้นฐานการใช้งาน ChatGPT , Claude อย่างลึกซึ้ง',
+        duration: '30 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'เรียนรู้เทคนิคการคุยกับ AI แบบมืออาชีพ การวาง Context และโครงสร้างคำสั่ง',
+        attachmentName: 'คู่มือและ Prompt สรุป EP.1 (PDF)',
+        attachmentUrl: 'https://ai-kevin-booking.vercel.app/prompts'
+      },
+      {
+        id: 'ep-2',
+        title: 'EP.2 การสร้างเว็บบ้านๆด้วย GPT Site , Claude Design',
+        duration: '30 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'สร้างเว็บเพจแรกของคุณโดยไม่ต้องเขียน HTML/CSS เอง ให้ AI ออกแบบและขึ้นโครงให้',
+        attachmentName: 'ตัวอย่างโค้ดเว็บหน้าแรก HTML & Tailwind',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'ep-3',
+        title: 'EP.3 พื้นฐานเกี่ยวกับ การทำเว็บแอพพลิเคชั่น และการออนไลน์เว็บ',
+        duration: '16 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ทำความเข้าใจ Frontend, Backend, Domain Name และการ Host เว็บขึ้น Production',
+        attachmentName: 'Infographic สรุปโครงสร้างเว็บแอพพลิเคชั่น',
+        attachmentUrl: '/assets/ai-unlock-cover.jpg'
+      },
+      {
+        id: 'ep-4',
+        title: 'EP.4 เรื่องของ API & MCP',
+        duration: '6 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'เชื่อมต่อพลัง AI เข้ากับระบบภายนอกด้วย API และทำความเข้าใจ Model Context Protocol (MCP)',
+        attachmentName: 'Cheatsheet MCP Protocols และตัวอย่างการเชื่อมต่อ',
+        attachmentUrl: 'https://ai-kevin-booking.vercel.app/prompts'
+      },
+      {
+        id: 'ep-5',
+        title: 'EP.5 การติดตั้ง เตรียมเครื่องให้พร้อมพัฒนาเว็บแอพพลิเคชั่น',
+        duration: '23 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ตั้งค่า VS Code, Node.js, Git และเครื่องมือ AI Extensions สำหรับเขียนโค้ด',
+        attachmentName: 'Checklist เครื่องมือและ Extension แนะนำสำหรับ Vibe Coding',
+        attachmentUrl: 'https://ai-kevin-booking.vercel.app/articles'
+      },
+      {
+        id: 'ep-6',
+        title: 'EP.6 Workshop-1 การทำเว็บแจ้งซ่อมด้วย Chatgpt-Codex + Supabase + Vercel',
+        duration: '40 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'ลงมือทำระบบ Web Application แจ้งซ่อมพร้อมฐานข้อมูล Supabase และ Deploy สู่ Vercel ทันที',
+        attachmentName: 'Source Code เต็มระบบเว็บแจ้งซ่อม (ZIP)',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'ep-7',
+        title: 'Workshop-2 การสร้างเว็บที่มีการเชื่อมต่อ API ด้วย Claude',
+        duration: '35 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'สร้างเว็บที่เรียกข้อมูลสดจาก Third-party API ผ่าน Claude Artifacts & Next.js',
+        attachmentName: 'ตัวอย่างโค้ด API Integration Claude',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'ep-8',
+        title: 'Workshop-3 การสร้าง Chrome Extention ด้วย GPT (รออัพเดท)',
+        duration: '0 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'สร้างส่วนเสริมเบราว์เซอร์สำหรับช่วยจับใจความและสรุปบทความบนหน้าเว็บ',
+        attachmentName: 'Manifest V3 Chrome Extension Template',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'ep-9',
+        title: 'Workshop-4 การทำ AI แชทผ่าน Line ง่ายๆด้วย Claude (รออัพเดท)',
+        duration: '0 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'เชื่อมต่อ Claude API เข้ากับ Line Messaging API ให้กลายเป็น LINE Chatbot อัตโนมัติ',
+        attachmentName: 'LINE Bot Webhook Template & Setup Guide',
+        attachmentUrl: 'https://ai-kevin-booking.vercel.app/prompts'
+      },
+      {
+        id: 'ep-10',
+        title: 'Workshop-5 การสร้างโปรแกรม .EXE และ .DMG ด้วย Claude (รออัพเดท)',
+        duration: '0 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'แพ็กเว็บแอพพลิเคชั่นให้กลายเป็น Desktop App ใช้งานบน Windows (.exe) และ Mac (.dmg) ด้วย Electron/Tauri',
+        attachmentName: 'Desktop App Boilerplate Code',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'ep-11',
+        title: 'Workshop-6 การสร้างระบบ LMS ด้วย Claude (รออัพเดท)',
+        duration: '0 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'พัฒนาแพลตฟอร์มคอร์สเรียนออนไลน์ มีระบบวิดีโอ สารบัญ และใบประกาศนียบัตรแบบครบวงจร',
+        attachmentName: 'LMS Platform Architecture & Database Schema',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'ep-12',
+        title: 'Workshop-7 การสร้างบอทเทรด AI อัตโนมัติ (รออัพเดท)',
+        duration: '0 น.',
+        videoUrl: 'https://www.youtube.com/watch?v=kCc8FmEb1nY',
+        summary: 'วิเคราะห์กราฟและสัญญาณเทรดด้วย AI พร้อมตัวอย่างการสั่งคำสั่งซื้อขายผ่าน Webhook อัตโนมัติ',
+        attachmentName: 'AI Trading Bot Strategy & Webhook Script',
+        attachmentUrl: 'https://github.com/candelaz2025/ai-kevin-booking'
+      }
+    ],
+    instructorName: 'อาจารย์ สรเชษฐ์ (อ. เควิน)',
+    instructorTitle: 'Founder & Lead AI Instructor, kevinaiagent.tech',
+    instructorSignature: '',
+    certificateEnabled: true,
+    passingScorePercent: 70,
+    attachments: [
+      {
+        id: 'att-unlock-1',
+        name: 'สไลด์ประกอบการเรียน AI UNLOCK ฉบับเต็ม (PDF)',
+        type: 'pdf',
+        url: '/assets/ai-unlock-cover.jpg',
+        size: '24.5 MB'
+      },
+      {
+        id: 'att-unlock-2',
+        name: 'Source Code ตัวอย่างทั้ง 7 เวิร์กช็อป (GitHub Repository)',
+        type: 'link',
+        url: 'https://github.com/candelaz2025/ai-kevin-booking'
+      },
+      {
+        id: 'att-unlock-3',
+        name: 'คลัง 400 AI Prompt & Use Cases',
+        type: 'link',
+        url: 'https://ai-kevin-booking.vercel.app/prompts'
+      }
+    ]
+  },
+  {
     id: 'ai-agent-foundation',
     title: 'Agentic AI Foundation — คอร์สเรียนสด 2 ชั่วโมง (สำหรับผู้เริ่มต้น)',
     subtitle: 'ให้ AI ทำงานแทนคุณ ทั้งชีวิตประจำวันและงานออฟฟิศ ด้วย ChatGPT และ Meta AI พร้อม 3 โมดูลเสริม',
@@ -588,8 +766,11 @@ export async function getClasses(): Promise<ClassItem[]> {
       const { data, error } = await supabase.from('classes').select('*').order('created_at', { ascending: false });
       if (!error && data && data.length > 0) {
         const mapped = data.map(mapDbClass);
-        global.__app_classes = mapped;
-        return mapped;
+        // Ensure initial classes (e.g. ai-unlock) are always present even if DB had older snapshot
+        const missingInitial = INITIAL_CLASSES.filter(ic => !mapped.some(m => m.id === ic.id));
+        const combined = [...mapped, ...missingInitial];
+        global.__app_classes = combined;
+        return combined;
       }
     } catch (e) {
       console.error('Supabase query error, using local fallback:', e);
@@ -601,6 +782,11 @@ export async function getClasses(): Promise<ClassItem[]> {
     global.__app_classes = [...INITIAL_CLASSES];
   }
   return global.__app_classes;
+}
+
+export async function getClassById(id: string): Promise<ClassItem | null> {
+  const classes = await getClasses();
+  return classes.find(c => c.id === id) || null;
 }
 
 export async function saveClass(item: ClassItem): Promise<ClassItem> {

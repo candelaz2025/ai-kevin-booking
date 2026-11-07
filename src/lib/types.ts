@@ -65,6 +65,8 @@ export interface LessonModule {
   videoUrl: string; // YouTube link, Google Drive video, or direct MP4 link
   summary?: string;
   order?: number;
+  attachmentUrl?: string; // ลิงก์ดาวน์โหลดเอกสารประกอบบทเรียน
+  attachmentName?: string; // ชื่อไฟล์หรือเอกสารประกอบ
 }
 
 export interface ClassItem {
@@ -107,10 +109,13 @@ export interface ClassItem {
 export function getYouTubeEmbedUrl(url?: string): string | null {
   if (!url) return null;
   const trimmed = url.trim();
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|shorts\/|watch\?v=|&v=)([^#&?]*).*/;
   const match = trimmed.match(regExp);
   if (match && match[2].length === 11) {
     return `https://www.youtube.com/embed/${match[2]}`;
+  }
+  if (trimmed.includes('youtube.com/embed/')) {
+    return trimmed;
   }
   return null;
 }

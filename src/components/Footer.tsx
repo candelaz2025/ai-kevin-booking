@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { SiteSettings } from '@/lib/types';
 
 import { Phone, Mail, MessageCircle } from 'lucide-react';
@@ -15,6 +16,7 @@ function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
   const [settings, setSettings] = useState<SiteSettings | null>(null);
 
   useEffect(() => {
@@ -27,6 +29,10 @@ export default function Footer() {
       })
       .catch(console.error);
   }, []);
+
+  if (pathname?.startsWith('/classroom')) {
+    return null;
+  }
 
   const phone = settings?.footerContactPhone || '091-746-2444';
   const email = settings?.footerContactEmail || 'sorachetkevin@gmail.com';

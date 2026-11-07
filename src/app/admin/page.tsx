@@ -1494,6 +1494,16 @@ export default function AdminPage() {
     });
   };
 
+  const handleMoveLesson = (index: number, direction: 'up' | 'down') => {
+    const cur = [...(editingClass?.lessons || [])];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= cur.length) return;
+    const temp = cur[index];
+    cur[index] = cur[targetIndex];
+    cur[targetIndex] = temp;
+    setEditingClass({ ...editingClass, lessons: cur });
+  };
+
   // Instructor Signature Upload
   const [isUploadingSignature, setIsUploadingSignature] = useState(false);
 
@@ -8090,12 +8100,35 @@ export default function AdminPage() {
                     {(editingClass.lessons || []).map((les, idx) => (
                       <div key={les.id} className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5">
-                            <span className="w-5 h-5 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-[10px] font-black">
-                              {idx + 1}
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5">
+                              <span className="w-5 h-5 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-[10px] font-black">
+                                {idx + 1}
+                              </span>
+                              <span>บทเรียนที่ {idx + 1}</span>
                             </span>
-                            <span>บทเรียนที่ {idx + 1}</span>
-                          </span>
+                            <div className="flex items-center gap-1">
+                              <button
+                                type="button"
+                                disabled={idx === 0}
+                                onClick={() => handleMoveLesson(idx, 'up')}
+                                className="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-30 text-white flex items-center justify-center text-xs transition"
+                                title="เลื่อนขึ้น"
+                              >
+                                ↑
+                              </button>
+                              <button
+                                type="button"
+                                disabled={idx === (editingClass.lessons || []).length - 1}
+                                onClick={() => handleMoveLesson(idx, 'down')}
+                                className="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-30 text-white flex items-center justify-center text-xs transition"
+                                title="เลื่อนลง"
+                              >
+                                ↓
+                              </button>
+                            </div>
+                          </div>
+
                           <button
                             type="button"
                             onClick={() => handleRemoveLesson(les.id)}
@@ -8111,7 +8144,7 @@ export default function AdminPage() {
                             <input
                               type="text"
                               required
-                              placeholder="เช่น บทที่ 1: ติดตั้งและตั้งค่าเริ่มต้น AI Tool"
+                              placeholder="เช่น EP.1 พื้นฐานการใช้งาน ChatGPT , Claude อย่างลึกซึ้ง"
                               value={les.title}
                               onChange={e => handleUpdateLesson(les.id, 'title', e.target.value)}
                               className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
@@ -8122,7 +8155,7 @@ export default function AdminPage() {
                             <label className="block text-[10px] text-slate-400 mb-0.5">ระยะเวลา</label>
                             <input
                               type="text"
-                              placeholder="เช่น 15 นาที หรือ 12:30"
+                              placeholder="เช่น 30 น. หรือ 15 นาที"
                               value={les.duration || ''}
                               onChange={e => handleUpdateLesson(les.id, 'duration', e.target.value)}
                               className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
@@ -8144,11 +8177,35 @@ export default function AdminPage() {
                             <label className="block text-[10px] text-slate-400 mb-0.5">สรุปเนื้อหาสำคัญของบทนี้ (Summary)</label>
                             <input
                               type="text"
-                              placeholder="เช่น เรียนรู้การเขียน Prompt โครงสร้างหลัก และข้อควรระวัง"
+                              placeholder="เช่น เรียนรู้เทคนิคการคุยกับ AI แบบมืออาชีพ การวาง Context และโครงสร้างคำสั่ง"
                               value={les.summary || ''}
                               onChange={e => handleUpdateLesson(les.id, 'summary', e.target.value)}
                               className="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
                             />
+                          </div>
+
+                          {/* Lesson Specific Downloadable Attachment */}
+                          <div className="sm:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-slate-800/80">
+                            <div>
+                              <label className="block text-[10px] text-cyan-400 mb-0.5">📥 ชื่อเอกสารประกอบบทเรียน (ถ้ามี)</label>
+                              <input
+                                type="text"
+                                placeholder="เช่น คู่มือสรุป Prompt EP.1 (PDF)"
+                                value={les.attachmentName || ''}
+                                onChange={e => handleUpdateLesson(les.id, 'attachmentName', e.target.value)}
+                                className="w-full bg-slate-900 border border-slate-700 focus:border-cyan-400 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] text-cyan-400 mb-0.5">🔗 ลิงก์ดาวน์โหลดเอกสาร (URL)</label>
+                              <input
+                                type="url"
+                                placeholder="https://... หรือ /downloads/..."
+                                value={les.attachmentUrl || ''}
+                                onChange={e => handleUpdateLesson(les.id, 'attachmentUrl', e.target.value)}
+                                className="w-full bg-slate-900 border border-slate-700 focus:border-cyan-400 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
